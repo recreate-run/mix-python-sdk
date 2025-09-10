@@ -1,0 +1,331 @@
+lockVersion: 2.0.0
+id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
+management:
+  docChecksum: 686d72449bb08a1ff47abd77c2577aea
+  docVersion: 1.0.0
+  speakeasyVersion: 1.613.0
+  generationVersion: 2.696.0
+  releaseVersion: 0.1.0
+  configChecksum: 32c97da3f3acdf585f8e5deb5f21cef3
+features:
+  python:
+    additionalDependencies: 1.0.0
+    constsAndDefaults: 1.0.5
+    core: 5.20.3
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    flatRequests: 1.0.1
+    flattening: 3.1.1
+    globalSecurityCallbacks: 1.0.0
+    globalServerURLs: 3.1.1
+    groups: 3.0.0
+    methodArguments: 1.0.2
+    nameOverrides: 3.0.1
+    nullables: 1.0.1
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.1.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/errors/restresponseerror.md
+  - docs/models/cancelsessionprocessingdata.md
+  - docs/models/cancelsessionprocessingrequest.md
+  - docs/models/cancelsessionprocessingresponse.md
+  - docs/models/createsessionrequest.md
+  - docs/models/createsessionresponse.md
+  - docs/models/deletesessionrequest.md
+  - docs/models/denypermissiondata.md
+  - docs/models/denypermissionrequest.md
+  - docs/models/denypermissionresponse.md
+  - docs/models/forksessionrequest.md
+  - docs/models/forksessionrequestbody.md
+  - docs/models/forksessionresponse.md
+  - docs/models/getcommanddata.md
+  - docs/models/getcommandrequest.md
+  - docs/models/getcommandresponse.md
+  - docs/models/getmessagehistoryrequest.md
+  - docs/models/getmessagehistoryresponse.md
+  - docs/models/getsessionmessagesrequest.md
+  - docs/models/getsessionmessagesresponse.md
+  - docs/models/getsessionrequest.md
+  - docs/models/getsessionresponse.md
+  - docs/models/grantpermissiondata.md
+  - docs/models/grantpermissionrequest.md
+  - docs/models/grantpermissionresponse.md
+  - docs/models/healthcheckdata.md
+  - docs/models/healthcheckresponse.md
+  - docs/models/initiateoauthlogindata.md
+  - docs/models/initiateoauthloginresponse.md
+  - docs/models/listcommandsdata.md
+  - docs/models/listcommandsresponse.md
+  - docs/models/listmcpserversdata.md
+  - docs/models/listmcpserversresponse.md
+  - docs/models/listsessionsresponse.md
+  - docs/models/messagedata.md
+  - docs/models/messagerole.md
+  - docs/models/resterror.md
+  - docs/models/sendmessagerequest.md
+  - docs/models/sendmessagerequestbody.md
+  - docs/models/sendmessageresponse.md
+  - docs/models/sessiondata.md
+  - docs/models/setapikeydata.md
+  - docs/models/setapikeyrequest.md
+  - docs/models/setapikeyresponse.md
+  - docs/models/tool.md
+  - docs/models/toolcalldata.md
+  - docs/models/type.md
+  - docs/models/utils/retryconfig.md
+  - docs/sdks/authentication/README.md
+  - docs/sdks/messages/README.md
+  - docs/sdks/mix/README.md
+  - docs/sdks/permissions/README.md
+  - docs/sdks/sessions/README.md
+  - docs/sdks/system/README.md
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/publish.sh
+  - src/mix_python_sdk/__init__.py
+  - src/mix_python_sdk/_hooks/__init__.py
+  - src/mix_python_sdk/_hooks/sdkhooks.py
+  - src/mix_python_sdk/_hooks/types.py
+  - src/mix_python_sdk/_version.py
+  - src/mix_python_sdk/authentication.py
+  - src/mix_python_sdk/basesdk.py
+  - src/mix_python_sdk/errors/__init__.py
+  - src/mix_python_sdk/errors/mixdefaulterror.py
+  - src/mix_python_sdk/errors/mixerror.py
+  - src/mix_python_sdk/errors/no_response_error.py
+  - src/mix_python_sdk/errors/responsevalidationerror.py
+  - src/mix_python_sdk/errors/restresponse_error.py
+  - src/mix_python_sdk/httpclient.py
+  - src/mix_python_sdk/messages.py
+  - src/mix_python_sdk/models/__init__.py
+  - src/mix_python_sdk/models/cancelsessionprocessingop.py
+  - src/mix_python_sdk/models/createsessionop.py
+  - src/mix_python_sdk/models/deletesessionop.py
+  - src/mix_python_sdk/models/denypermissionop.py
+  - src/mix_python_sdk/models/forksessionop.py
+  - src/mix_python_sdk/models/getcommandop.py
+  - src/mix_python_sdk/models/getmessagehistoryop.py
+  - src/mix_python_sdk/models/getsessionmessagesop.py
+  - src/mix_python_sdk/models/getsessionop.py
+  - src/mix_python_sdk/models/grantpermissionop.py
+  - src/mix_python_sdk/models/healthcheckop.py
+  - src/mix_python_sdk/models/initiateoauthloginop.py
+  - src/mix_python_sdk/models/listcommandsop.py
+  - src/mix_python_sdk/models/listmcpserversop.py
+  - src/mix_python_sdk/models/listsessionsop.py
+  - src/mix_python_sdk/models/messagedata.py
+  - src/mix_python_sdk/models/messagerole.py
+  - src/mix_python_sdk/models/resterror.py
+  - src/mix_python_sdk/models/sendmessageop.py
+  - src/mix_python_sdk/models/sessiondata.py
+  - src/mix_python_sdk/models/setapikeyop.py
+  - src/mix_python_sdk/models/toolcalldata.py
+  - src/mix_python_sdk/permissions.py
+  - src/mix_python_sdk/py.typed
+  - src/mix_python_sdk/sdk.py
+  - src/mix_python_sdk/sdkconfiguration.py
+  - src/mix_python_sdk/sessions.py
+  - src/mix_python_sdk/system.py
+  - src/mix_python_sdk/types/__init__.py
+  - src/mix_python_sdk/types/basemodel.py
+  - src/mix_python_sdk/utils/__init__.py
+  - src/mix_python_sdk/utils/annotations.py
+  - src/mix_python_sdk/utils/datetimes.py
+  - src/mix_python_sdk/utils/enums.py
+  - src/mix_python_sdk/utils/eventstreaming.py
+  - src/mix_python_sdk/utils/forms.py
+  - src/mix_python_sdk/utils/headers.py
+  - src/mix_python_sdk/utils/logger.py
+  - src/mix_python_sdk/utils/metadata.py
+  - src/mix_python_sdk/utils/queryparams.py
+  - src/mix_python_sdk/utils/requestbodies.py
+  - src/mix_python_sdk/utils/retries.py
+  - src/mix_python_sdk/utils/security.py
+  - src/mix_python_sdk/utils/serializers.py
+  - src/mix_python_sdk/utils/unmarshal_json_response.py
+  - src/mix_python_sdk/utils/url.py
+  - src/mix_python_sdk/utils/values.py
+examples:
+  setApiKey:
+    speakeasy-default-set-api-key:
+      requestBody:
+        application/json: {"apiKey": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+  initiateOAuthLogin:
+    speakeasy-default-initiate-O-auth-login:
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  listCommands:
+    speakeasy-default-list-commands:
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  getCommand:
+    speakeasy-default-get-command:
+      parameters:
+        path:
+          name: "<value>"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {}
+  listMcpServers:
+    speakeasy-default-list-mcp-servers:
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  healthCheck:
+    speakeasy-default-health-check:
+      responses:
+        "200":
+          application/json: {}
+        "500":
+          application/json: {}
+  getMessageHistory:
+    speakeasy-default-get-message-history:
+      parameters:
+        query:
+          limit: 50
+          offset: 0
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  cancelSessionProcessing:
+    speakeasy-default-cancel-session-processing:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {}
+  getSessionMessages:
+    speakeasy-default-get-session-messages:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {}
+  sendMessage:
+    speakeasy-default-send-message:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"content": "<value>"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+  denyPermission:
+    speakeasy-default-deny-permission:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  grantPermission:
+    speakeasy-default-grant-permission:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  listSessions:
+    speakeasy-default-list-sessions:
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {}
+        "500":
+          application/json: {}
+  createSession:
+    speakeasy-default-create-session:
+      requestBody:
+        application/json: {}
+      responses:
+        "201":
+          application/json: {}
+        "400":
+          application/json: {}
+  deleteSession:
+    speakeasy-default-delete-session:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "404":
+          application/json: {}
+  getSession:
+    speakeasy-default-get-session:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {}
+  forkSession:
+    speakeasy-default-fork-session:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"messageIndex": 385832}
+      responses:
+        "201":
+          application/json: {}
+        "400":
+          application/json: {}
+examplesVersion: 1.0.2

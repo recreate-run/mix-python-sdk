@@ -1,0 +1,24 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Mix REST API:
+        inputs:
+            - location: ../mix/sdk/openapi.json
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/recreate/mix/mix-rest-api
+targets:
+    mix:
+        target: ""
+        source: ""
+    mix-py-target:
+        target: python
+        source: Mix REST API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/recreate/mix/mix-rest-api-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false

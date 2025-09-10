@@ -1,0 +1,18 @@
+# SessionData
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `assistant_message_count`                                            | *int*                                                                | :heavy_check_mark:                                                   | Number of assistant messages in session                              |
+| `completion_tokens`                                                  | *int*                                                                | :heavy_check_mark:                                                   | Total completion tokens used                                         |
+| `cost`                                                               | *float*                                                              | :heavy_check_mark:                                                   | Total cost of session                                                |
+| `created_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | Session creation timestamp                                           |
+| `first_user_message`                                                 | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | First user message (optional)                                        |
+| `id`                                                                 | *str*                                                                | :heavy_check_mark:                                                   | Unique session identifier                                            |
+| `prompt_tokens`                                                      | *int*                                                                | :heavy_check_mark:                                                   | Total prompt tokens used                                             |
+| `title`                                                              | *str*                                                                | :heavy_check_mark:                                                   | Session title                                                        |
+| `tool_call_count`                                                    | *int*                                                                | :heavy_check_mark:                                                   | Number of tool calls made in session                                 |
+| `user_message_count`                                                 | *int*                                                                | :heavy_check_mark:                                                   | Number of user messages in session                                   |
+| `working_directory`                                                  | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Working directory path (optional)                                    |

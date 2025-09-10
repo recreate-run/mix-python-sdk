@@ -1,0 +1,107 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.1
+  x-speakeasy-metadata:
+    type: speakeasy-modifications
+    before: ""
+    after: ""
+actions:
+  - target: $["paths"]["/api/sessions/{id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.sessions.get()
+      before: sdk.Sessions.getSession()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/health"]["get"]
+    update:
+      x-speakeasy-name-override: getHealth
+    x-speakeasy-metadata:
+      after: sdk.system.getHealth()
+      before: sdk.System.healthCheck()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.sessions.create()
+      before: sdk.Sessions.createSession()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/permissions/{id}/deny"]["post"]
+    update:
+      x-speakeasy-name-override: deny
+    x-speakeasy-metadata:
+      after: sdk.permissions.deny()
+      before: sdk.Permissions.denyPermission()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions/{id}/messages"]["post"]
+    update:
+      x-speakeasy-name-override: send
+    x-speakeasy-metadata:
+      after: sdk.messages.send()
+      before: sdk.Messages.sendMessage()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.sessions.list()
+      before: sdk.Sessions.listSessions()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions/{id}/fork"]["post"]
+    update:
+      x-speakeasy-name-override: fork
+    x-speakeasy-metadata:
+      after: sdk.sessions.fork()
+      before: sdk.Sessions.forkSession()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions/{id}/cancel"]["post"]
+    update:
+      x-speakeasy-group: sessions
+      x-speakeasy-name-override: cancelProcessing
+    x-speakeasy-metadata:
+      after: sdk.sessions.cancelProcessing()
+      before: sdk.Messages.cancelSessionProcessing()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions/{id}/messages"]["get"]
+    update:
+      x-speakeasy-name-override: listSession
+    x-speakeasy-metadata:
+      after: sdk.messages.listSession()
+      before: sdk.Messages.getSessionMessages()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/sessions/{id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.sessions.delete()
+      before: sdk.Sessions.deleteSession()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/permissions/{id}/grant"]["post"]
+    update:
+      x-speakeasy-name-override: grant
+    x-speakeasy-metadata:
+      after: sdk.permissions.grant()
+      before: sdk.Permissions.grantPermission()
+      created_at: 1757510504757
+      type: method-name
+  - target: $["paths"]["/api/messages/history"]["get"]
+    update:
+      x-speakeasy-name-override: getHistory
+    x-speakeasy-metadata:
+      after: sdk.messages.getHistory()
+      before: sdk.Messages.getMessageHistory()
+      created_at: 1757510504757
+      type: method-name
