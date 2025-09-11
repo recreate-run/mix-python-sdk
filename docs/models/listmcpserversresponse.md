@@ -1,12 +1,11 @@
 # ListMcpServersResponse
 
-List of MCP servers
-
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `data`                                                             | List[[models.ListMcpServersData](../models/listmcpserversdata.md)] | :heavy_minus_sign:                                                 | N/A                                                                |
-| `error`                                                            | [Optional[models.RESTError]](../models/resterror.md)               | :heavy_minus_sign:                                                 | N/A                                                                |
-| `message`                                                          | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | Optional message                                                   |
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `connected`                                                                 | *bool*                                                                      | :heavy_check_mark:                                                          | Whether the MCP server is currently connected                               |
+| `name`                                                                      | *str*                                                                       | :heavy_check_mark:                                                          | MCP server name                                                             |
+| `status`                                                                    | *str*                                                                       | :heavy_check_mark:                                                          | Server connection status (e.g., 'connected', 'failed', 'disconnected')      |
+| `tools`                                                                     | List[[models.Tool](../models/tool.md)]                                      | :heavy_minus_sign:                                                          | List of tools provided by this MCP server (null if server is not connected) |

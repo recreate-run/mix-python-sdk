@@ -5,7 +5,7 @@ from mix_python_sdk import errors, models, utils
 from mix_python_sdk._hooks import HookContext
 from mix_python_sdk.types import OptionalNullable, UNSET
 from mix_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Any, List, Mapping, Optional
 
 
 class System(BaseSDK):
@@ -16,7 +16,7 @@ class System(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListCommandsResponse:
+    ) -> List[models.ListCommandsResponse]:
         r"""List available commands
 
         Retrieve list of all available commands
@@ -77,17 +77,13 @@ class System(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ListCommandsResponse, http_res)
+            return unmarshal_json_response(List[models.ListCommandsResponse], http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -104,7 +100,7 @@ class System(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListCommandsResponse:
+    ) -> List[models.ListCommandsResponse]:
         r"""List available commands
 
         Retrieve list of all available commands
@@ -165,17 +161,13 @@ class System(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ListCommandsResponse, http_res)
+            return unmarshal_json_response(List[models.ListCommandsResponse], http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -262,10 +254,8 @@ class System(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.GetCommandResponse, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -352,10 +342,8 @@ class System(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.GetCommandResponse, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -372,7 +360,7 @@ class System(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListMcpServersResponse:
+    ) -> List[models.ListMcpServersResponse]:
         r"""List MCP servers
 
         Retrieve list of available Model Context Protocol (MCP) servers
@@ -433,17 +421,15 @@ class System(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ListMcpServersResponse, http_res)
+            return unmarshal_json_response(
+                List[models.ListMcpServersResponse], http_res
+            )
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -460,7 +446,7 @@ class System(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListMcpServersResponse:
+    ) -> List[models.ListMcpServersResponse]:
         r"""List MCP servers
 
         Retrieve list of available Model Context Protocol (MCP) servers
@@ -521,17 +507,15 @@ class System(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ListMcpServersResponse, http_res)
+            return unmarshal_json_response(
+                List[models.ListMcpServersResponse], http_res
+            )
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -611,10 +595,8 @@ class System(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.HealthCheckResponse, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -694,10 +676,8 @@ class System(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.HealthCheckResponse, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)

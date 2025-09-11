@@ -41,11 +41,11 @@ with Mix() as mix:
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 401, 404                 | application/json         |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 401, 404               | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## grant
 
@@ -80,8 +80,8 @@ with Mix() as mix:
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 401, 404                 | application/json         |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 401, 404               | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |

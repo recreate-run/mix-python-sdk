@@ -7,26 +7,26 @@ import builtins
 import sys
 
 if TYPE_CHECKING:
+    from .errorresponse import ErrorResponse, ErrorResponseData
     from .mixdefaulterror import MixDefaultError
     from .no_response_error import NoResponseError
     from .responsevalidationerror import ResponseValidationError
-    from .restresponse_error import RESTResponseError, RESTResponseErrorData
 
 __all__ = [
+    "ErrorResponse",
+    "ErrorResponseData",
     "MixDefaultError",
     "MixError",
     "NoResponseError",
-    "RESTResponseError",
-    "RESTResponseErrorData",
     "ResponseValidationError",
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "ErrorResponse": ".errorresponse",
+    "ErrorResponseData": ".errorresponse",
     "MixDefaultError": ".mixdefaulterror",
     "NoResponseError": ".no_response_error",
     "ResponseValidationError": ".responsevalidationerror",
-    "RESTResponseError": ".restresponse_error",
-    "RESTResponseErrorData": ".restresponse_error",
 }
 
 

@@ -278,16 +278,14 @@ with Mix() as mix:
         print(e.raw_response)
 
         # Depending on the method different errors may be thrown
-        if isinstance(e, errors.RESTResponseError):
-            print(e.data.data)  # Optional[Any]
-            print(e.data.error)  # Optional[models.RESTError]
-            print(e.data.message)  # Optional[str]
+        if isinstance(e, errors.ErrorResponse):
+            print(e.data.error)  # models.RESTError
 ```
 
 ### Error Classes
 **Primary errors:**
 * [`MixError`](./src/mix_python_sdk/errors/mixerror.py): The base class for HTTP error responses.
-  * [`RESTResponseError`](./src/mix_python_sdk/errors/restresponseerror.py): Generic error.
+  * [`ErrorResponse`](./src/mix_python_sdk/errors/errorresponse.py): Generic error.
 
 <details><summary>Less common errors (5)</summary>
 

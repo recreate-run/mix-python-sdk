@@ -38,15 +38,15 @@ with Mix() as mix:
 
 ### Response
 
-**[models.ListCommandsResponse](../../models/listcommandsresponse.md)**
+**[List[models.ListCommandsResponse]](../../models/.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 401                      | application/json         |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 401                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## get_command
 
@@ -81,10 +81,10 @@ with Mix() as mix:
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 404                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## list_mcp_servers
 
@@ -114,15 +114,15 @@ with Mix() as mix:
 
 ### Response
 
-**[models.ListMcpServersResponse](../../models/listmcpserversresponse.md)**
+**[List[models.ListMcpServersResponse]](../../models/.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 401                      | application/json         |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 401                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## get_health
 
@@ -156,7 +156,7 @@ with Mix() as mix:
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |

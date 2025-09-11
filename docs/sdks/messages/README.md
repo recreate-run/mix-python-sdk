@@ -39,15 +39,15 @@ with Mix() as mix:
 
 ### Response
 
-**[models.GetMessageHistoryResponse](../../models/getmessagehistoryresponse.md)**
+**[List[models.MessageData]](../../models/.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 401                      | application/json         |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 401                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## list_session
 
@@ -78,14 +78,14 @@ with Mix() as mix:
 
 ### Response
 
-**[models.GetSessionMessagesResponse](../../models/getsessionmessagesresponse.md)**
+**[List[models.MessageData]](../../models/.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 404                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## send
 
@@ -117,11 +117,11 @@ with Mix() as mix:
 
 ### Response
 
-**[models.SendMessageResponse](../../models/sendmessageresponse.md)**
+**[models.MessageData](../../models/messagedata.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 400, 404                 | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 400, 404               | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |

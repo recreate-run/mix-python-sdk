@@ -5,7 +5,7 @@ from mix_python_sdk import errors, models, utils
 from mix_python_sdk._hooks import HookContext
 from mix_python_sdk.types import OptionalNullable, UNSET
 from mix_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Any, List, Mapping, Optional
 
 
 class Sessions(BaseSDK):
@@ -16,7 +16,7 @@ class Sessions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListSessionsResponse:
+    ) -> List[models.SessionData]:
         r"""List all sessions
 
         Retrieve a list of all available sessions with their metadata
@@ -77,17 +77,13 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ListSessionsResponse, http_res)
+            return unmarshal_json_response(List[models.SessionData], http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -104,7 +100,7 @@ class Sessions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListSessionsResponse:
+    ) -> List[models.SessionData]:
         r"""List all sessions
 
         Retrieve a list of all available sessions with their metadata
@@ -165,17 +161,13 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.ListSessionsResponse, http_res)
+            return unmarshal_json_response(List[models.SessionData], http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -188,18 +180,18 @@ class Sessions(BaseSDK):
     def create(
         self,
         *,
-        title: Optional[str] = None,
+        title: str,
         working_directory: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateSessionResponse:
+    ) -> models.SessionData:
         r"""Create a new session
 
-        Create a new session with optional title and working directory
+        Create a new session with required title and optional working directory
 
-        :param title: Optional title for the session
+        :param title: Title for the session
         :param working_directory: Optional working directory path
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -266,12 +258,10 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.CreateSessionResponse, http_res)
+            return unmarshal_json_response(models.SessionData, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -284,18 +274,18 @@ class Sessions(BaseSDK):
     async def create_async(
         self,
         *,
-        title: Optional[str] = None,
+        title: str,
         working_directory: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateSessionResponse:
+    ) -> models.SessionData:
         r"""Create a new session
 
-        Create a new session with optional title and working directory
+        Create a new session with required title and optional working directory
 
-        :param title: Optional title for the session
+        :param title: Title for the session
         :param working_directory: Optional working directory path
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -362,12 +352,10 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.CreateSessionResponse, http_res)
+            return unmarshal_json_response(models.SessionData, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -454,10 +442,8 @@ class Sessions(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -544,10 +530,8 @@ class Sessions(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -565,7 +549,7 @@ class Sessions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetSessionResponse:
+    ) -> models.SessionData:
         r"""Get a specific session
 
         Retrieve detailed information about a specific session
@@ -632,12 +616,10 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetSessionResponse, http_res)
+            return unmarshal_json_response(models.SessionData, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -655,7 +637,7 @@ class Sessions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetSessionResponse:
+    ) -> models.SessionData:
         r"""Get a specific session
 
         Retrieve detailed information about a specific session
@@ -722,12 +704,10 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetSessionResponse, http_res)
+            return unmarshal_json_response(models.SessionData, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -747,7 +727,7 @@ class Sessions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ForkSessionResponse:
+    ) -> models.SessionData:
         r"""Fork a session
 
         Create a new session based on an existing session, copying messages up to a specified index
@@ -827,12 +807,10 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.ForkSessionResponse, http_res)
+            return unmarshal_json_response(models.SessionData, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -852,7 +830,7 @@ class Sessions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ForkSessionResponse:
+    ) -> models.SessionData:
         r"""Fork a session
 
         Create a new session based on an existing session, copying messages up to a specified index
@@ -932,12 +910,10 @@ class Sessions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.ForkSessionResponse, http_res)
+            return unmarshal_json_response(models.SessionData, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -1026,10 +1002,8 @@ class Sessions(BaseSDK):
                 models.CancelSessionProcessingResponse, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -1118,10 +1092,8 @@ class Sessions(BaseSDK):
                 models.CancelSessionProcessingResponse, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)

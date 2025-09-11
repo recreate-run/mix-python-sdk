@@ -10,28 +10,25 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class MessageDataTypedDict(TypedDict):
-    content: str
-    r"""Message content"""
     id: str
     r"""Unique message identifier"""
     role: MessageRole
     r"""Message role"""
     session_id: str
     r"""Session identifier"""
+    user_input: str
+    r"""User's input message"""
+    assistant_response: NotRequired[str]
+    r"""Assistant's response message (optional)"""
     reasoning: NotRequired[str]
     r"""Reasoning process (optional)"""
     reasoning_duration: NotRequired[int]
     r"""Reasoning duration in milliseconds (optional)"""
-    response: NotRequired[str]
-    r"""Assistant response (optional)"""
     tool_calls: NotRequired[List[ToolCallDataTypedDict]]
     r"""Tool calls made during message processing"""
 
 
 class MessageData(BaseModel):
-    content: str
-    r"""Message content"""
-
     id: str
     r"""Unique message identifier"""
 
@@ -41,6 +38,14 @@ class MessageData(BaseModel):
     session_id: Annotated[str, pydantic.Field(alias="sessionId")]
     r"""Session identifier"""
 
+    user_input: Annotated[str, pydantic.Field(alias="userInput")]
+    r"""User's input message"""
+
+    assistant_response: Annotated[
+        Optional[str], pydantic.Field(alias="assistantResponse")
+    ] = None
+    r"""Assistant's response message (optional)"""
+
     reasoning: Optional[str] = None
     r"""Reasoning process (optional)"""
 
@@ -48,9 +53,6 @@ class MessageData(BaseModel):
         Optional[int], pydantic.Field(alias="reasoningDuration")
     ] = None
     r"""Reasoning duration in milliseconds (optional)"""
-
-    response: Optional[str] = None
-    r"""Assistant response (optional)"""
 
     tool_calls: Annotated[
         Optional[List[ToolCallData]], pydantic.Field(alias="toolCalls")

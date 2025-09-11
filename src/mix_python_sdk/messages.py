@@ -5,7 +5,7 @@ from mix_python_sdk import errors, models, utils
 from mix_python_sdk._hooks import HookContext
 from mix_python_sdk.types import OptionalNullable, UNSET
 from mix_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Any, List, Mapping, Optional
 
 
 class Messages(BaseSDK):
@@ -18,7 +18,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetMessageHistoryResponse:
+    ) -> List[models.MessageData]:
         r"""Get global message history
 
         Retrieve message history across all sessions with optional pagination
@@ -87,17 +87,13 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetMessageHistoryResponse, http_res)
+            return unmarshal_json_response(List[models.MessageData], http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -116,7 +112,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetMessageHistoryResponse:
+    ) -> List[models.MessageData]:
         r"""Get global message history
 
         Retrieve message history across all sessions with optional pagination
@@ -185,17 +181,13 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetMessageHistoryResponse, http_res)
+            return unmarshal_json_response(List[models.MessageData], http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -213,7 +205,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetSessionMessagesResponse:
+    ) -> List[models.MessageData]:
         r"""List session messages
 
         Retrieve all messages from a specific session
@@ -280,12 +272,10 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetSessionMessagesResponse, http_res)
+            return unmarshal_json_response(List[models.MessageData], http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -303,7 +293,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetSessionMessagesResponse:
+    ) -> List[models.MessageData]:
         r"""List session messages
 
         Retrieve all messages from a specific session
@@ -370,12 +360,10 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetSessionMessagesResponse, http_res)
+            return unmarshal_json_response(List[models.MessageData], http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -394,7 +382,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SendMessageResponse:
+    ) -> models.MessageData:
         r"""Send a message to session
 
         Send a user message to a specific session for AI processing
@@ -472,12 +460,10 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.SendMessageResponse, http_res)
+            return unmarshal_json_response(models.MessageData, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
@@ -496,7 +482,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SendMessageResponse:
+    ) -> models.MessageData:
         r"""Send a message to session
 
         Send a user message to a specific session for AI processing
@@ -574,12 +560,10 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.SendMessageResponse, http_res)
+            return unmarshal_json_response(models.MessageData, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(
-                errors.RESTResponseErrorData, http_res
-            )
-            raise errors.RESTResponseError(response_data, http_res)
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.MixDefaultError("API error occurred", http_res, http_res_text)

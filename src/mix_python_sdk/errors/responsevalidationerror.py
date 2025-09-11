@@ -2,10 +2,12 @@
 
 import httpx
 from typing import Optional
+from dataclasses import dataclass
 
 from mix_python_sdk.errors import MixError
 
 
+@dataclass(frozen=True)
 class ResponseValidationError(MixError):
     """Error raised when there is a type mismatch between the response data and the expected Pydantic model."""
 

@@ -29,31 +29,26 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "success":
-                            description: "Whether API key was set successfully"
-                            type: "boolean"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "success":
+                    description: "Whether API key was set successfully"
+                    type: "boolean"
+                type: "object"
           description: "API key set status"
         "400":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Invalid API key"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication failed"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "Set API key"
       tags:
@@ -67,26 +62,21 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "authUrl":
-                            description: "OAuth authorization URL"
-                            type: "string"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "authUrl":
+                    description: "OAuth authorization URL"
+                    type: "string"
+                type: "object"
           description: "Authentication URL"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication failed"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "OAuth authentication"
       tags:
@@ -100,31 +90,26 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        items:
-                          properties:
-                            "description":
-                              description: "Command description"
-                              type: "string"
-                            "name":
-                              description: "Command name"
-                              type: "string"
-                          type: "object"
-                        type: "array"
-                    type: "object"
+                items:
+                  properties:
+                    "description":
+                      description: "Command description"
+                      type: "string"
+                    "name":
+                      description: "Command name"
+                      type: "string"
+                  type: "object"
+                type: "array"
           description: "List of commands"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication required"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "List available commands"
       tags:
@@ -145,27 +130,22 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "description":
-                            description: "Command description"
-                            type: "string"
-                          "name":
-                            description: "Command name"
-                            type: "string"
-                          "usage":
-                            description: "Command usage instructions"
-                            type: "string"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "description":
+                    description: "Command description"
+                    type: "string"
+                  "name":
+                    description: "Command name"
+                    type: "string"
+                  "usage":
+                    description: "Command usage instructions"
+                    type: "string"
+                type: "object"
           description: "Command details"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Command not found"
       summary: "Get specific command"
       tags:
@@ -179,54 +159,49 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        items:
-                          properties:
-                            "connected":
-                              description: "Whether the MCP server is currently connected"
-                              type: "boolean"
-                            "name":
-                              description: "MCP server name"
-                              type: "string"
-                            "status":
-                              description: "Server connection status (e.g., 'connected', 'failed', 'disconnected')"
-                              type: "string"
-                            "tools":
-                              description: "List of tools provided by this MCP server (null if server is not connected)"
-                              items:
-                                properties:
-                                  "description":
-                                    description: "Tool description"
-                                    type: "string"
-                                  "name":
-                                    description: "Tool name"
-                                    type: "string"
-                                required:
-                                  - "name"
-                                  - "description"
-                                type: "object"
-                              nullable: true
-                              type: "array"
-                          required:
-                            - "name"
-                            - "connected"
-                            - "status"
-                          type: "object"
-                        type: "array"
-                    type: "object"
+                items:
+                  properties:
+                    "connected":
+                      description: "Whether the MCP server is currently connected"
+                      type: "boolean"
+                    "name":
+                      description: "MCP server name"
+                      type: "string"
+                    "status":
+                      description: "Server connection status (e.g., 'connected', 'failed', 'disconnected')"
+                      type: "string"
+                    "tools":
+                      description: "List of tools provided by this MCP server (null if server is not connected)"
+                      items:
+                        properties:
+                          "description":
+                            description: "Tool description"
+                            type: "string"
+                          "name":
+                            description: "Tool name"
+                            type: "string"
+                        required:
+                          - "name"
+                          - "description"
+                        type: "object"
+                      nullable: true
+                      type: "array"
+                  required:
+                    - "name"
+                    - "connected"
+                    - "status"
+                  type: "object"
+                type: "array"
           description: "List of MCP servers"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication required"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "List MCP servers"
       tags:
@@ -256,23 +231,18 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        items: {"$ref": "#/components/schemas/MessageData"}
-                        type: "array"
-                    type: "object"
+                items: {"$ref": "#/components/schemas/MessageData"}
+                type: "array"
           description: "Message history"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication required"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "Get global message history"
       tags:
@@ -294,31 +264,26 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "denied":
-                            description: "Whether permission was denied"
-                            type: "boolean"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "denied":
+                    description: "Whether permission was denied"
+                    type: "boolean"
+                type: "object"
           description: "Permission deny status"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication required"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Permission not found"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "Deny permission"
       tags:
@@ -340,31 +305,26 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "granted":
-                            description: "Whether permission was granted"
-                            type: "boolean"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "granted":
+                    description: "Whether permission was granted"
+                    type: "boolean"
+                type: "object"
           description: "Permission grant status"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication required"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Permission not found"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "Grant permission"
       tags:
@@ -379,30 +339,25 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        items: {"$ref": "#/components/schemas/SessionData"}
-                        type: "array"
-                    type: "object"
+                items: {"$ref": "#/components/schemas/SessionData"}
+                type: "array"
           description: "List of sessions"
         "401":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Unauthorized - authentication required"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "List all sessions"
       tags:
         - "Sessions"
       x-speakeasy-name-override: "list"
     post:
-      description: "Create a new session with optional title and working directory"
+      description: "Create a new session with required title and optional working directory"
       operationId: "createSession"
       requestBody:
         content:
@@ -410,28 +365,25 @@ paths:
             schema:
               properties:
                 "title":
-                  description: "Optional title for the session"
+                  description: "Title for the session"
                   type: "string"
                 "workingDirectory":
                   description: "Optional working directory path"
                   type: "string"
+              required:
+                - "title"
               type: "object"
         required: true
       responses:
         "201":
           content:
             "application/json":
-              schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data": {"$ref": "#/components/schemas/SessionData"}
-                    type: "object"
+              schema: {"$ref": "#/components/schemas/SessionData"}
           description: "Created session"
         "400":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Invalid request data"
       summary: "Create a new session"
       tags:
@@ -454,7 +406,7 @@ paths:
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Session not found"
       summary: "Delete a session"
       tags:
@@ -474,17 +426,12 @@ paths:
         "200":
           content:
             "application/json":
-              schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data": {"$ref": "#/components/schemas/SessionData"}
-                    type: "object"
+              schema: {"$ref": "#/components/schemas/SessionData"}
           description: "Session details"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Session not found"
       summary: "Get a specific session"
       tags:
@@ -506,21 +453,16 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "cancelled":
-                            description: "Whether cancellation was successful"
-                            type: "boolean"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "cancelled":
+                    description: "Whether cancellation was successful"
+                    type: "boolean"
+                type: "object"
           description: "Cancellation status"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Session not found"
       summary: "Cancel agent processing"
       tags:
@@ -558,22 +500,17 @@ paths:
         "201":
           content:
             "application/json":
-              schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data": {"$ref": "#/components/schemas/SessionData"}
-                    type: "object"
+              schema: {"$ref": "#/components/schemas/SessionData"}
           description: "Forked session"
         "400":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Invalid request - messageIndex must be > 0"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Source session not found"
       summary: "Fork a session"
       tags:
@@ -595,18 +532,13 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        items: {"$ref": "#/components/schemas/MessageData"}
-                        type: "array"
-                    type: "object"
+                items: {"$ref": "#/components/schemas/MessageData"}
+                type: "array"
           description: "List of session messages"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Session not found"
       summary: "List session messages"
       tags:
@@ -638,22 +570,17 @@ paths:
         "200":
           content:
             "application/json":
-              schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data": {"$ref": "#/components/schemas/MessageData"}
-                    type: "object"
+              schema: {"$ref": "#/components/schemas/MessageData"}
           description: "Message sent and processed"
         "400":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Invalid message data"
         "404":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Session not found"
       summary: "Send a message to session"
       tags:
@@ -668,27 +595,22 @@ paths:
           content:
             "application/json":
               schema:
-                allOf:
-                  - {"$ref": "#/components/schemas/RESTResponse"}
-                  - properties:
-                      "data":
-                        properties:
-                          "status":
-                            description: "Health status"
-                            type: "string"
-                          "timestamp":
-                            description: "Current timestamp"
-                            type: "string"
-                          "version":
-                            description: "Application version"
-                            type: "string"
-                        type: "object"
-                    type: "object"
+                properties:
+                  "status":
+                    description: "Health status"
+                    type: "string"
+                  "timestamp":
+                    description: "Current timestamp"
+                    type: "string"
+                  "version":
+                    description: "Application version"
+                    type: "string"
+                type: "object"
           description: "Health information"
         "500":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/RESTResponse"}
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Internal server error"
       summary: "Health check"
       tags:
@@ -696,10 +618,16 @@ paths:
       x-speakeasy-name-override: "getHealth"
 components:
   schemas:
+    "ErrorResponse":
+      properties:
+        "error": {"$ref": "#/components/schemas/RESTError"}
+      required:
+        - "error"
+      type: "object"
     "MessageData":
       properties:
-        "content":
-          description: "Message content"
+        "assistantResponse":
+          description: "Assistant's response message (optional)"
           type: "string"
         "id":
           description: "Unique message identifier"
@@ -710,9 +638,6 @@ components:
         "reasoningDuration":
           description: "Reasoning duration in milliseconds (optional)"
           type: "integer"
-        "response":
-          description: "Assistant response (optional)"
-          type: "string"
         "role": {"$ref": "#/components/schemas/MessageRole"}
         "sessionId":
           description: "Session identifier"
@@ -721,11 +646,14 @@ components:
           description: "Tool calls made during message processing"
           items: {"$ref": "#/components/schemas/ToolCallData"}
           type: "array"
+        "userInput":
+          description: "User's input message"
+          type: "string"
       required:
         - "id"
         - "sessionId"
         - "role"
-        - "content"
+        - "userInput"
       type: "object"
     "MessageRole":
       description: "Message role"
@@ -755,15 +683,6 @@ components:
         - "code"
         - "message"
         - "type"
-      type: "object"
-    "RESTResponse":
-      properties:
-        "data":
-          description: "Response data"
-        "error": {"$ref": "#/components/schemas/RESTError"}
-        "message":
-          description: "Optional message"
-          type: "string"
       type: "object"
     "SessionData":
       properties:

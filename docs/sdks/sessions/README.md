@@ -40,19 +40,19 @@ with Mix() as mix:
 
 ### Response
 
-**[models.ListSessionsResponse](../../models/listsessionsresponse.md)**
+**[List[models.SessionData]](../../models/.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 401                      | application/json         |
-| errors.RESTResponseError | 500                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 401                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## create
 
-Create a new session with optional title and working directory
+Create a new session with required title and optional working directory
 
 ### Example Usage
 
@@ -63,7 +63,7 @@ from mix_python_sdk import Mix
 
 with Mix() as mix:
 
-    res = mix.sessions.create()
+    res = mix.sessions.create(title="<value>")
 
     # Handle response
     print(res)
@@ -74,20 +74,20 @@ with Mix() as mix:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `title`                                                             | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Optional title for the session                                      |
+| `title`                                                             | *str*                                                               | :heavy_check_mark:                                                  | Title for the session                                               |
 | `working_directory`                                                 | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Optional working directory path                                     |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.CreateSessionResponse](../../models/createsessionresponse.md)**
+**[models.SessionData](../../models/sessiondata.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 400                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 400                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## delete
 
@@ -117,10 +117,10 @@ with Mix() as mix:
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 404                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## get
 
@@ -151,14 +151,14 @@ with Mix() as mix:
 
 ### Response
 
-**[models.GetSessionResponse](../../models/getsessionresponse.md)**
+**[models.SessionData](../../models/sessiondata.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 404                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## fork
 
@@ -191,14 +191,14 @@ with Mix() as mix:
 
 ### Response
 
-**[models.ForkSessionResponse](../../models/forksessionresponse.md)**
+**[models.SessionData](../../models/sessiondata.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 400, 404                 | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 400, 404               | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## cancel_processing
 
@@ -233,7 +233,7 @@ with Mix() as mix:
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.RESTResponseError | 404                      | application/json         |
-| errors.MixDefaultError   | 4XX, 5XX                 | \*/\*                    |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |

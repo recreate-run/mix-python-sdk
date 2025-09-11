@@ -10,9 +10,6 @@ sources:
         registry:
             location: registry.speakeasyapi.dev/recreate/mix/mix-rest-api
 targets:
-    mix:
-        target: ""
-        source: ""
     mix-py-target:
         target: python
         source: Mix REST API

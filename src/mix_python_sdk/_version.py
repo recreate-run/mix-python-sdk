@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "mix-python-sdk"
-__version__: str = "0.1.0"
+__version__: str = "0.1.4"
 __openapi_doc_version__: str = "1.0.0"
-__gen_version__: str = "2.696.0"
-__user_agent__: str = "speakeasy-sdk/python 0.1.0 2.696.0 1.0.0 mix-python-sdk"
+__gen_version__: str = "2.698.4"
+__user_agent__: str = "speakeasy-sdk/python 0.1.4 2.698.4 1.0.0 mix-python-sdk"
 
 try:
     if __package__ is not None:

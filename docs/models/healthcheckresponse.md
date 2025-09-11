@@ -5,8 +5,8 @@ Health information
 
 ## Fields
 
-| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `data`                                                           | [Optional[models.HealthCheckData]](../models/healthcheckdata.md) | :heavy_minus_sign:                                               | N/A                                                              |
-| `error`                                                          | [Optional[models.RESTError]](../models/resterror.md)             | :heavy_minus_sign:                                               | N/A                                                              |
-| `message`                                                        | *Optional[str]*                                                  | :heavy_minus_sign:                                               | Optional message                                                 |
+| Field               | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `status`            | *Optional[str]*     | :heavy_minus_sign:  | Health status       |
+| `timestamp`         | *Optional[str]*     | :heavy_minus_sign:  | Current timestamp   |
+| `version`           | *Optional[str]*     | :heavy_minus_sign:  | Application version |
