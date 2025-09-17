@@ -1,0 +1,51 @@
+name: Publish Python Package
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install uv pylint mypy
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -e .
+    - name: Lint with pylint
+      run: |
+        # Use appropriate linting configuration if available
+        pylint src/ || true
+    - name: Type check with mypy
+      run: |
+        mypy src/ || true
+
+  publish-pypi:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'release'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install uv
+    - name: Build and publish
+      env:
+        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        bash scripts/publish.sh

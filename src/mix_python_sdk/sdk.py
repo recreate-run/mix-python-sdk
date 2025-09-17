@@ -16,8 +16,10 @@ import weakref
 
 if TYPE_CHECKING:
     from mix_python_sdk.authentication import Authentication
+    from mix_python_sdk.files import Files
     from mix_python_sdk.messages import Messages
     from mix_python_sdk.permissions import Permissions
+    from mix_python_sdk.preferences_sdk import PreferencesSDK
     from mix_python_sdk.sessions import Sessions
     from mix_python_sdk.system import System
 
@@ -29,13 +31,17 @@ class Mix(BaseSDK):
     system: "System"
     messages: "Messages"
     permissions: "Permissions"
+    preferences: "PreferencesSDK"
     sessions: "Sessions"
+    files: "Files"
     _sub_sdk_map = {
         "authentication": ("mix_python_sdk.authentication", "Authentication"),
         "system": ("mix_python_sdk.system", "System"),
         "messages": ("mix_python_sdk.messages", "Messages"),
         "permissions": ("mix_python_sdk.permissions", "Permissions"),
+        "preferences": ("mix_python_sdk.preferences_sdk", "PreferencesSDK"),
         "sessions": ("mix_python_sdk.sessions", "Sessions"),
+        "files": ("mix_python_sdk.files", "Files"),
     }
 
     def __init__(

@@ -13,6 +13,16 @@ if TYPE_CHECKING:
         CancelSessionProcessingResponseTypedDict,
     )
     from .createsessionop import CreateSessionRequest, CreateSessionRequestTypedDict
+    from .deletecredentialsop import (
+        DeleteCredentialsRequest,
+        DeleteCredentialsRequestTypedDict,
+        DeleteCredentialsResponse,
+        DeleteCredentialsResponseTypedDict,
+    )
+    from .deletesessionfileop import (
+        DeleteSessionFileRequest,
+        DeleteSessionFileRequestTypedDict,
+    )
     from .deletesessionop import DeleteSessionRequest, DeleteSessionRequestTypedDict
     from .denypermissionop import (
         DenyPermissionRequest,
@@ -20,11 +30,23 @@ if TYPE_CHECKING:
         DenyPermissionResponse,
         DenyPermissionResponseTypedDict,
     )
+    from .fileinfo import FileInfo, FileInfoTypedDict
     from .forksessionop import (
         ForkSessionRequest,
         ForkSessionRequestBody,
         ForkSessionRequestBodyTypedDict,
         ForkSessionRequestTypedDict,
+    )
+    from .getauthstatusop import (
+        GetAuthStatusAuthMethod,
+        GetAuthStatusResponse,
+        GetAuthStatusResponseTypedDict,
+        Providers,
+        ProvidersTypedDict,
+    )
+    from .getavailableprovidersop import (
+        GetAvailableProvidersResponse,
+        GetAvailableProvidersResponseTypedDict,
     )
     from .getcommandop import (
         GetCommandRequest,
@@ -36,6 +58,20 @@ if TYPE_CHECKING:
         GetMessageHistoryRequest,
         GetMessageHistoryRequestTypedDict,
     )
+    from .getpreferencesop import (
+        AvailableProviders,
+        AvailableProvidersTypedDict,
+        GetPreferencesPreferences,
+        GetPreferencesPreferencesTypedDict,
+        GetPreferencesResponse,
+        GetPreferencesResponseTypedDict,
+    )
+    from .getsessionfileop import (
+        GetSessionFileRequest,
+        GetSessionFileRequestTypedDict,
+        GetSessionFileResponse,
+        GetSessionFileResponseTypedDict,
+    )
     from .getsessionmessagesop import (
         GetSessionMessagesRequest,
         GetSessionMessagesRequestTypedDict,
@@ -46,6 +82,12 @@ if TYPE_CHECKING:
         GrantPermissionRequestTypedDict,
         GrantPermissionResponse,
         GrantPermissionResponseTypedDict,
+    )
+    from .handleoauthcallbackop import (
+        HandleOAuthCallbackRequest,
+        HandleOAuthCallbackRequestTypedDict,
+        HandleOAuthCallbackResponse,
+        HandleOAuthCallbackResponseTypedDict,
     )
     from .healthcheckop import HealthCheckResponse, HealthCheckResponseTypedDict
     from .initiateoauthloginop import (
@@ -59,8 +101,16 @@ if TYPE_CHECKING:
         Tool,
         ToolTypedDict,
     )
+    from .listsessionfilesop import (
+        ListSessionFilesRequest,
+        ListSessionFilesRequestTypedDict,
+    )
     from .messagedata import MessageData, MessageDataTypedDict
     from .messagerole import MessageRole
+    from .resetpreferencesop import (
+        ResetPreferencesResponse,
+        ResetPreferencesResponseTypedDict,
+    )
     from .resterror import RESTError, RESTErrorTypedDict, Type
     from .sendmessageop import (
         SendMessageRequest,
@@ -75,31 +125,88 @@ if TYPE_CHECKING:
         SetAPIKeyResponse,
         SetAPIKeyResponseTypedDict,
     )
+    from .startoauthflowop import (
+        StartOAuthFlowRequest,
+        StartOAuthFlowRequestTypedDict,
+        StartOAuthFlowResponse,
+        StartOAuthFlowResponseTypedDict,
+    )
+    from .storeapikeyop import (
+        Provider,
+        StoreAPIKeyRequest,
+        StoreAPIKeyRequestTypedDict,
+        StoreAPIKeyResponse,
+        StoreAPIKeyResponseTypedDict,
+    )
     from .toolcalldata import ToolCallData, ToolCallDataTypedDict
+    from .updatepreferencesop import (
+        UpdatePreferencesRequest,
+        UpdatePreferencesRequestTypedDict,
+        UpdatePreferencesResponse,
+        UpdatePreferencesResponseTypedDict,
+    )
+    from .uploadsessionfileop import (
+        File,
+        FileTypedDict,
+        UploadSessionFileRequest,
+        UploadSessionFileRequestBody,
+        UploadSessionFileRequestBodyTypedDict,
+        UploadSessionFileRequestTypedDict,
+    )
+    from .validatepreferredproviderop import (
+        ValidatePreferredProviderAuthMethod,
+        ValidatePreferredProviderResponse,
+        ValidatePreferredProviderResponseTypedDict,
+    )
 
 __all__ = [
+    "AvailableProviders",
+    "AvailableProvidersTypedDict",
     "CancelSessionProcessingRequest",
     "CancelSessionProcessingRequestTypedDict",
     "CancelSessionProcessingResponse",
     "CancelSessionProcessingResponseTypedDict",
     "CreateSessionRequest",
     "CreateSessionRequestTypedDict",
+    "DeleteCredentialsRequest",
+    "DeleteCredentialsRequestTypedDict",
+    "DeleteCredentialsResponse",
+    "DeleteCredentialsResponseTypedDict",
+    "DeleteSessionFileRequest",
+    "DeleteSessionFileRequestTypedDict",
     "DeleteSessionRequest",
     "DeleteSessionRequestTypedDict",
     "DenyPermissionRequest",
     "DenyPermissionRequestTypedDict",
     "DenyPermissionResponse",
     "DenyPermissionResponseTypedDict",
+    "File",
+    "FileInfo",
+    "FileInfoTypedDict",
+    "FileTypedDict",
     "ForkSessionRequest",
     "ForkSessionRequestBody",
     "ForkSessionRequestBodyTypedDict",
     "ForkSessionRequestTypedDict",
+    "GetAuthStatusAuthMethod",
+    "GetAuthStatusResponse",
+    "GetAuthStatusResponseTypedDict",
+    "GetAvailableProvidersResponse",
+    "GetAvailableProvidersResponseTypedDict",
     "GetCommandRequest",
     "GetCommandRequestTypedDict",
     "GetCommandResponse",
     "GetCommandResponseTypedDict",
     "GetMessageHistoryRequest",
     "GetMessageHistoryRequestTypedDict",
+    "GetPreferencesPreferences",
+    "GetPreferencesPreferencesTypedDict",
+    "GetPreferencesResponse",
+    "GetPreferencesResponseTypedDict",
+    "GetSessionFileRequest",
+    "GetSessionFileRequestTypedDict",
+    "GetSessionFileResponse",
+    "GetSessionFileResponseTypedDict",
     "GetSessionMessagesRequest",
     "GetSessionMessagesRequestTypedDict",
     "GetSessionRequest",
@@ -108,6 +215,10 @@ __all__ = [
     "GrantPermissionRequestTypedDict",
     "GrantPermissionResponse",
     "GrantPermissionResponseTypedDict",
+    "HandleOAuthCallbackRequest",
+    "HandleOAuthCallbackRequestTypedDict",
+    "HandleOAuthCallbackResponse",
+    "HandleOAuthCallbackResponseTypedDict",
     "HealthCheckResponse",
     "HealthCheckResponseTypedDict",
     "InitiateOAuthLoginResponse",
@@ -116,11 +227,18 @@ __all__ = [
     "ListCommandsResponseTypedDict",
     "ListMcpServersResponse",
     "ListMcpServersResponseTypedDict",
+    "ListSessionFilesRequest",
+    "ListSessionFilesRequestTypedDict",
     "MessageData",
     "MessageDataTypedDict",
     "MessageRole",
+    "Provider",
+    "Providers",
+    "ProvidersTypedDict",
     "RESTError",
     "RESTErrorTypedDict",
+    "ResetPreferencesResponse",
+    "ResetPreferencesResponseTypedDict",
     "SendMessageRequest",
     "SendMessageRequestBody",
     "SendMessageRequestBodyTypedDict",
@@ -131,11 +249,30 @@ __all__ = [
     "SetAPIKeyRequestTypedDict",
     "SetAPIKeyResponse",
     "SetAPIKeyResponseTypedDict",
+    "StartOAuthFlowRequest",
+    "StartOAuthFlowRequestTypedDict",
+    "StartOAuthFlowResponse",
+    "StartOAuthFlowResponseTypedDict",
+    "StoreAPIKeyRequest",
+    "StoreAPIKeyRequestTypedDict",
+    "StoreAPIKeyResponse",
+    "StoreAPIKeyResponseTypedDict",
     "Tool",
     "ToolCallData",
     "ToolCallDataTypedDict",
     "ToolTypedDict",
     "Type",
+    "UpdatePreferencesRequest",
+    "UpdatePreferencesRequestTypedDict",
+    "UpdatePreferencesResponse",
+    "UpdatePreferencesResponseTypedDict",
+    "UploadSessionFileRequest",
+    "UploadSessionFileRequestBody",
+    "UploadSessionFileRequestBodyTypedDict",
+    "UploadSessionFileRequestTypedDict",
+    "ValidatePreferredProviderAuthMethod",
+    "ValidatePreferredProviderResponse",
+    "ValidatePreferredProviderResponseTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -145,22 +282,47 @@ _dynamic_imports: dict[str, str] = {
     "CancelSessionProcessingResponseTypedDict": ".cancelsessionprocessingop",
     "CreateSessionRequest": ".createsessionop",
     "CreateSessionRequestTypedDict": ".createsessionop",
+    "DeleteCredentialsRequest": ".deletecredentialsop",
+    "DeleteCredentialsRequestTypedDict": ".deletecredentialsop",
+    "DeleteCredentialsResponse": ".deletecredentialsop",
+    "DeleteCredentialsResponseTypedDict": ".deletecredentialsop",
+    "DeleteSessionFileRequest": ".deletesessionfileop",
+    "DeleteSessionFileRequestTypedDict": ".deletesessionfileop",
     "DeleteSessionRequest": ".deletesessionop",
     "DeleteSessionRequestTypedDict": ".deletesessionop",
     "DenyPermissionRequest": ".denypermissionop",
     "DenyPermissionRequestTypedDict": ".denypermissionop",
     "DenyPermissionResponse": ".denypermissionop",
     "DenyPermissionResponseTypedDict": ".denypermissionop",
+    "FileInfo": ".fileinfo",
+    "FileInfoTypedDict": ".fileinfo",
     "ForkSessionRequest": ".forksessionop",
     "ForkSessionRequestBody": ".forksessionop",
     "ForkSessionRequestBodyTypedDict": ".forksessionop",
     "ForkSessionRequestTypedDict": ".forksessionop",
+    "GetAuthStatusAuthMethod": ".getauthstatusop",
+    "GetAuthStatusResponse": ".getauthstatusop",
+    "GetAuthStatusResponseTypedDict": ".getauthstatusop",
+    "Providers": ".getauthstatusop",
+    "ProvidersTypedDict": ".getauthstatusop",
+    "GetAvailableProvidersResponse": ".getavailableprovidersop",
+    "GetAvailableProvidersResponseTypedDict": ".getavailableprovidersop",
     "GetCommandRequest": ".getcommandop",
     "GetCommandRequestTypedDict": ".getcommandop",
     "GetCommandResponse": ".getcommandop",
     "GetCommandResponseTypedDict": ".getcommandop",
     "GetMessageHistoryRequest": ".getmessagehistoryop",
     "GetMessageHistoryRequestTypedDict": ".getmessagehistoryop",
+    "AvailableProviders": ".getpreferencesop",
+    "AvailableProvidersTypedDict": ".getpreferencesop",
+    "GetPreferencesPreferences": ".getpreferencesop",
+    "GetPreferencesPreferencesTypedDict": ".getpreferencesop",
+    "GetPreferencesResponse": ".getpreferencesop",
+    "GetPreferencesResponseTypedDict": ".getpreferencesop",
+    "GetSessionFileRequest": ".getsessionfileop",
+    "GetSessionFileRequestTypedDict": ".getsessionfileop",
+    "GetSessionFileResponse": ".getsessionfileop",
+    "GetSessionFileResponseTypedDict": ".getsessionfileop",
     "GetSessionMessagesRequest": ".getsessionmessagesop",
     "GetSessionMessagesRequestTypedDict": ".getsessionmessagesop",
     "GetSessionRequest": ".getsessionop",
@@ -169,6 +331,10 @@ _dynamic_imports: dict[str, str] = {
     "GrantPermissionRequestTypedDict": ".grantpermissionop",
     "GrantPermissionResponse": ".grantpermissionop",
     "GrantPermissionResponseTypedDict": ".grantpermissionop",
+    "HandleOAuthCallbackRequest": ".handleoauthcallbackop",
+    "HandleOAuthCallbackRequestTypedDict": ".handleoauthcallbackop",
+    "HandleOAuthCallbackResponse": ".handleoauthcallbackop",
+    "HandleOAuthCallbackResponseTypedDict": ".handleoauthcallbackop",
     "HealthCheckResponse": ".healthcheckop",
     "HealthCheckResponseTypedDict": ".healthcheckop",
     "InitiateOAuthLoginResponse": ".initiateoauthloginop",
@@ -179,9 +345,13 @@ _dynamic_imports: dict[str, str] = {
     "ListMcpServersResponseTypedDict": ".listmcpserversop",
     "Tool": ".listmcpserversop",
     "ToolTypedDict": ".listmcpserversop",
+    "ListSessionFilesRequest": ".listsessionfilesop",
+    "ListSessionFilesRequestTypedDict": ".listsessionfilesop",
     "MessageData": ".messagedata",
     "MessageDataTypedDict": ".messagedata",
     "MessageRole": ".messagerole",
+    "ResetPreferencesResponse": ".resetpreferencesop",
+    "ResetPreferencesResponseTypedDict": ".resetpreferencesop",
     "RESTError": ".resterror",
     "RESTErrorTypedDict": ".resterror",
     "Type": ".resterror",
@@ -195,8 +365,30 @@ _dynamic_imports: dict[str, str] = {
     "SetAPIKeyRequestTypedDict": ".setapikeyop",
     "SetAPIKeyResponse": ".setapikeyop",
     "SetAPIKeyResponseTypedDict": ".setapikeyop",
+    "StartOAuthFlowRequest": ".startoauthflowop",
+    "StartOAuthFlowRequestTypedDict": ".startoauthflowop",
+    "StartOAuthFlowResponse": ".startoauthflowop",
+    "StartOAuthFlowResponseTypedDict": ".startoauthflowop",
+    "Provider": ".storeapikeyop",
+    "StoreAPIKeyRequest": ".storeapikeyop",
+    "StoreAPIKeyRequestTypedDict": ".storeapikeyop",
+    "StoreAPIKeyResponse": ".storeapikeyop",
+    "StoreAPIKeyResponseTypedDict": ".storeapikeyop",
     "ToolCallData": ".toolcalldata",
     "ToolCallDataTypedDict": ".toolcalldata",
+    "UpdatePreferencesRequest": ".updatepreferencesop",
+    "UpdatePreferencesRequestTypedDict": ".updatepreferencesop",
+    "UpdatePreferencesResponse": ".updatepreferencesop",
+    "UpdatePreferencesResponseTypedDict": ".updatepreferencesop",
+    "File": ".uploadsessionfileop",
+    "FileTypedDict": ".uploadsessionfileop",
+    "UploadSessionFileRequest": ".uploadsessionfileop",
+    "UploadSessionFileRequestBody": ".uploadsessionfileop",
+    "UploadSessionFileRequestBodyTypedDict": ".uploadsessionfileop",
+    "UploadSessionFileRequestTypedDict": ".uploadsessionfileop",
+    "ValidatePreferredProviderAuthMethod": ".validatepreferredproviderop",
+    "ValidatePreferredProviderResponse": ".validatepreferredproviderop",
+    "ValidatePreferredProviderResponseTypedDict": ".validatepreferredproviderop",
 }
 
 

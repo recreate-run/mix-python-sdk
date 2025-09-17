@@ -11,8 +11,6 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *mix-
 
 
 <br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/recreate/mix). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -28,6 +26,7 @@ Mix REST API: REST API for the Mix application - session management, messaging, 
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -43,9 +42,6 @@ Mix REST API: REST API for the Mix application - session management, messaging, 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
 
 > [!NOTE]
 > **Python version upgrade policy**
@@ -59,7 +55,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add git+<UNSET>.git
+uv add mix-python-sdk
 ```
 
 ### PIP
@@ -67,7 +63,7 @@ uv add git+<UNSET>.git
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install mix-python-sdk
 ```
 
 ### Poetry
@@ -75,7 +71,15 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add mix-python-sdk
+```
+
+### Installation from GitHub
+
+You can also install the package directly from GitHub:
+
+```bash
+pip install git+https://github.com/recreate-run/mix-python-sdk.git
 ```
 
 ### Shell and script usage with `uv`
@@ -132,7 +136,7 @@ from mix_python_sdk import Mix
 
 with Mix() as mix:
 
-    res = mix.authentication.set_api_key(api_key="<value>")
+    res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
     # Handle response
     print(res)
@@ -150,7 +154,7 @@ async def main():
 
     async with Mix() as mix:
 
-        res = await mix.authentication.set_api_key_async(api_key="<value>")
+        res = await mix.authentication.store_api_key_async(api_key="<value>", provider="openrouter")
 
         # Handle response
         print(res)
@@ -167,8 +171,21 @@ asyncio.run(main())
 
 ### [authentication](docs/sdks/authentication/README.md)
 
+* [store_api_key](docs/sdks/authentication/README.md#store_api_key) - Store API key
 * [set_api_key](docs/sdks/authentication/README.md#set_api_key) - Set API key
 * [initiate_o_auth_login](docs/sdks/authentication/README.md#initiate_o_auth_login) - OAuth authentication
+* [handle_o_auth_callback](docs/sdks/authentication/README.md#handle_o_auth_callback) - Handle OAuth callback
+* [start_o_auth_flow](docs/sdks/authentication/README.md#start_o_auth_flow) - Start OAuth authentication
+* [get_auth_status](docs/sdks/authentication/README.md#get_auth_status) - Get authentication status
+* [validate_preferred_provider](docs/sdks/authentication/README.md#validate_preferred_provider) - Validate preferred provider
+* [delete_credentials](docs/sdks/authentication/README.md#delete_credentials) - Delete provider credentials
+
+### [files](docs/sdks/files/README.md)
+
+* [list_session_files](docs/sdks/files/README.md#list_session_files) - List session files
+* [upload_session_file](docs/sdks/files/README.md#upload_session_file) - Upload file to session
+* [delete_session_file](docs/sdks/files/README.md#delete_session_file) - Delete session file
+* [get_session_file](docs/sdks/files/README.md#get_session_file) - Get session file
 
 ### [messages](docs/sdks/messages/README.md)
 
@@ -181,6 +198,13 @@ asyncio.run(main())
 
 * [deny](docs/sdks/permissions/README.md#deny) - Deny permission
 * [grant](docs/sdks/permissions/README.md#grant) - Grant permission
+
+### [preferences](docs/sdks/preferencessdk/README.md)
+
+* [get_preferences](docs/sdks/preferencessdk/README.md#get_preferences) - Get user preferences
+* [update_preferences](docs/sdks/preferencessdk/README.md#update_preferences) - Update user preferences
+* [get_available_providers](docs/sdks/preferencessdk/README.md#get_available_providers) - Get available providers
+* [reset_preferences](docs/sdks/preferencessdk/README.md#reset_preferences) - Reset preferences
 
 ### [sessions](docs/sdks/sessions/README.md)
 
@@ -201,6 +225,33 @@ asyncio.run(main())
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
+<!-- Start File uploads [file-upload] -->
+## File uploads
+
+Certain SDK methods accept file objects as part of a request body or multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
+
+> [!TIP]
+>
+> For endpoints that handle file uploads bytes arrays can also be used. However, using streams is recommended for large files.
+>
+
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.files.upload_session_file(id="<id>", file={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    })
+
+    # Handle response
+    print(res)
+
+```
+<!-- End File uploads [file-upload] -->
+
 <!-- Start Retries [retries] -->
 ## Retries
 
@@ -214,7 +265,7 @@ from mix_python_sdk.utils import BackoffStrategy, RetryConfig
 
 with Mix() as mix:
 
-    res = mix.authentication.set_api_key(api_key="<value>",
+    res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -232,7 +283,7 @@ with Mix(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
 ) as mix:
 
-    res = mix.authentication.set_api_key(api_key="<value>")
+    res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
     # Handle response
     print(res)
@@ -263,7 +314,7 @@ with Mix() as mix:
     res = None
     try:
 
-        res = mix.authentication.set_api_key(api_key="<value>")
+        res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
         # Handle response
         print(res)
@@ -317,7 +368,7 @@ with Mix(
     server_url="http://localhost:8088",
 ) as mix:
 
-    res = mix.authentication.set_api_key(api_key="<value>")
+    res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
     # Handle response
     print(res)

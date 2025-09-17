@@ -1,19 +1,21 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: dc9fe6dd3549ff3565563bee19c9654a
+  docChecksum: 58c165a7964caebcaf3d3732f25fe06f
   docVersion: 1.0.0
-  speakeasyVersion: 1.615.1
-  generationVersion: 2.698.4
-  releaseVersion: 0.1.4
-  configChecksum: a8c6b1ccb17a5585f003b3899d054b01
+  speakeasyVersion: 1.617.1
+  generationVersion: 2.701.8
+  releaseVersion: 0.2.0
+  configChecksum: f304120f1268b7c46b3dc5093a12c6e2
 features:
   python:
+    acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
     core: 5.20.4
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
+    downloadStreams: 1.0.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
@@ -22,11 +24,13 @@ features:
     globalServerURLs: 3.1.1
     groups: 3.0.0
     methodArguments: 1.0.2
+    multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
+    uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -35,41 +39,72 @@ generatedFiles:
   - .vscode/settings.json
   - USAGE.md
   - docs/errors/errorresponse.md
+  - docs/models/availableproviders.md
   - docs/models/cancelsessionprocessingrequest.md
   - docs/models/cancelsessionprocessingresponse.md
   - docs/models/createsessionrequest.md
+  - docs/models/deletecredentialsrequest.md
+  - docs/models/deletecredentialsresponse.md
+  - docs/models/deletesessionfilerequest.md
   - docs/models/deletesessionrequest.md
   - docs/models/denypermissionrequest.md
   - docs/models/denypermissionresponse.md
+  - docs/models/file.md
+  - docs/models/fileinfo.md
   - docs/models/forksessionrequest.md
   - docs/models/forksessionrequestbody.md
+  - docs/models/getauthstatusauthmethod.md
+  - docs/models/getauthstatusresponse.md
+  - docs/models/getavailableprovidersresponse.md
   - docs/models/getcommandrequest.md
   - docs/models/getcommandresponse.md
   - docs/models/getmessagehistoryrequest.md
+  - docs/models/getpreferencespreferences.md
+  - docs/models/getpreferencesresponse.md
+  - docs/models/getsessionfilerequest.md
+  - docs/models/getsessionfileresponse.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
   - docs/models/grantpermissionrequest.md
   - docs/models/grantpermissionresponse.md
+  - docs/models/handleoauthcallbackrequest.md
+  - docs/models/handleoauthcallbackresponse.md
   - docs/models/healthcheckresponse.md
   - docs/models/initiateoauthloginresponse.md
   - docs/models/listcommandsresponse.md
   - docs/models/listmcpserversresponse.md
+  - docs/models/listsessionfilesrequest.md
   - docs/models/messagedata.md
   - docs/models/messagerole.md
+  - docs/models/provider.md
+  - docs/models/providers.md
+  - docs/models/resetpreferencesresponse.md
   - docs/models/resterror.md
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
   - docs/models/sessiondata.md
   - docs/models/setapikeyrequest.md
   - docs/models/setapikeyresponse.md
+  - docs/models/startoauthflowrequest.md
+  - docs/models/startoauthflowresponse.md
+  - docs/models/storeapikeyrequest.md
+  - docs/models/storeapikeyresponse.md
   - docs/models/tool.md
   - docs/models/toolcalldata.md
   - docs/models/type.md
+  - docs/models/updatepreferencesrequest.md
+  - docs/models/updatepreferencesresponse.md
+  - docs/models/uploadsessionfilerequest.md
+  - docs/models/uploadsessionfilerequestbody.md
   - docs/models/utils/retryconfig.md
+  - docs/models/validatepreferredproviderauthmethod.md
+  - docs/models/validatepreferredproviderresponse.md
   - docs/sdks/authentication/README.md
+  - docs/sdks/files/README.md
   - docs/sdks/messages/README.md
   - docs/sdks/mix/README.md
   - docs/sdks/permissions/README.md
+  - docs/sdks/preferencessdk/README.md
   - docs/sdks/sessions/README.md
   - docs/sdks/system/README.md
   - py.typed
@@ -89,31 +124,48 @@ generatedFiles:
   - src/mix_python_sdk/errors/mixerror.py
   - src/mix_python_sdk/errors/no_response_error.py
   - src/mix_python_sdk/errors/responsevalidationerror.py
+  - src/mix_python_sdk/files.py
   - src/mix_python_sdk/httpclient.py
   - src/mix_python_sdk/messages.py
   - src/mix_python_sdk/models/__init__.py
   - src/mix_python_sdk/models/cancelsessionprocessingop.py
   - src/mix_python_sdk/models/createsessionop.py
+  - src/mix_python_sdk/models/deletecredentialsop.py
+  - src/mix_python_sdk/models/deletesessionfileop.py
   - src/mix_python_sdk/models/deletesessionop.py
   - src/mix_python_sdk/models/denypermissionop.py
+  - src/mix_python_sdk/models/fileinfo.py
   - src/mix_python_sdk/models/forksessionop.py
+  - src/mix_python_sdk/models/getauthstatusop.py
+  - src/mix_python_sdk/models/getavailableprovidersop.py
   - src/mix_python_sdk/models/getcommandop.py
   - src/mix_python_sdk/models/getmessagehistoryop.py
+  - src/mix_python_sdk/models/getpreferencesop.py
+  - src/mix_python_sdk/models/getsessionfileop.py
   - src/mix_python_sdk/models/getsessionmessagesop.py
   - src/mix_python_sdk/models/getsessionop.py
   - src/mix_python_sdk/models/grantpermissionop.py
+  - src/mix_python_sdk/models/handleoauthcallbackop.py
   - src/mix_python_sdk/models/healthcheckop.py
   - src/mix_python_sdk/models/initiateoauthloginop.py
   - src/mix_python_sdk/models/listcommandsop.py
   - src/mix_python_sdk/models/listmcpserversop.py
+  - src/mix_python_sdk/models/listsessionfilesop.py
   - src/mix_python_sdk/models/messagedata.py
   - src/mix_python_sdk/models/messagerole.py
+  - src/mix_python_sdk/models/resetpreferencesop.py
   - src/mix_python_sdk/models/resterror.py
   - src/mix_python_sdk/models/sendmessageop.py
   - src/mix_python_sdk/models/sessiondata.py
   - src/mix_python_sdk/models/setapikeyop.py
+  - src/mix_python_sdk/models/startoauthflowop.py
+  - src/mix_python_sdk/models/storeapikeyop.py
   - src/mix_python_sdk/models/toolcalldata.py
+  - src/mix_python_sdk/models/updatepreferencesop.py
+  - src/mix_python_sdk/models/uploadsessionfileop.py
+  - src/mix_python_sdk/models/validatepreferredproviderop.py
   - src/mix_python_sdk/permissions.py
+  - src/mix_python_sdk/preferences_sdk.py
   - src/mix_python_sdk/py.typed
   - src/mix_python_sdk/sdk.py
   - src/mix_python_sdk/sdkconfiguration.py
@@ -311,4 +363,139 @@ examples:
           application/json: {"assistantMessageCount": 385832, "completionTokens": 551389, "cost": 5945.98, "createdAt": "2025-08-26T03:33:17.824Z", "id": "<id>", "promptTokens": 770117, "title": "<value>", "toolCallCount": 905266, "userMessageCount": 239157}
         "400":
           application/json: {"error": {"code": 654763, "message": "<value>", "type": "validation_error"}}
+  storeApiKey:
+    speakeasy-default-store-api-key:
+      requestBody:
+        application/json: {"api_key": "<value>", "provider": "openrouter"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 266487, "message": "<value>", "type": "not_found"}}
+        "500":
+          application/json: {"error": {"code": 266487, "message": "<value>", "type": "not_found"}}
+  handleOAuthCallback:
+    speakeasy-default-handle-O-auth-callback:
+      requestBody:
+        application/json: {"code": "<value>", "provider": "<value>", "state": "Arizona"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 930404, "message": "<value>", "type": "internal_error"}}
+        "500":
+          application/json: {"error": {"code": 930404, "message": "<value>", "type": "internal_error"}}
+  startOAuthFlow:
+    speakeasy-default-start-O-auth-flow:
+      parameters:
+        path:
+          provider: "<value>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 879433, "message": "<value>", "type": "validation_error"}}
+        "500":
+          application/json: {"error": {"code": 879433, "message": "<value>", "type": "validation_error"}}
+  getAuthStatus:
+    speakeasy-default-get-auth-status:
+      responses:
+        "200":
+          application/json: {}
+        "500":
+          application/json: {"error": {"code": 430191, "message": "<value>", "type": "validation_error"}}
+  validatePreferredProvider:
+    speakeasy-default-validate-preferred-provider:
+      responses:
+        "200":
+          application/json: {}
+        "500":
+          application/json: {"error": {"code": 605554, "message": "<value>", "type": "internal_error"}}
+  deleteCredentials:
+    speakeasy-default-delete-credentials:
+      parameters:
+        path:
+          provider: "<value>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 839078, "message": "<value>", "type": "bad_request"}}
+        "500":
+          application/json: {"error": {"code": 839078, "message": "<value>", "type": "bad_request"}}
+  getPreferences:
+    speakeasy-default-get-preferences:
+      responses:
+        "200":
+          application/json: {"available_providers": {"key": {}}}
+        "500":
+          application/json: {"error": {"code": 25779, "message": "<value>", "type": "not_found"}}
+  updatePreferences:
+    speakeasy-default-update-preferences:
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 990914, "message": "<value>", "type": "validation_error"}}
+        "500":
+          application/json: {"error": {"code": 990914, "message": "<value>", "type": "validation_error"}}
+  getAvailableProviders:
+    speakeasy-default-get-available-providers:
+      responses:
+        "200":
+          application/json: {"key": {}}
+        "500":
+          application/json: {"error": {"code": 769766, "message": "<value>", "type": "internal_error"}}
+  resetPreferences:
+    speakeasy-default-reset-preferences:
+      responses:
+        "200":
+          application/json: {}
+        "500":
+          application/json: {"error": {"code": 941390, "message": "<value>", "type": "unauthorized"}}
+  listSessionFiles:
+    speakeasy-default-list-session-files:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: [{"isDir": false, "modified": 765133, "name": "<value>", "size": 287523}]
+        "404":
+          application/json: {"error": {"code": 744976, "message": "<value>", "type": "not_found"}}
+  uploadSessionFile:
+    speakeasy-default-upload-session-file:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file"}
+      responses:
+        "201":
+          application/json: {"isDir": false, "modified": 467218, "name": "<value>", "size": 793494}
+        "400":
+          application/json: {"error": {"code": 658099, "message": "<value>", "type": "not_found"}}
+  deleteSessionFile:
+    speakeasy-default-delete-session-file:
+      parameters:
+        path:
+          id: "<id>"
+          filename: "example.file"
+      responses:
+        "404":
+          application/json: {"error": {"code": 565254, "message": "<value>", "type": "internal_error"}}
+  getSessionFile:
+    speakeasy-default-get-session-file:
+      parameters:
+        path:
+          id: "<id>"
+          filename: "example.file"
+      responses:
+        "200":
+          application/octet-stream: "x-file: example.file"
+          image/jpeg: "x-file: example.file"
+        "400":
+          application/json: {"error": {"code": 958191, "message": "<value>", "type": "internal_error"}}
 examplesVersion: 1.0.2

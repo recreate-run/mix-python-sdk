@@ -1,0 +1,13 @@
+# ValidatePreferredProviderResponse
+
+Preferred provider validation status
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `auth_method`                                                                                            | [Optional[models.ValidatePreferredProviderAuthMethod]](../models/validatepreferredproviderauthmethod.md) | :heavy_minus_sign:                                                                                       | Authentication method used                                                                               |
+| `message`                                                                                                | *Optional[str]*                                                                                          | :heavy_minus_sign:                                                                                       | Status message                                                                                           |
+| `provider`                                                                                               | *Optional[str]*                                                                                          | :heavy_minus_sign:                                                                                       | Preferred provider name                                                                                  |
+| `valid`                                                                                                  | *Optional[bool]*                                                                                         | :heavy_minus_sign:                                                                                       | Whether preferred provider is authenticated                                                              |

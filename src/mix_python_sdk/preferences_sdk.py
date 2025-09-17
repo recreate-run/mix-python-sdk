@@ -5,21 +5,21 @@ from mix_python_sdk import errors, models, utils
 from mix_python_sdk._hooks import HookContext
 from mix_python_sdk.types import OptionalNullable, UNSET
 from mix_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Dict, Mapping, Optional
 
 
-class Sessions(BaseSDK):
-    def list(
+class PreferencesSDK(BaseSDK):
+    def get_preferences(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.SessionData]:
-        r"""List all sessions
+    ) -> models.GetPreferencesResponse:
+        r"""Get user preferences
 
-        Retrieve a list of all available sessions with their metadata
+        Retrieve current user preferences including model and provider settings
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -37,7 +37,7 @@ class Sessions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
-            path="/api/sessions",
+            path="/api/preferences",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -66,21 +66,18 @@ class Sessions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listSessions",
+                operation_id="getPreferences",
                 oauth2_scopes=[],
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            error_status_codes=["4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.SessionData], http_res)
-        if utils.match_response(http_res, "401", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
+            return unmarshal_json_response(models.GetPreferencesResponse, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -93,17 +90,17 @@ class Sessions(BaseSDK):
 
         raise errors.MixDefaultError("Unexpected response received", http_res)
 
-    async def list_async(
+    async def get_preferences_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.SessionData]:
-        r"""List all sessions
+    ) -> models.GetPreferencesResponse:
+        r"""Get user preferences
 
-        Retrieve a list of all available sessions with their metadata
+        Retrieve current user preferences including model and provider settings
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -121,7 +118,7 @@ class Sessions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
-            path="/api/sessions",
+            path="/api/preferences",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -150,19 +147,240 @@ class Sessions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listSessions",
+                operation_id="getPreferences",
                 oauth2_scopes=[],
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            error_status_codes=["4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.SessionData], http_res)
-        if utils.match_response(http_res, "401", "application/json"):
+            return unmarshal_json_response(models.GetPreferencesResponse, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.MixDefaultError("Unexpected response received", http_res)
+
+    def update_preferences(
+        self,
+        *,
+        main_agent_max_tokens: Optional[int] = None,
+        main_agent_model: Optional[str] = None,
+        main_agent_reasoning_effort: Optional[str] = None,
+        preferred_provider: Optional[str] = None,
+        sub_agent_max_tokens: Optional[int] = None,
+        sub_agent_model: Optional[str] = None,
+        sub_agent_reasoning_effort: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdatePreferencesResponse:
+        r"""Update user preferences
+
+        Update user preferences including model and provider settings
+
+        :param main_agent_max_tokens: Maximum tokens for main agent responses
+        :param main_agent_model: Main agent model ID
+        :param main_agent_reasoning_effort: Reasoning effort setting for main agent
+        :param preferred_provider: Preferred AI provider (anthropic, openai, openrouter)
+        :param sub_agent_max_tokens: Maximum tokens for sub agent responses
+        :param sub_agent_model: Sub agent model ID
+        :param sub_agent_reasoning_effort: Reasoning effort setting for sub agent
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdatePreferencesRequest(
+            main_agent_max_tokens=main_agent_max_tokens,
+            main_agent_model=main_agent_model,
+            main_agent_reasoning_effort=main_agent_reasoning_effort,
+            preferred_provider=preferred_provider,
+            sub_agent_max_tokens=sub_agent_max_tokens,
+            sub_agent_model=sub_agent_model,
+            sub_agent_reasoning_effort=sub_agent_reasoning_effort,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/preferences",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=False,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.UpdatePreferencesRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX", "408", "429"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updatePreferences",
+                oauth2_scopes=[],
+                security_source=None,
+            ),
+            request=req,
+            error_status_codes=["400", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdatePreferencesResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.MixDefaultError("Unexpected response received", http_res)
+
+    async def update_preferences_async(
+        self,
+        *,
+        main_agent_max_tokens: Optional[int] = None,
+        main_agent_model: Optional[str] = None,
+        main_agent_reasoning_effort: Optional[str] = None,
+        preferred_provider: Optional[str] = None,
+        sub_agent_max_tokens: Optional[int] = None,
+        sub_agent_model: Optional[str] = None,
+        sub_agent_reasoning_effort: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdatePreferencesResponse:
+        r"""Update user preferences
+
+        Update user preferences including model and provider settings
+
+        :param main_agent_max_tokens: Maximum tokens for main agent responses
+        :param main_agent_model: Main agent model ID
+        :param main_agent_reasoning_effort: Reasoning effort setting for main agent
+        :param preferred_provider: Preferred AI provider (anthropic, openai, openrouter)
+        :param sub_agent_max_tokens: Maximum tokens for sub agent responses
+        :param sub_agent_model: Sub agent model ID
+        :param sub_agent_reasoning_effort: Reasoning effort setting for sub agent
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdatePreferencesRequest(
+            main_agent_max_tokens=main_agent_max_tokens,
+            main_agent_model=main_agent_model,
+            main_agent_reasoning_effort=main_agent_reasoning_effort,
+            preferred_provider=preferred_provider,
+            sub_agent_max_tokens=sub_agent_max_tokens,
+            sub_agent_model=sub_agent_model,
+            sub_agent_reasoning_effort=sub_agent_reasoning_effort,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/preferences",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=False,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.UpdatePreferencesRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX", "408", "429"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updatePreferences",
+                oauth2_scopes=[],
+                security_source=None,
+            ),
+            request=req,
+            error_status_codes=["400", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.UpdatePreferencesResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
@@ -177,22 +395,18 @@ class Sessions(BaseSDK):
 
         raise errors.MixDefaultError("Unexpected response received", http_res)
 
-    def create(
+    def get_available_providers(
         self,
         *,
-        title: str,
-        working_directory: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Create a new session
+    ) -> Dict[str, models.GetAvailableProvidersResponse]:
+        r"""Get available providers
 
-        Create a new session with required title. Session automatically gets isolated storage directory.
+        Retrieve list of available AI providers and their supported models
 
-        :param title: Title for the session
-        :param working_directory: Optional working directory path
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -207,27 +421,18 @@ class Sessions(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.CreateSessionRequest(
-            title=title,
-            working_directory=working_directory,
-        )
-
         req = self._build_request(
-            method="POST",
-            path="/api/sessions",
+            method="GET",
+            path="/api/preferences/providers",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
-            request_body_required=True,
+            request=None,
+            request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=False,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CreateSessionRequest
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -247,761 +452,21 @@ class Sessions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createSession",
+                operation_id="getAvailableProviders",
                 oauth2_scopes=[],
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["400", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    async def create_async(
-        self,
-        *,
-        title: str,
-        working_directory: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Create a new session
-
-        Create a new session with required title. Session automatically gets isolated storage directory.
-
-        :param title: Title for the session
-        :param working_directory: Optional working directory path
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.CreateSessionRequest(
-            title=title,
-            working_directory=working_directory,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/api/sessions",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.CreateSessionRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="createSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    def delete(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Delete a session
-
-        Permanently delete a session and all its data
-
-        :param id: Session ID
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DeleteSessionRequest(
-            id=id,
-        )
-
-        req = self._build_request(
-            method="DELETE",
-            path="/api/sessions/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="deleteSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    async def delete_async(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Delete a session
-
-        Permanently delete a session and all its data
-
-        :param id: Session ID
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DeleteSessionRequest(
-            id=id,
-        )
-
-        req = self._build_request_async(
-            method="DELETE",
-            path="/api/sessions/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="deleteSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    def get(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Get a specific session
-
-        Retrieve detailed information about a specific session
-
-        :param id: Session ID
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.GetSessionRequest(
-            id=id,
-        )
-
-        req = self._build_request(
-            method="GET",
-            path="/api/sessions/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="getSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    async def get_async(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Get a specific session
-
-        Retrieve detailed information about a specific session
-
-        :param id: Session ID
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.GetSessionRequest(
-            id=id,
-        )
-
-        req = self._build_request_async(
-            method="GET",
-            path="/api/sessions/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="getSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, "404", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    def fork(
-        self,
-        *,
-        id: str,
-        message_index: int,
-        title: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Fork a session
-
-        Create a new session based on an existing session, copying messages up to a specified index
-
-        :param id: Source session ID to fork from
-        :param message_index: Index of the last message to include in the fork (1-based)
-        :param title: Optional title for the forked session (defaults to 'Forked Session')
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.ForkSessionRequest(
-            id=id,
-            request_body=models.ForkSessionRequestBody(
-                message_index=message_index,
-                title=title,
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/api/sessions/{id}/fork",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                False,
-                "json",
-                models.ForkSessionRequestBody,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="forkSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["400", "404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    async def fork_async(
-        self,
-        *,
-        id: str,
-        message_index: int,
-        title: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Fork a session
-
-        Create a new session based on an existing session, copying messages up to a specified index
-
-        :param id: Source session ID to fork from
-        :param message_index: Index of the last message to include in the fork (1-based)
-        :param title: Optional title for the forked session (defaults to 'Forked Session')
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.ForkSessionRequest(
-            id=id,
-            request_body=models.ForkSessionRequestBody(
-                message_index=message_index,
-                title=title,
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/api/sessions/{id}/fork",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                False,
-                "json",
-                models.ForkSessionRequestBody,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="forkSession",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["400", "404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    def cancel_processing(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CancelSessionProcessingResponse:
-        r"""Cancel agent processing
-
-        Cancel any ongoing agent processing in the specified session
-
-        :param id: Session ID
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.CancelSessionProcessingRequest(
-            id=id,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/api/sessions/{id}/cancel",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="cancelSessionProcessing",
-                oauth2_scopes=[],
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.CancelSessionProcessingResponse, http_res
+                Dict[str, models.GetAvailableProvidersResponse], http_res
             )
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1013,20 +478,18 @@ class Sessions(BaseSDK):
 
         raise errors.MixDefaultError("Unexpected response received", http_res)
 
-    async def cancel_processing_async(
+    async def get_available_providers_async(
         self,
         *,
-        id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CancelSessionProcessingResponse:
-        r"""Cancel agent processing
+    ) -> Dict[str, models.GetAvailableProvidersResponse]:
+        r"""Get available providers
 
-        Cancel any ongoing agent processing in the specified session
+        Retrieve list of available AI providers and their supported models
 
-        :param id: Session ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1041,19 +504,14 @@ class Sessions(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.CancelSessionProcessingRequest(
-            id=id,
-        )
-
         req = self._build_request_async(
-            method="POST",
-            path="/api/sessions/{id}/cancel",
+            method="GET",
+            path="/api/preferences/providers",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=False,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -1077,21 +535,183 @@ class Sessions(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="cancelSessionProcessing",
+                operation_id="getAvailableProviders",
                 oauth2_scopes=[],
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(
-                models.CancelSessionProcessingResponse, http_res
+                Dict[str, models.GetAvailableProvidersResponse], http_res
             )
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.MixDefaultError("Unexpected response received", http_res)
+
+    def reset_preferences(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ResetPreferencesResponse:
+        r"""Reset preferences
+
+        Reset user preferences to default values
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="POST",
+            path="/api/preferences/reset",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=False,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX", "408", "429"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="resetPreferences",
+                oauth2_scopes=[],
+                security_source=None,
+            ),
+            request=req,
+            error_status_codes=["4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ResetPreferencesResponse, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.MixDefaultError("Unexpected response received", http_res)
+
+    async def reset_preferences_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.ResetPreferencesResponse:
+        r"""Reset preferences
+
+        Reset user preferences to default values
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="POST",
+            path="/api/preferences/reset",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=False,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX", "408", "429"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="resetPreferences",
+                oauth2_scopes=[],
+                security_source=None,
+            ),
+            request=req,
+            error_status_codes=["4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.ResetPreferencesResponse, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
