@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 58c165a7964caebcaf3d3732f25fe06f
+  docChecksum: f2b770a4c20dd38414add0a3e9771688
   docVersion: 1.0.0
-  speakeasyVersion: 1.617.1
-  generationVersion: 2.701.8
-  releaseVersion: 0.2.0
-  configChecksum: f304120f1268b7c46b3dc5093a12c6e2
+  speakeasyVersion: 1.622.0
+  generationVersion: 2.709.0
+  releaseVersion: 0.2.1
+  configChecksum: 4a4976cf7bd78e7b660e58561c5e1671
 features:
   python:
     acceptHeaders: 3.0.0

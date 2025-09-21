@@ -6,7 +6,11 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ValidatePreferredProviderAuthMethod = Literal["oauth", "api_key", "none"]
+ValidatePreferredProviderAuthMethod = Literal[
+    "oauth",
+    "api_key",
+    "none",
+]
 r"""Authentication method used"""
 
 

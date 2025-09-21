@@ -39,7 +39,7 @@ with Mix() as mix:
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `api_key`                                                           | *str*                                                               | :heavy_check_mark:                                                  | API key for authentication                                          |
-| `provider`                                                          | [models.Provider](../../models/provider.md)                         | :heavy_check_mark:                                                  | Provider name (anthropic, openai, openrouter)                       |
+| `provider`                                                          | [models.Provider](../../models/provider.md)                         | :heavy_check_mark:                                                  | Provider name (anthropic, openai, openrouter, gemini)               |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response

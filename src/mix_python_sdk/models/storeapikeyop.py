@@ -6,15 +6,20 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-Provider = Literal["anthropic", "openai", "openrouter"]
-r"""Provider name (anthropic, openai, openrouter)"""
+Provider = Literal[
+    "anthropic",
+    "openai",
+    "openrouter",
+    "gemini",
+]
+r"""Provider name (anthropic, openai, openrouter, gemini)"""
 
 
 class StoreAPIKeyRequestTypedDict(TypedDict):
     api_key: str
     r"""API key for authentication"""
     provider: Provider
-    r"""Provider name (anthropic, openai, openrouter)"""
+    r"""Provider name (anthropic, openai, openrouter, gemini)"""
 
 
 class StoreAPIKeyRequest(BaseModel):
@@ -22,7 +27,7 @@ class StoreAPIKeyRequest(BaseModel):
     r"""API key for authentication"""
 
     provider: Provider
-    r"""Provider name (anthropic, openai, openrouter)"""
+    r"""Provider name (anthropic, openai, openrouter, gemini)"""
 
 
 class StoreAPIKeyResponseTypedDict(TypedDict):

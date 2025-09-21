@@ -6,7 +6,11 @@ from typing import Dict, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-GetAuthStatusAuthMethod = Literal["oauth", "api_key", "none"]
+GetAuthStatusAuthMethod = Literal[
+    "oauth",
+    "api_key",
+    "none",
+]
 r"""Authentication method (oauth, api_key, none)"""
 
 
