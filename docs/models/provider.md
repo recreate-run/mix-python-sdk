@@ -1,6 +1,6 @@
 # Provider
 
-Provider name (anthropic, openai, openrouter)
+Provider name (anthropic, openai, openrouter, gemini)
 
 
 ## Values
@@ -10,3 +10,4 @@ Provider name (anthropic, openai, openrouter)
 | `ANTHROPIC`  | anthropic    |
 | `OPENAI`     | openai       |
 | `OPENROUTER` | openrouter   |
+| `GEMINI`     | gemini       |

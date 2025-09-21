@@ -21,11 +21,12 @@ paths:
                   description: "API key for authentication"
                   type: "string"
                 "provider":
-                  description: "Provider name (anthropic, openai, openrouter)"
+                  description: "Provider name (anthropic, openai, openrouter, gemini)"
                   enum:
                     - "anthropic"
                     - "openai"
                     - "openrouter"
+                    - "gemini"
                   type: "string"
               required:
                 - "provider"

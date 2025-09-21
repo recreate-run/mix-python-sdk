@@ -7,7 +7,11 @@ from typing_extensions import TypedDict
 
 
 Type = Literal[
-    "bad_request", "not_found", "internal_error", "unauthorized", "validation_error"
+    "bad_request",
+    "not_found",
+    "internal_error",
+    "unauthorized",
+    "validation_error",
 ]
 r"""Error type"""
 

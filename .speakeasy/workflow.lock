@@ -1,9 +1,9 @@
-speakeasyVersion: 1.617.1
+speakeasyVersion: 1.622.0
 sources:
     Mix REST API:
         sourceNamespace: mix-rest-api
-        sourceRevisionDigest: sha256:ccabe904b780d003a1fa33fbeb2fdb244868657e12f9f91b1ffacf8b400d2152
-        sourceBlobDigest: sha256:6e754e7819dbc739d2c8b19ed29a41dee4847c912351b9757dee2559f46745c8
+        sourceRevisionDigest: sha256:8b4e1ebe860c334dffa1ccf7d9db3bce308753ecb08eda56aff467d06eb41611
+        sourceBlobDigest: sha256:9b0585fe92bdcf94b07d8ff2dd061a7f9f45e8e99bf6189d9028c3b8f6bcfc29
         tags:
             - latest
             - 1.0.0
@@ -11,17 +11,17 @@ targets:
     mix-py-target:
         source: Mix REST API
         sourceNamespace: mix-rest-api
-        sourceRevisionDigest: sha256:ccabe904b780d003a1fa33fbeb2fdb244868657e12f9f91b1ffacf8b400d2152
-        sourceBlobDigest: sha256:6e754e7819dbc739d2c8b19ed29a41dee4847c912351b9757dee2559f46745c8
+        sourceRevisionDigest: sha256:8b4e1ebe860c334dffa1ccf7d9db3bce308753ecb08eda56aff467d06eb41611
+        sourceBlobDigest: sha256:9b0585fe92bdcf94b07d8ff2dd061a7f9f45e8e99bf6189d9028c3b8f6bcfc29
         codeSamplesNamespace: mix-rest-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:6a9c9f1ccf0422a8e96428aca5c4031ef862f9b2e363570b397a4b37a3310cfe
+        codeSamplesRevisionDigest: sha256:af8cc916cbdd6fed675961d7e64119d2d101bdd3fa52486b30319f6f0dfab470
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         Mix REST API:
             inputs:
-                - location: ../mix/sdk/openapi.json
+                - location: ../mix/mix_sdk/openapi.json
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             output: .speakeasy/out.openapi.yaml
