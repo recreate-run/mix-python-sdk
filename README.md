@@ -219,8 +219,6 @@ asyncio.run(main())
 
 ### [tools](docs/sdks/tools/README.md)
 
-* [store_tool_credentials](docs/sdks/tools/README.md#store_tool_credentials) - Store tool API key
-* [delete_tool_credentials](docs/sdks/tools/README.md#delete_tool_credentials) - Delete tool API key
 * [get_tools_status](docs/sdks/tools/README.md#get_tools_status) - Get tools status
 
 </details>

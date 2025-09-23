@@ -11,15 +11,16 @@ Provider = Literal[
     "openai",
     "openrouter",
     "gemini",
+    "brave",
 ]
-r"""Provider name (anthropic, openai, openrouter, gemini)"""
+r"""Provider name (anthropic, openai, openrouter, gemini, brave)"""
 
 
 class StoreAPIKeyRequestTypedDict(TypedDict):
     api_key: str
     r"""API key for authentication"""
     provider: Provider
-    r"""Provider name (anthropic, openai, openrouter, gemini)"""
+    r"""Provider name (anthropic, openai, openrouter, gemini, brave)"""
 
 
 class StoreAPIKeyRequest(BaseModel):
@@ -27,7 +28,7 @@ class StoreAPIKeyRequest(BaseModel):
     r"""API key for authentication"""
 
     provider: Provider
-    r"""Provider name (anthropic, openai, openrouter, gemini)"""
+    r"""Provider name (anthropic, openai, openrouter, gemini, brave)"""
 
 
 class StoreAPIKeyResponseTypedDict(TypedDict):

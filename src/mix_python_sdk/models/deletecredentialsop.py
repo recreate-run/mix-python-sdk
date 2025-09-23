@@ -9,14 +9,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class DeleteCredentialsRequestTypedDict(TypedDict):
     provider: str
-    r"""Provider name (anthropic, openai, openrouter)"""
+    r"""Provider name (anthropic, openai, openrouter, gemini, brave)"""
 
 
 class DeleteCredentialsRequest(BaseModel):
     provider: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""Provider name (anthropic, openai, openrouter)"""
+    r"""Provider name (anthropic, openai, openrouter, gemini, brave)"""
 
 
 class DeleteCredentialsResponseTypedDict(TypedDict):
