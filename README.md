@@ -217,6 +217,12 @@ asyncio.run(main())
 * [list_mcp_servers](docs/sdks/system/README.md#list_mcp_servers) - List MCP servers
 * [get_health](docs/sdks/system/README.md#get_health) - Health check
 
+### [tools](docs/sdks/tools/README.md)
+
+* [get_tools_status](docs/sdks/tools/README.md#get_tools_status) - Get tools status
+* [store_tool_credentials](docs/sdks/tools/README.md#store_tool_credentials) - Store tool API key
+* [delete_tool_credentials](docs/sdks/tools/README.md#delete_tool_credentials) - Delete tool API key
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
