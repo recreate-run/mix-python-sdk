@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:medium.com)",
       "Bash(uv run:*)",
-      "Bash(timeout 30 uv run:*)"
+      "Bash(find:*)",
+      "Bash(uv show:*)",
+      "Bash(uv pip:*)"
     ],
     "deny": []
   }
