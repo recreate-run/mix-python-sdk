@@ -183,17 +183,13 @@ Based on analysis of the SDK documentation and existing examples, we will create
 **Functionality to showcase:**
 
 - Tools status discovery and authentication checking
-- Tool credential storage for different providers (Brave, Gemini)
-- Tool type management (web_search, multimodal_analyzer)
-- Credential deletion and cleanup operations
-- Authentication verification workflows
+- Available tool categories and individual tools inspection
+- Authentication status verification for each tool
+- Tool provider and authentication requirement analysis
 
 **Key operations demonstrated:**
 
-- `get_tools_status()` - Tool availability and authentication status
-- `store_tool_credentials()` - Provider credential storage
-- `delete_tool_credentials()` - Credential cleanup
-- Tool authentication verification and management
+- `get_tools_status()` - Get status and authentication information for all available tools and categories
 
 ## Implementation Standards
 
