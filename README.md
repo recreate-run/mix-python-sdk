@@ -58,7 +58,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add git+<UNSET>.git
+uv add git+https://github.com/recreate-run/mix-python-sdk.git
 ```
 
 ### PIP
@@ -66,7 +66,7 @@ uv add git+<UNSET>.git
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install git+https://github.com/recreate-run/mix-python-sdk.git
 ```
 
 ### Poetry
@@ -74,7 +74,7 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add git+https://github.com/recreate-run/mix-python-sdk.git
 ```
 
 ### Shell and script usage with `uv`
@@ -219,9 +219,9 @@ asyncio.run(main())
 
 ### [tools](docs/sdks/tools/README.md)
 
-* [get_tools_status](docs/sdks/tools/README.md#get_tools_status) - Get tools status
 * [store_tool_credentials](docs/sdks/tools/README.md#store_tool_credentials) - Store tool API key
 * [delete_tool_credentials](docs/sdks/tools/README.md#delete_tool_credentials) - Delete tool API key
+* [get_tools_status](docs/sdks/tools/README.md#get_tools_status) - Get tools status
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
