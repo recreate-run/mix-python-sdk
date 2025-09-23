@@ -24,7 +24,7 @@ class Authentication(BaseSDK):
         Store API key for direct authentication with a specific provider
 
         :param api_key: API key for authentication
-        :param provider: Provider name (anthropic, openai, openrouter, gemini)
+        :param provider: Provider name (anthropic, openai, openrouter, gemini, brave)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -121,7 +121,7 @@ class Authentication(BaseSDK):
         Store API key for direct authentication with a specific provider
 
         :param api_key: API key for authentication
-        :param provider: Provider name (anthropic, openai, openrouter, gemini)
+        :param provider: Provider name (anthropic, openai, openrouter, gemini, brave)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1282,7 +1282,7 @@ class Authentication(BaseSDK):
 
         Delete stored API key and/or OAuth credentials for a provider
 
-        :param provider: Provider name (anthropic, openai, openrouter)
+        :param provider: Provider name (anthropic, openai, openrouter, gemini, brave)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1373,7 +1373,7 @@ class Authentication(BaseSDK):
 
         Delete stored API key and/or OAuth credentials for a provider
 
-        :param provider: Provider name (anthropic, openai, openrouter)
+        :param provider: Provider name (anthropic, openai, openrouter, gemini, brave)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

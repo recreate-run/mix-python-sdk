@@ -24,12 +24,6 @@ if TYPE_CHECKING:
         DeleteSessionFileRequestTypedDict,
     )
     from .deletesessionop import DeleteSessionRequest, DeleteSessionRequestTypedDict
-    from .deletetoolcredentialsop import (
-        DeleteToolCredentialsRequest,
-        DeleteToolCredentialsRequestTypedDict,
-        DeleteToolCredentialsResponse,
-        DeleteToolCredentialsResponseTypedDict,
-    )
     from .denypermissionop import (
         DenyPermissionRequest,
         DenyPermissionRequestTypedDict,
@@ -152,13 +146,6 @@ if TYPE_CHECKING:
         StoreAPIKeyResponse,
         StoreAPIKeyResponseTypedDict,
     )
-    from .storetoolcredentialsop import (
-        StoreToolCredentialsRequest,
-        StoreToolCredentialsRequestTypedDict,
-        StoreToolCredentialsResponse,
-        StoreToolCredentialsResponseTypedDict,
-        ToolType,
-    )
     from .toolcalldata import ToolCallData, ToolCallDataTypedDict
     from .updatepreferencesop import (
         UpdatePreferencesRequest,
@@ -199,10 +186,6 @@ __all__ = [
     "DeleteSessionFileRequestTypedDict",
     "DeleteSessionRequest",
     "DeleteSessionRequestTypedDict",
-    "DeleteToolCredentialsRequest",
-    "DeleteToolCredentialsRequestTypedDict",
-    "DeleteToolCredentialsResponse",
-    "DeleteToolCredentialsResponseTypedDict",
     "DenyPermissionRequest",
     "DenyPermissionRequestTypedDict",
     "DenyPermissionResponse",
@@ -290,13 +273,8 @@ __all__ = [
     "StoreAPIKeyRequestTypedDict",
     "StoreAPIKeyResponse",
     "StoreAPIKeyResponseTypedDict",
-    "StoreToolCredentialsRequest",
-    "StoreToolCredentialsRequestTypedDict",
-    "StoreToolCredentialsResponse",
-    "StoreToolCredentialsResponseTypedDict",
     "ToolCallData",
     "ToolCallDataTypedDict",
-    "ToolType",
     "Type",
     "UpdatePreferencesRequest",
     "UpdatePreferencesRequestTypedDict",
@@ -326,10 +304,6 @@ _dynamic_imports: dict[str, str] = {
     "DeleteSessionFileRequestTypedDict": ".deletesessionfileop",
     "DeleteSessionRequest": ".deletesessionop",
     "DeleteSessionRequestTypedDict": ".deletesessionop",
-    "DeleteToolCredentialsRequest": ".deletetoolcredentialsop",
-    "DeleteToolCredentialsRequestTypedDict": ".deletetoolcredentialsop",
-    "DeleteToolCredentialsResponse": ".deletetoolcredentialsop",
-    "DeleteToolCredentialsResponseTypedDict": ".deletetoolcredentialsop",
     "DenyPermissionRequest": ".denypermissionop",
     "DenyPermissionRequestTypedDict": ".denypermissionop",
     "DenyPermissionResponse": ".denypermissionop",
@@ -420,11 +394,6 @@ _dynamic_imports: dict[str, str] = {
     "StoreAPIKeyRequestTypedDict": ".storeapikeyop",
     "StoreAPIKeyResponse": ".storeapikeyop",
     "StoreAPIKeyResponseTypedDict": ".storeapikeyop",
-    "StoreToolCredentialsRequest": ".storetoolcredentialsop",
-    "StoreToolCredentialsRequestTypedDict": ".storetoolcredentialsop",
-    "StoreToolCredentialsResponse": ".storetoolcredentialsop",
-    "StoreToolCredentialsResponseTypedDict": ".storetoolcredentialsop",
-    "ToolType": ".storetoolcredentialsop",
     "ToolCallData": ".toolcalldata",
     "ToolCallDataTypedDict": ".toolcalldata",
     "UpdatePreferencesRequest": ".updatepreferencesop",

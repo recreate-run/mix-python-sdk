@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 5b9e37fc0b1ca8c5d9bf237d2b714034
+  docChecksum: 94f65bf919deb156ade7fdd6e88c04d1
   docVersion: 1.0.0
   speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.2.3
-  configChecksum: f567513a9b38e9e35857f51ddcd0c44e
+  releaseVersion: 0.2.4
+  configChecksum: 41e5e100e88b706b947b97efe12851f6
 features:
   python:
     acceptHeaders: 3.0.0
@@ -48,8 +48,6 @@ generatedFiles:
   - docs/models/deletecredentialsresponse.md
   - docs/models/deletesessionfilerequest.md
   - docs/models/deletesessionrequest.md
-  - docs/models/deletetoolcredentialsrequest.md
-  - docs/models/deletetoolcredentialsresponse.md
   - docs/models/denypermissionrequest.md
   - docs/models/denypermissionresponse.md
   - docs/models/file.md
@@ -95,10 +93,7 @@ generatedFiles:
   - docs/models/startoauthflowresponse.md
   - docs/models/storeapikeyrequest.md
   - docs/models/storeapikeyresponse.md
-  - docs/models/storetoolcredentialsrequest.md
-  - docs/models/storetoolcredentialsresponse.md
   - docs/models/toolcalldata.md
-  - docs/models/tooltype.md
   - docs/models/type.md
   - docs/models/updatepreferencesrequest.md
   - docs/models/updatepreferencesresponse.md
@@ -142,7 +137,6 @@ generatedFiles:
   - src/mix_python_sdk/models/deletecredentialsop.py
   - src/mix_python_sdk/models/deletesessionfileop.py
   - src/mix_python_sdk/models/deletesessionop.py
-  - src/mix_python_sdk/models/deletetoolcredentialsop.py
   - src/mix_python_sdk/models/denypermissionop.py
   - src/mix_python_sdk/models/fileinfo.py
   - src/mix_python_sdk/models/forksessionop.py
@@ -171,7 +165,6 @@ generatedFiles:
   - src/mix_python_sdk/models/setapikeyop.py
   - src/mix_python_sdk/models/startoauthflowop.py
   - src/mix_python_sdk/models/storeapikeyop.py
-  - src/mix_python_sdk/models/storetoolcredentialsop.py
   - src/mix_python_sdk/models/toolcalldata.py
   - src/mix_python_sdk/models/updatepreferencesop.py
   - src/mix_python_sdk/models/uploadsessionfileop.py
