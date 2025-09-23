@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: f2b770a4c20dd38414add0a3e9771688
+  docChecksum: 9f58ae0610314cb268db1a32c18a336b
   docVersion: 1.0.0
-  speakeasyVersion: 1.622.0
+  speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.2.1
-  configChecksum: 4a4976cf7bd78e7b660e58561c5e1671
+  releaseVersion: 0.2.2
+  configChecksum: 9b15af9c4ee4953f13208ddebe2602d3
 features:
   python:
     acceptHeaders: 3.0.0
@@ -42,11 +42,14 @@ generatedFiles:
   - docs/models/availableproviders.md
   - docs/models/cancelsessionprocessingrequest.md
   - docs/models/cancelsessionprocessingresponse.md
+  - docs/models/categories.md
   - docs/models/createsessionrequest.md
   - docs/models/deletecredentialsrequest.md
   - docs/models/deletecredentialsresponse.md
   - docs/models/deletesessionfilerequest.md
   - docs/models/deletesessionrequest.md
+  - docs/models/deletetoolcredentialsrequest.md
+  - docs/models/deletetoolcredentialsresponse.md
   - docs/models/denypermissionrequest.md
   - docs/models/denypermissionresponse.md
   - docs/models/file.md
@@ -65,6 +68,8 @@ generatedFiles:
   - docs/models/getsessionfileresponse.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
+  - docs/models/gettoolsstatusresponse.md
+  - docs/models/gettoolsstatustool.md
   - docs/models/grantpermissionrequest.md
   - docs/models/grantpermissionresponse.md
   - docs/models/handleoauthcallbackrequest.md
@@ -73,6 +78,7 @@ generatedFiles:
   - docs/models/initiateoauthloginresponse.md
   - docs/models/listcommandsresponse.md
   - docs/models/listmcpserversresponse.md
+  - docs/models/listmcpserverstool.md
   - docs/models/listsessionfilesrequest.md
   - docs/models/messagedata.md
   - docs/models/messagerole.md
@@ -89,8 +95,10 @@ generatedFiles:
   - docs/models/startoauthflowresponse.md
   - docs/models/storeapikeyrequest.md
   - docs/models/storeapikeyresponse.md
-  - docs/models/tool.md
+  - docs/models/storetoolcredentialsrequest.md
+  - docs/models/storetoolcredentialsresponse.md
   - docs/models/toolcalldata.md
+  - docs/models/tooltype.md
   - docs/models/type.md
   - docs/models/updatepreferencesrequest.md
   - docs/models/updatepreferencesresponse.md
@@ -107,6 +115,7 @@ generatedFiles:
   - docs/sdks/preferencessdk/README.md
   - docs/sdks/sessions/README.md
   - docs/sdks/system/README.md
+  - docs/sdks/tools/README.md
   - py.typed
   - pylintrc
   - pyproject.toml
@@ -133,6 +142,7 @@ generatedFiles:
   - src/mix_python_sdk/models/deletecredentialsop.py
   - src/mix_python_sdk/models/deletesessionfileop.py
   - src/mix_python_sdk/models/deletesessionop.py
+  - src/mix_python_sdk/models/deletetoolcredentialsop.py
   - src/mix_python_sdk/models/denypermissionop.py
   - src/mix_python_sdk/models/fileinfo.py
   - src/mix_python_sdk/models/forksessionop.py
@@ -144,6 +154,7 @@ generatedFiles:
   - src/mix_python_sdk/models/getsessionfileop.py
   - src/mix_python_sdk/models/getsessionmessagesop.py
   - src/mix_python_sdk/models/getsessionop.py
+  - src/mix_python_sdk/models/gettoolsstatusop.py
   - src/mix_python_sdk/models/grantpermissionop.py
   - src/mix_python_sdk/models/handleoauthcallbackop.py
   - src/mix_python_sdk/models/healthcheckop.py
@@ -160,6 +171,7 @@ generatedFiles:
   - src/mix_python_sdk/models/setapikeyop.py
   - src/mix_python_sdk/models/startoauthflowop.py
   - src/mix_python_sdk/models/storeapikeyop.py
+  - src/mix_python_sdk/models/storetoolcredentialsop.py
   - src/mix_python_sdk/models/toolcalldata.py
   - src/mix_python_sdk/models/updatepreferencesop.py
   - src/mix_python_sdk/models/uploadsessionfileop.py
@@ -171,6 +183,7 @@ generatedFiles:
   - src/mix_python_sdk/sdkconfiguration.py
   - src/mix_python_sdk/sessions.py
   - src/mix_python_sdk/system.py
+  - src/mix_python_sdk/tools.py
   - src/mix_python_sdk/types/__init__.py
   - src/mix_python_sdk/types/basemodel.py
   - src/mix_python_sdk/utils/__init__.py
@@ -498,4 +511,35 @@ examples:
           image/jpeg: "x-file: example.file"
         "400":
           application/json: {"error": {"code": 958191, "message": "<value>", "type": "internal_error"}}
+  getToolsStatus:
+    speakeasy-default-get-tools-status:
+      responses:
+        "200":
+          application/json: {}
+        "500":
+          application/json: {"error": {"code": 561833, "message": "<value>", "type": "validation_error"}}
+  storeToolCredentials:
+    speakeasy-default-store-tool-credentials:
+      requestBody:
+        application/json: {"api_key": "<value>", "provider": "<value>", "tool_type": "multimodal_analyzer"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 290401, "message": "<value>", "type": "internal_error"}}
+        "500":
+          application/json: {"error": {"code": 290401, "message": "<value>", "type": "internal_error"}}
+  deleteToolCredentials:
+    speakeasy-default-delete-tool-credentials:
+      parameters:
+        path:
+          tool_type: "<value>"
+          provider: "<value>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": 50299, "message": "<value>", "type": "not_found"}}
+        "500":
+          application/json: {"error": {"code": 50299, "message": "<value>", "type": "not_found"}}
 examplesVersion: 1.0.2

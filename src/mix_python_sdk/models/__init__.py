@@ -24,6 +24,12 @@ if TYPE_CHECKING:
         DeleteSessionFileRequestTypedDict,
     )
     from .deletesessionop import DeleteSessionRequest, DeleteSessionRequestTypedDict
+    from .deletetoolcredentialsop import (
+        DeleteToolCredentialsRequest,
+        DeleteToolCredentialsRequestTypedDict,
+        DeleteToolCredentialsResponse,
+        DeleteToolCredentialsResponseTypedDict,
+    )
     from .denypermissionop import (
         DenyPermissionRequest,
         DenyPermissionRequestTypedDict,
@@ -77,6 +83,14 @@ if TYPE_CHECKING:
         GetSessionMessagesRequestTypedDict,
     )
     from .getsessionop import GetSessionRequest, GetSessionRequestTypedDict
+    from .gettoolsstatusop import (
+        Categories,
+        CategoriesTypedDict,
+        GetToolsStatusResponse,
+        GetToolsStatusResponseTypedDict,
+        GetToolsStatusTool,
+        GetToolsStatusToolTypedDict,
+    )
     from .grantpermissionop import (
         GrantPermissionRequest,
         GrantPermissionRequestTypedDict,
@@ -98,8 +112,8 @@ if TYPE_CHECKING:
     from .listmcpserversop import (
         ListMcpServersResponse,
         ListMcpServersResponseTypedDict,
-        Tool,
-        ToolTypedDict,
+        ListMcpServersTool,
+        ListMcpServersToolTypedDict,
     )
     from .listsessionfilesop import (
         ListSessionFilesRequest,
@@ -138,6 +152,13 @@ if TYPE_CHECKING:
         StoreAPIKeyResponse,
         StoreAPIKeyResponseTypedDict,
     )
+    from .storetoolcredentialsop import (
+        StoreToolCredentialsRequest,
+        StoreToolCredentialsRequestTypedDict,
+        StoreToolCredentialsResponse,
+        StoreToolCredentialsResponseTypedDict,
+        ToolType,
+    )
     from .toolcalldata import ToolCallData, ToolCallDataTypedDict
     from .updatepreferencesop import (
         UpdatePreferencesRequest,
@@ -166,6 +187,8 @@ __all__ = [
     "CancelSessionProcessingRequestTypedDict",
     "CancelSessionProcessingResponse",
     "CancelSessionProcessingResponseTypedDict",
+    "Categories",
+    "CategoriesTypedDict",
     "CreateSessionRequest",
     "CreateSessionRequestTypedDict",
     "DeleteCredentialsRequest",
@@ -176,6 +199,10 @@ __all__ = [
     "DeleteSessionFileRequestTypedDict",
     "DeleteSessionRequest",
     "DeleteSessionRequestTypedDict",
+    "DeleteToolCredentialsRequest",
+    "DeleteToolCredentialsRequestTypedDict",
+    "DeleteToolCredentialsResponse",
+    "DeleteToolCredentialsResponseTypedDict",
     "DenyPermissionRequest",
     "DenyPermissionRequestTypedDict",
     "DenyPermissionResponse",
@@ -211,6 +238,10 @@ __all__ = [
     "GetSessionMessagesRequestTypedDict",
     "GetSessionRequest",
     "GetSessionRequestTypedDict",
+    "GetToolsStatusResponse",
+    "GetToolsStatusResponseTypedDict",
+    "GetToolsStatusTool",
+    "GetToolsStatusToolTypedDict",
     "GrantPermissionRequest",
     "GrantPermissionRequestTypedDict",
     "GrantPermissionResponse",
@@ -227,6 +258,8 @@ __all__ = [
     "ListCommandsResponseTypedDict",
     "ListMcpServersResponse",
     "ListMcpServersResponseTypedDict",
+    "ListMcpServersTool",
+    "ListMcpServersToolTypedDict",
     "ListSessionFilesRequest",
     "ListSessionFilesRequestTypedDict",
     "MessageData",
@@ -257,10 +290,13 @@ __all__ = [
     "StoreAPIKeyRequestTypedDict",
     "StoreAPIKeyResponse",
     "StoreAPIKeyResponseTypedDict",
-    "Tool",
+    "StoreToolCredentialsRequest",
+    "StoreToolCredentialsRequestTypedDict",
+    "StoreToolCredentialsResponse",
+    "StoreToolCredentialsResponseTypedDict",
     "ToolCallData",
     "ToolCallDataTypedDict",
-    "ToolTypedDict",
+    "ToolType",
     "Type",
     "UpdatePreferencesRequest",
     "UpdatePreferencesRequestTypedDict",
@@ -290,6 +326,10 @@ _dynamic_imports: dict[str, str] = {
     "DeleteSessionFileRequestTypedDict": ".deletesessionfileop",
     "DeleteSessionRequest": ".deletesessionop",
     "DeleteSessionRequestTypedDict": ".deletesessionop",
+    "DeleteToolCredentialsRequest": ".deletetoolcredentialsop",
+    "DeleteToolCredentialsRequestTypedDict": ".deletetoolcredentialsop",
+    "DeleteToolCredentialsResponse": ".deletetoolcredentialsop",
+    "DeleteToolCredentialsResponseTypedDict": ".deletetoolcredentialsop",
     "DenyPermissionRequest": ".denypermissionop",
     "DenyPermissionRequestTypedDict": ".denypermissionop",
     "DenyPermissionResponse": ".denypermissionop",
@@ -327,6 +367,12 @@ _dynamic_imports: dict[str, str] = {
     "GetSessionMessagesRequestTypedDict": ".getsessionmessagesop",
     "GetSessionRequest": ".getsessionop",
     "GetSessionRequestTypedDict": ".getsessionop",
+    "Categories": ".gettoolsstatusop",
+    "CategoriesTypedDict": ".gettoolsstatusop",
+    "GetToolsStatusResponse": ".gettoolsstatusop",
+    "GetToolsStatusResponseTypedDict": ".gettoolsstatusop",
+    "GetToolsStatusTool": ".gettoolsstatusop",
+    "GetToolsStatusToolTypedDict": ".gettoolsstatusop",
     "GrantPermissionRequest": ".grantpermissionop",
     "GrantPermissionRequestTypedDict": ".grantpermissionop",
     "GrantPermissionResponse": ".grantpermissionop",
@@ -343,8 +389,8 @@ _dynamic_imports: dict[str, str] = {
     "ListCommandsResponseTypedDict": ".listcommandsop",
     "ListMcpServersResponse": ".listmcpserversop",
     "ListMcpServersResponseTypedDict": ".listmcpserversop",
-    "Tool": ".listmcpserversop",
-    "ToolTypedDict": ".listmcpserversop",
+    "ListMcpServersTool": ".listmcpserversop",
+    "ListMcpServersToolTypedDict": ".listmcpserversop",
     "ListSessionFilesRequest": ".listsessionfilesop",
     "ListSessionFilesRequestTypedDict": ".listsessionfilesop",
     "MessageData": ".messagedata",
@@ -374,6 +420,11 @@ _dynamic_imports: dict[str, str] = {
     "StoreAPIKeyRequestTypedDict": ".storeapikeyop",
     "StoreAPIKeyResponse": ".storeapikeyop",
     "StoreAPIKeyResponseTypedDict": ".storeapikeyop",
+    "StoreToolCredentialsRequest": ".storetoolcredentialsop",
+    "StoreToolCredentialsRequestTypedDict": ".storetoolcredentialsop",
+    "StoreToolCredentialsResponse": ".storetoolcredentialsop",
+    "StoreToolCredentialsResponseTypedDict": ".storetoolcredentialsop",
+    "ToolType": ".storetoolcredentialsop",
     "ToolCallData": ".toolcalldata",
     "ToolCallDataTypedDict": ".toolcalldata",
     "UpdatePreferencesRequest": ".updatepreferencesop",

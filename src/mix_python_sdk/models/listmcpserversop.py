@@ -13,14 +13,14 @@ from typing import List
 from typing_extensions import NotRequired, TypedDict
 
 
-class ToolTypedDict(TypedDict):
+class ListMcpServersToolTypedDict(TypedDict):
     description: str
     r"""Tool description"""
     name: str
     r"""Tool name"""
 
 
-class Tool(BaseModel):
+class ListMcpServersTool(BaseModel):
     description: str
     r"""Tool description"""
 
@@ -35,7 +35,7 @@ class ListMcpServersResponseTypedDict(TypedDict):
     r"""MCP server name"""
     status: str
     r"""Server connection status (e.g., 'connected', 'failed', 'disconnected')"""
-    tools: NotRequired[Nullable[List[ToolTypedDict]]]
+    tools: NotRequired[Nullable[List[ListMcpServersToolTypedDict]]]
     r"""List of tools provided by this MCP server (null if server is not connected)"""
 
 
@@ -49,7 +49,7 @@ class ListMcpServersResponse(BaseModel):
     status: str
     r"""Server connection status (e.g., 'connected', 'failed', 'disconnected')"""
 
-    tools: OptionalNullable[List[Tool]] = UNSET
+    tools: OptionalNullable[List[ListMcpServersTool]] = UNSET
     r"""List of tools provided by this MCP server (null if server is not connected)"""
 
     @model_serializer(mode="wrap")

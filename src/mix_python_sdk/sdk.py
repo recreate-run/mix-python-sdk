@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from mix_python_sdk.preferences_sdk import PreferencesSDK
     from mix_python_sdk.sessions import Sessions
     from mix_python_sdk.system import System
+    from mix_python_sdk.tools import Tools
 
 
 class Mix(BaseSDK):
@@ -34,6 +35,7 @@ class Mix(BaseSDK):
     preferences: "PreferencesSDK"
     sessions: "Sessions"
     files: "Files"
+    tools: "Tools"
     _sub_sdk_map = {
         "authentication": ("mix_python_sdk.authentication", "Authentication"),
         "system": ("mix_python_sdk.system", "System"),
@@ -42,6 +44,7 @@ class Mix(BaseSDK):
         "preferences": ("mix_python_sdk.preferences_sdk", "PreferencesSDK"),
         "sessions": ("mix_python_sdk.sessions", "Sessions"),
         "files": ("mix_python_sdk.files", "Files"),
+        "tools": ("mix_python_sdk.tools", "Tools"),
     }
 
     def __init__(
