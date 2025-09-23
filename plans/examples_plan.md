@@ -4,7 +4,7 @@ This document outlines the comprehensive plan for creating minimal examples for 
 
 ## Overview
 
-Based on analysis of the SDK documentation and existing examples, we will create **8 separate test files** in the `examples/` directory, each demonstrating the complete functionality of one SDK module.
+Based on analysis of the SDK documentation and existing examples, we will create **8 separate test files** in the `examples/` directory, each demonstrating the complete functionality of one SDK module. Use only the openrouter LLM provider, with the OPENROUTER_API_KEY. Don't use any other provider
 
 ## Example Files to Create
 
@@ -16,7 +16,6 @@ Based on analysis of the SDK documentation and existing examples, we will create
 
 **Functionality to showcase:**
 
-- API key storage for multiple providers (OpenAI, Anthropic, OpenRouter, Gemini, Brave)
 - OAuth flow initiation and callback handling (Anthropic provider only)
 - Authentication status checking across all providers
 - Preferred provider validation
@@ -56,6 +55,7 @@ Based on analysis of the SDK documentation and existing examples, we will create
 - Error handling for file operations
 
 **Sample Files Required:**
+
 - Uses real sample files from `examples/sample_files/` directory
 - Required files: `sample.txt` (any text content) and `sample.jpg/png` (any image file)
 - Example raises `FileNotFoundError` if sample files are missing
