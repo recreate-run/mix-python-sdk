@@ -27,7 +27,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.2.5
+  version: 0.3.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -50,7 +50,6 @@ python:
   flattenRequests: true
   flatteningOrder: parameters-first
   githubURL: https://github.com/recreate-run/mix-python-sdk
-  repoURL: https://github.com/recreate-run/mix-python-sdk
   imports:
     option: openapi
     paths:
@@ -69,6 +68,7 @@ python:
   packageURL: https://github.com/recreate-run/mix-python-sdk
   pytestFilterWarnings: []
   pytestTimeout: 0
+  repoURL: https://github.com/recreate-run/mix-python-sdk
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

@@ -1,15 +1,14 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 14de53c13fc2bf423abe3bcd72c118ff
+  docChecksum: 78f89004ea6ac44720290b0b380983c7
   docVersion: 1.0.0
   speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.2.5
-  configChecksum: d3df1fadd91983df3ce2047c77c51645
+  releaseVersion: 0.3.0
+  configChecksum: 396a3d120874ff1a0aa664ced95875ae
 features:
   python:
-    acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
     core: 5.20.4
@@ -63,7 +62,6 @@ generatedFiles:
   - docs/models/getpreferencespreferences.md
   - docs/models/getpreferencesresponse.md
   - docs/models/getsessionfilerequest.md
-  - docs/models/getsessionfileresponse.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
   - docs/models/gettoolsstatusresponse.md
@@ -497,6 +495,7 @@ examples:
         "200":
           application/octet-stream: "x-file: example.file"
           image/jpeg: "x-file: example.file"
+          '*/*': "x-file: example.file"
         "400":
           application/json: {"error": {"code": 958191, "message": "<value>", "type": "internal_error"}}
   getToolsStatus:
