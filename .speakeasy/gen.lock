@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 94f65bf919deb156ade7fdd6e88c04d1
+  docChecksum: 14de53c13fc2bf423abe3bcd72c118ff
   docVersion: 1.0.0
   speakeasyVersion: 1.622.1
   generationVersion: 2.709.0
-  releaseVersion: 0.2.4
-  configChecksum: 41e5e100e88b706b947b97efe12851f6
+  releaseVersion: 0.2.5
+  configChecksum: d3df1fadd91983df3ce2047c77c51645
 features:
   python:
     acceptHeaders: 3.0.0
@@ -73,7 +73,6 @@ generatedFiles:
   - docs/models/handleoauthcallbackrequest.md
   - docs/models/handleoauthcallbackresponse.md
   - docs/models/healthcheckresponse.md
-  - docs/models/initiateoauthloginresponse.md
   - docs/models/listcommandsresponse.md
   - docs/models/listmcpserversresponse.md
   - docs/models/listmcpserverstool.md
@@ -87,8 +86,6 @@ generatedFiles:
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
   - docs/models/sessiondata.md
-  - docs/models/setapikeyrequest.md
-  - docs/models/setapikeyresponse.md
   - docs/models/startoauthflowrequest.md
   - docs/models/startoauthflowresponse.md
   - docs/models/storeapikeyrequest.md
@@ -152,7 +149,6 @@ generatedFiles:
   - src/mix_python_sdk/models/grantpermissionop.py
   - src/mix_python_sdk/models/handleoauthcallbackop.py
   - src/mix_python_sdk/models/healthcheckop.py
-  - src/mix_python_sdk/models/initiateoauthloginop.py
   - src/mix_python_sdk/models/listcommandsop.py
   - src/mix_python_sdk/models/listmcpserversop.py
   - src/mix_python_sdk/models/listsessionfilesop.py
@@ -162,7 +158,6 @@ generatedFiles:
   - src/mix_python_sdk/models/resterror.py
   - src/mix_python_sdk/models/sendmessageop.py
   - src/mix_python_sdk/models/sessiondata.py
-  - src/mix_python_sdk/models/setapikeyop.py
   - src/mix_python_sdk/models/startoauthflowop.py
   - src/mix_python_sdk/models/storeapikeyop.py
   - src/mix_python_sdk/models/toolcalldata.py
