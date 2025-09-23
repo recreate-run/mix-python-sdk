@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:medium.com)",
-      "Bash(uv run:*)"
+      "Bash(uv run:*)",
+      "Bash(timeout 30 uv run:*)"
     ],
     "deny": []
   }
