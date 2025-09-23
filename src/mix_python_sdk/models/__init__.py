@@ -98,10 +98,6 @@ if TYPE_CHECKING:
         HandleOAuthCallbackResponseTypedDict,
     )
     from .healthcheckop import HealthCheckResponse, HealthCheckResponseTypedDict
-    from .initiateoauthloginop import (
-        InitiateOAuthLoginResponse,
-        InitiateOAuthLoginResponseTypedDict,
-    )
     from .listcommandsop import ListCommandsResponse, ListCommandsResponseTypedDict
     from .listmcpserversop import (
         ListMcpServersResponse,
@@ -127,12 +123,6 @@ if TYPE_CHECKING:
         SendMessageRequestTypedDict,
     )
     from .sessiondata import SessionData, SessionDataTypedDict
-    from .setapikeyop import (
-        SetAPIKeyRequest,
-        SetAPIKeyRequestTypedDict,
-        SetAPIKeyResponse,
-        SetAPIKeyResponseTypedDict,
-    )
     from .startoauthflowop import (
         StartOAuthFlowRequest,
         StartOAuthFlowRequestTypedDict,
@@ -235,8 +225,6 @@ __all__ = [
     "HandleOAuthCallbackResponseTypedDict",
     "HealthCheckResponse",
     "HealthCheckResponseTypedDict",
-    "InitiateOAuthLoginResponse",
-    "InitiateOAuthLoginResponseTypedDict",
     "ListCommandsResponse",
     "ListCommandsResponseTypedDict",
     "ListMcpServersResponse",
@@ -261,10 +249,6 @@ __all__ = [
     "SendMessageRequestTypedDict",
     "SessionData",
     "SessionDataTypedDict",
-    "SetAPIKeyRequest",
-    "SetAPIKeyRequestTypedDict",
-    "SetAPIKeyResponse",
-    "SetAPIKeyResponseTypedDict",
     "StartOAuthFlowRequest",
     "StartOAuthFlowRequestTypedDict",
     "StartOAuthFlowResponse",
@@ -357,8 +341,6 @@ _dynamic_imports: dict[str, str] = {
     "HandleOAuthCallbackResponseTypedDict": ".handleoauthcallbackop",
     "HealthCheckResponse": ".healthcheckop",
     "HealthCheckResponseTypedDict": ".healthcheckop",
-    "InitiateOAuthLoginResponse": ".initiateoauthloginop",
-    "InitiateOAuthLoginResponseTypedDict": ".initiateoauthloginop",
     "ListCommandsResponse": ".listcommandsop",
     "ListCommandsResponseTypedDict": ".listcommandsop",
     "ListMcpServersResponse": ".listmcpserversop",
@@ -381,10 +363,6 @@ _dynamic_imports: dict[str, str] = {
     "SendMessageRequestTypedDict": ".sendmessageop",
     "SessionData": ".sessiondata",
     "SessionDataTypedDict": ".sessiondata",
-    "SetAPIKeyRequest": ".setapikeyop",
-    "SetAPIKeyRequestTypedDict": ".setapikeyop",
-    "SetAPIKeyResponse": ".setapikeyop",
-    "SetAPIKeyResponseTypedDict": ".setapikeyop",
     "StartOAuthFlowRequest": ".startoauthflowop",
     "StartOAuthFlowRequestTypedDict": ".startoauthflowop",
     "StartOAuthFlowResponse": ".startoauthflowop",

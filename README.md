@@ -167,8 +167,6 @@ asyncio.run(main())
 ### [authentication](docs/sdks/authentication/README.md)
 
 * [store_api_key](docs/sdks/authentication/README.md#store_api_key) - Store API key
-* [set_api_key](docs/sdks/authentication/README.md#set_api_key) - Set API key
-* [initiate_o_auth_login](docs/sdks/authentication/README.md#initiate_o_auth_login) - OAuth authentication
 * [handle_o_auth_callback](docs/sdks/authentication/README.md#handle_o_auth_callback) - Handle OAuth callback
 * [start_o_auth_flow](docs/sdks/authentication/README.md#start_o_auth_flow) - Start OAuth authentication
 * [get_auth_status](docs/sdks/authentication/README.md#get_auth_status) - Get authentication status
