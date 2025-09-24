@@ -9,7 +9,6 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *mix-
     </a>
 </div>
 
-
 <br /><br />
 
 <!-- Start Summary [summary] -->
@@ -26,6 +25,7 @@ Mix REST API: REST API for the Mix application - session management, messaging, 
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [Server-sent event streaming](#server-sent-event-streaming)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -58,7 +58,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add git+https://github.com/recreate-run/mix-python-sdk.git
+uv add git+<UNSET>.git
 ```
 
 ### PIP
@@ -66,7 +66,7 @@ uv add git+https://github.com/recreate-run/mix-python-sdk.git
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/recreate-run/mix-python-sdk.git
+pip install git+<UNSET>.git
 ```
 
 ### Poetry
@@ -74,7 +74,7 @@ pip install git+https://github.com/recreate-run/mix-python-sdk.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/recreate-run/mix-python-sdk.git
+poetry add git+<UNSET>.git
 ```
 
 ### Shell and script usage with `uv`
@@ -208,6 +208,11 @@ asyncio.run(main())
 * [fork](docs/sdks/sessions/README.md#fork) - Fork a session
 * [cancel_processing](docs/sdks/sessions/README.md#cancel_processing) - Cancel agent processing
 
+### [streaming](docs/sdks/streaming/README.md)
+
+* [stream_events](docs/sdks/streaming/README.md#stream_events) - Server-Sent Events stream for real-time updates
+* [send_streaming_message](docs/sdks/streaming/README.md#send_streaming_message) - Send message via streaming pipeline
+
 ### [system](docs/sdks/system/README.md)
 
 * [list_commands](docs/sdks/system/README.md#list_commands) - List available commands
@@ -221,6 +226,38 @@ asyncio.run(main())
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Server-sent event streaming [eventstream] -->
+## Server-sent event streaming
+
+[Server-sent events][mdn-sse] are used to stream content from certain
+operations. These operations will expose the stream as [Generator][generator] that
+can be consumed using a simple `for` loop. The loop will
+terminate when the server no longer has any events to send and closes the
+underlying connection.  
+
+The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the
+underlying connection when the context is exited.
+
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.streaming.stream_events(session_id="<id>")
+
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
+
+```
+
+[mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+[generator]: https://book.pythontips.com/en/latest/generators.html
+[context-manager]: https://book.pythontips.com/en/latest/context_managers.html
+<!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -506,7 +543,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=mix-python-sdk&utm_campaign=python)

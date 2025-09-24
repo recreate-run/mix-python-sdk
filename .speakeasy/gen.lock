@@ -1,17 +1,18 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 78f89004ea6ac44720290b0b380983c7
+  docChecksum: df92121a4c60c07809bc5dcf92f466f8
   docVersion: 1.0.0
-  speakeasyVersion: 1.622.1
-  generationVersion: 2.709.0
-  releaseVersion: 0.3.0
-  configChecksum: 396a3d120874ff1a0aa664ced95875ae
+  speakeasyVersion: 1.624.0
+  generationVersion: 2.714.0
+  releaseVersion: 0.4.2
+  configChecksum: 7045f261cc28b9576c960cf5e18595c8
 features:
   python:
+    acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.20.4
+    core: 5.22.0
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     downloadStreams: 1.0.1
@@ -29,6 +30,8 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
+    serverEvents: 1.0.10
+    unions: 3.0.4
     uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
@@ -62,6 +65,7 @@ generatedFiles:
   - docs/models/getpreferencespreferences.md
   - docs/models/getpreferencesresponse.md
   - docs/models/getsessionfilerequest.md
+  - docs/models/getsessionfileresponse.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
   - docs/models/gettoolsstatusresponse.md
@@ -77,17 +81,58 @@ generatedFiles:
   - docs/models/listsessionfilesrequest.md
   - docs/models/messagedata.md
   - docs/models/messagerole.md
+  - docs/models/params.md
   - docs/models/provider.md
   - docs/models/providers.md
   - docs/models/resetpreferencesresponse.md
   - docs/models/resterror.md
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
+  - docs/models/sendstreamingmessagerequest.md
+  - docs/models/sendstreamingmessagerequestbody.md
   - docs/models/sessiondata.md
+  - docs/models/ssecompleteevent.md
+  - docs/models/ssecompleteeventdata.md
+  - docs/models/ssecompleteeventevent.md
+  - docs/models/sseconnectedevent.md
+  - docs/models/sseconnectedeventdata.md
+  - docs/models/sseconnectedeventevent.md
+  - docs/models/ssecontentevent.md
+  - docs/models/ssecontenteventdata.md
+  - docs/models/ssecontenteventevent.md
+  - docs/models/sseerrorevent.md
+  - docs/models/sseerroreventdata.md
+  - docs/models/sseerroreventevent.md
+  - docs/models/sseeventstream.md
+  - docs/models/sseheartbeatevent.md
+  - docs/models/sseheartbeateventdata.md
+  - docs/models/sseheartbeateventevent.md
+  - docs/models/ssepermissionevent.md
+  - docs/models/ssepermissioneventdata.md
+  - docs/models/ssepermissioneventevent.md
+  - docs/models/ssesummarizeevent.md
+  - docs/models/ssesummarizeeventdata.md
+  - docs/models/ssesummarizeeventevent.md
+  - docs/models/ssethinkingevent.md
+  - docs/models/ssethinkingeventdata.md
+  - docs/models/ssethinkingeventevent.md
+  - docs/models/ssetoolevent.md
+  - docs/models/ssetooleventdata.md
+  - docs/models/ssetooleventevent.md
+  - docs/models/ssetoolexecutioncompleteevent.md
+  - docs/models/ssetoolexecutioncompleteeventdata.md
+  - docs/models/ssetoolexecutioncompleteeventevent.md
+  - docs/models/ssetoolexecutionstartevent.md
+  - docs/models/ssetoolexecutionstarteventdata.md
+  - docs/models/ssetoolexecutionstarteventevent.md
   - docs/models/startoauthflowrequest.md
   - docs/models/startoauthflowresponse.md
+  - docs/models/status.md
   - docs/models/storeapikeyrequest.md
   - docs/models/storeapikeyresponse.md
+  - docs/models/streameventsrequest.md
+  - docs/models/streameventsresponse.md
+  - docs/models/streammessageresponse.md
   - docs/models/toolcalldata.md
   - docs/models/type.md
   - docs/models/updatepreferencesrequest.md
@@ -104,6 +149,7 @@ generatedFiles:
   - docs/sdks/permissions/README.md
   - docs/sdks/preferencessdk/README.md
   - docs/sdks/sessions/README.md
+  - docs/sdks/streaming/README.md
   - docs/sdks/system/README.md
   - docs/sdks/tools/README.md
   - py.typed
@@ -155,9 +201,13 @@ generatedFiles:
   - src/mix_python_sdk/models/resetpreferencesop.py
   - src/mix_python_sdk/models/resterror.py
   - src/mix_python_sdk/models/sendmessageop.py
+  - src/mix_python_sdk/models/sendstreamingmessageop.py
   - src/mix_python_sdk/models/sessiondata.py
+  - src/mix_python_sdk/models/sseeventstream.py
   - src/mix_python_sdk/models/startoauthflowop.py
   - src/mix_python_sdk/models/storeapikeyop.py
+  - src/mix_python_sdk/models/streameventsop.py
+  - src/mix_python_sdk/models/streammessageresponse.py
   - src/mix_python_sdk/models/toolcalldata.py
   - src/mix_python_sdk/models/updatepreferencesop.py
   - src/mix_python_sdk/models/uploadsessionfileop.py
@@ -168,6 +218,7 @@ generatedFiles:
   - src/mix_python_sdk/sdk.py
   - src/mix_python_sdk/sdkconfiguration.py
   - src/mix_python_sdk/sessions.py
+  - src/mix_python_sdk/streaming.py
   - src/mix_python_sdk/system.py
   - src/mix_python_sdk/tools.py
   - src/mix_python_sdk/types/__init__.py
@@ -529,4 +580,28 @@ examples:
           application/json: {"error": {"code": 50299, "message": "<value>", "type": "not_found"}}
         "500":
           application/json: {"error": {"code": 50299, "message": "<value>", "type": "not_found"}}
+  streamEvents:
+    speakeasy-default-stream-events:
+      parameters:
+        query:
+          sessionId: "<id>"
+      responses:
+        "404":
+          application/json: {"error": {"code": 67605, "message": "<value>", "type": "validation_error"}}
+        "500":
+          application/json: {"error": {"code": 67605, "message": "<value>", "type": "validation_error"}}
+  sendStreamingMessage:
+    speakeasy-default-send-streaming-message:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"content": "<value>"}
+      responses:
+        "200":
+          application/json: {"sessionId": "<id>", "status": "broadcasted"}
+        "400":
+          application/json: {"error": {"code": 286747, "message": "<value>", "type": "not_found"}}
+        "500":
+          application/json: {"error": {"code": 286747, "message": "<value>", "type": "not_found"}}
 examplesVersion: 1.0.2

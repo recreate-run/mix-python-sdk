@@ -1,0 +1,15 @@
+# SSEPermissionEventData
+
+
+## Fields
+
+| Field                                            | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `action`                                         | *str*                                            | :heavy_check_mark:                               | Requested action description                     |
+| `description`                                    | *str*                                            | :heavy_check_mark:                               | Human-readable permission description            |
+| `id`                                             | *str*                                            | :heavy_check_mark:                               | Permission request identifier                    |
+| `params`                                         | [Optional[models.Params]](../models/params.md)   | :heavy_minus_sign:                               | Additional parameters for the permission request |
+| `path`                                           | *Optional[str]*                                  | :heavy_minus_sign:                               | File path for permission request                 |
+| `session_id`                                     | *str*                                            | :heavy_check_mark:                               | Session identifier for the permission request    |
+| `tool_name`                                      | *str*                                            | :heavy_check_mark:                               | Tool requiring permission                        |
+| `type`                                           | *str*                                            | :heavy_check_mark:                               | Permission event type                            |

@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from mix_python_sdk.permissions import Permissions
     from mix_python_sdk.preferences_sdk import PreferencesSDK
     from mix_python_sdk.sessions import Sessions
+    from mix_python_sdk.streaming import Streaming
     from mix_python_sdk.system import System
     from mix_python_sdk.tools import Tools
 
@@ -36,6 +37,7 @@ class Mix(BaseSDK):
     sessions: "Sessions"
     files: "Files"
     tools: "Tools"
+    streaming: "Streaming"
     _sub_sdk_map = {
         "authentication": ("mix_python_sdk.authentication", "Authentication"),
         "system": ("mix_python_sdk.system", "System"),
@@ -45,6 +47,7 @@ class Mix(BaseSDK):
         "sessions": ("mix_python_sdk.sessions", "Sessions"),
         "files": ("mix_python_sdk.files", "Files"),
         "tools": ("mix_python_sdk.tools", "Tools"),
+        "streaming": ("mix_python_sdk.streaming", "Streaming"),
     }
 
     def __init__(
@@ -70,7 +73,7 @@ class Mix(BaseSDK):
         """
         client_supplied = True
         if client is None:
-            client = httpx.Client()
+            client = httpx.Client(follow_redirects=True)
             client_supplied = False
 
         assert issubclass(
@@ -79,7 +82,7 @@ class Mix(BaseSDK):
 
         async_client_supplied = True
         if async_client is None:
-            async_client = httpx.AsyncClient()
+            async_client = httpx.AsyncClient(follow_redirects=True)
             async_client_supplied = False
 
         if debug_logger is None:
