@@ -3,10 +3,11 @@ id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
   docChecksum: df92121a4c60c07809bc5dcf92f466f8
   docVersion: 1.0.0
-  speakeasyVersion: 1.624.0
-  generationVersion: 2.714.0
-  releaseVersion: 0.4.2
-  configChecksum: 7045f261cc28b9576c960cf5e18595c8
+  speakeasyVersion: 1.624.1
+  generationVersion: 2.714.1
+  releaseVersion: 0.4.3
+  configChecksum: 493b7bcf106490166070c05d0b2aba36
+  published: true
 features:
   python:
     acceptHeaders: 3.0.0

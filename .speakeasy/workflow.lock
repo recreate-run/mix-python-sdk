@@ -1,4 +1,4 @@
-speakeasyVersion: 1.624.0
+speakeasyVersion: 1.624.1
 sources:
     Mix REST API:
         sourceNamespace: mix-rest-api
@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:f4e305adbe6e2bf5114d35a882e3a40056a67b889b4b349657da97b5c380885d
         sourceBlobDigest: sha256:45bf3de21a93fcff1e4f8722fc576fb74dd60c03b15602952ab96b9044514e3e
         codeSamplesNamespace: mix-rest-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:ca267ea739e524c2b59d870fa6f480288e3140f9425e19c8970ec8eed8bba1e5
+        codeSamplesRevisionDigest: sha256:2974e0900fc849bb0cb9bc2990b717d1527aa26f1262e0df556e57b4024a644c
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,6 +31,9 @@ workflow:
         mix-py-target:
             target: python
             source: Mix REST API
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/recreate/mix/mix-rest-api-python-code-samples
