@@ -13,6 +13,9 @@ targets:
     mix-py-target:
         target: python
         source: Mix REST API
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/recreate/mix/mix-rest-api-python-code-samples
