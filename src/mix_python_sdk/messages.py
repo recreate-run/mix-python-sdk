@@ -377,7 +377,10 @@ class Messages(BaseSDK):
         self,
         *,
         id: str,
-        content: str,
+        apps: List[str],
+        media: List[str],
+        plan_mode: bool,
+        text: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -388,7 +391,10 @@ class Messages(BaseSDK):
         Send a user message to a specific session for AI processing
 
         :param id: Session ID
-        :param content: Message content to send
+        :param apps: Array of app identifiers or references
+        :param media: Array of media file references or URLs
+        :param plan_mode: Whether the message is in planning mode
+        :param text: The text content of the message
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -407,7 +413,10 @@ class Messages(BaseSDK):
         request = models.SendMessageRequest(
             id=id,
             request_body=models.SendMessageRequestBody(
-                content=content,
+                apps=apps,
+                media=media,
+                plan_mode=plan_mode,
+                text=text,
             ),
         )
 
@@ -477,7 +486,10 @@ class Messages(BaseSDK):
         self,
         *,
         id: str,
-        content: str,
+        apps: List[str],
+        media: List[str],
+        plan_mode: bool,
+        text: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -488,7 +500,10 @@ class Messages(BaseSDK):
         Send a user message to a specific session for AI processing
 
         :param id: Session ID
-        :param content: Message content to send
+        :param apps: Array of app identifiers or references
+        :param media: Array of media file references or URLs
+        :param plan_mode: Whether the message is in planning mode
+        :param text: The text content of the message
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -507,7 +522,10 @@ class Messages(BaseSDK):
         request = models.SendMessageRequest(
             id=id,
             request_body=models.SendMessageRequestBody(
-                content=content,
+                apps=apps,
+                media=media,
+                plan_mode=plan_mode,
+                text=text,
             ),
         )
 

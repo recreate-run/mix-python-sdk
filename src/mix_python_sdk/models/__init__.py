@@ -110,7 +110,6 @@ if TYPE_CHECKING:
         ListSessionFilesRequestTypedDict,
     )
     from .messagedata import MessageData, MessageDataTypedDict
-    from .messagerole import MessageRole
     from .resetpreferencesop import (
         ResetPreferencesResponse,
         ResetPreferencesResponseTypedDict,
@@ -214,7 +213,6 @@ if TYPE_CHECKING:
         StreamMessageResponse,
         StreamMessageResponseTypedDict,
     )
-    from .toolcalldata import ToolCallData, ToolCallDataTypedDict
     from .updatepreferencesop import (
         UpdatePreferencesRequest,
         UpdatePreferencesRequestTypedDict,
@@ -313,7 +311,6 @@ __all__ = [
     "ListSessionFilesRequestTypedDict",
     "MessageData",
     "MessageDataTypedDict",
-    "MessageRole",
     "Params",
     "ParamsTypedDict",
     "Provider",
@@ -405,8 +402,6 @@ __all__ = [
     "StreamEventsResponseTypedDict",
     "StreamMessageResponse",
     "StreamMessageResponseTypedDict",
-    "ToolCallData",
-    "ToolCallDataTypedDict",
     "Type",
     "UpdatePreferencesRequest",
     "UpdatePreferencesRequestTypedDict",
@@ -499,7 +494,6 @@ _dynamic_imports: dict[str, str] = {
     "ListSessionFilesRequestTypedDict": ".listsessionfilesop",
     "MessageData": ".messagedata",
     "MessageDataTypedDict": ".messagedata",
-    "MessageRole": ".messagerole",
     "ResetPreferencesResponse": ".resetpreferencesop",
     "ResetPreferencesResponseTypedDict": ".resetpreferencesop",
     "RESTError": ".resterror",
@@ -590,8 +584,6 @@ _dynamic_imports: dict[str, str] = {
     "Status": ".streammessageresponse",
     "StreamMessageResponse": ".streammessageresponse",
     "StreamMessageResponseTypedDict": ".streammessageresponse",
-    "ToolCallData": ".toolcalldata",
-    "ToolCallDataTypedDict": ".toolcalldata",
     "UpdatePreferencesRequest": ".updatepreferencesop",
     "UpdatePreferencesRequestTypedDict": ".updatepreferencesop",
     "UpdatePreferencesResponse": ".updatepreferencesop",

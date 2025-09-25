@@ -201,8 +201,8 @@ def main():
         print(f"Created session: {session.id}")
 
         # Demonstrate all streaming functionality
-        demonstrate_sse_connection(mix, session.id)
-        demonstrate_streaming_message(mix, session.id)
+        # demonstrate_sse_connection(mix, session.id)
+        # demonstrate_streaming_message(mix, session.id)
         demonstrate_integrated_streaming_workflow(mix, session.id)
 
         # Clean up

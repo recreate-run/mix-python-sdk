@@ -3,17 +3,33 @@
 from __future__ import annotations
 from mix_python_sdk.types import BaseModel
 from mix_python_sdk.utils import FieldMetadata, PathParamMetadata, RequestMetadata
+from typing import List
 from typing_extensions import Annotated, TypedDict
 
 
 class SendMessageRequestBodyTypedDict(TypedDict):
-    content: str
-    r"""Message content to send"""
+    apps: List[str]
+    r"""Array of app identifiers or references"""
+    media: List[str]
+    r"""Array of media file references or URLs"""
+    plan_mode: bool
+    r"""Whether the message is in planning mode"""
+    text: str
+    r"""The text content of the message"""
 
 
 class SendMessageRequestBody(BaseModel):
-    content: str
-    r"""Message content to send"""
+    apps: List[str]
+    r"""Array of app identifiers or references"""
+
+    media: List[str]
+    r"""Array of media file references or URLs"""
+
+    plan_mode: bool
+    r"""Whether the message is in planning mode"""
+
+    text: str
+    r"""The text content of the message"""
 
 
 class SendMessageRequestTypedDict(TypedDict):

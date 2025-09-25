@@ -100,7 +100,12 @@ from mix_python_sdk import Mix
 
 with Mix() as mix:
 
-    res = mix.messages.send(id="<id>", content="<value>")
+    res = mix.messages.send(id="<id>", apps=[
+        "<value 1>",
+    ], media=[
+        "<value 1>",
+        "<value 2>",
+    ], plan_mode=False, text="<value>")
 
     # Handle response
     print(res)
@@ -112,7 +117,10 @@ with Mix() as mix:
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Session ID                                                          |
-| `content`                                                           | *str*                                                               | :heavy_check_mark:                                                  | Message content to send                                             |
+| `apps`                                                              | List[*str*]                                                         | :heavy_check_mark:                                                  | Array of app identifiers or references                              |
+| `media`                                                             | List[*str*]                                                         | :heavy_check_mark:                                                  | Array of media file references or URLs                              |
+| `plan_mode`                                                         | *bool*                                                              | :heavy_check_mark:                                                  | Whether the message is in planning mode                             |
+| `text`                                                              | *str*                                                               | :heavy_check_mark:                                                  | The text content of the message                                     |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response

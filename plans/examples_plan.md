@@ -191,29 +191,6 @@ Based on analysis of the SDK documentation and existing examples, we will create
 
 - `get_tools_status()` - Get status and authentication information for all available tools and categories
 
-### 9. `examples/streaming_example.py`
-
-**Documentation Reference**: `docs/sdks/streaming/README.md`
-
-**Purpose**: Demonstrate real-time streaming functionality and Server-Sent Events
-
-**Functionality to showcase:**
-
-- Server-Sent Events (SSE) connection establishment for real-time updates
-- Persistent streaming connections with proper reconnection support
-- Message sending via streaming pipeline with real-time event broadcasting
-- Event stream processing and handling during message processing
-- Last-Event-ID header support for reconnection and event replay
-- Integration with active SSE connections for real-time processing events
-
-**Key operations demonstrated:**
-
-- `stream_events()` - Establish persistent SSE connection for receiving real-time updates
-- `send_streaming_message()` - Send message to session via streaming pipeline
-- Event stream iteration and processing
-- Reconnection handling with Last-Event-ID
-- Real-time event broadcasting and consumption
-
 ## Implementation Standards
 
 ### Code Structure Template
