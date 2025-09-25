@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Mix REST API:
         inputs:
-            - location: https://raw.githubusercontent.com/recreate-run/mix/main/mix_sdk/openapi.json
+            - location: ../mix/mix_sdk/openapi.json
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         output: .speakeasy/out.openapi.yaml
