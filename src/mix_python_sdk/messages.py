@@ -18,7 +18,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.MessageData]:
+    ) -> List[models.BackendMessage]:
         r"""Get global message history
 
         Retrieve message history across all sessions with optional pagination
@@ -87,7 +87,7 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.MessageData], http_res)
+            return unmarshal_json_response(List[models.BackendMessage], http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -112,7 +112,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.MessageData]:
+    ) -> List[models.BackendMessage]:
         r"""Get global message history
 
         Retrieve message history across all sessions with optional pagination
@@ -181,7 +181,7 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.MessageData], http_res)
+            return unmarshal_json_response(List[models.BackendMessage], http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -205,7 +205,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.MessageData]:
+    ) -> List[models.BackendMessage]:
         r"""List session messages
 
         Retrieve all messages from a specific session
@@ -272,7 +272,7 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.MessageData], http_res)
+            return unmarshal_json_response(List[models.BackendMessage], http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -293,7 +293,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.MessageData]:
+    ) -> List[models.BackendMessage]:
         r"""List session messages
 
         Retrieve all messages from a specific session
@@ -360,7 +360,7 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.MessageData], http_res)
+            return unmarshal_json_response(List[models.BackendMessage], http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -385,7 +385,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.MessageData:
+    ) -> models.BackendMessage:
         r"""Send a message to session
 
         Send a user message to a specific session for AI processing
@@ -469,7 +469,7 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.MessageData, http_res)
+            return unmarshal_json_response(models.BackendMessage, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -494,7 +494,7 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.MessageData:
+    ) -> models.BackendMessage:
         r"""Send a message to session
 
         Send a user message to a specific session for AI processing
@@ -578,7 +578,7 @@ class Messages(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.MessageData, http_res)
+            return unmarshal_json_response(models.BackendMessage, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)

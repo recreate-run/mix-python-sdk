@@ -428,7 +428,7 @@ paths:
           content:
             "application/json":
               schema:
-                items: {"$ref": "#/components/schemas/MessageData"}
+                items: {"$ref": "#/components/schemas/BackendMessage"}
                 type: "array"
           description: "Message history"
         "401":
@@ -789,9 +789,6 @@ paths:
                 "title":
                   description: "Title for the session"
                   type: "string"
-                "workingDirectory":
-                  description: "Optional working directory path"
-                  type: "string"
               required:
                 - "title"
               type: "object"
@@ -1066,8 +1063,8 @@ paths:
             schema:
               properties:
                 "messageIndex":
-                  description: "Index of the last message to include in the fork (1-based)"
-                  minimum: 1
+                  description: "Index of the last message to include in the fork (0-based)"
+                  minimum: 0
                   type: "integer"
                 "title":
                   description: "Optional title for the forked session (defaults to 'Forked Session')"
@@ -1086,7 +1083,7 @@ paths:
           content:
             "application/json":
               schema: {"$ref": "#/components/schemas/ErrorResponse"}
-          description: "Invalid request - messageIndex must be > 0"
+          description: "Invalid request - messageIndex must be >= 0"
         "404":
           content:
             "application/json":
@@ -1112,7 +1109,7 @@ paths:
           content:
             "application/json":
               schema:
-                items: {"$ref": "#/components/schemas/MessageData"}
+                items: {"$ref": "#/components/schemas/BackendMessage"}
                 type: "array"
           description: "List of session messages"
         "404":
@@ -1166,7 +1163,7 @@ paths:
         "200":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/MessageData"}
+              schema: {"$ref": "#/components/schemas/BackendMessage"}
           description: "Message sent and processed"
         "400":
           content:
@@ -1855,9 +1852,6 @@ components:
         "userMessageCount":
           description: "Number of user messages in session"
           type: "integer"
-        "workingDirectory":
-          description: "Working directory path (optional)"
-          type: "string"
       required:
         - "id"
         - "title"

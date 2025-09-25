@@ -2,23 +2,14 @@
 
 from __future__ import annotations
 from mix_python_sdk.types import BaseModel
-import pydantic
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import TypedDict
 
 
 class CreateSessionRequestTypedDict(TypedDict):
     title: str
     r"""Title for the session"""
-    working_directory: NotRequired[str]
-    r"""Optional working directory path"""
 
 
 class CreateSessionRequest(BaseModel):
     title: str
     r"""Title for the session"""
-
-    working_directory: Annotated[
-        Optional[str], pydantic.Field(alias="workingDirectory")
-    ] = None
-    r"""Optional working directory path"""

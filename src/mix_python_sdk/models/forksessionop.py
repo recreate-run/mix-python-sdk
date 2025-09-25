@@ -10,14 +10,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class ForkSessionRequestBodyTypedDict(TypedDict):
     message_index: int
-    r"""Index of the last message to include in the fork (1-based)"""
+    r"""Index of the last message to include in the fork (0-based)"""
     title: NotRequired[str]
     r"""Optional title for the forked session (defaults to 'Forked Session')"""
 
 
 class ForkSessionRequestBody(BaseModel):
     message_index: Annotated[int, pydantic.Field(alias="messageIndex")]
-    r"""Index of the last message to include in the fork (1-based)"""
+    r"""Index of the last message to include in the fork (0-based)"""
 
     title: Optional[str] = None
     r"""Optional title for the forked session (defaults to 'Forked Session')"""

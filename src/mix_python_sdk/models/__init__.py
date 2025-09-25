@@ -6,6 +6,7 @@ import builtins
 import sys
 
 if TYPE_CHECKING:
+    from .backendmessage import BackendMessage, BackendMessageTypedDict
     from .cancelsessionprocessingop import (
         CancelSessionProcessingRequest,
         CancelSessionProcessingRequestTypedDict,
@@ -109,7 +110,6 @@ if TYPE_CHECKING:
         ListSessionFilesRequest,
         ListSessionFilesRequestTypedDict,
     )
-    from .messagedata import MessageData, MessageDataTypedDict
     from .resetpreferencesop import (
         ResetPreferencesResponse,
         ResetPreferencesResponseTypedDict,
@@ -213,6 +213,7 @@ if TYPE_CHECKING:
         StreamMessageResponse,
         StreamMessageResponseTypedDict,
     )
+    from .toolcalldata import ToolCallData, ToolCallDataTypedDict
     from .updatepreferencesop import (
         UpdatePreferencesRequest,
         UpdatePreferencesRequestTypedDict,
@@ -236,6 +237,8 @@ if TYPE_CHECKING:
 __all__ = [
     "AvailableProviders",
     "AvailableProvidersTypedDict",
+    "BackendMessage",
+    "BackendMessageTypedDict",
     "CancelSessionProcessingRequest",
     "CancelSessionProcessingRequestTypedDict",
     "CancelSessionProcessingResponse",
@@ -309,8 +312,6 @@ __all__ = [
     "ListMcpServersToolTypedDict",
     "ListSessionFilesRequest",
     "ListSessionFilesRequestTypedDict",
-    "MessageData",
-    "MessageDataTypedDict",
     "Params",
     "ParamsTypedDict",
     "Provider",
@@ -402,6 +403,8 @@ __all__ = [
     "StreamEventsResponseTypedDict",
     "StreamMessageResponse",
     "StreamMessageResponseTypedDict",
+    "ToolCallData",
+    "ToolCallDataTypedDict",
     "Type",
     "UpdatePreferencesRequest",
     "UpdatePreferencesRequestTypedDict",
@@ -417,6 +420,8 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "BackendMessage": ".backendmessage",
+    "BackendMessageTypedDict": ".backendmessage",
     "CancelSessionProcessingRequest": ".cancelsessionprocessingop",
     "CancelSessionProcessingRequestTypedDict": ".cancelsessionprocessingop",
     "CancelSessionProcessingResponse": ".cancelsessionprocessingop",
@@ -492,8 +497,6 @@ _dynamic_imports: dict[str, str] = {
     "ListMcpServersToolTypedDict": ".listmcpserversop",
     "ListSessionFilesRequest": ".listsessionfilesop",
     "ListSessionFilesRequestTypedDict": ".listsessionfilesop",
-    "MessageData": ".messagedata",
-    "MessageDataTypedDict": ".messagedata",
     "ResetPreferencesResponse": ".resetpreferencesop",
     "ResetPreferencesResponseTypedDict": ".resetpreferencesop",
     "RESTError": ".resterror",
@@ -584,6 +587,8 @@ _dynamic_imports: dict[str, str] = {
     "Status": ".streammessageresponse",
     "StreamMessageResponse": ".streammessageresponse",
     "StreamMessageResponseTypedDict": ".streammessageresponse",
+    "ToolCallData": ".toolcalldata",
+    "ToolCallDataTypedDict": ".toolcalldata",
     "UpdatePreferencesRequest": ".updatepreferencesop",
     "UpdatePreferencesRequestTypedDict": ".updatepreferencesop",
     "UpdatePreferencesResponse": ".updatepreferencesop",

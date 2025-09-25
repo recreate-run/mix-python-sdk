@@ -181,7 +181,6 @@ class Sessions(BaseSDK):
         self,
         *,
         title: str,
-        working_directory: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -192,7 +191,6 @@ class Sessions(BaseSDK):
         Create a new session with required title. Session automatically gets isolated storage directory.
 
         :param title: Title for the session
-        :param working_directory: Optional working directory path
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -210,7 +208,6 @@ class Sessions(BaseSDK):
 
         request = models.CreateSessionRequest(
             title=title,
-            working_directory=working_directory,
         )
 
         req = self._build_request(
@@ -275,7 +272,6 @@ class Sessions(BaseSDK):
         self,
         *,
         title: str,
-        working_directory: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -286,7 +282,6 @@ class Sessions(BaseSDK):
         Create a new session with required title. Session automatically gets isolated storage directory.
 
         :param title: Title for the session
-        :param working_directory: Optional working directory path
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -304,7 +299,6 @@ class Sessions(BaseSDK):
 
         request = models.CreateSessionRequest(
             title=title,
-            working_directory=working_directory,
         )
 
         req = self._build_request_async(
@@ -733,7 +727,7 @@ class Sessions(BaseSDK):
         Create a new session based on an existing session, copying messages up to a specified index
 
         :param id: Source session ID to fork from
-        :param message_index: Index of the last message to include in the fork (1-based)
+        :param message_index: Index of the last message to include in the fork (0-based)
         :param title: Optional title for the forked session (defaults to 'Forked Session')
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -836,7 +830,7 @@ class Sessions(BaseSDK):
         Create a new session based on an existing session, copying messages up to a specified index
 
         :param id: Source session ID to fork from
-        :param message_index: Index of the last message to include in the fork (1-based)
+        :param message_index: Index of the last message to include in the fork (0-based)
         :param title: Optional title for the forked session (defaults to 'Forked Session')
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

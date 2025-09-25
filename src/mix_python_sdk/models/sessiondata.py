@@ -29,8 +29,6 @@ class SessionDataTypedDict(TypedDict):
     r"""Number of user messages in session"""
     first_user_message: NotRequired[str]
     r"""First user message (optional)"""
-    working_directory: NotRequired[str]
-    r"""Working directory path (optional)"""
 
 
 class SessionData(BaseModel):
@@ -67,8 +65,3 @@ class SessionData(BaseModel):
         Optional[str], pydantic.Field(alias="firstUserMessage")
     ] = None
     r"""First user message (optional)"""
-
-    working_directory: Annotated[
-        Optional[str], pydantic.Field(alias="workingDirectory")
-    ] = None
-    r"""Working directory path (optional)"""

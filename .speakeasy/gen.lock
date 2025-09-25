@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 7769095e6e789e669f13711be3da1d1e
+  docChecksum: 11a4b5a5c6076ea17477f7059a4378f0
   docVersion: 1.0.0
-  speakeasyVersion: 1.628.1
-  generationVersion: 2.716.1
-  releaseVersion: 0.4.5
-  configChecksum: 7bda50c46f9944e4bb30bd48032f2c39
+  speakeasyVersion: 1.628.2
+  generationVersion: 2.716.3
+  releaseVersion: 0.4.6
+  configChecksum: 0f674ea41631204e5db1901df668bb17
   published: true
 features:
   python:
@@ -32,7 +32,7 @@ features:
     retries: 3.0.2
     sdkHooks: 1.1.0
     serverEvents: 1.0.10
-    unions: 3.0.4
+    unions: 3.0.5
     uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
@@ -43,6 +43,7 @@ generatedFiles:
   - USAGE.md
   - docs/errors/errorresponse.md
   - docs/models/availableproviders.md
+  - docs/models/backendmessage.md
   - docs/models/cancelsessionprocessingrequest.md
   - docs/models/cancelsessionprocessingresponse.md
   - docs/models/categories.md
@@ -80,7 +81,6 @@ generatedFiles:
   - docs/models/listmcpserversresponse.md
   - docs/models/listmcpserverstool.md
   - docs/models/listsessionfilesrequest.md
-  - docs/models/messagedata.md
   - docs/models/params.md
   - docs/models/provider.md
   - docs/models/providers.md
@@ -133,6 +133,7 @@ generatedFiles:
   - docs/models/streameventsrequest.md
   - docs/models/streameventsresponse.md
   - docs/models/streammessageresponse.md
+  - docs/models/toolcalldata.md
   - docs/models/type.md
   - docs/models/updatepreferencesrequest.md
   - docs/models/updatepreferencesresponse.md
@@ -172,6 +173,7 @@ generatedFiles:
   - src/mix_python_sdk/httpclient.py
   - src/mix_python_sdk/messages.py
   - src/mix_python_sdk/models/__init__.py
+  - src/mix_python_sdk/models/backendmessage.py
   - src/mix_python_sdk/models/cancelsessionprocessingop.py
   - src/mix_python_sdk/models/createsessionop.py
   - src/mix_python_sdk/models/deletecredentialsop.py
@@ -195,7 +197,6 @@ generatedFiles:
   - src/mix_python_sdk/models/listcommandsop.py
   - src/mix_python_sdk/models/listmcpserversop.py
   - src/mix_python_sdk/models/listsessionfilesop.py
-  - src/mix_python_sdk/models/messagedata.py
   - src/mix_python_sdk/models/resetpreferencesop.py
   - src/mix_python_sdk/models/resterror.py
   - src/mix_python_sdk/models/sendmessageop.py
@@ -206,6 +207,7 @@ generatedFiles:
   - src/mix_python_sdk/models/storeapikeyop.py
   - src/mix_python_sdk/models/streameventsop.py
   - src/mix_python_sdk/models/streammessageresponse.py
+  - src/mix_python_sdk/models/toolcalldata.py
   - src/mix_python_sdk/models/updatepreferencesop.py
   - src/mix_python_sdk/models/uploadsessionfileop.py
   - src/mix_python_sdk/models/validatepreferredproviderop.py
@@ -301,7 +303,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: [{"apps": [], "media": [], "plan_mode": false, "text": "<value>"}]
+          application/json: [{"id": "<id>", "role": "<value>", "sessionId": "<id>", "userInput": "<value>"}]
         "401":
           application/json: {"error": {"code": 37164, "message": "<value>", "type": "validation_error"}}
         "500":
@@ -323,7 +325,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: [{"apps": [], "media": ["<value 1>"], "plan_mode": true, "text": "<value>"}]
+          application/json: [{"id": "<id>", "role": "<value>", "sessionId": "<id>", "userInput": "<value>"}]
         "404":
           application/json: {"error": {"code": 355518, "message": "<value>", "type": "bad_request"}}
   sendMessage:
@@ -335,7 +337,7 @@ examples:
         application/json: {"apps": ["<value 1>"], "media": ["<value 1>", "<value 2>"], "plan_mode": false, "text": "<value>"}
       responses:
         "200":
-          application/json: {"apps": ["<value 1>"], "media": ["<value 1>", "<value 2>"], "plan_mode": false, "text": "<value>"}
+          application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "userInput": "<value>"}
         "400":
           application/json: {"error": {"code": 600162, "message": "<value>", "type": "validation_error"}}
   denyPermission:

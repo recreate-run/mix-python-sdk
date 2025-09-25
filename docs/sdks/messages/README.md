@@ -39,7 +39,7 @@ with Mix() as mix:
 
 ### Response
 
-**[List[models.MessageData]](../../models/.md)**
+**[List[models.BackendMessage]](../../models/.md)**
 
 ### Errors
 
@@ -78,7 +78,7 @@ with Mix() as mix:
 
 ### Response
 
-**[List[models.MessageData]](../../models/.md)**
+**[List[models.BackendMessage]](../../models/.md)**
 
 ### Errors
 
@@ -125,7 +125,7 @@ with Mix() as mix:
 
 ### Response
 
-**[models.MessageData](../../models/messagedata.md)**
+**[models.BackendMessage](../../models/backendmessage.md)**
 
 ### Errors
 
