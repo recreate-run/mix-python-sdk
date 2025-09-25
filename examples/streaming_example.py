@@ -28,10 +28,9 @@ def demonstrate_basic_sse_connection(mix, session_id):
     stream_response = mix.streaming.stream_events(session_id=session_id)
     print(f"Stream response: {stream_response}")
 
-    if hasattr(stream_response, '__dict__'):
-        print("\nSSE Connection details:")
-        for key, value in stream_response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nSSE Connection details:")
+    for key, value in stream_response.__dict__.items():
+        print(f"  {key}: {value}")
 
     return stream_response
 
@@ -67,10 +66,9 @@ def demonstrate_basic_streaming_message(mix, session_id):
 
     print(f"Message response: {message_response}")
 
-    if hasattr(message_response, '__dict__'):
-        print("\nMessage response details:")
-        for key, value in message_response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nMessage response details:")
+    for key, value in message_response.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("3. Processing SSE events for response...")
     response_content = []
@@ -87,70 +85,61 @@ def demonstrate_basic_streaming_message(mix, session_id):
             elif event.event == "heartbeat":
                 print("💓 Heartbeat - connection alive")
 
-            elif event.event == "thinking" and hasattr(event, 'data') and hasattr(event.data, 'content'):
+            elif event.event == "thinking":
                 thinking_chunk = event.data.content
-                if thinking_chunk:
-                    thinking_content.append(thinking_chunk)
-                    print(f"🤔 Thinking: {thinking_chunk[:100]}...")
+                thinking_content.append(thinking_chunk)
+                print(f"🤔 Thinking: {thinking_chunk[:100]}...")
 
-            elif event.event == "content" and hasattr(event, 'data') and hasattr(event.data, 'content'):
+            elif event.event == "content":
                 content_chunk = event.data.content
-                if content_chunk:
-                    response_content.append(content_chunk)
-                    print(f"📝 Content chunk: {content_chunk}")
+                response_content.append(content_chunk)
+                print(f"📝 Content chunk: {content_chunk}")
 
-            elif event.event == "tool" and hasattr(event, 'data'):
+            elif event.event == "tool":
                 tool_data = event.data
                 tool_info = {
-                    'id': getattr(tool_data, 'id', 'unknown'),
-                    'name': getattr(tool_data, 'name', 'unknown'),
-                    'status': getattr(tool_data, 'status', 'unknown'),
-                    'input': getattr(tool_data, 'input', None)
+                    'id': tool_data.id,
+                    'name': tool_data.name,
+                    'status': tool_data.status,
+                    'input': tool_data.input
                 }
                 tool_calls.append(tool_info)
                 print(f"🔧 Tool: {tool_info['name']} - {tool_info['status']}")
-                if tool_info['input']:
-                    print(f"   Input: {str(tool_info['input'])[:100]}...")
+                print(f"   Input: {str(tool_info['input'])[:100]}...")
 
-            elif event.event == "tool_execution_start" and hasattr(event, 'data'):
-                tool_id = getattr(event.data, 'toolCallId', 'unknown')
-                progress = getattr(event.data, 'progress', '')
+            elif event.event == "tool_execution_start":
+                tool_id = event.data.toolCallId
+                progress = event.data.progress
                 print(f"🚀 Tool execution started: {tool_id}")
-                if progress:
-                    print(f"   Progress: {progress}")
+                print(f"   Progress: {progress}")
 
-            elif event.event == "tool_execution_complete" and hasattr(event, 'data'):
-                tool_id = getattr(event.data, 'toolCallId', 'unknown')
-                success = getattr(event.data, 'success', False)
-                progress = getattr(event.data, 'progress', '')
+            elif event.event == "tool_execution_complete":
+                tool_id = event.data.toolCallId
+                success = event.data.success
+                progress = event.data.progress
                 status = "✅ Success" if success else "❌ Failed"
                 print(f"{status} Tool execution completed: {tool_id}")
-                if progress:
-                    print(f"   Result: {progress[:100]}...")
+                print(f"   Result: {progress[:100]}...")
 
-            elif event.event == "error" and hasattr(event, 'data'):
-                error_msg = getattr(event.data, 'error', 'Unknown error')
+            elif event.event == "error":
+                error_msg = event.data.error
                 print(f"❌ Error: {error_msg}")
 
-            elif event.event == "permission" and hasattr(event, 'data'):
+            elif event.event == "permission":
                 perm_data = event.data
-                tool_name = getattr(perm_data, 'toolName', 'unknown')
-                description = getattr(perm_data, 'description', '')
+                tool_name = perm_data.toolName
+                description = perm_data.description
                 print(f"🔐 Permission requested for: {tool_name}")
-                if description:
-                    print(f"   Description: {description}")
+                print(f"   Description: {description}")
 
             elif event.event == "complete":
                 print("✅ Message processing completed!")
 
-                # Show final reasoning if available
-                if hasattr(event, 'data'):
-                    reasoning = getattr(event.data, 'reasoning', None)
-                    reasoning_duration = getattr(event.data, 'reasoningDuration', None)
-                    if reasoning:
-                        print(f"🧠 Final reasoning: {reasoning[:200]}...")
-                    if reasoning_duration:
-                        print(f"⏱️  Reasoning duration: {reasoning_duration}ms")
+                # Show final reasoning
+                reasoning = event.data.reasoning
+                reasoning_duration = event.data.reasoning_duration
+                print(f"🧠 Final reasoning: {reasoning[:200]}...")
+                print(f"⏱️  Reasoning duration: {reasoning_duration}ms")
                 break
 
             else:
@@ -160,22 +149,17 @@ def demonstrate_basic_streaming_message(mix, session_id):
     # Print comprehensive results
     print(f"\n=== STREAMING SESSION SUMMARY ===")
 
-    if thinking_content:
-        complete_thinking = ''.join(thinking_content)
-        print(f"🤔 Agent Thinking Process:")
-        print(f"   {complete_thinking[:300]}...")
+    complete_thinking = ''.join(thinking_content)
+    print(f"🤔 Agent Thinking Process:")
+    print(f"   {complete_thinking[:300]}...")
 
-    if tool_calls:
-        print(f"🔧 Tool Calls ({len(tool_calls)} total):")
-        for tool in tool_calls:
-            print(f"   - {tool['name']} ({tool['status']})")
+    print(f"🔧 Tool Calls ({len(tool_calls)} total):")
+    for tool in tool_calls:
+        print(f"   - {tool['name']} ({tool['status']})")
 
-    if response_content:
-        complete_response = ''.join(response_content)
-        print(f"📝 Complete Agent Response:")
-        print(f"   {complete_response}")
-    else:
-        print("❌ No content received from stream")
+    complete_response = ''.join(response_content)
+    print(f"📝 Complete Agent Response:")
+    print(f"   {complete_response}")
 
     return message_response
 

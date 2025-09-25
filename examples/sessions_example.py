@@ -38,8 +38,6 @@ def demonstrate_session_listing(mix):
             print(f"  Tokens: {session.prompt_tokens} prompt, {session.completion_tokens} completion")
             print(f"  Cost: ${session.cost:.4f}")
             print(f"  Tool calls: {session.tool_call_count}")
-            if session.working_directory:
-                print(f"  Working directory: {session.working_directory}")
             if session.first_user_message:
                 print(f"  First message: {session.first_user_message[:100]}...")
             print()
@@ -91,7 +89,10 @@ def demonstrate_session_messaging(mix, session_id, api_key):
     # Send a simple message to generate session activity
     response = mix.messages.send(
         id=session_id,
-        content="Hello! This is a test message for the sessions example. Please respond briefly."
+        text="Hello! This is a test message for the sessions example. Please respond briefly.",
+        apps=[],
+        media=[],
+        plan_mode=False
     )
     print(f"Message sent successfully!")
     print(f"Response: {response.assistant_response[:200]}...")
@@ -99,7 +100,10 @@ def demonstrate_session_messaging(mix, session_id, api_key):
     # Send another message to create more activity
     response2 = mix.messages.send(
         id=session_id,
-        content="Can you tell me what 2+2 equals?"
+        text="Can you tell me what 2+2 equals?",
+        apps=[],
+        media=[],
+        plan_mode=False
     )
     print(f"Second message sent!")
     print(f"Response: {response2.assistant_response[:100]}...")
@@ -126,6 +130,9 @@ def demonstrate_session_forking(mix, source_session_id):
     # Verify forked session has fewer messages
     forked_messages = mix.messages.list_session(id=forked_session.id)
     print(f"Forked session has {len(forked_messages)} messages")
+
+    if len(forked_messages) != 1:
+        raise RuntimeError(f"Session forking failed: expected 1 message in forked session, got {len(forked_messages)}")
 
     return forked_session
 
@@ -183,10 +190,14 @@ def demonstrate_session_cleanup(mix, session_ids):
         mix.sessions.delete(id=session_id)
         print(f"   Session {session_id} deleted successfully")
 
-    print("\n2. Verifying cleanup by listing sessions...")
+    print("\n2. Verifying cleanup by checking for deleted session IDs...")
     remaining_sessions = mix.sessions.list()
-    demo_sessions = [s for s in remaining_sessions if "Demo Session" in s.title]
-    print(f"Demo sessions remaining: {len(demo_sessions)}")
+    remaining_ids = {s.id for s in remaining_sessions}
+    failed_deletions = [sid for sid in session_ids if sid in remaining_ids]
+    print(f"Sessions that failed to delete: {len(failed_deletions)}")
+
+    if failed_deletions:
+        raise RuntimeError(f"Session cleanup failed: {len(failed_deletions)} sessions still exist after deletion: {failed_deletions}")
 
 
 def main():
@@ -213,6 +224,11 @@ def main():
         # Always start with system health check
         health = mix.system.get_health()
         print(f"System health: {health}")
+
+        if health.status != 'ok':
+            raise RuntimeError(f"System health check failed: {health}")
+
+        # Remove the models_available check since it's not part of the HealthCheckResponse
 
         # Track session IDs for cleanup
         created_session_ids = []

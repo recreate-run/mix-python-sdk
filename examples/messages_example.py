@@ -16,8 +16,10 @@ Run this example to see all messages methods in action.
 """
 
 from mix_python_sdk import Mix
+from mix_python_sdk.models import SendMessageRequestBody
 import os
 from dotenv import load_dotenv
+import json
 
 
 def demonstrate_global_message_history(mix):
@@ -32,11 +34,8 @@ def demonstrate_global_message_history(mix):
     if history_page1:
         print("Sample message from page 1:")
         sample_msg = history_page1[0]
-        if hasattr(sample_msg, '__dict__'):
-            for key, value in sample_msg.__dict__.items():
-                print(f"  {key}: {value}")
-        else:
-            print(f"  {sample_msg}")
+        for key, value in sample_msg.__dict__.items():
+            print(f"  {key}: {value}")
 
     # Get second page if there are more messages
     print("\nFetching next 10 messages from global history...")
@@ -56,11 +55,8 @@ def demonstrate_session_message_listing(mix, session_id):
 
     for i, message in enumerate(session_messages):
         print(f"\nMessage {i+1}:")
-        if hasattr(message, '__dict__'):
-            for key, value in message.__dict__.items():
-                print(f"  {key}: {value}")
-        else:
-            print(f"  {message}")
+        for key, value in message.__dict__.items():
+            print(f"  {key}: {value}")
 
     return session_messages
 
@@ -74,26 +70,32 @@ def demonstrate_interactive_messaging(mix, session_id):
     user_message = "What is the capital of France?"
     print(f"User message: {user_message}")
 
-    response = mix.messages.send(id=session_id, content=user_message)
+    response = mix.messages.send(
+        id=session_id,
+        text=user_message,
+        apps=[],
+        media=[],
+        plan_mode=False
+    )
     print("AI Response received:")
-    if hasattr(response, '__dict__'):
-        for key, value in response.__dict__.items():
-            print(f"  {key}: {value}")
-    else:
-        print(f"  {response}")
+    for key, value in response.__dict__.items():
+        print(f"  {key}: {value}")
 
     # Send a follow-up message
     print("\nSending follow-up message...")
     followup_message = "What is the population of that city?"
     print(f"User message: {followup_message}")
 
-    followup_response = mix.messages.send(id=session_id, content=followup_message)
+    followup_response = mix.messages.send(
+        id=session_id,
+        text=followup_message,
+        apps=[],
+        media=[],
+        plan_mode=False
+    )
     print("AI Follow-up Response received:")
-    if hasattr(followup_response, '__dict__'):
-        for key, value in followup_response.__dict__.items():
-            print(f"  {key}: {value}")
-    else:
-        print(f"  {followup_response}")
+    for key, value in followup_response.__dict__.items():
+        print(f"  {key}: {value}")
 
     return [response, followup_response]
 
@@ -107,22 +109,22 @@ def demonstrate_tool_integration_analysis(mix, session_id):
     tool_message = "Can you help me analyze some data or perform a calculation?"
     print(f"User message: {tool_message}")
 
-    response = mix.messages.send(id=session_id, content=tool_message)
+    response = mix.messages.send(
+        id=session_id,
+        text=tool_message,
+        apps=[],
+        media=[],
+        plan_mode=False
+    )
     print("Tool Response received:")
-    if hasattr(response, '__dict__'):
-        for key, value in response.__dict__.items():
-            print(f"  {key}: {value}")
-            if key == 'tool_calls' and value:
-                print("  Tool calls detected:")
-                for i, tool_call in enumerate(value):
-                    print(f"    Tool call {i+1}:")
-                    if hasattr(tool_call, '__dict__'):
-                        for tool_key, tool_value in tool_call.__dict__.items():
-                            print(f"      {tool_key}: {tool_value}")
-                    else:
-                        print(f"      {tool_call}")
-    else:
-        print(f"  {response}")
+    for key, value in response.__dict__.items():
+        print(f"  {key}: {value}")
+        if key == 'tool_calls' and value:
+            print("  Tool calls detected:")
+            for i, tool_call in enumerate(value):
+                print(f"    Tool call {i+1}:")
+                for tool_key, tool_value in tool_call.__dict__.items():
+                    print(f"      {tool_key}: {tool_value}")
 
     return response
 
@@ -142,31 +144,29 @@ def demonstrate_message_metadata_analysis(mix, session_id):
 
     for i, message in enumerate(session_messages):
         print(f"\nMessage {i+1} metadata:")
-        if hasattr(message, '__dict__'):
-            # Analyze reasoning
-            if hasattr(message, 'reasoning') and message.reasoning:
-                print(f"  Has reasoning: Yes")
-                if hasattr(message, 'reasoning_duration') and message.reasoning_duration:
-                    print(f"  Reasoning duration: {message.reasoning_duration}ms")
-                    total_reasoning_time += message.reasoning_duration
-                    messages_with_reasoning += 1
-            else:
-                print(f"  Has reasoning: No")
+        # Analyze reasoning
+        if message.reasoning:
+            print(f"  Has reasoning: Yes")
+            if message.reasoning_duration:
+                print(f"  Reasoning duration: {message.reasoning_duration}ms")
+                total_reasoning_time += message.reasoning_duration
+                messages_with_reasoning += 1
+        else:
+            print(f"  Has reasoning: No")
 
-            # Analyze tool calls
-            if hasattr(message, 'tool_calls') and message.tool_calls:
-                print(f"  Tool calls: {len(message.tool_calls)}")
-                messages_with_tools += 1
-            else:
-                print(f"  Tool calls: 0")
+        # Analyze tool calls
+        if message.tool_calls:
+            print(f"  Tool calls: {len(message.tool_calls)}")
+            messages_with_tools += 1
+        else:
+            print(f"  Tool calls: 0")
 
-            # Show role and content info
-            if hasattr(message, 'role'):
-                print(f"  Role: {message.role}")
-            if hasattr(message, 'user_input') and message.user_input:
-                print(f"  User input length: {len(message.user_input)} chars")
-            if hasattr(message, 'assistant_response') and message.assistant_response:
-                print(f"  Assistant response length: {len(message.assistant_response)} chars")
+        # Show role and content info
+        print(f"  Role: {message.role}")
+        if message.user_input:
+            print(f"  User input length: {len(message.user_input)} chars")
+        if message.assistant_response:
+            print(f"  Assistant response length: {len(message.assistant_response)} chars")
 
     # Summary statistics
     print(f"\n=== Session Statistics ===")
@@ -192,22 +192,40 @@ def demonstrate_conversation_continuity(mix, session_id):
     print("\n1. Establishing context...")
     context_msg = "Let's talk about Python programming. I'm working on a web application."
     print(f"User: {context_msg}")
-    response1 = mix.messages.send(id=session_id, content=context_msg)
-    print(f"Assistant: {getattr(response1, 'assistant_response', response1) if hasattr(response1, 'assistant_response') else response1}")
+    response1 = mix.messages.send(
+        id=session_id,
+        text=context_msg,
+        apps=[],
+        media=[],
+        plan_mode=False
+    )
+    print(f"Assistant: {response1.assistant_response}")
 
     # Reference previous context
     print("\n2. Referencing previous context...")
     context_ref_msg = "What framework would you recommend for that?"
     print(f"User: {context_ref_msg}")
-    response2 = mix.messages.send(id=session_id, content=context_ref_msg)
-    print(f"Assistant: {getattr(response2, 'assistant_response', response2) if hasattr(response2, 'assistant_response') else response2}")
+    response2 = mix.messages.send(
+        id=session_id,
+        text=context_ref_msg,
+        apps=[],
+        media=[],
+        plan_mode=False
+    )
+    print(f"Assistant: {response2.assistant_response}")
 
     # Continue conversation thread
     print("\n3. Continuing conversation thread...")
     continue_msg = "Can you give me a specific example?"
     print(f"User: {continue_msg}")
-    response3 = mix.messages.send(id=session_id, content=continue_msg)
-    print(f"Assistant: {getattr(response3, 'assistant_response', response3) if hasattr(response3, 'assistant_response') else response3}")
+    response3 = mix.messages.send(
+        id=session_id,
+        text=continue_msg,
+        apps=[],
+        media=[],
+        plan_mode=False
+    )
+    print(f"Assistant: {response3.assistant_response}")
 
     # Verify conversation flow by listing final messages
     print("\n4. Verifying conversation flow...")
@@ -233,7 +251,7 @@ def main():
         # Create a session for message operations
         print("Creating session for message examples...")
         session = mix.sessions.create(title="Messages Example Session")
-        session_id = session.id if hasattr(session, 'id') else session
+        session_id = session.id
         print(f"Created session: {session_id}")
         print()
 

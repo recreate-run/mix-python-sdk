@@ -108,10 +108,9 @@ def demonstrate_file_listing_and_metadata(mix, session_id):
         print(f"  Modified: {file_info.modified}")
         print(f"  Is directory: {file_info.is_dir}")
 
-        if hasattr(file_info, '__dict__'):
-            print("  All attributes:")
-            for key, value in file_info.__dict__.items():
-                print(f"    {key}: {value}")
+        print("  All attributes:")
+        for key, value in file_info.__dict__.items():
+            print(f"    {key}: {value}")
 
     return files
 

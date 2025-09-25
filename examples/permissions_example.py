@@ -27,10 +27,9 @@ def demonstrate_permission_granting(mix):
     print("1. Granting a valid permission...")
     response = mix.permissions.grant(id="test_permission_001")
     print(f"Grant response: {response}")
-    if hasattr(response, '__dict__'):
-        print("Detailed breakdown:")
-        for key, value in response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("Detailed breakdown:")
+    for key, value in response.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Granting another permission...")
     response = mix.permissions.grant(id="test_permission_002")
@@ -48,10 +47,9 @@ def demonstrate_permission_denial(mix):
     print("1. Denying a permission...")
     response = mix.permissions.deny(id="test_permission_001")
     print(f"Deny response: {response}")
-    if hasattr(response, '__dict__'):
-        print("Detailed breakdown:")
-        for key, value in response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("Detailed breakdown:")
+    for key, value in response.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Denying another permission...")
     response = mix.permissions.deny(id="test_permission_002")
@@ -69,10 +67,9 @@ async def demonstrate_async_operations(mix):
     print("1. Async permission granting...")
     response = await mix.permissions.grant_async(id="async_test_permission_001")
     print(f"Async grant response: {response}")
-    if hasattr(response, '__dict__'):
-        print("Detailed breakdown:")
-        for key, value in response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("Detailed breakdown:")
+    for key, value in response.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Async permission denial...")
     response = await mix.permissions.deny_async(id="async_test_permission_001")

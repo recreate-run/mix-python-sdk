@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Preferences Example for Mix Python SDK
 
@@ -28,23 +27,20 @@ def demonstrate_provider_discovery(mix):
     providers = mix.preferences.get_available_providers()
     print(f"Available providers response: {providers}")
 
-    if hasattr(providers, '__dict__'):
-        print("\nDetailed breakdown:")
-        for key, value in providers.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed breakdown:")
+    for key, value in providers.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Analyzing provider capabilities...")
     if isinstance(providers, dict):
         for provider_key, provider_info in providers.items():
             print(f"\nProvider: {provider_key}")
-            if hasattr(provider_info, 'display_name') and provider_info.display_name:
-                print(f"  Display Name: {provider_info.display_name}")
-            if hasattr(provider_info, 'models') and provider_info.models:
-                print(f"  Available Models: {len(provider_info.models)} models")
-                for model in provider_info.models[:3]:  # Show first 3 models
-                    print(f"    - {model}")
-                if len(provider_info.models) > 3:
-                    print(f"    ... and {len(provider_info.models) - 3} more")
+            print(f"  Display Name: {provider_info.display_name}")
+            print(f"  Available Models: {len(provider_info.models)} models")
+            for model in provider_info.models[:3]:  # Show first 3 models
+                print(f"    - {model}")
+            if len(provider_info.models) > 3:
+                print(f"    ... and {len(provider_info.models) - 3} more")
 
 
 def demonstrate_current_preferences(mix):
@@ -55,27 +51,18 @@ def demonstrate_current_preferences(mix):
     preferences = mix.preferences.get_preferences()
     print(f"Preferences response: {preferences}")
 
-    if hasattr(preferences, '__dict__'):
-        print("\nDetailed breakdown:")
-        for key, value in preferences.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed breakdown:")
+    for key, value in preferences.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Analyzing current settings...")
-    if hasattr(preferences, 'preferences') and preferences.preferences:
-        prefs = preferences.preferences
-        print("Current preference configuration:")
-        if hasattr(prefs, 'preferred_provider'):
-            print(f"  Preferred Provider: {prefs.preferred_provider}")
-        if hasattr(prefs, 'main_agent_model'):
-            print(f"  Main Agent Model: {prefs.main_agent_model}")
-        if hasattr(prefs, 'main_agent_max_tokens'):
-            print(f"  Main Agent Max Tokens: {prefs.main_agent_max_tokens}")
-        if hasattr(prefs, 'sub_agent_model'):
-            print(f"  Sub Agent Model: {prefs.sub_agent_model}")
-        if hasattr(prefs, 'sub_agent_max_tokens'):
-            print(f"  Sub Agent Max Tokens: {prefs.sub_agent_max_tokens}")
-    else:
-        print("  No preferences currently configured (using defaults)")
+    prefs = preferences.preferences
+    print("Current preference configuration:")
+    print(f"  Preferred Provider: {prefs.preferred_provider}")
+    print(f"  Main Agent Model: {prefs.main_agent_model}")
+    print(f"  Main Agent Max Tokens: {prefs.main_agent_max_tokens}")
+    print(f"  Sub Agent Model: {prefs.sub_agent_model}")
+    print(f"  Sub Agent Max Tokens: {prefs.sub_agent_max_tokens}")
 
 
 def demonstrate_preference_updates(mix):
@@ -91,10 +78,9 @@ def demonstrate_preference_updates(mix):
     )
     print(f"Main agent update response: {update_response}")
 
-    if hasattr(update_response, '__dict__'):
-        print("Detailed breakdown:")
-        for key, value in update_response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("Detailed breakdown:")
+    for key, value in update_response.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Updating sub agent preferences...")
     update_response = mix.preferences.update_preferences(
@@ -162,9 +148,8 @@ def demonstrate_provider_switching(mix):
 
     print("\n2. Verifying provider switch...")
     current_prefs = mix.preferences.get_preferences()
-    if hasattr(current_prefs, 'preferences') and current_prefs.preferences:
-        print(f"Current provider: {current_prefs.preferences.preferred_provider}")
-        print(f"Current main model: {current_prefs.preferences.main_agent_model}")
+    print(f"Current provider: {current_prefs.preferences.preferred_provider}")
+    print(f"Current main model: {current_prefs.preferences.main_agent_model}")
 
     print("\n3. Testing different provider configurations...")
     providers_to_test = [
@@ -194,10 +179,9 @@ def demonstrate_preference_reset(mix):
     reset_response = mix.preferences.reset_preferences()
     print(f"Reset response: {reset_response}")
 
-    if hasattr(reset_response, '__dict__'):
-        print("Detailed breakdown:")
-        for key, value in reset_response.__dict__.items():
-            print(f"  {key}: {value}")
+    print("Detailed breakdown:")
+    for key, value in reset_response.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n3. Verifying reset completed...")
     after_reset = mix.preferences.get_preferences()

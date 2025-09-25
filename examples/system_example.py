@@ -30,10 +30,9 @@ def demonstrate_health_monitoring(mix):
     print(f"Timestamp: {health.timestamp}")
 
     # Show detailed health information
-    if hasattr(health, '__dict__'):
-        print("\nDetailed health breakdown:")
-        for key, value in health.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed health breakdown:")
+    for key, value in health.__dict__.items():
+        print(f"  {key}: {value}")
 
 
 def demonstrate_command_discovery(mix):
@@ -56,10 +55,9 @@ def demonstrate_command_discovery(mix):
         print(f"Usage: {cmd_detail.usage}")
 
         # Show detailed command information
-        if hasattr(cmd_detail, '__dict__'):
-            print("\nDetailed command breakdown:")
-            for key, value in cmd_detail.__dict__.items():
-                print(f"  {key}: {value}")
+        print("\nDetailed command breakdown:")
+        for key, value in cmd_detail.__dict__.items():
+            print(f"  {key}: {value}")
 
         # Inspect a few more commands if available
         if len(commands) > 1:
@@ -93,11 +91,10 @@ def demonstrate_mcp_server_monitoring(mix):
             print("     Tools unavailable (server not connected)")
 
         # Show detailed server information
-        if hasattr(server, '__dict__'):
-            print("     Detailed server breakdown:")
-            for key, value in server.__dict__.items():
-                if key != 'tools':  # Skip tools as we already displayed them
-                    print(f"       {key}: {value}")
+        print("     Detailed server breakdown:")
+        for key, value in server.__dict__.items():
+            if key != 'tools':  # Skip tools as we already displayed them
+                print(f"       {key}: {value}")
 
 
 def demonstrate_integration_verification(mix):

@@ -29,29 +29,21 @@ def demonstrate_tools_status_discovery(mix):
     tools_status = mix.tools.get_tools_status()
     print(f"Tools status response received: {type(tools_status)}")
 
-    if hasattr(tools_status, 'categories') and tools_status.categories:
-        print(f"\n2. Found {len(tools_status.categories)} tool categories")
+    print(f"\n2. Found {len(tools_status.categories)} tool categories")
 
-        for category_name, category_info in tools_status.categories.items():
-            print(f"\n--- Category: {category_name} ---")
-            if hasattr(category_info, 'display_name') and category_info.display_name:
-                print(f"  Display Name: {category_info.display_name}")
-
-            if hasattr(category_info, 'tools') and category_info.tools:
-                print(f"  Tools in category: {len(category_info.tools)}")
-                for tool in category_info.tools:
-                    demonstrate_tool_analysis(tool)
-            else:
-                print("  No tools found in this category")
-    else:
-        print("No tool categories found in response")
+    for category_name, category_info in tools_status.categories.items():
+        print(f"\n--- Category: {category_name} ---")
+        print(f"  Display Name: {category_info.display_name}")
+        print(f"  Tools in category: {len(category_info.tools)}")
+        for tool in category_info.tools:
+            demonstrate_tool_analysis(tool)
 
 
 def demonstrate_tool_analysis(tool):
     """Demonstrate detailed tool analysis and authentication status"""
-    print(f"\n    Tool: {tool.display_name or 'Unknown'}")
-    print(f"      Provider: {tool.provider or 'Unknown'}")
-    print(f"      Description: {tool.description or 'No description'}")
+    print(f"\n    Tool: {tool.display_name}")
+    print(f"      Provider: {tool.provider}")
+    print(f"      Description: {tool.description}")
     print(f"      API Key Required: {tool.api_key_required}")
     print(f"      Authenticated: {tool.authenticated}")
 
@@ -77,16 +69,14 @@ def demonstrate_authentication_verification(mix):
     unauthenticated_tools = []
     no_auth_required = []
 
-    if hasattr(tools_status, 'categories') and tools_status.categories:
-        for category_name, category_info in tools_status.categories.items():
-            if hasattr(category_info, 'tools') and category_info.tools:
-                for tool in category_info.tools:
-                    if tool.api_key_required and tool.authenticated:
-                        authenticated_tools.append((category_name, tool))
-                    elif tool.api_key_required and not tool.authenticated:
-                        unauthenticated_tools.append((category_name, tool))
-                    elif not tool.api_key_required:
-                        no_auth_required.append((category_name, tool))
+    for category_name, category_info in tools_status.categories.items():
+        for tool in category_info.tools:
+            if tool.api_key_required and tool.authenticated:
+                authenticated_tools.append((category_name, tool))
+            elif tool.api_key_required and not tool.authenticated:
+                unauthenticated_tools.append((category_name, tool))
+            elif not tool.api_key_required:
+                no_auth_required.append((category_name, tool))
 
     print(f"\n2. Authentication Summary:")
     print(f"   ✅ Authenticated tools: {len(authenticated_tools)}")
@@ -113,21 +103,19 @@ def demonstrate_provider_analysis(mix):
 
     providers = {}
 
-    if hasattr(tools_status, 'categories') and tools_status.categories:
-        for category_name, category_info in tools_status.categories.items():
-            if hasattr(category_info, 'tools') and category_info.tools:
-                for tool in category_info.tools:
-                    provider = tool.provider or 'Unknown'
-                    if provider not in providers:
-                        providers[provider] = {
-                            'tools': [],
-                            'authenticated': 0,
-                            'total': 0
-                        }
-                    providers[provider]['tools'].append((category_name, tool))
-                    providers[provider]['total'] += 1
-                    if tool.authenticated:
-                        providers[provider]['authenticated'] += 1
+    for category_name, category_info in tools_status.categories.items():
+        for tool in category_info.tools:
+            provider = tool.provider
+            if provider not in providers:
+                providers[provider] = {
+                    'tools': [],
+                    'authenticated': 0,
+                    'total': 0
+                }
+            providers[provider]['tools'].append((category_name, tool))
+            providers[provider]['total'] += 1
+            if tool.authenticated:
+                providers[provider]['authenticated'] += 1
 
     print(f"\n2. Found {len(providers)} unique providers:")
     for provider_name, provider_info in providers.items():
@@ -158,28 +146,26 @@ def demonstrate_capability_assessment(mix):
         'gemini': False
     }
 
-    if hasattr(tools_status, 'categories') and tools_status.categories:
-        for category_name, category_info in tools_status.categories.items():
-            if hasattr(category_info, 'tools') and category_info.tools:
-                for tool in category_info.tools:
-                    total_tools += 1
+    for category_name, category_info in tools_status.categories.items():
+        for tool in category_info.tools:
+            total_tools += 1
 
-                    # Check if tool is ready (either authenticated or no auth required)
-                    if tool.authenticated or not tool.api_key_required:
-                        ready_tools += 1
+            # Check if tool is ready (either authenticated or no auth required)
+            if tool.authenticated or not tool.api_key_required:
+                ready_tools += 1
 
-                    # Check for specific capabilities mentioned in plan
-                    tool_name = tool.display_name.lower() if tool.display_name else ''
-                    provider_name = tool.provider.lower() if tool.provider else ''
+            # Check for specific capabilities mentioned in plan
+            tool_name = tool.display_name.lower()
+            provider_name = tool.provider.lower()
 
-                    if 'web' in tool_name or 'search' in tool_name:
-                        capabilities['web_search'] = tool.authenticated or not tool.api_key_required
-                    if 'multimodal' in tool_name or 'analyzer' in tool_name:
-                        capabilities['multimodal_analyzer'] = tool.authenticated or not tool.api_key_required
-                    if 'brave' in provider_name:
-                        capabilities['brave'] = tool.authenticated or not tool.api_key_required
-                    if 'gemini' in provider_name:
-                        capabilities['gemini'] = tool.authenticated or not tool.api_key_required
+            if 'web' in tool_name or 'search' in tool_name:
+                capabilities['web_search'] = tool.authenticated or not tool.api_key_required
+            if 'multimodal' in tool_name or 'analyzer' in tool_name:
+                capabilities['multimodal_analyzer'] = tool.authenticated or not tool.api_key_required
+            if 'brave' in provider_name:
+                capabilities['brave'] = tool.authenticated or not tool.api_key_required
+            if 'gemini' in provider_name:
+                capabilities['gemini'] = tool.authenticated or not tool.api_key_required
 
     readiness_ratio = ready_tools / total_tools if total_tools > 0 else 0
 

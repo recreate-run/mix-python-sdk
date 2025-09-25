@@ -1,16 +1,15 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 11a4b5a5c6076ea17477f7059a4378f0
+  docChecksum: 97e6c2503742713f91f1bf9c32b16d06
   docVersion: 1.0.0
-  speakeasyVersion: 1.628.2
-  generationVersion: 2.716.3
-  releaseVersion: 0.4.6
-  configChecksum: 0f674ea41631204e5db1901df668bb17
+  speakeasyVersion: 1.628.4
+  generationVersion: 2.716.5
+  releaseVersion: 0.5.0
+  configChecksum: f07b2d46f154201cdefa0bf220a29465
   published: true
 features:
   python:
-    acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
     core: 5.22.0
@@ -67,7 +66,6 @@ generatedFiles:
   - docs/models/getpreferencespreferences.md
   - docs/models/getpreferencesresponse.md
   - docs/models/getsessionfilerequest.md
-  - docs/models/getsessionfileresponse.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
   - docs/models/gettoolsstatusresponse.md

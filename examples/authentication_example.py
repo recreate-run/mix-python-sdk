@@ -30,10 +30,9 @@ def demonstrate_api_key_storage(mix, api_key):
     )
     print(f"Result: {result}")
 
-    if hasattr(result, '__dict__'):
-        print("\nDetailed breakdown:")
-        for key, value in result.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed breakdown:")
+    for key, value in result.__dict__.items():
+        print(f"  {key}: {value}")
 
 
 def demonstrate_oauth_flow(mix):
@@ -45,16 +44,15 @@ def demonstrate_oauth_flow(mix):
     oauth_result = mix.authentication.start_o_auth_flow(provider="anthropic")
     print(f"OAuth flow result: {oauth_result}")
 
-    if hasattr(oauth_result, '__dict__'):
-        print("\nDetailed OAuth flow breakdown:")
-        for key, value in oauth_result.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed OAuth flow breakdown:")
+    for key, value in oauth_result.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. OAuth callback handling demonstration...")
     print("   (Note: This would normally be called by OAuth provider with actual code)")
     print("   For demo purposes, showing the method signature and expected behavior")
 
-    if hasattr(oauth_result, 'state') and oauth_result.state:
+    if oauth_result.state:
         print(f"   Would call handle_o_auth_callback with:")
         print(f"   - code: 'oauth_authorization_code'")
         print(f"   - provider: 'anthropic'")
@@ -67,10 +65,9 @@ def demonstrate_oauth_flow(mix):
         )
         print(f"Callback result: {callback_result}")
 
-        if hasattr(callback_result, '__dict__'):
-            print("\nDetailed callback breakdown:")
-            for key, value in callback_result.__dict__.items():
-                print(f"  {key}: {value}")
+        print("\nDetailed callback breakdown:")
+        for key, value in callback_result.__dict__.items():
+            print(f"  {key}: {value}")
 
 
 def demonstrate_auth_status(mix):
@@ -81,20 +78,16 @@ def demonstrate_auth_status(mix):
     status_result = mix.authentication.get_auth_status()
     print(f"Auth status result: {status_result}")
 
-    if hasattr(status_result, '__dict__'):
-        print("\nDetailed status breakdown:")
-        for key, value in status_result.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed status breakdown:")
+    for key, value in status_result.__dict__.items():
+        print(f"  {key}: {value}")
 
-    if hasattr(status_result, 'providers') and status_result.providers:
+    if status_result.providers:
         print("\nProvider-specific details:")
         for provider_name, provider_info in status_result.providers.items():
             print(f"  Provider: {provider_name}")
-            if hasattr(provider_info, '__dict__'):
-                for attr, val in provider_info.__dict__.items():
-                    print(f"    {attr}: {val}")
-            else:
-                print(f"    Info: {provider_info}")
+            for attr, val in provider_info.__dict__.items():
+                print(f"    {attr}: {val}")
 
 
 def demonstrate_preferred_provider_validation(mix):
@@ -105,10 +98,9 @@ def demonstrate_preferred_provider_validation(mix):
     validation_result = mix.authentication.validate_preferred_provider()
     print(f"Validation result: {validation_result}")
 
-    if hasattr(validation_result, '__dict__'):
-        print("\nDetailed validation breakdown:")
-        for key, value in validation_result.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed validation breakdown:")
+    for key, value in validation_result.__dict__.items():
+        print(f"  {key}: {value}")
 
 
 def demonstrate_credential_deletion(mix):
@@ -120,19 +112,17 @@ def demonstrate_credential_deletion(mix):
     deletion_result = mix.authentication.delete_credentials(provider="openrouter")
     print(f"Deletion result: {deletion_result}")
 
-    if hasattr(deletion_result, '__dict__'):
-        print("\nDetailed deletion breakdown:")
-        for key, value in deletion_result.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed deletion breakdown:")
+    for key, value in deletion_result.__dict__.items():
+        print(f"  {key}: {value}")
 
     print("\n2. Verifying deletion by checking auth status...")
     final_status = mix.authentication.get_auth_status()
-    if hasattr(final_status, 'providers') and final_status.providers:
+    if final_status.providers:
         openrouter_status = final_status.providers.get('openrouter')
         if openrouter_status:
             print(f"OpenRouter status after deletion: {openrouter_status}")
-            if hasattr(openrouter_status, 'authenticated'):
-                print(f"  Authenticated: {openrouter_status.authenticated}")
+            print(f"  Authenticated: {openrouter_status.authenticated}")
 
 
 def main():

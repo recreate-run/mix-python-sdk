@@ -67,12 +67,7 @@ if TYPE_CHECKING:
         GetPreferencesResponse,
         GetPreferencesResponseTypedDict,
     )
-    from .getsessionfileop import (
-        GetSessionFileRequest,
-        GetSessionFileRequestTypedDict,
-        GetSessionFileResponse,
-        GetSessionFileResponseTypedDict,
-    )
+    from .getsessionfileop import GetSessionFileRequest, GetSessionFileRequestTypedDict
     from .getsessionmessagesop import (
         GetSessionMessagesRequest,
         GetSessionMessagesRequestTypedDict,
@@ -284,8 +279,6 @@ __all__ = [
     "GetPreferencesResponseTypedDict",
     "GetSessionFileRequest",
     "GetSessionFileRequestTypedDict",
-    "GetSessionFileResponse",
-    "GetSessionFileResponseTypedDict",
     "GetSessionMessagesRequest",
     "GetSessionMessagesRequestTypedDict",
     "GetSessionRequest",
@@ -467,8 +460,6 @@ _dynamic_imports: dict[str, str] = {
     "GetPreferencesResponseTypedDict": ".getpreferencesop",
     "GetSessionFileRequest": ".getsessionfileop",
     "GetSessionFileRequestTypedDict": ".getsessionfileop",
-    "GetSessionFileResponse": ".getsessionfileop",
-    "GetSessionFileResponseTypedDict": ".getsessionfileop",
     "GetSessionMessagesRequest": ".getsessionmessagesop",
     "GetSessionMessagesRequestTypedDict": ".getsessionmessagesop",
     "GetSessionRequest": ".getsessionop",

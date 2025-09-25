@@ -156,7 +156,7 @@ with Mix() as mix:
 
 ### Response
 
-**[models.GetSessionFileResponse](../../models/getsessionfileresponse.md)**
+**[httpx.Response](../../models/.md)**
 
 ### Errors
 
