@@ -4,6 +4,7 @@ Basic usage example for mix-python-sdk
 """
 
 from mix_python_sdk import Mix
+from mix_python_sdk.models import SendMessageRequestBody
 import os
 
 def main():
@@ -24,15 +25,16 @@ def main():
             print(f"Created session: {session.id if session else 'No session data'}")
 
             # Send hello message
-            if session:
-                response = mix.messages.send(id=session.id, content = "Hello")
-                print(f"Message response: {response}")
-                
-                # Delete the session
-                mix.sessions.delete(id=session.id)
-                print(f"Deleted session: {session.id}")
-            else:
-                print("No session data available to send message")
+            response = mix.messages.send(id=session.id,
+                        text="Hello",
+                        media=[],
+                        apps=[],
+                        plan_mode=False)
+            print(f"Message response: {response}")
+            
+            # Delete the session
+            mix.sessions.delete(id=session.id)
+            print(f"Deleted session: {session.id}")
             
         except Exception as e:
             print(f"Error: {e}")

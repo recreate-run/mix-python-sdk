@@ -13,7 +13,11 @@ if TYPE_CHECKING:
         CancelSessionProcessingResponse,
         CancelSessionProcessingResponseTypedDict,
     )
-    from .createsessionop import CreateSessionRequest, CreateSessionRequestTypedDict
+    from .createsessionop import (
+        CreateSessionRequest,
+        CreateSessionRequestTypedDict,
+        PromptMode,
+    )
     from .deletecredentialsop import (
         DeleteCredentialsRequest,
         DeleteCredentialsRequestTypedDict,
@@ -307,6 +311,7 @@ __all__ = [
     "ListSessionFilesRequestTypedDict",
     "Params",
     "ParamsTypedDict",
+    "PromptMode",
     "Provider",
     "Providers",
     "ProvidersTypedDict",
@@ -421,6 +426,7 @@ _dynamic_imports: dict[str, str] = {
     "CancelSessionProcessingResponseTypedDict": ".cancelsessionprocessingop",
     "CreateSessionRequest": ".createsessionop",
     "CreateSessionRequestTypedDict": ".createsessionop",
+    "PromptMode": ".createsessionop",
     "DeleteCredentialsRequest": ".deletecredentialsop",
     "DeleteCredentialsRequestTypedDict": ".deletecredentialsop",
     "DeleteCredentialsResponse": ".deletecredentialsop",

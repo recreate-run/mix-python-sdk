@@ -181,6 +181,8 @@ class Sessions(BaseSDK):
         self,
         *,
         title: str,
+        custom_system_prompt: Optional[str] = None,
+        prompt_mode: Optional[models.PromptMode] = "default",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -188,9 +190,11 @@ class Sessions(BaseSDK):
     ) -> models.SessionData:
         r"""Create a new session
 
-        Create a new session with required title. Session automatically gets isolated storage directory.
+        Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory.
 
         :param title: Title for the session
+        :param custom_system_prompt: Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.
+        :param prompt_mode: Custom prompt handling mode: - 'default': Use base system prompt only (customSystemPrompt ignored) - 'append': Append customSystemPrompt to base system prompt (50KB limit) - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -207,6 +211,8 @@ class Sessions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateSessionRequest(
+            custom_system_prompt=custom_system_prompt,
+            prompt_mode=prompt_mode,
             title=title,
         )
 
@@ -272,6 +278,8 @@ class Sessions(BaseSDK):
         self,
         *,
         title: str,
+        custom_system_prompt: Optional[str] = None,
+        prompt_mode: Optional[models.PromptMode] = "default",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -279,9 +287,11 @@ class Sessions(BaseSDK):
     ) -> models.SessionData:
         r"""Create a new session
 
-        Create a new session with required title. Session automatically gets isolated storage directory.
+        Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory.
 
         :param title: Title for the session
+        :param custom_system_prompt: Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.
+        :param prompt_mode: Custom prompt handling mode: - 'default': Use base system prompt only (customSystemPrompt ignored) - 'append': Append customSystemPrompt to base system prompt (50KB limit) - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -298,6 +308,8 @@ class Sessions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateSessionRequest(
+            custom_system_prompt=custom_system_prompt,
+            prompt_mode=prompt_mode,
             title=title,
         )
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 97e6c2503742713f91f1bf9c32b16d06
+  docChecksum: 840b34cd3ada1f9dc6dc20fcf4dada74
   docVersion: 1.0.0
-  speakeasyVersion: 1.628.4
-  generationVersion: 2.716.5
-  releaseVersion: 0.5.0
-  configChecksum: f07b2d46f154201cdefa0bf220a29465
+  speakeasyVersion: 1.630.0
+  generationVersion: 2.716.10
+  releaseVersion: 0.5.1
+  configChecksum: 7c96fbf79016842a4748756ff3b2031b
   published: true
 features:
   python:
@@ -80,6 +80,7 @@ generatedFiles:
   - docs/models/listmcpserverstool.md
   - docs/models/listsessionfilesrequest.md
   - docs/models/params.md
+  - docs/models/promptmode.md
   - docs/models/provider.md
   - docs/models/providers.md
   - docs/models/resetpreferencesresponse.md
@@ -380,6 +381,30 @@ examples:
           application/json: {"assistantMessageCount": 880027, "completionTokens": 524380, "cost": 8710.41, "createdAt": "2024-03-18T16:52:26.875Z", "id": "<id>", "promptTokens": 469380, "title": "<value>", "toolCallCount": 70138, "userMessageCount": 844160}
         "400":
           application/json: {"error": {"code": 481369, "message": "<value>", "type": "validation_error"}}
+    invalid_prompt_mode:
+      requestBody:
+        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "promptMode must be 'default', 'append', or 'replace'", "type": "validation_error"}}
+    missing_title:
+      requestBody:
+        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "title is required", "type": "validation_error"}}
+    prompt_size_exceeded_append:
+      requestBody:
+        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "Custom prompt size (75KB) exceeds append mode limit of 50KB", "type": "validation_error"}}
+    prompt_size_exceeded_replace:
+      requestBody:
+        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "Custom prompt size (150KB) exceeds replace mode limit of 100KB", "type": "validation_error"}}
   deleteSession:
     speakeasy-default-delete-session:
       parameters:

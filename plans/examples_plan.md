@@ -1,195 +1,8 @@
-# Mix Python SDK Examples Plan
-
-This document outlines the comprehensive plan for creating minimal examples for each SDK module directory in `docs/sdks/`. Each example will showcase all functionality available in that specific module.
+# Mix Python SDK Example creation guidelines
 
 ## Overview
 
-Based on analysis of the SDK documentation and existing examples, we will create **9 separate test files** in the `examples/` directory, each demonstrating the complete functionality of one SDK module. Use only the openrouter LLM provider, with the OPENROUTER_API_KEY. Don't use any other provider
-
-## Example Files to Create
-
-### 1. `examples/authentication_example.py`
-
-**Documentation Reference**: `docs/sdks/authentication/README.md`
-
-**Purpose**: Demonstrate comprehensive authentication management
-
-**Functionality to showcase:**
-
-- OAuth flow initiation and callback handling (Anthropic provider only)
-- Authentication status checking across all providers
-- Preferred provider validation
-- Credential deletion and cleanup operations
-
-**Key operations demonstrated:**
-
-- `store_api_key()` - Provider-specific API key storage
-- `start_o_auth_flow()` - Provider-specific OAuth flow (Anthropic only)
-- `handle_o_auth_callback()` - OAuth callback processing
-- `get_auth_status()` - Authentication status checking
-- `validate_preferred_provider()` - Preferred provider validation
-- `delete_credentials()` - Credential cleanup
-
-### 2. `examples/files_example.py`
-
-**Documentation Reference**: `docs/sdks/files/README.md`
-
-**Purpose**: Demonstrate comprehensive file management within sessions
-
-**Functionality to showcase:**
-
-- File upload operations with different content types (text, image, binary)
-- File listing with metadata display and filtering
-- Thumbnail generation and retrieval for images
-- File download with various options and error handling
-- Session-based file isolation and management
-- File deletion and cleanup operations
-
-**Key operations demonstrated:**
-
-- `upload()` - Upload files to sessions with content type handling
-- `list()` - List session files with metadata
-- `get()` - Retrieve specific file details and download
-- `delete()` - Remove files from sessions
-- Thumbnail generation workflows
-- Error handling for file operations
-
-**Sample Files Required:**
-
-- Uses real sample files from `examples/sample_files/` directory
-- Required files: `sample.txt` (any text content) and `sample.jpg/png` (any image file)
-- Example raises `FileNotFoundError` if sample files are missing
-
-### 3. `examples/messages_example.py`
-
-**Documentation Reference**: `docs/sdks/messages/README.md`
-
-**Purpose**: Demonstrate comprehensive messaging functionality
-
-**Functionality to showcase:**
-
-- Global message history retrieval with pagination support
-- Session-specific message listing and filtering
-- Interactive message sending with AI response handling
-- Tool integration during conversations
-- Message metadata analysis (reasoning, tool calls, tokens)
-- Conversation continuity and context management
-
-**Key operations demonstrated:**
-
-- `get_history()` - Global message history with pagination
-- `list_session()` - Session-specific message retrieval
-- `send()` - Message sending with response handling
-- Message structure analysis (roles, tool calls, reasoning)
-- Conversation flow management
-
-### 4. `examples/permissions_example.py`
-
-**Documentation Reference**: `docs/sdks/permissions/README.md`
-
-**Purpose**: Demonstrate permission management operations
-
-**Functionality to showcase:**
-
-- Permission granting operations with ID-based management
-- Permission denial operations with proper response handling
-- Error handling for invalid permission IDs and authentication
-- Both synchronous and asynchronous operation patterns
-- Response validation and status checking
-
-**Key operations demonstrated:**
-
-- `grant()` - Grant specific permissions by ID
-- `deny()` - Deny specific permissions by ID
-- `grant_async()` - Asynchronous permission granting
-- `deny_async()` - Asynchronous permission denial
-- Error handling for 401, 404, and 500 responses
-
-### 5. `examples/preferences_example.py` (Enhanced)
-
-**Documentation Reference**: `docs/sdks/preferencessdk/README.md`
-
-**Purpose**: Demonstrate comprehensive preference management
-
-**Functionality to showcase:**
-
-- Available provider and model discovery
-- Current preference retrieval and analysis
-- Dual-agent configuration (main agent vs sub agent)
-- Model selection, token limits, and reasoning effort settings
-- Preference reset functionality
-- Provider switching workflows and validation
-
-**Key operations demonstrated:**
-
-- `get_available_providers()` - Provider and model discovery
-- `get_preferences()` - Current preference retrieval
-- `update_preferences()` - Comprehensive preference configuration
-- `reset_preferences()` - Reset to default settings
-- Dual-agent architecture configuration
-
-### 6. `examples/sessions_example.py` (Enhanced)
-
-**Documentation Reference**: `docs/sdks/sessions/README.md`
-
-**Purpose**: Demonstrate comprehensive session lifecycle management
-
-**Functionality to showcase:**
-
-- Complete session lifecycle (create, get, list, delete)
-- Session forking with message index specification
-- Processing cancellation for long-running operations
-- Session metadata and usage statistics analysis
-- Working directory management and isolation
-- Session cleanup and resource management
-
-**Key operations demonstrated:**
-
-- `list()` - List all sessions with metadata
-- `create()` - Create new sessions with configuration
-- `get()` - Retrieve specific session details
-- `delete()` - Session deletion and cleanup
-- `fork()` - Session branching with message history
-- `cancel_processing()` - Cancel ongoing operations
-
-### 7. `examples/system_example.py`
-
-**Documentation Reference**: `docs/sdks/system/README.md`
-
-**Purpose**: Demonstrate system operations and health monitoring
-
-**Functionality to showcase:**
-
-- Health check and system status monitoring
-- Command discovery and detailed command inspection
-- MCP (Model Context Protocol) server listing and tool ecosystem status
-- Integration readiness verification
-- System introspection and capability discovery
-
-**Key operations demonstrated:**
-
-- `get_health()` - System health monitoring
-- `list_commands()` - Available command discovery
-- `get_command()` - Detailed command inspection
-- `list_mcp_servers()` - MCP server and tool ecosystem status
-- System integration verification workflows
-
-### 8. `examples/tools_example.py`
-
-**Documentation Reference**: `docs/sdks/tools/README.md`
-
-**Purpose**: Demonstrate tools management and credential handling
-
-**Functionality to showcase:**
-
-- Tools status discovery and authentication checking
-- Available tool categories and individual tools inspection
-- Authentication status verification for each tool
-- Tool provider and authentication requirement analysis
-
-**Key operations demonstrated:**
-
-- `get_tools_status()` - Get status and authentication information for all available tools and categories
+Use only the openrouter LLM provider, with the OPENROUTER_API_KEY. Don't use any other provider
 
 ## Implementation Standards
 
@@ -265,13 +78,12 @@ def demonstrate_feature_name(mix):
     print(f"Result: {result}")
 
     # Additional processing if needed
-    if hasattr(result, '__dict__'):
-        print("\nDetailed breakdown:")
-        for key, value in result.__dict__.items():
-            print(f"  {key}: {value}")
+    print("\nDetailed breakdown:")
+    for key, value in result.__dict__.items():
+        print(f"  {key}: {value}")
 ```
 
-#### 7. Main Function Template (UPDATED)
+#### 7. Main Function Template
 
 ```python
 def main():
@@ -320,6 +132,7 @@ if __name__ == "__main__":
 - **No silent failures**: Never catch and log errors - let them crash
 - **Fail fast principle**: Stop execution on first error to surface problems immediately
 - **No error recovery**: Never attempt to continue after failures
+- **NO defensive programming**: Never use `hasattr` or other defensive patterns - let code fail fast with AttributeError when API contracts change
 
 **Example of what NOT to do:**
 
@@ -344,7 +157,7 @@ result = mix.authentication.store_api_key(api_key, provider)
 - **Section headers**: Use `=== [Section Name] Demo ===` format
 - **Numbered steps**: Use "1. Step description...", "2. Next step..." within sections
 - **Response display**: Always print operation results
-- **Detailed breakdowns**: Use `hasattr(result, '__dict__')` to show object details
+- **Detailed breakdowns**: Access object attributes directly without defensive checks
 - **Clear separation**: Empty lines between major sections
 - **Status indicators**: Use visual indicators (✅, ❌) when appropriate
 
@@ -375,7 +188,7 @@ from dotenv import load_dotenv
 - **Parameter documentation**: Explain demo parameters and real-world usage
 - **Example notes**: Include notes about demo vs production usage
 
-### Common Patterns (UPDATED)
+### Common Patterns
 
 Each example file will follow these established patterns:
 
@@ -388,41 +201,6 @@ Each example file will follow these established patterns:
 - **Modular Design**: Separate functions for each feature group
 - **Immediate Failure**: Stop execution on first error
 
-## Usage Scenarios
-
-### For Developers
-
-- **Learning Tool**: Progressive complexity from basic to advanced operations
-- **Reference Implementation**: Production-ready patterns and best practices
-- **Integration Guide**: Complete examples for each SDK module
-
-### For Testing
-
-- **Functionality Verification**: Ensure all SDK operations work correctly
-- **Integration Testing**: Validate SDK behavior with the Mix platform
-- **Regression Testing**: Detect issues when SDK or platform changes
-
-### For Documentation
-
-- **API Examples**: Complete, runnable code snippets
-- **Feature Coverage**: Demonstrate all available functionality
-- **Best Practices**: Show recommended usage patterns
-
 ## File Organization
 
 All examples will be placed in the existing `examples/` directory:
-
-## Success Criteria
-
-Each example file should:
-
-- ✅ Demonstrate ALL operations available in its respective SDK module
-- ✅ **NO error handling** - let all errors crash immediately
-- ✅ Load real credentials from environment variables using `python-dotenv`
-- ✅ Validate environment setup before execution
-- ✅ Follow established SDK patterns and conventions
-- ✅ Provide clear, informative output
-- ✅ Use actual API operations, not demo/placeholder calls
-- ✅ Serve as both learning tool and reference implementation
-
-This plan ensures complete coverage of the Mix Python SDK functionality while maintaining consistency and providing valuable learning resources for developers.
