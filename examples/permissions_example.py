@@ -35,7 +35,9 @@ def demonstrate_permission_granting(mix):
     response = mix.permissions.grant(id="test_permission_002")
     print(f"Grant response: {response}")
 
-    print("\n3. Attempting to grant invalid permission (will demonstrate error handling)...")
+    print(
+        "\n3. Attempting to grant invalid permission (will demonstrate error handling)..."
+    )
     response = mix.permissions.grant(id="invalid_permission_xyz")
     print(f"Grant response for invalid ID: {response}")
 
@@ -55,7 +57,9 @@ def demonstrate_permission_denial(mix):
     response = mix.permissions.deny(id="test_permission_002")
     print(f"Deny response: {response}")
 
-    print("\n3. Attempting to deny invalid permission (will demonstrate error handling)...")
+    print(
+        "\n3. Attempting to deny invalid permission (will demonstrate error handling)..."
+    )
     response = mix.permissions.deny(id="nonexistent_permission_123")
     print(f"Deny response for invalid ID: {response}")
 
@@ -89,27 +93,23 @@ def demonstrate_advanced_parameters(mix):
     print("\n=== Advanced Parameters Demo ===")
 
     print("1. Using custom timeout...")
-    response = mix.permissions.grant(
-        id="timeout_test_permission",
-        timeout_ms=5000
-    )
+    response = mix.permissions.grant(id="timeout_test_permission", timeout_ms=5000)
     print(f"Custom timeout response: {response}")
 
     print("\n2. Using custom HTTP headers...")
     custom_headers = {
         "X-Custom-Header": "test-value",
-        "X-Request-ID": "demo-request-001"
+        "X-Request-ID": "demo-request-001",
     }
     response = mix.permissions.grant(
-        id="headers_test_permission",
-        http_headers=custom_headers
+        id="headers_test_permission", http_headers=custom_headers
     )
     print(f"Custom headers response: {response}")
 
     print("\n3. Using server URL override...")
     response = mix.permissions.deny(
         id="server_test_permission",
-        server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")
+        server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088"),
     )
     print(f"Server override response: {response}")
 
@@ -154,17 +154,19 @@ def main():
     # Get required API key from environment
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file.")
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file."
+        )
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - PERMISSIONS EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all permissions functionality")
     print("Using real OpenRouter API key from .env file")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
@@ -178,14 +180,14 @@ def main():
         demonstrate_permission_workflow(mix)
 
         # Demonstrate asynchronous operations
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("ASYNCHRONOUS OPERATIONS")
-        print("="*60)
+        print("=" * 60)
         asyncio.run(run_async_demonstrations(mix))
 
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("PERMISSIONS EXAMPLE COMPLETED")
-        print("="*60)
+        print("=" * 60)
         print("All permissions operations demonstrated successfully!")
 
 

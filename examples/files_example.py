@@ -45,7 +45,9 @@ def demonstrate_file_upload_operations(mix, session_id):
     # Check for text file (required)
     text_file_path = os.path.join(sample_dir, "sample.txt")
     if not os.path.exists(text_file_path):
-        raise FileNotFoundError(f"Required sample text file not found at {text_file_path}. Please add a sample.txt file to the examples/sample_files/ directory.")
+        raise FileNotFoundError(
+            f"Required sample text file not found at {text_file_path}. Please add a sample.txt file to the examples/sample_files/ directory."
+        )
 
     print(f"2. Uploading text file: {text_file_path}")
     with open(text_file_path, "rb") as f:
@@ -54,8 +56,8 @@ def demonstrate_file_upload_operations(mix, session_id):
             file={
                 "file_name": "sample.txt",
                 "content": f,
-                "content_type": "text/plain"
-            }
+                "content_type": "text/plain",
+            },
         )
     print(f"Uploaded text file: {text_file_info.name}")
     print(f"File size: {text_file_info.size} bytes")
@@ -78,8 +80,8 @@ def demonstrate_file_upload_operations(mix, session_id):
                     file={
                         "file_name": f"sample{ext}",
                         "content": f,
-                        "content_type": content_type
-                    }
+                        "content_type": content_type,
+                    },
                 )
             print(f"Uploaded image file: {image_file_info.name}")
             print(f"File size: {image_file_info.size} bytes")
@@ -88,7 +90,9 @@ def demonstrate_file_upload_operations(mix, session_id):
             break
 
     if not image_uploaded:
-        raise FileNotFoundError(f"Required sample image file not found in {sample_dir}. Please add a sample image file (sample.jpg, sample.png, etc.) to the examples/sample_files/ directory.")
+        raise FileNotFoundError(
+            f"Required sample image file not found in {sample_dir}. Please add a sample image file (sample.jpg, sample.png, etc.) to the examples/sample_files/ directory."
+        )
 
     return uploaded_files
 
@@ -124,21 +128,22 @@ def demonstrate_file_download_operations(mix, session_id, files):
 
         # Basic download
         file_response = mix.files.get_session_file(
-            id=session_id,
-            filename=file_info.name
+            id=session_id, filename=file_info.name
         )
         print(f"Download response status: {file_response.status_code}")
         print(f"Content type: {file_response.headers.get('content-type', 'unknown')}")
-        print(f"Content length: {file_response.headers.get('content-length', 'unknown')}")
+        print(
+            f"Content length: {file_response.headers.get('content-length', 'unknown')}"
+        )
 
         # Read first few bytes to verify content
         content = file_response.read()
         if len(content) > 0:
             preview = content[:50] if len(content) > 50 else content
             try:
-                preview_str = preview.decode('utf-8', errors='ignore')
+                preview_str = preview.decode("utf-8", errors="ignore")
                 print(f"Content preview: {repr(preview_str)}")
-            except:
+            except Exception:
                 print(f"Binary content preview: {preview[:20]}...")
 
 
@@ -149,7 +154,10 @@ def demonstrate_thumbnail_generation(mix, session_id, uploaded_files):
     # Find an image file from uploaded files
     image_file = None
     for file_info in uploaded_files:
-        if any(ext in file_info.name.lower() for ext in ['.jpg', '.jpeg', '.png', '.gif', '.bmp']):
+        if any(
+            ext in file_info.name.lower()
+            for ext in [".jpg", ".jpeg", ".png", ".gif", ".bmp"]
+        ):
             image_file = file_info
             break
 
@@ -163,18 +171,18 @@ def demonstrate_thumbnail_generation(mix, session_id, uploaded_files):
     thumbnail_specs = [
         ("100", "100x100 box thumbnail"),
         ("w200", "Width-constrained to 200px"),
-        ("h150", "Height-constrained to 150px")
+        ("h150", "Height-constrained to 150px"),
     ]
 
     for thumb_spec, description in thumbnail_specs:
         print(f"\n2. Generating {description}...")
         thumbnail_response = mix.files.get_session_file(
-            id=session_id,
-            filename=image_file.name,
-            thumb=thumb_spec
+            id=session_id, filename=image_file.name, thumb=thumb_spec
         )
         print(f"Thumbnail response status: {thumbnail_response.status_code}")
-        print(f"Thumbnail content type: {thumbnail_response.headers.get('content-type', 'unknown')}")
+        print(
+            f"Thumbnail content type: {thumbnail_response.headers.get('content-type', 'unknown')}"
+        )
         content = thumbnail_response.read()
         print(f"Thumbnail size: {len(content)} bytes")
 
@@ -189,9 +197,17 @@ def demonstrate_file_deletion_and_cleanup(mix, session_id, files):
         print(f"  - {file_info.name} ({file_info.size} bytes)")
 
     # Filter out system files and directories that shouldn't be deleted
-    user_files = [f for f in current_files if not f.is_dir and not f.name.startswith('.') and f.name in ['sample.txt', 'sample.jpg', 'sample.png']]
+    user_files = [
+        f
+        for f in current_files
+        if not f.is_dir
+        and not f.name.startswith(".")
+        and f.name in ["sample.txt", "sample.jpg", "sample.png"]
+    ]
 
-    print(f"\n2. Deleting user uploaded files (excluding system files and directories)...")
+    print(
+        "\n2. Deleting user uploaded files (excluding system files and directories)..."
+    )
     for file_info in user_files:
         print(f"Deleting {file_info.name}...")
         mix.files.delete_session_file(id=session_id, filename=file_info.name)
@@ -203,7 +219,9 @@ def demonstrate_file_deletion_and_cleanup(mix, session_id, files):
         print(f"  - {file_info.name} ({file_info.size} bytes)")
 
     print("\n4. Final verification:")
-    user_files_remaining = [f for f in remaining_files if not f.is_dir and not f.name.startswith('.')]
+    user_files_remaining = [
+        f for f in remaining_files if not f.is_dir and not f.name.startswith(".")
+    ]
     print(f"User files remaining: {len(user_files_remaining)}")
     if len(user_files_remaining) == 0:
         print("✅ All user files successfully deleted")
@@ -224,15 +242,14 @@ def demonstrate_session_isolation(mix):
     print(f"Session 2 ID: {session2.id}")
 
     print("\n2. Uploading file to Session 1...")
-    test_content1 = b"This file belongs to Session 1"
     with open("examples/sample_files/sample.txt", "rb") as f:
         mix.files.upload_session_file(
             id=session1.id,
             file={
                 "file_name": "session1_file.txt",
                 "content": f,
-                "content_type": "text/plain"
-            }
+                "content_type": "text/plain",
+            },
         )
 
     print("3. Uploading file to Session 2...")
@@ -242,8 +259,8 @@ def demonstrate_session_isolation(mix):
             file={
                 "file_name": "session2_file.txt",
                 "content": f,
-                "content_type": "text/plain"
-            }
+                "content_type": "text/plain",
+            },
         )
 
     print("\n4. Verifying file isolation...")
@@ -271,13 +288,13 @@ def main():
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - FILES EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all files functionality")
     print("Using session-based file isolation and management")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
@@ -300,7 +317,7 @@ def main():
 
         finally:
             # Clean up the main session
-            print(f"\n=== Final Cleanup ===")
+            print("\n=== Final Cleanup ===")
             print(f"Deleting main session: {session.id}")
             mix.sessions.delete(id=session.id)
             print("✅ Main session deleted")

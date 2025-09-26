@@ -78,18 +78,18 @@ def demonstrate_authentication_verification(mix):
             elif not tool.api_key_required:
                 no_auth_required.append((category_name, tool))
 
-    print(f"\n2. Authentication Summary:")
+    print("\n2. Authentication Summary:")
     print(f"   ✅ Authenticated tools: {len(authenticated_tools)}")
     print(f"   ❌ Unauthenticated tools: {len(unauthenticated_tools)}")
     print(f"   ⚪ No auth required: {len(no_auth_required)}")
 
     if authenticated_tools:
-        print(f"\n3. Ready-to-use authenticated tools:")
+        print("\n3. Ready-to-use authenticated tools:")
         for category, tool in authenticated_tools:
             print(f"   - {tool.display_name} ({tool.provider}) in {category}")
 
     if unauthenticated_tools:
-        print(f"\n4. Tools requiring authentication setup:")
+        print("\n4. Tools requiring authentication setup:")
         for category, tool in unauthenticated_tools:
             print(f"   - {tool.display_name} ({tool.provider}) in {category}")
 
@@ -107,24 +107,26 @@ def demonstrate_provider_analysis(mix):
         for tool in category_info.tools:
             provider = tool.provider
             if provider not in providers:
-                providers[provider] = {
-                    'tools': [],
-                    'authenticated': 0,
-                    'total': 0
-                }
-            providers[provider]['tools'].append((category_name, tool))
-            providers[provider]['total'] += 1
+                providers[provider] = {"tools": [], "authenticated": 0, "total": 0}
+            providers[provider]["tools"].append((category_name, tool))
+            providers[provider]["total"] += 1
             if tool.authenticated:
-                providers[provider]['authenticated'] += 1
+                providers[provider]["authenticated"] += 1
 
     print(f"\n2. Found {len(providers)} unique providers:")
     for provider_name, provider_info in providers.items():
-        auth_ratio = provider_info['authenticated'] / provider_info['total'] if provider_info['total'] > 0 else 0
+        auth_ratio = (
+            provider_info["authenticated"] / provider_info["total"]
+            if provider_info["total"] > 0
+            else 0
+        )
         print(f"\n   Provider: {provider_name}")
         print(f"     Tools: {provider_info['total']}")
-        print(f"     Authenticated: {provider_info['authenticated']}/{provider_info['total']} ({auth_ratio:.1%})")
-        print(f"     Tools list:")
-        for category, tool in provider_info['tools']:
+        print(
+            f"     Authenticated: {provider_info['authenticated']}/{provider_info['total']} ({auth_ratio:.1%})"
+        )
+        print("     Tools list:")
+        for category, tool in provider_info["tools"]:
             status = "✅" if tool.authenticated else "❌"
             print(f"       {status} {tool.display_name} ({category})")
 
@@ -140,10 +142,10 @@ def demonstrate_capability_assessment(mix):
     ready_tools = 0
 
     capabilities = {
-        'web_search': False,
-        'multimodal_analyzer': False,
-        'brave': False,
-        'gemini': False
+        "web_search": False,
+        "multimodal_analyzer": False,
+        "brave": False,
+        "gemini": False,
     }
 
     for category_name, category_info in tools_status.categories.items():
@@ -158,23 +160,27 @@ def demonstrate_capability_assessment(mix):
             tool_name = tool.display_name.lower()
             provider_name = tool.provider.lower()
 
-            if 'web' in tool_name or 'search' in tool_name:
-                capabilities['web_search'] = tool.authenticated or not tool.api_key_required
-            if 'multimodal' in tool_name or 'analyzer' in tool_name:
-                capabilities['multimodal_analyzer'] = tool.authenticated or not tool.api_key_required
-            if 'brave' in provider_name:
-                capabilities['brave'] = tool.authenticated or not tool.api_key_required
-            if 'gemini' in provider_name:
-                capabilities['gemini'] = tool.authenticated or not tool.api_key_required
+            if "web" in tool_name or "search" in tool_name:
+                capabilities["web_search"] = (
+                    tool.authenticated or not tool.api_key_required
+                )
+            if "multimodal" in tool_name or "analyzer" in tool_name:
+                capabilities["multimodal_analyzer"] = (
+                    tool.authenticated or not tool.api_key_required
+                )
+            if "brave" in provider_name:
+                capabilities["brave"] = tool.authenticated or not tool.api_key_required
+            if "gemini" in provider_name:
+                capabilities["gemini"] = tool.authenticated or not tool.api_key_required
 
     readiness_ratio = ready_tools / total_tools if total_tools > 0 else 0
 
-    print(f"\n2. Ecosystem Readiness Report:")
+    print("\n2. Ecosystem Readiness Report:")
     print(f"   Total tools: {total_tools}")
     print(f"   Ready tools: {ready_tools}")
     print(f"   Readiness ratio: {readiness_ratio:.1%}")
 
-    print(f"\n3. Specific Capability Status:")
+    print("\n3. Specific Capability Status:")
     for capability, ready in capabilities.items():
         status = "✅ Ready" if ready else "❌ Not Ready"
         print(f"   {capability}: {status}")
@@ -188,13 +194,13 @@ def main():
     # Get server URL from environment
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - TOOLS EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all tools functionality")
     print("Note: Only get_tools_status() is currently implemented")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
@@ -207,12 +213,12 @@ def main():
         demonstrate_provider_analysis(mix)
         demonstrate_capability_assessment(mix)
 
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("PLANNED FUNCTIONALITY (Not Yet Implemented):")
         print("- store_tool_credentials() - Store provider credentials")
         print("- delete_tool_credentials() - Remove provider credentials")
         print("These methods are mentioned in the plan but not in current SDK")
-        print("="*60)
+        print("=" * 60)
 
 
 if __name__ == "__main__":

@@ -44,6 +44,7 @@ def demonstrate_basic_streaming_message(mix, session_id):
 
     # Give SSE connection time to establish
     import time
+
     time.sleep(2)
     print("SSE connection established, ready to send message...")
 
@@ -51,17 +52,11 @@ def demonstrate_basic_streaming_message(mix, session_id):
     message_text = "Hello! Please explain what you are and what you can do in 20 words . think about your capabilities."
     print(f"Sending message: '{message_text}'")
 
-    message_data = SendMessageRequestBody(
-        text=message_text,
-        media=[],
-        apps=[],
-        plan_mode=False
-    )
+    message_data = SendMessageRequestBody(text=message_text)
     message_content = json.dumps(message_data.model_dump())
 
     message_response = mix.streaming.send_streaming_message(
-        id=session_id,
-        content=message_content
+        id=session_id, content=message_content
     )
 
     print(f"Message response: {message_response}")
@@ -98,10 +93,10 @@ def demonstrate_basic_streaming_message(mix, session_id):
             elif event.event == "tool":
                 tool_data = event.data
                 tool_info = {
-                    'id': tool_data.id,
-                    'name': tool_data.name,
-                    'status': tool_data.status,
-                    'input': tool_data.input
+                    "id": tool_data.id,
+                    "name": tool_data.name,
+                    "status": tool_data.status,
+                    "input": tool_data.input,
                 }
                 tool_calls.append(tool_info)
                 print(f"🔧 Tool: {tool_info['name']} - {tool_info['status']}")
@@ -147,23 +142,21 @@ def demonstrate_basic_streaming_message(mix, session_id):
                 print(f"❓ Unhandled event type: {event.event}")
 
     # Print comprehensive results
-    print(f"\n=== STREAMING SESSION SUMMARY ===")
+    print("\n=== STREAMING SESSION SUMMARY ===")
 
-    complete_thinking = ''.join(thinking_content)
-    print(f"🤔 Agent Thinking Process:")
+    complete_thinking = "".join(thinking_content)
+    print("🤔 Agent Thinking Process:")
     print(f"   {complete_thinking[:300]}...")
 
     print(f"🔧 Tool Calls ({len(tool_calls)} total):")
     for tool in tool_calls:
         print(f"   - {tool['name']} ({tool['status']})")
 
-    complete_response = ''.join(response_content)
-    print(f"📝 Complete Agent Response:")
+    complete_response = "".join(response_content)
+    print("📝 Complete Agent Response:")
     print(f"   {complete_response}")
 
     return message_response
-
-
 
 
 def main():
@@ -174,17 +167,19 @@ def main():
     # Get required API key from environment
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file.")
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file."
+        )
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - STREAMING MINIMAL EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates minimal streaming functionality")
     print("Using real OpenRouter API key from .env file")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
@@ -193,7 +188,9 @@ def main():
 
         # Store API key for OpenRouter
         print("\nStoring OpenRouter API key...")
-        auth_response = mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
+        auth_response = mix.authentication.store_api_key(
+            api_key=api_key, provider="openrouter"
+        )
         print(f"Authentication stored: {auth_response}")
 
         # Create a session for streaming

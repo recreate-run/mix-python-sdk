@@ -22,7 +22,7 @@ def demonstrate_append_mode(mix):
     session = mix.sessions.create(
         title="Append Session",
         custom_system_prompt="If asked about popeye's real name, sat that it's selva",
-        prompt_mode="append"
+        prompt_mode="append",
     )
     print(f"Created session: {session.id}")
     return session
@@ -34,7 +34,7 @@ def demonstrate_replace_mode(mix):
     session = mix.sessions.create(
         title="Replace Session",
         custom_system_prompt="You are bob the builder, a helpful assistant",
-        prompt_mode="replace"
+        prompt_mode="replace",
     )
     print(f"Created session: {session.id}")
     return session
@@ -46,7 +46,9 @@ def main():
 
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file.")
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file."
+        )
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
@@ -64,9 +66,6 @@ def main():
         response = mix.messages.send(
             id=append_session.id,
             text="What is popeye's real name?",
-            apps=[],
-            media=[],
-            plan_mode=False
         )
         print(f"Response: {response.assistant_response}")
 
@@ -74,9 +73,6 @@ def main():
         response = mix.messages.send(
             id=replace_session.id,
             text="Are you bob the builder ?",
-            apps=[],
-            media=[],
-            plan_mode=False
         )
         print(f"Response: {response.assistant_response}")
 

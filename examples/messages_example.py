@@ -16,10 +16,8 @@ Run this example to see all messages methods in action.
 """
 
 from mix_python_sdk import Mix
-from mix_python_sdk.models import SendMessageRequestBody
 import os
 from dotenv import load_dotenv
-import json
 
 
 def demonstrate_global_message_history(mix):
@@ -54,7 +52,7 @@ def demonstrate_session_message_listing(mix, session_id):
     print(f"Found {len(session_messages)} messages in this session")
 
     for i, message in enumerate(session_messages):
-        print(f"\nMessage {i+1}:")
+        print(f"\nMessage {i + 1}:")
         for key, value in message.__dict__.items():
             print(f"  {key}: {value}")
 
@@ -73,9 +71,6 @@ def demonstrate_interactive_messaging(mix, session_id):
     response = mix.messages.send(
         id=session_id,
         text=user_message,
-        apps=[],
-        media=[],
-        plan_mode=False
     )
     print("AI Response received:")
     for key, value in response.__dict__.items():
@@ -86,13 +81,7 @@ def demonstrate_interactive_messaging(mix, session_id):
     followup_message = "What is the population of that city?"
     print(f"User message: {followup_message}")
 
-    followup_response = mix.messages.send(
-        id=session_id,
-        text=followup_message,
-        apps=[],
-        media=[],
-        plan_mode=False
-    )
+    followup_response = mix.messages.send(id=session_id, text=followup_message)
     print("AI Follow-up Response received:")
     for key, value in followup_response.__dict__.items():
         print(f"  {key}: {value}")
@@ -109,20 +98,14 @@ def demonstrate_tool_integration_analysis(mix, session_id):
     tool_message = "Can you help me analyze some data or perform a calculation?"
     print(f"User message: {tool_message}")
 
-    response = mix.messages.send(
-        id=session_id,
-        text=tool_message,
-        apps=[],
-        media=[],
-        plan_mode=False
-    )
+    response = mix.messages.send(id=session_id, text=tool_message)
     print("Tool Response received:")
     for key, value in response.__dict__.items():
         print(f"  {key}: {value}")
-        if key == 'tool_calls' and value:
+        if key == "tool_calls" and value:
             print("  Tool calls detected:")
             for i, tool_call in enumerate(value):
-                print(f"    Tool call {i+1}:")
+                print(f"    Tool call {i + 1}:")
                 for tool_key, tool_value in tool_call.__dict__.items():
                     print(f"      {tool_key}: {tool_value}")
 
@@ -143,33 +126,35 @@ def demonstrate_message_metadata_analysis(mix, session_id):
     messages_with_tools = 0
 
     for i, message in enumerate(session_messages):
-        print(f"\nMessage {i+1} metadata:")
+        print(f"\nMessage {i + 1} metadata:")
         # Analyze reasoning
         if message.reasoning:
-            print(f"  Has reasoning: Yes")
+            print("  Has reasoning: Yes")
             if message.reasoning_duration:
                 print(f"  Reasoning duration: {message.reasoning_duration}ms")
                 total_reasoning_time += message.reasoning_duration
                 messages_with_reasoning += 1
         else:
-            print(f"  Has reasoning: No")
+            print("  Has reasoning: No")
 
         # Analyze tool calls
         if message.tool_calls:
             print(f"  Tool calls: {len(message.tool_calls)}")
             messages_with_tools += 1
         else:
-            print(f"  Tool calls: 0")
+            print("  Tool calls: 0")
 
         # Show role and content info
         print(f"  Role: {message.role}")
         if message.user_input:
             print(f"  User input length: {len(message.user_input)} chars")
         if message.assistant_response:
-            print(f"  Assistant response length: {len(message.assistant_response)} chars")
+            print(
+                f"  Assistant response length: {len(message.assistant_response)} chars"
+            )
 
     # Summary statistics
-    print(f"\n=== Session Statistics ===")
+    print("\n=== Session Statistics ===")
     print(f"Total messages: {len(session_messages)}")
     print(f"Messages with reasoning: {messages_with_reasoning}")
     print(f"Messages with tool calls: {messages_with_tools}")
@@ -190,41 +175,25 @@ def demonstrate_conversation_continuity(mix, session_id):
 
     # Establish context
     print("\n1. Establishing context...")
-    context_msg = "Let's talk about Python programming. I'm working on a web application."
-    print(f"User: {context_msg}")
-    response1 = mix.messages.send(
-        id=session_id,
-        text=context_msg,
-        apps=[],
-        media=[],
-        plan_mode=False
+    context_msg = (
+        "Let's talk about Python programming. I'm working on a web application."
     )
+    print(f"User: {context_msg}")
+    response1 = mix.messages.send(id=session_id, text=context_msg)
     print(f"Assistant: {response1.assistant_response}")
 
     # Reference previous context
     print("\n2. Referencing previous context...")
     context_ref_msg = "What framework would you recommend for that?"
     print(f"User: {context_ref_msg}")
-    response2 = mix.messages.send(
-        id=session_id,
-        text=context_ref_msg,
-        apps=[],
-        media=[],
-        plan_mode=False
-    )
+    response2 = mix.messages.send(id=session_id, text=context_ref_msg)
     print(f"Assistant: {response2.assistant_response}")
 
     # Continue conversation thread
     print("\n3. Continuing conversation thread...")
     continue_msg = "Can you give me a specific example?"
     print(f"User: {continue_msg}")
-    response3 = mix.messages.send(
-        id=session_id,
-        text=continue_msg,
-        apps=[],
-        media=[],
-        plan_mode=False
-    )
+    response3 = mix.messages.send(id=session_id, text=continue_msg)
     print(f"Assistant: {response3.assistant_response}")
 
     # Verify conversation flow by listing final messages

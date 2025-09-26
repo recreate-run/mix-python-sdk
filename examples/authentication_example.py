@@ -24,10 +24,7 @@ def demonstrate_api_key_storage(mix, api_key):
     print("\n=== API Key Storage Demo ===")
 
     print("1. Storing OpenRouter API key...")
-    result = mix.authentication.store_api_key(
-        api_key=api_key,
-        provider="openrouter"
-    )
+    result = mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
     print(f"Result: {result}")
 
     print("\nDetailed breakdown:")
@@ -53,15 +50,13 @@ def demonstrate_oauth_flow(mix):
     print("   For demo purposes, showing the method signature and expected behavior")
 
     if oauth_result.state:
-        print(f"   Would call handle_o_auth_callback with:")
-        print(f"   - code: 'oauth_authorization_code'")
-        print(f"   - provider: 'anthropic'")
+        print("   Would call handle_o_auth_callback with:")
+        print("   - code: 'oauth_authorization_code'")
+        print("   - provider: 'anthropic'")
         print(f"   - state: '{oauth_result.state}'")
 
         callback_result = mix.authentication.handle_o_auth_callback(
-            code="demo_code",
-            provider="anthropic",
-            state=oauth_result.state
+            code="demo_code", provider="anthropic", state=oauth_result.state
         )
         print(f"Callback result: {callback_result}")
 
@@ -119,7 +114,7 @@ def demonstrate_credential_deletion(mix):
     print("\n2. Verifying deletion by checking auth status...")
     final_status = mix.authentication.get_auth_status()
     if final_status.providers:
-        openrouter_status = final_status.providers.get('openrouter')
+        openrouter_status = final_status.providers.get("openrouter")
         if openrouter_status:
             print(f"OpenRouter status after deletion: {openrouter_status}")
             print(f"  Authenticated: {openrouter_status.authenticated}")
@@ -131,17 +126,19 @@ def main():
 
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file.")
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file."
+        )
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - AUTHENTICATION EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all authentication functionality")
     print("Using real OpenRouter API key from .env file")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         health = mix.system.get_health()

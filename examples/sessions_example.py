@@ -34,8 +34,12 @@ def demonstrate_session_listing(mix):
             print(f"  ID: {session.id}")
             print(f"  Title: {session.title}")
             print(f"  Created: {session.created_at}")
-            print(f"  Messages: {session.user_message_count} user, {session.assistant_message_count} assistant")
-            print(f"  Tokens: {session.prompt_tokens} prompt, {session.completion_tokens} completion")
+            print(
+                f"  Messages: {session.user_message_count} user, {session.assistant_message_count} assistant"
+            )
+            print(
+                f"  Tokens: {session.prompt_tokens} prompt, {session.completion_tokens} completion"
+            )
             print(f"  Cost: ${session.cost:.4f}")
             print(f"  Tool calls: {session.tool_call_count}")
             if session.first_user_message:
@@ -54,9 +58,7 @@ def demonstrate_session_creation(mix):
     print(f"Created at: {basic_session.created_at}")
 
     print("\n2. Creating another session with longer title...")
-    advanced_session = mix.sessions.create(
-        title="Advanced Demo Session for Testing"
-    )
+    advanced_session = mix.sessions.create(title="Advanced Demo Session for Testing")
     print(f"Created advanced session: {advanced_session.id}")
     print(f"Title: {advanced_session.title}")
     print(f"Created at: {advanced_session.created_at}")
@@ -70,7 +72,7 @@ def demonstrate_session_retrieval(mix, session_id):
 
     print(f"1. Retrieving session details for ID: {session_id}")
     session = mix.sessions.get(id=session_id)
-    print(f"Session retrieved successfully!")
+    print("Session retrieved successfully!")
 
     print("\nDetailed session information:")
     for key, value in session.__dict__.items():
@@ -90,22 +92,15 @@ def demonstrate_session_messaging(mix, session_id, api_key):
     response = mix.messages.send(
         id=session_id,
         text="Hello! This is a test message for the sessions example. Please respond briefly.",
-        apps=[],
-        media=[],
-        plan_mode=False
     )
-    print(f"Message sent successfully!")
+    print("Message sent successfully!")
     print(f"Response: {response.assistant_response[:200]}...")
 
     # Send another message to create more activity
     response2 = mix.messages.send(
-        id=session_id,
-        text="Can you tell me what 2+2 equals?",
-        apps=[],
-        media=[],
-        plan_mode=False
+        id=session_id, text="Can you tell me what 2+2 equals?"
     )
-    print(f"Second message sent!")
+    print("Second message sent!")
     print(f"Response: {response2.assistant_response[:100]}...")
 
 
@@ -118,11 +113,11 @@ def demonstrate_session_forking(mix, source_session_id):
     message_count = len(messages)
     print(f"Source session has {message_count} messages")
 
-    print(f"\n2. Forking session at message index 1...")
+    print("\n2. Forking session at message index 1...")
     forked_session = mix.sessions.fork(
         id=source_session_id,
         message_index=1,
-        title="Forked Session - First Message Only"
+        title="Forked Session - First Message Only",
     )
     print(f"Forked session created: {forked_session.id}")
     print(f"Forked session title: {forked_session.title}")
@@ -132,7 +127,9 @@ def demonstrate_session_forking(mix, source_session_id):
     print(f"Forked session has {len(forked_messages)} messages")
 
     if len(forked_messages) != 1:
-        raise RuntimeError(f"Session forking failed: expected 1 message in forked session, got {len(forked_messages)}")
+        raise RuntimeError(
+            f"Session forking failed: expected 1 message in forked session, got {len(forked_messages)}"
+        )
 
     return forked_session
 
@@ -157,7 +154,9 @@ def demonstrate_session_metadata_analysis(mix, session_id):
     print("\nCost Analysis:")
     print(f"  Total cost: ${session.cost:.6f}")
     if session.completion_tokens > 0:
-        cost_per_token = session.cost / (session.prompt_tokens + session.completion_tokens)
+        cost_per_token = session.cost / (
+            session.prompt_tokens + session.completion_tokens
+        )
         print(f"  Cost per token: ${cost_per_token:.8f}")
 
 
@@ -167,7 +166,7 @@ def demonstrate_processing_cancellation(mix, session_id):
 
     print(f"1. Attempting to cancel processing for session {session_id}...")
     cancel_response = mix.sessions.cancel_processing(id=session_id)
-    print(f"Cancel response received!")
+    print("Cancel response received!")
 
     print("Cancel response details:")
     for key, value in cancel_response.__dict__.items():
@@ -197,7 +196,9 @@ def demonstrate_session_cleanup(mix, session_ids):
     print(f"Sessions that failed to delete: {len(failed_deletions)}")
 
     if failed_deletions:
-        raise RuntimeError(f"Session cleanup failed: {len(failed_deletions)} sessions still exist after deletion: {failed_deletions}")
+        raise RuntimeError(
+            f"Session cleanup failed: {len(failed_deletions)} sessions still exist after deletion: {failed_deletions}"
+        )
 
 
 def main():
@@ -208,24 +209,26 @@ def main():
     # Get required API key from environment
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file.")
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file."
+        )
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - SESSIONS EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all sessions functionality")
     print("Using real OpenRouter API key from .env file")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
         health = mix.system.get_health()
         print(f"System health: {health}")
 
-        if health.status != 'ok':
+        if health.status != "ok":
             raise RuntimeError(f"System health check failed: {health}")
 
         # Remove the models_available check since it's not part of the HealthCheckResponse

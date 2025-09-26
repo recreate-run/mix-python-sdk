@@ -74,7 +74,7 @@ def demonstrate_preference_updates(mix):
         preferred_provider="openrouter",
         main_agent_model="openrouter.deepseek-v3.1",
         main_agent_max_tokens=4000,
-        main_agent_reasoning_effort="medium"
+        main_agent_reasoning_effort="medium",
     )
     print(f"Main agent update response: {update_response}")
 
@@ -86,7 +86,7 @@ def demonstrate_preference_updates(mix):
     update_response = mix.preferences.update_preferences(
         sub_agent_model="openrouter.zai-glm-4.5-air",
         sub_agent_max_tokens=2000,
-        sub_agent_reasoning_effort="low"
+        sub_agent_reasoning_effort="low",
     )
     print(f"Sub agent update response: {update_response}")
 
@@ -98,7 +98,7 @@ def demonstrate_preference_updates(mix):
         main_agent_reasoning_effort="high",
         sub_agent_model="claude-3.7-sonnet",
         sub_agent_max_tokens=4000,
-        sub_agent_reasoning_effort="medium"
+        sub_agent_reasoning_effort="medium",
     )
     print(f"Comprehensive update response: {comprehensive_update}")
 
@@ -111,7 +111,7 @@ def demonstrate_dual_agent_configuration(mix):
     main_agent_config = mix.preferences.update_preferences(
         main_agent_model="claude-4-sonnet",
         main_agent_max_tokens=8000,
-        main_agent_reasoning_effort="high"
+        main_agent_reasoning_effort="high",
     )
     print(f"Main agent configuration: {main_agent_config}")
 
@@ -119,7 +119,7 @@ def demonstrate_dual_agent_configuration(mix):
     sub_agent_config = mix.preferences.update_preferences(
         sub_agent_model="claude-3.7-sonnet",
         sub_agent_max_tokens=2000,
-        sub_agent_reasoning_effort="low"
+        sub_agent_reasoning_effort="low",
     )
     print(f"Sub agent configuration: {sub_agent_config}")
 
@@ -141,8 +141,7 @@ def demonstrate_provider_switching(mix):
 
     print("1. Switching to OpenRouter provider...")
     openrouter_switch = mix.preferences.update_preferences(
-        preferred_provider="openrouter",
-        main_agent_model="openrouter.deepseek-v3.1"
+        preferred_provider="openrouter", main_agent_model="openrouter.deepseek-v3.1"
     )
     print(f"OpenRouter switch response: {openrouter_switch}")
 
@@ -155,14 +154,13 @@ def demonstrate_provider_switching(mix):
     providers_to_test = [
         {"provider": "openrouter", "model": "openrouter.deepseek-v3.1"},
         {"provider": "anthropic", "model": "claude-4-sonnet"},
-        {"provider": "openai", "model": "gpt-4.1"}
+        {"provider": "openai", "model": "gpt-4.1"},
     ]
 
     for config in providers_to_test:
         print(f"\n  Testing {config['provider']} with {config['model']}...")
         test_response = mix.preferences.update_preferences(
-            preferred_provider=config["provider"],
-            main_agent_model=config["model"]
+            preferred_provider=config["provider"], main_agent_model=config["model"]
         )
         print(f"  Configuration successful: {test_response is not None}")
 
@@ -199,17 +197,19 @@ def main():
     # Get required API key from environment
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file.")
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. Please add it to your .env file."
+        )
 
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - PREFERENCES EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all preferences functionality")
     print("Using real OPENROUTER API key from .env file")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
@@ -224,9 +224,9 @@ def main():
         demonstrate_provider_switching(mix)
         demonstrate_preference_reset(mix)
 
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("PREFERENCES EXAMPLE COMPLETED")
-        print("="*60)
+        print("=" * 60)
         print("All preferences operations demonstrated successfully!")
 
 

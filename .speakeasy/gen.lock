@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 840b34cd3ada1f9dc6dc20fcf4dada74
+  docChecksum: 123033415f19e44a3d11211e0c3a9246
   docVersion: 1.0.0
   speakeasyVersion: 1.630.0
   generationVersion: 2.716.10
-  releaseVersion: 0.5.1
-  configChecksum: 7c96fbf79016842a4748756ff3b2031b
+  releaseVersion: 0.5.2
+  configChecksum: 58fc1000a6de5f6a7d552457fc42ac83
   published: true
 features:
   python:
@@ -333,7 +333,7 @@ examples:
         path:
           id: "<id>"
       requestBody:
-        application/json: {"apps": ["<value 1>"], "media": ["<value 1>", "<value 2>"], "plan_mode": false, "text": "<value>"}
+        application/json: {"plan_mode": false, "text": "<value>"}
       responses:
         "200":
           application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "userInput": "<value>"}

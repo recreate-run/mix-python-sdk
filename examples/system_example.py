@@ -61,8 +61,8 @@ def demonstrate_command_discovery(mix):
 
         # Inspect a few more commands if available
         if len(commands) > 1:
-            print(f"\n3. Inspecting additional commands...")
-            for command in commands[1:min(4, len(commands))]:  # Inspect up to 3 more
+            print("\n3. Inspecting additional commands...")
+            for command in commands[1 : min(4, len(commands))]:  # Inspect up to 3 more
                 detail = mix.system.get_command(name=command.name)
                 print(f"  • {detail.name}: {detail.usage}")
 
@@ -93,7 +93,7 @@ def demonstrate_mcp_server_monitoring(mix):
         # Show detailed server information
         print("     Detailed server breakdown:")
         for key, value in server.__dict__.items():
-            if key != 'tools':  # Skip tools as we already displayed them
+            if key != "tools":  # Skip tools as we already displayed them
                 print(f"       {key}: {value}")
 
 
@@ -105,23 +105,29 @@ def demonstrate_integration_verification(mix):
 
     # Check system health
     health = mix.system.get_health()
-    health_ok = health.status.lower() in ['ok', 'healthy', 'up']
+    health_ok = health.status.lower() in ["ok", "healthy", "up"]
     print(f"   System Health: {'✅' if health_ok else '❌'} ({health.status})")
 
     # Check available commands
     commands = mix.system.list_commands()
     commands_ok = len(commands) > 0
-    print(f"   Available Commands: {'✅' if commands_ok else '❌'} ({len(commands)} commands)")
+    print(
+        f"   Available Commands: {'✅' if commands_ok else '❌'} ({len(commands)} commands)"
+    )
 
     # Check MCP servers
     mcp_servers = mix.system.list_mcp_servers()
     connected_servers = [s for s in mcp_servers if s.connected]
     mcp_ok = len(connected_servers) > 0
-    print(f"   MCP Servers: {'✅' if mcp_ok else '❌'} ({len(connected_servers)}/{len(mcp_servers)} connected)")
+    print(
+        f"   MCP Servers: {'✅' if mcp_ok else '❌'} ({len(connected_servers)}/{len(mcp_servers)} connected)"
+    )
 
     # Overall integration status
     integration_ready = health_ok and commands_ok
-    print(f"\n2. Overall Integration Status: {'✅ READY' if integration_ready else '❌ NOT READY'}")
+    print(
+        f"\n2. Overall Integration Status: {'✅ READY' if integration_ready else '❌ NOT READY'}"
+    )
 
     if integration_ready:
         print("   System is ready for integration and development")
@@ -147,11 +153,13 @@ def demonstrate_capability_discovery(mix):
     print(f"   Total MCP Servers: {len(mcp_servers)}")
 
     # Categorize commands by type (simple heuristic)
-    api_commands = [c for c in commands if 'api' in c.name.lower()]
-    system_commands = [c for c in commands if 'system' in c.name.lower()]
-    other_commands = [c for c in commands if c not in api_commands and c not in system_commands]
+    api_commands = [c for c in commands if "api" in c.name.lower()]
+    system_commands = [c for c in commands if "system" in c.name.lower()]
+    other_commands = [
+        c for c in commands if c not in api_commands and c not in system_commands
+    ]
 
-    print(f"\n2. Command categorization:")
+    print("\n2. Command categorization:")
     print(f"   API Commands: {len(api_commands)}")
     print(f"   System Commands: {len(system_commands)}")
     print(f"   Other Commands: {len(other_commands)}")
@@ -160,7 +168,7 @@ def demonstrate_capability_discovery(mix):
     connected_servers = [s for s in mcp_servers if s.connected]
     total_tools = sum(len(s.tools) if s.tools else 0 for s in connected_servers)
 
-    print(f"\n3. MCP ecosystem capabilities:")
+    print("\n3. MCP ecosystem capabilities:")
     print(f"   Connected Servers: {len(connected_servers)}")
     print(f"   Available Tools: {total_tools}")
 
@@ -179,13 +187,13 @@ def main():
     # Get server URL from environment (no API key needed for system operations)
     server_url = os.getenv("MIX_SERVER_URL", "http://localhost:8088")
 
-    print("="*60)
+    print("=" * 60)
     print("MIX PYTHON SDK - SYSTEM EXAMPLE")
-    print("="*60)
+    print("=" * 60)
     print(f"Server URL: {server_url}")
     print("This example demonstrates all system functionality")
     print("No API keys required for system operations")
-    print("="*60)
+    print("=" * 60)
 
     with Mix(server_url=server_url) as mix:
         # Always start with system health check
@@ -199,9 +207,9 @@ def main():
         demonstrate_integration_verification(mix)
         demonstrate_capability_discovery(mix)
 
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("SYSTEM EXAMPLE COMPLETED SUCCESSFULLY")
-        print("="*60)
+        print("=" * 60)
 
 
 if __name__ == "__main__":

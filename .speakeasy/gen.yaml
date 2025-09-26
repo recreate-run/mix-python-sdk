@@ -27,11 +27,12 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.5.1
+  version: 0.5.2
   additionalDependencies:
-    dev: {}
+    dev:
+      dotenv: ^0.9.9
     main:
-      dotenv: ^0.9.9 
+      ruff: ^0.13.2
   allowedRedefinedBuiltins:
     - id
     - object
