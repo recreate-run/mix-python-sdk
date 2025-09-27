@@ -92,7 +92,7 @@ with Mix() as mix:
 
 ## delete_session_file
 
-Delete a specific file from session storage
+Delete a specific file from session storage. Only files are supported - directories cannot be deleted.
 
 ### Example Usage
 
@@ -121,7 +121,7 @@ with Mix() as mix:
 
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
-| errors.ErrorResponse   | 404                    | application/json       |
+| errors.ErrorResponse   | 400, 404               | application/json       |
 | errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## get_session_file

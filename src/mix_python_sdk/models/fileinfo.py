@@ -15,6 +15,8 @@ class FileInfoTypedDict(TypedDict):
     r"""File name"""
     size: int
     r"""File size in bytes"""
+    url: str
+    r"""Static URL to access the file"""
 
 
 class FileInfo(BaseModel):
@@ -29,3 +31,6 @@ class FileInfo(BaseModel):
 
     size: int
     r"""File size in bytes"""
+
+    url: str
+    r"""Static URL to access the file"""

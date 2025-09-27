@@ -13,6 +13,7 @@ if TYPE_CHECKING:
         CancelSessionProcessingResponse,
         CancelSessionProcessingResponseTypedDict,
     )
+    from .coretoolname import CoreToolName
     from .createsessionop import (
         CreateSessionRequest,
         CreateSessionRequestTypedDict,
@@ -213,6 +214,7 @@ if TYPE_CHECKING:
         StreamMessageResponseTypedDict,
     )
     from .toolcalldata import ToolCallData, ToolCallDataTypedDict
+    from .toolname import ToolName, ToolNameTypedDict
     from .updatepreferencesop import (
         UpdatePreferencesRequest,
         UpdatePreferencesRequestTypedDict,
@@ -244,6 +246,7 @@ __all__ = [
     "CancelSessionProcessingResponseTypedDict",
     "Categories",
     "CategoriesTypedDict",
+    "CoreToolName",
     "CreateSessionRequest",
     "CreateSessionRequestTypedDict",
     "DeleteCredentialsRequest",
@@ -403,6 +406,8 @@ __all__ = [
     "StreamMessageResponseTypedDict",
     "ToolCallData",
     "ToolCallDataTypedDict",
+    "ToolName",
+    "ToolNameTypedDict",
     "Type",
     "UpdatePreferencesRequest",
     "UpdatePreferencesRequestTypedDict",
@@ -424,6 +429,7 @@ _dynamic_imports: dict[str, str] = {
     "CancelSessionProcessingRequestTypedDict": ".cancelsessionprocessingop",
     "CancelSessionProcessingResponse": ".cancelsessionprocessingop",
     "CancelSessionProcessingResponseTypedDict": ".cancelsessionprocessingop",
+    "CoreToolName": ".coretoolname",
     "CreateSessionRequest": ".createsessionop",
     "CreateSessionRequestTypedDict": ".createsessionop",
     "PromptMode": ".createsessionop",
@@ -586,6 +592,8 @@ _dynamic_imports: dict[str, str] = {
     "StreamMessageResponseTypedDict": ".streammessageresponse",
     "ToolCallData": ".toolcalldata",
     "ToolCallDataTypedDict": ".toolcalldata",
+    "ToolName": ".toolname",
+    "ToolNameTypedDict": ".toolname",
     "UpdatePreferencesRequest": ".updatepreferencesop",
     "UpdatePreferencesRequestTypedDict": ".updatepreferencesop",
     "UpdatePreferencesResponse": ".updatepreferencesop",
