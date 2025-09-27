@@ -992,7 +992,7 @@ paths:
         - "Files"
   "/api/sessions/{id}/files/{filename}":
     delete:
-      description: "Delete a specific file from session storage"
+      description: "Delete a specific file from session storage. Only files are supported - directories cannot be deleted."
       operationId: "deleteSessionFile"
       parameters:
         - description: "Session ID"
@@ -1010,6 +1010,11 @@ paths:
       responses:
         "204":
           description: "File deleted successfully"
+        "400":
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
+          description: "Bad request - attempted to delete a directory"
         "404":
           content:
             "application/json":
@@ -1408,6 +1413,23 @@ components:
         - "role"
         - "userInput"
       type: "object"
+    "CoreToolName":
+      description: "Core built-in tool names"
+      enum:
+        - "bash"
+        - "ReadText"
+        - "glob"
+        - "ReadMedia"
+        - "grep"
+        - "write"
+        - "edit"
+        - "python_execution"
+        - "search"
+        - "todo_write"
+        - "exit_plan_mode"
+        - "show_media"
+        - "task"
+      type: "string"
     "ErrorResponse":
       properties:
         "error": {"$ref": "#/components/schemas/RESTError"}
@@ -1430,26 +1452,21 @@ components:
           description: "File size in bytes"
           format: "int64"
           type: "integer"
+        "url":
+          description: "Static URL to access the file"
+          type: "string"
       required:
         - "name"
         - "size"
         - "modified"
         - "isDir"
+        - "url"
       type: "object"
     "MessageData":
       description: "Message data structure for user input"
       properties:
-        "apps":
-          description: "Array of app identifiers or references"
-          items:
-            type: "string"
-          type: "array"
-        "media":
-          description: "Array of media file references or URLs"
-          items:
-            type: "string"
-          type: "array"
         "plan_mode":
+          default: false
           description: "Whether the message is in planning mode"
           type: "boolean"
         "text":
@@ -1457,9 +1474,6 @@ components:
           type: "string"
       required:
         - "text"
-        - "media"
-        - "apps"
-        - "plan_mode"
       type: "object"
     "MessageRole":
       description: "Message role"
@@ -1681,9 +1695,7 @@ components:
                 "sessionId":
                   description: "Session identifier for the permission request"
                   type: "string"
-                "toolName":
-                  description: "Tool requiring permission"
-                  type: "string"
+                "toolName": {"$ref": "#/components/schemas/ToolName", "description": "Tool requiring permission"}
                 "type":
                   description: "Permission event type"
                   type: "string"
@@ -1752,9 +1764,7 @@ components:
                 "input":
                   description: "Tool input parameters"
                   type: "string"
-                "name":
-                  description: "Tool name being executed"
-                  type: "string"
+                "name": {"$ref": "#/components/schemas/ToolName", "description": "Tool name being executed"}
                 "status":
                   description: "Tool execution status"
                   type: "string"
@@ -1786,9 +1796,7 @@ components:
                 "toolCallId":
                   description: "Tool call identifier"
                   type: "string"
-                "toolName":
-                  description: "Name of the completed tool"
-                  type: "string"
+                "toolName": {"$ref": "#/components/schemas/ToolName", "description": "Name of the completed tool"}
                 "type":
                   description: "Tool execution complete event type"
                   type: "string"
@@ -1814,9 +1822,7 @@ components:
                 "toolCallId":
                   description: "Tool call identifier"
                   type: "string"
-                "toolName":
-                  description: "Name of the tool being executed"
-                  type: "string"
+                "toolName": {"$ref": "#/components/schemas/ToolName", "description": "Name of the tool being executed"}
                 "type":
                   description: "Tool execution start event type"
                   type: "string"
@@ -1903,9 +1909,7 @@ components:
         "isError":
           description: "Whether tool call resulted in error (optional)"
           type: "boolean"
-        "name":
-          description: "Tool name"
-          type: "string"
+        "name": {"$ref": "#/components/schemas/ToolName", "description": "Tool name"}
         "result":
           description: "Tool execution result (optional)"
           type: "string"
@@ -1919,3 +1923,11 @@ components:
         - "type"
         - "finished"
       type: "object"
+    "ToolName":
+      anyOf:
+        - {"$ref": "#/components/schemas/CoreToolName"}
+        - description: "MCP tool names following pattern: {serverName}_{toolName}"
+          example: "brave_search"
+          pattern: "^[a-zA-Z0-9_]+_[a-zA-Z0-9_]+$"
+          type: "string"
+      description: "Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"

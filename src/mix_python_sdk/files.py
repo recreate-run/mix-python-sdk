@@ -398,7 +398,7 @@ class Files(BaseSDK):
     ):
         r"""Delete session file
 
-        Delete a specific file from session storage
+        Delete a specific file from session storage. Only files are supported - directories cannot be deleted.
 
         :param id: Session ID
         :param filename: Filename to delete
@@ -458,14 +458,14 @@ class Files(BaseSDK):
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["400", "404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -489,7 +489,7 @@ class Files(BaseSDK):
     ):
         r"""Delete session file
 
-        Delete a specific file from session storage
+        Delete a specific file from session storage. Only files are supported - directories cannot be deleted.
 
         :param id: Session ID
         :param filename: Filename to delete
@@ -549,14 +549,14 @@ class Files(BaseSDK):
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["400", "404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

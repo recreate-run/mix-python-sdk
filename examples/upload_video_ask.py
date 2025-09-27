@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal streaming example demonstrating SSE connection, message sending, and event processing."""
+"""Streaming example demonstrating image upload and AI analysis via SSE connection."""
 
 from mix_python_sdk import Mix
 from mix_python_sdk.models import (
@@ -7,16 +7,30 @@ from mix_python_sdk.models import (
     SSEThinkingEvent,
     SSEContentEvent,
     SSEToolEvent,
-    SSEToolExecutionStartEvent,
-    SSEToolExecutionCompleteEvent,
-    SSECompleteEvent,
     SSEErrorEvent,
-    SSEPermissionEvent,
     SSEEventStream,
+    SSECompleteEvent,
 )
 import os
 from dotenv import load_dotenv
 import json
+
+
+def upload_sample_image(mix, session_id: str) -> str:
+    """Upload sample.jpg to the session"""
+    image_path = "examples/sample_files/sample.jpg"
+
+    with open(image_path, "rb") as f:
+        image_file_info = mix.files.upload_session_file(
+            id=session_id,
+            file={
+                "file_name": "sample.jpg",
+                "content": f,
+                "content_type": "image/jpeg",
+            },
+        )
+    print(f"✅ Uploaded File URL: {image_file_info.url}")
+    return image_file_info.url
 
 
 def stream_message(mix, session_id: str, message: str) -> None:
@@ -40,7 +54,7 @@ def stream_message(mix, session_id: str, message: str) -> None:
             elif isinstance(event, SSEContentEvent):
                 if not content_started:
                     print(
-                        f"{'\\n' if thinking_started else ''}📝 Response: ",
+                        f"{'\n' if thinking_started else ''}📝 Response: ",
                         end="",
                         flush=True,
                     )
@@ -50,24 +64,10 @@ def stream_message(mix, session_id: str, message: str) -> None:
                 print(f"\n🔧 Tool: {event.data.name} - {event.data.status}")
                 if event.data.input:
                     print(f"   Parameters: {event.data.input}")
-            elif isinstance(event, SSEToolExecutionStartEvent):
-                if hasattr(event.data, "progress") and event.data.progress:
-                    print(f"   Progress: {event.data.progress}")
-            elif isinstance(event, SSEToolExecutionCompleteEvent):
-                # Display the actual tool content
-                if hasattr(event.data, "progress") and event.data.progress:
-                    if event.data.success:
-                        print(f"📄 Result:\n{event.data.progress}")
-                    else:
-                        print(f"❌ Error:\n{event.data.progress}")
             elif isinstance(event, SSEErrorEvent):
                 print(f"\n❌ Error: {event.data.error}")
-            elif isinstance(event, SSEPermissionEvent):
-                print(f"\n🔐 Permission: {event.data.tool_name}")
+                break
             elif isinstance(event, SSECompleteEvent):
-                if content_started:
-                    print("\n")
-                print("✅ Complete!")
                 break
 
 
@@ -77,15 +77,20 @@ def main():
     if not api_key:
         raise ValueError("OPENROUTER_API_KEY not found in environment variables")
 
-    user_msg = "what's your working dir?"
-
-    with Mix(server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")) as mix:
+    with Mix(server_url=os.getenv("MIX_SERVER_URL")) as mix:
         mix.system.get_health()
-        # auth
-        mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
+        mix.preferences.update_preferences(main_agent_model="claude-4-sonnet")
+        # mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
 
         # session creation
-        session = mix.sessions.create(title="Streaming Demo")
+        session = mix.sessions.create(title="Image Analysis Demo")
+
+        # Upload sample image
+        uploaded_file_url = upload_sample_image(mix, session.id)
+
+        # Ask about the uploaded image
+        user_msg = f"Explain {uploaded_file_url}"
+
         stream_message(mix, session.id, user_msg)
         mix.sessions.delete(id=session.id)
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 123033415f19e44a3d11211e0c3a9246
+  docChecksum: 7310f71653943f10f9b628d3a36dd821
   docVersion: 1.0.0
-  speakeasyVersion: 1.630.0
+  speakeasyVersion: 1.631.0
   generationVersion: 2.716.10
-  releaseVersion: 0.5.2
-  configChecksum: 58fc1000a6de5f6a7d552457fc42ac83
+  releaseVersion: 0.5.3
+  configChecksum: 37f9d107bf4ca87172fbfee76b241c91
   published: true
 features:
   python:
@@ -46,6 +46,7 @@ generatedFiles:
   - docs/models/cancelsessionprocessingrequest.md
   - docs/models/cancelsessionprocessingresponse.md
   - docs/models/categories.md
+  - docs/models/coretoolname.md
   - docs/models/createsessionrequest.md
   - docs/models/deletecredentialsrequest.md
   - docs/models/deletecredentialsresponse.md
@@ -133,6 +134,7 @@ generatedFiles:
   - docs/models/streameventsresponse.md
   - docs/models/streammessageresponse.md
   - docs/models/toolcalldata.md
+  - docs/models/toolname.md
   - docs/models/type.md
   - docs/models/updatepreferencesrequest.md
   - docs/models/updatepreferencesresponse.md
@@ -174,6 +176,7 @@ generatedFiles:
   - src/mix_python_sdk/models/__init__.py
   - src/mix_python_sdk/models/backendmessage.py
   - src/mix_python_sdk/models/cancelsessionprocessingop.py
+  - src/mix_python_sdk/models/coretoolname.py
   - src/mix_python_sdk/models/createsessionop.py
   - src/mix_python_sdk/models/deletecredentialsop.py
   - src/mix_python_sdk/models/deletesessionfileop.py
@@ -207,6 +210,7 @@ generatedFiles:
   - src/mix_python_sdk/models/streameventsop.py
   - src/mix_python_sdk/models/streammessageresponse.py
   - src/mix_python_sdk/models/toolcalldata.py
+  - src/mix_python_sdk/models/toolname.py
   - src/mix_python_sdk/models/updatepreferencesop.py
   - src/mix_python_sdk/models/uploadsessionfileop.py
   - src/mix_python_sdk/models/validatepreferredproviderop.py
@@ -336,7 +340,7 @@ examples:
         application/json: {"plan_mode": false, "text": "<value>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "userInput": "<value>"}
+          application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "toolCalls": [{"finished": true, "id": "<id>", "input": "<value>", "name": "brave_search", "type": "<value>"}], "userInput": "<value>"}
         "400":
           application/json: {"error": {"code": 600162, "message": "<value>", "type": "validation_error"}}
   denyPermission:
@@ -534,7 +538,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: [{"isDir": false, "modified": 765133, "name": "<value>", "size": 287523}]
+          application/json: [{"isDir": false, "modified": 765133, "name": "<value>", "size": 287523, "url": "https://sniveling-eggplant.net"}]
         "404":
           application/json: {"error": {"code": 744976, "message": "<value>", "type": "not_found"}}
   uploadSessionFile:
@@ -546,7 +550,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file"}
       responses:
         "201":
-          application/json: {"isDir": false, "modified": 467218, "name": "<value>", "size": 793494}
+          application/json: {"isDir": false, "modified": 467218, "name": "<value>", "size": 793494, "url": "https://likable-seagull.name"}
         "400":
           application/json: {"error": {"code": 658099, "message": "<value>", "type": "not_found"}}
   deleteSessionFile:
@@ -557,6 +561,8 @@ examples:
           filename: "example.file"
       responses:
         "404":
+          application/json: {"error": {"code": 565254, "message": "<value>", "type": "internal_error"}}
+        "400":
           application/json: {"error": {"code": 565254, "message": "<value>", "type": "internal_error"}}
   getSessionFile:
     speakeasy-default-get-session-file:

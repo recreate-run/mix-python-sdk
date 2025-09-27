@@ -7,12 +7,9 @@ from mix_python_sdk.models import (
     SSEThinkingEvent,
     SSEContentEvent,
     SSEToolEvent,
-    SSEToolExecutionStartEvent,
-    SSEToolExecutionCompleteEvent,
-    SSECompleteEvent,
     SSEErrorEvent,
-    SSEPermissionEvent,
     SSEEventStream,
+    SSECompleteEvent,
 )
 import os
 from dotenv import load_dotenv
@@ -40,7 +37,7 @@ def stream_message(mix, session_id: str, message: str) -> None:
             elif isinstance(event, SSEContentEvent):
                 if not content_started:
                     print(
-                        f"{'\\n' if thinking_started else ''}📝 Response: ",
+                        f"{'\n' if thinking_started else ''}📝 Response: ",
                         end="",
                         flush=True,
                     )
@@ -50,24 +47,10 @@ def stream_message(mix, session_id: str, message: str) -> None:
                 print(f"\n🔧 Tool: {event.data.name} - {event.data.status}")
                 if event.data.input:
                     print(f"   Parameters: {event.data.input}")
-            elif isinstance(event, SSEToolExecutionStartEvent):
-                if hasattr(event.data, "progress") and event.data.progress:
-                    print(f"   Progress: {event.data.progress}")
-            elif isinstance(event, SSEToolExecutionCompleteEvent):
-                # Display the actual tool content
-                if hasattr(event.data, "progress") and event.data.progress:
-                    if event.data.success:
-                        print(f"📄 Result:\n{event.data.progress}")
-                    else:
-                        print(f"❌ Error:\n{event.data.progress}")
             elif isinstance(event, SSEErrorEvent):
                 print(f"\n❌ Error: {event.data.error}")
-            elif isinstance(event, SSEPermissionEvent):
-                print(f"\n🔐 Permission: {event.data.tool_name}")
+                break
             elif isinstance(event, SSECompleteEvent):
-                if content_started:
-                    print("\n")
-                print("✅ Complete!")
                 break
 
 
@@ -77,11 +60,10 @@ def main():
     if not api_key:
         raise ValueError("OPENROUTER_API_KEY not found in environment variables")
 
-    user_msg = "what's your working dir?"
+    user_msg = "Show me the top cat videos on youtube"
 
-    with Mix(server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")) as mix:
+    with Mix(server_url=os.getenv("MIX_SERVER_URL")) as mix:
         mix.system.get_health()
-        # auth
         mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
 
         # session creation
