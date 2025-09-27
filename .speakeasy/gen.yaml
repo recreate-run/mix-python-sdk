@@ -30,9 +30,9 @@ python:
   version: 0.5.2
   additionalDependencies:
     dev:
-      dotenv: ^0.9.9
-    main:
       ruff: ^0.13.2
+    main:
+      dotenv: ^0.9.9
   allowedRedefinedBuiltins:
     - id
     - object
