@@ -9,6 +9,7 @@
 * [create](#create) - Create a new session
 * [delete](#delete) - Delete a session
 * [get](#get) - Get a specific session
+* [export_session](#export_session) - Export session transcript
 * [fork](#fork) - Fork a session
 * [rewind_session](#rewind_session) - Rewind a session
 * [cancel_processing](#cancel_processing) - Cancel agent processing
@@ -160,6 +161,45 @@ with Mix() as mix:
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
+
+## export_session
+
+Export complete session transcript with all messages, tool calls, reasoning, and metadata as JSON
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="exportSession" method="get" path="/api/sessions/{id}/export" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.sessions.export_session(id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Session ID to export                                                |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.ExportSessionResponse](../../models/exportsessionresponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 404                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
 | errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## fork

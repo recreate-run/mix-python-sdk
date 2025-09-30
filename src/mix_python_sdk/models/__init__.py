@@ -36,6 +36,20 @@ if TYPE_CHECKING:
         DenyPermissionResponse,
         DenyPermissionResponseTypedDict,
     )
+    from .exportmessage import ExportMessage, ExportMessageTypedDict
+    from .exportsession import ExportSession, ExportSessionTypedDict
+    from .exportsessionop import (
+        ExportSessionRequest,
+        ExportSessionRequestTypedDict,
+        ExportSessionResponse,
+        ExportSessionResponseTypedDict,
+    )
+    from .exporttoolcall import (
+        ExportToolCall,
+        ExportToolCallTypedDict,
+        InputJSON,
+        InputJSONTypedDict,
+    )
     from .fileinfo import FileInfo, FileInfoTypedDict
     from .forksessionop import (
         ForkSessionRequest,
@@ -267,6 +281,16 @@ __all__ = [
     "DenyPermissionRequestTypedDict",
     "DenyPermissionResponse",
     "DenyPermissionResponseTypedDict",
+    "ExportMessage",
+    "ExportMessageTypedDict",
+    "ExportSession",
+    "ExportSessionRequest",
+    "ExportSessionRequestTypedDict",
+    "ExportSessionResponse",
+    "ExportSessionResponseTypedDict",
+    "ExportSessionTypedDict",
+    "ExportToolCall",
+    "ExportToolCallTypedDict",
     "File",
     "FileInfo",
     "FileInfoTypedDict",
@@ -310,6 +334,8 @@ __all__ = [
     "HandleOAuthCallbackResponseTypedDict",
     "HealthCheckResponse",
     "HealthCheckResponseTypedDict",
+    "InputJSON",
+    "InputJSONTypedDict",
     "ListCommandsResponse",
     "ListCommandsResponseTypedDict",
     "ListMcpServersResponse",
@@ -455,6 +481,18 @@ _dynamic_imports: dict[str, str] = {
     "DenyPermissionRequestTypedDict": ".denypermissionop",
     "DenyPermissionResponse": ".denypermissionop",
     "DenyPermissionResponseTypedDict": ".denypermissionop",
+    "ExportMessage": ".exportmessage",
+    "ExportMessageTypedDict": ".exportmessage",
+    "ExportSession": ".exportsession",
+    "ExportSessionTypedDict": ".exportsession",
+    "ExportSessionRequest": ".exportsessionop",
+    "ExportSessionRequestTypedDict": ".exportsessionop",
+    "ExportSessionResponse": ".exportsessionop",
+    "ExportSessionResponseTypedDict": ".exportsessionop",
+    "ExportToolCall": ".exporttoolcall",
+    "ExportToolCallTypedDict": ".exporttoolcall",
+    "InputJSON": ".exporttoolcall",
+    "InputJSONTypedDict": ".exporttoolcall",
     "FileInfo": ".fileinfo",
     "FileInfoTypedDict": ".fileinfo",
     "ForkSessionRequest": ".forksessionop",

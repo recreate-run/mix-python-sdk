@@ -1,0 +1,20 @@
+# ExportSession
+
+Comprehensive session export with all messages, tool calls, and metadata
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `assistant_message_count`                                            | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | Number of assistant messages                                         |
+| `completion_tokens`                                                  | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | Total completion tokens used                                         |
+| `cost`                                                               | *Optional[float]*                                                    | :heavy_minus_sign:                                                   | Total cost of session                                                |
+| `created_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | Session creation timestamp                                           |
+| `id`                                                                 | *str*                                                                | :heavy_check_mark:                                                   | Session identifier                                                   |
+| `messages`                                                           | List[[models.ExportMessage](../models/exportmessage.md)]             | :heavy_check_mark:                                                   | Complete list of messages with full details                          |
+| `prompt_tokens`                                                      | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | Total prompt tokens used                                             |
+| `title`                                                              | *str*                                                                | :heavy_check_mark:                                                   | Session title                                                        |
+| `tool_call_count`                                                    | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | Total number of tool calls                                           |
+| `updated_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | Session last update timestamp                                        |
+| `user_message_count`                                                 | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | Number of user messages                                              |

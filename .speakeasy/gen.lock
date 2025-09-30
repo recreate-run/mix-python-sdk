@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 6c18e0d66ec928b5d07a6d16d8587aaf
+  docChecksum: aff7317e4c2d0a43cebb3c30e9fcdf82
   docVersion: 1.0.0
   speakeasyVersion: 1.631.5
   generationVersion: 2.716.16
-  releaseVersion: 0.5.4
-  configChecksum: 5b0af16b417a9f0282226dcd7124b4fa
+  releaseVersion: 0.5.5
+  configChecksum: 82af8f37429140d9f4857aeb3c18ab07
   published: true
 features:
   python:
@@ -54,6 +54,11 @@ generatedFiles:
   - docs/models/deletesessionrequest.md
   - docs/models/denypermissionrequest.md
   - docs/models/denypermissionresponse.md
+  - docs/models/exportmessage.md
+  - docs/models/exportsession.md
+  - docs/models/exportsessionrequest.md
+  - docs/models/exportsessionresponse.md
+  - docs/models/exporttoolcall.md
   - docs/models/file.md
   - docs/models/fileinfo.md
   - docs/models/forksessionrequest.md
@@ -76,6 +81,7 @@ generatedFiles:
   - docs/models/handleoauthcallbackrequest.md
   - docs/models/handleoauthcallbackresponse.md
   - docs/models/healthcheckresponse.md
+  - docs/models/inputjson.md
   - docs/models/listcommandsresponse.md
   - docs/models/listmcpserversresponse.md
   - docs/models/listmcpserverstool.md
@@ -184,6 +190,10 @@ generatedFiles:
   - src/mix_python_sdk/models/deletesessionfileop.py
   - src/mix_python_sdk/models/deletesessionop.py
   - src/mix_python_sdk/models/denypermissionop.py
+  - src/mix_python_sdk/models/exportmessage.py
+  - src/mix_python_sdk/models/exportsession.py
+  - src/mix_python_sdk/models/exportsessionop.py
+  - src/mix_python_sdk/models/exporttoolcall.py
   - src/mix_python_sdk/models/fileinfo.py
   - src/mix_python_sdk/models/forksessionop.py
   - src/mix_python_sdk/models/getauthstatusop.py
@@ -647,4 +657,16 @@ examples:
           application/json: {"assistantMessageCount": 676019, "completionTokens": 18242, "cost": 1903.72, "createdAt": "2024-09-02T07:59:03.378Z", "id": "<id>", "promptTokens": 505203, "title": "<value>", "toolCallCount": 938253, "userMessageCount": 629623}
         "400":
           application/json: {"error": {"code": 877894, "message": "<value>", "type": "bad_request"}}
+  exportSession:
+    speakeasy-default-export-session:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "messages": [], "title": "<value>"}
+        "404":
+          application/json: {"error": {"code": 657092, "message": "<value>", "type": "validation_error"}}
+        "500":
+          application/json: {"error": {"code": 657092, "message": "<value>", "type": "validation_error"}}
 examplesVersion: 1.0.2
