@@ -203,6 +203,7 @@ asyncio.run(main())
 * [delete](docs/sdks/sessions/README.md#delete) - Delete a session
 * [get](docs/sdks/sessions/README.md#get) - Get a specific session
 * [fork](docs/sdks/sessions/README.md#fork) - Fork a session
+* [rewind_session](docs/sdks/sessions/README.md#rewind_session) - Rewind a session
 * [cancel_processing](docs/sdks/sessions/README.md#cancel_processing) - Cancel agent processing
 
 ### [streaming](docs/sdks/streaming/README.md)

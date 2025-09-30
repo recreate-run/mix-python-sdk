@@ -115,6 +115,12 @@ if TYPE_CHECKING:
         ResetPreferencesResponseTypedDict,
     )
     from .resterror import RESTError, RESTErrorTypedDict, Type
+    from .rewindsessionop import (
+        RewindSessionRequest,
+        RewindSessionRequestBody,
+        RewindSessionRequestBodyTypedDict,
+        RewindSessionRequestTypedDict,
+    )
     from .sendmessageop import (
         SendMessageRequest,
         SendMessageRequestBody,
@@ -322,6 +328,10 @@ __all__ = [
     "RESTErrorTypedDict",
     "ResetPreferencesResponse",
     "ResetPreferencesResponseTypedDict",
+    "RewindSessionRequest",
+    "RewindSessionRequestBody",
+    "RewindSessionRequestBodyTypedDict",
+    "RewindSessionRequestTypedDict",
     "SSECompleteEvent",
     "SSECompleteEventData",
     "SSECompleteEventDataTypedDict",
@@ -505,6 +515,10 @@ _dynamic_imports: dict[str, str] = {
     "RESTError": ".resterror",
     "RESTErrorTypedDict": ".resterror",
     "Type": ".resterror",
+    "RewindSessionRequest": ".rewindsessionop",
+    "RewindSessionRequestBody": ".rewindsessionop",
+    "RewindSessionRequestBodyTypedDict": ".rewindsessionop",
+    "RewindSessionRequestTypedDict": ".rewindsessionop",
     "SendMessageRequest": ".sendmessageop",
     "SendMessageRequestBody": ".sendmessageop",
     "SendMessageRequestBodyTypedDict": ".sendmessageop",

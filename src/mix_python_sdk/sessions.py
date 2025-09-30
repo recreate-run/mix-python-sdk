@@ -929,6 +929,212 @@ class Sessions(BaseSDK):
 
         raise errors.MixDefaultError("Unexpected response received", http_res)
 
+    def rewind_session(
+        self,
+        *,
+        id: str,
+        message_id: str,
+        cleanup_media: Optional[bool] = True,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SessionData:
+        r"""Rewind a session
+
+        Delete messages after a specified message in the current session, optionally cleaning up media files created after that point
+
+        :param id: Session ID to rewind
+        :param message_id: ID of the last message to keep. All messages after this message will be deleted.
+        :param cleanup_media: Whether to clean up media files created after the rewind point (based on file timestamp)
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RewindSessionRequest(
+            id=id,
+            request_body=models.RewindSessionRequestBody(
+                cleanup_media=cleanup_media,
+                message_id=message_id,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/api/sessions/{id}/rewind",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=False,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "json",
+                models.RewindSessionRequestBody,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX", "408", "429"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="rewindSession",
+                oauth2_scopes=[],
+                security_source=None,
+            ),
+            request=req,
+            error_status_codes=["400", "404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.SessionData, http_res)
+        if utils.match_response(http_res, ["400", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.MixDefaultError("Unexpected response received", http_res)
+
+    async def rewind_session_async(
+        self,
+        *,
+        id: str,
+        message_id: str,
+        cleanup_media: Optional[bool] = True,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.SessionData:
+        r"""Rewind a session
+
+        Delete messages after a specified message in the current session, optionally cleaning up media files created after that point
+
+        :param id: Session ID to rewind
+        :param message_id: ID of the last message to keep. All messages after this message will be deleted.
+        :param cleanup_media: Whether to clean up media files created after the rewind point (based on file timestamp)
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RewindSessionRequest(
+            id=id,
+            request_body=models.RewindSessionRequestBody(
+                cleanup_media=cleanup_media,
+                message_id=message_id,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/api/sessions/{id}/rewind",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=False,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "json",
+                models.RewindSessionRequestBody,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX", "408", "429"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="rewindSession",
+                oauth2_scopes=[],
+                security_source=None,
+            ),
+            request=req,
+            error_status_codes=["400", "404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.SessionData, http_res)
+        if utils.match_response(http_res, ["400", "404"], "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
+
+        raise errors.MixDefaultError("Unexpected response received", http_res)
+
     def cancel_processing(
         self,
         *,

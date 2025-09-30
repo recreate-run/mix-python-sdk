@@ -27,7 +27,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.5.3
+  version: 0.5.4
   additionalDependencies:
     dev:
       ruff: ^0.13.2

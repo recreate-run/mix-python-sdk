@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 7310f71653943f10f9b628d3a36dd821
+  docChecksum: 6c18e0d66ec928b5d07a6d16d8587aaf
   docVersion: 1.0.0
-  speakeasyVersion: 1.631.0
-  generationVersion: 2.716.10
-  releaseVersion: 0.5.3
-  configChecksum: 37f9d107bf4ca87172fbfee76b241c91
+  speakeasyVersion: 1.631.5
+  generationVersion: 2.716.16
+  releaseVersion: 0.5.4
+  configChecksum: 5b0af16b417a9f0282226dcd7124b4fa
   published: true
 features:
   python:
@@ -86,6 +86,8 @@ generatedFiles:
   - docs/models/providers.md
   - docs/models/resetpreferencesresponse.md
   - docs/models/resterror.md
+  - docs/models/rewindsessionrequest.md
+  - docs/models/rewindsessionrequestbody.md
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
   - docs/models/sendstreamingmessagerequest.md
@@ -201,6 +203,7 @@ generatedFiles:
   - src/mix_python_sdk/models/listsessionfilesop.py
   - src/mix_python_sdk/models/resetpreferencesop.py
   - src/mix_python_sdk/models/resterror.py
+  - src/mix_python_sdk/models/rewindsessionop.py
   - src/mix_python_sdk/models/sendmessageop.py
   - src/mix_python_sdk/models/sendstreamingmessageop.py
   - src/mix_python_sdk/models/sessiondata.py
@@ -632,4 +635,16 @@ examples:
           application/json: {"error": {"code": 286747, "message": "<value>", "type": "not_found"}}
         "500":
           application/json: {"error": {"code": 286747, "message": "<value>", "type": "not_found"}}
+  rewindSession:
+    speakeasy-default-rewind-session:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"cleanupMedia": true, "messageId": "<id>"}
+      responses:
+        "200":
+          application/json: {"assistantMessageCount": 676019, "completionTokens": 18242, "cost": 1903.72, "createdAt": "2024-09-02T07:59:03.378Z", "id": "<id>", "promptTokens": 505203, "title": "<value>", "toolCallCount": 938253, "userMessageCount": 629623}
+        "400":
+          application/json: {"error": {"code": 877894, "message": "<value>", "type": "bad_request"}}
 examplesVersion: 1.0.2

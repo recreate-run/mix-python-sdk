@@ -10,6 +10,7 @@
 * [delete](#delete) - Delete a session
 * [get](#get) - Get a specific session
 * [fork](#fork) - Fork a session
+* [rewind_session](#rewind_session) - Rewind a session
 * [cancel_processing](#cancel_processing) - Cancel agent processing
 
 ## list
@@ -189,6 +190,46 @@ with Mix() as mix:
 | `message_index`                                                      | *int*                                                                | :heavy_check_mark:                                                   | Index of the last message to include in the fork (0-based)           |
 | `title`                                                              | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Optional title for the forked session (defaults to 'Forked Session') |
 | `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
+
+### Response
+
+**[models.SessionData](../../models/sessiondata.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 400, 404               | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
+
+## rewind_session
+
+Delete messages after a specified message in the current session, optionally cleaning up media files created after that point
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="rewindSession" method="post" path="/api/sessions/{id}/rewind" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.sessions.rewind_session(id="<id>", message_id="<id>", cleanup_media=True)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *str*                                                                                    | :heavy_check_mark:                                                                       | Session ID to rewind                                                                     |
+| `message_id`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | ID of the last message to keep. All messages after this message will be deleted.         |
+| `cleanup_media`                                                                          | *Optional[bool]*                                                                         | :heavy_minus_sign:                                                                       | Whether to clean up media files created after the rewind point (based on file timestamp) |
+| `retries`                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                         | :heavy_minus_sign:                                                                       | Configuration to override the default retry behavior of the client.                      |
 
 ### Response
 
