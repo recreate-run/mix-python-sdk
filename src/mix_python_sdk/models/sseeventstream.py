@@ -10,6 +10,136 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+SSESessionDeletedEventEvent = Literal[
+    "connected",
+    "heartbeat",
+    "error",
+    "complete",
+    "thinking",
+    "content",
+    "tool",
+    "tool_execution_start",
+    "tool_execution_complete",
+    "permission",
+    "summarize",
+    "session_created",
+    "session_deleted",
+]
+r"""Event type identifier"""
+
+
+class SSESessionDeletedEventDataTypedDict(TypedDict):
+    session_id: str
+    r"""ID of the deleted session"""
+    type: str
+    r"""Event type"""
+
+
+class SSESessionDeletedEventData(BaseModel):
+    session_id: Annotated[str, pydantic.Field(alias="sessionId")]
+    r"""ID of the deleted session"""
+
+    type: str
+    r"""Event type"""
+
+
+class SSESessionDeletedEventTypedDict(TypedDict):
+    r"""Base SSE event with standard fields"""
+
+    event: SSESessionDeletedEventEvent
+    r"""Event type identifier"""
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+    data: SSESessionDeletedEventDataTypedDict
+    retry: NotRequired[int]
+    r"""Client retry interval in milliseconds"""
+
+
+class SSESessionDeletedEvent(BaseModel):
+    r"""Base SSE event with standard fields"""
+
+    event: SSESessionDeletedEventEvent
+    r"""Event type identifier"""
+
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+
+    data: SSESessionDeletedEventData
+
+    retry: Optional[int] = None
+    r"""Client retry interval in milliseconds"""
+
+
+SSESessionCreatedEventEvent = Literal[
+    "connected",
+    "heartbeat",
+    "error",
+    "complete",
+    "thinking",
+    "content",
+    "tool",
+    "tool_execution_start",
+    "tool_execution_complete",
+    "permission",
+    "summarize",
+    "session_created",
+    "session_deleted",
+]
+r"""Event type identifier"""
+
+
+class SSESessionCreatedEventDataTypedDict(TypedDict):
+    created_at: int
+    r"""Unix timestamp when the session was created"""
+    session_id: str
+    r"""ID of the newly created session"""
+    title: str
+    r"""Title of the newly created session"""
+    type: str
+    r"""Event type"""
+
+
+class SSESessionCreatedEventData(BaseModel):
+    created_at: Annotated[int, pydantic.Field(alias="createdAt")]
+    r"""Unix timestamp when the session was created"""
+
+    session_id: Annotated[str, pydantic.Field(alias="sessionId")]
+    r"""ID of the newly created session"""
+
+    title: str
+    r"""Title of the newly created session"""
+
+    type: str
+    r"""Event type"""
+
+
+class SSESessionCreatedEventTypedDict(TypedDict):
+    r"""Base SSE event with standard fields"""
+
+    event: SSESessionCreatedEventEvent
+    r"""Event type identifier"""
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+    data: SSESessionCreatedEventDataTypedDict
+    retry: NotRequired[int]
+    r"""Client retry interval in milliseconds"""
+
+
+class SSESessionCreatedEvent(BaseModel):
+    r"""Base SSE event with standard fields"""
+
+    event: SSESessionCreatedEventEvent
+    r"""Event type identifier"""
+
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+
+    data: SSESessionCreatedEventData
+
+    retry: Optional[int] = None
+    r"""Client retry interval in milliseconds"""
+
+
 SSESummarizeEventEvent = Literal[
     "connected",
     "heartbeat",
@@ -22,6 +152,8 @@ SSESummarizeEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -85,6 +217,8 @@ SSEPermissionEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -181,6 +315,8 @@ SSEToolExecutionCompleteEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -254,6 +390,8 @@ SSEToolExecutionStartEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -322,6 +460,8 @@ SSEToolEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -395,6 +535,8 @@ SSEContentEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -453,6 +595,8 @@ SSEThinkingEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -511,6 +655,8 @@ SSECompleteEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -591,6 +737,8 @@ SSEErrorEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -664,6 +812,8 @@ SSEHeartbeatEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -717,6 +867,8 @@ SSEConnectedEventEvent = Literal[
     "tool_execution_complete",
     "permission",
     "summarize",
+    "session_created",
+    "session_deleted",
 ]
 r"""Event type identifier"""
 
@@ -772,6 +924,8 @@ SSEEventStreamTypedDict = TypeAliasType(
         SSEToolExecutionCompleteEventTypedDict,
         SSEPermissionEventTypedDict,
         SSESummarizeEventTypedDict,
+        SSESessionCreatedEventTypedDict,
+        SSESessionDeletedEventTypedDict,
     ],
 )
 r"""Server-Sent Event stream with discriminated event types"""
@@ -785,6 +939,8 @@ SSEEventStream = Annotated[
         Annotated[SSEErrorEvent, Tag("error")],
         Annotated[SSEHeartbeatEvent, Tag("heartbeat")],
         Annotated[SSEPermissionEvent, Tag("permission")],
+        Annotated[SSESessionCreatedEvent, Tag("session_created")],
+        Annotated[SSESessionDeletedEvent, Tag("session_deleted")],
         Annotated[SSESummarizeEvent, Tag("summarize")],
         Annotated[SSEThinkingEvent, Tag("thinking")],
         Annotated[SSEToolEvent, Tag("tool")],

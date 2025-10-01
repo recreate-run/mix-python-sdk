@@ -24,7 +24,6 @@ def upload_sample_image(mix, session_id: str) -> str:
     return image_file_info.url
 
 
-
 def main():
     load_dotenv()
     api_key = os.getenv("OPENROUTER_API_KEY")
@@ -46,7 +45,7 @@ def main():
         user_msg = f"Explain {uploaded_file_url}"
 
         stream_message(mix, session.id, user_msg)
-        mix.sessions.delete(id=session.id)
+        # mix.sessions.delete(id=session.id)
 
 
 if __name__ == "__main__":

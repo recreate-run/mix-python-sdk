@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: aff7317e4c2d0a43cebb3c30e9fcdf82
+  docChecksum: 7384494f232a985b639f7095a2061269
   docVersion: 1.0.0
   speakeasyVersion: 1.631.5
   generationVersion: 2.716.16
-  releaseVersion: 0.5.5
-  configChecksum: 82af8f37429140d9f4857aeb3c18ab07
+  releaseVersion: 0.5.6
+  configChecksum: c8b80734e2e0660fd051022af6c9817e
   published: true
 features:
   python:
@@ -118,6 +118,12 @@ generatedFiles:
   - docs/models/ssepermissionevent.md
   - docs/models/ssepermissioneventdata.md
   - docs/models/ssepermissioneventevent.md
+  - docs/models/ssesessioncreatedevent.md
+  - docs/models/ssesessioncreatedeventdata.md
+  - docs/models/ssesessioncreatedeventevent.md
+  - docs/models/ssesessiondeletedevent.md
+  - docs/models/ssesessiondeletedeventdata.md
+  - docs/models/ssesessiondeletedeventevent.md
   - docs/models/ssesummarizeevent.md
   - docs/models/ssesummarizeeventdata.md
   - docs/models/ssesummarizeeventevent.md

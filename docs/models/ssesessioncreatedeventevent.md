@@ -1,4 +1,4 @@
-# SSEContentEventEvent
+# SSESessionCreatedEventEvent
 
 Event type identifier
 

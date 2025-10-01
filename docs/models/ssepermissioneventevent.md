@@ -18,3 +18,5 @@ Event type identifier
 | `TOOL_EXECUTION_COMPLETE` | tool_execution_complete   |
 | `PERMISSION`              | permission                |
 | `SUMMARIZE`               | summarize                 |
+| `SESSION_CREATED`         | session_created           |
+| `SESSION_DELETED`         | session_deleted           |

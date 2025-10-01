@@ -13,7 +13,7 @@ def main():
     if not api_key:
         raise ValueError("OPENROUTER_API_KEY not found in environment variables")
 
-    user_msg = "Show me the top cat videos on youtube"
+    user_msg = "Say hi"
 
     with Mix(server_url=os.getenv("MIX_SERVER_URL")) as mix:
         mix.system.get_health()
@@ -22,7 +22,7 @@ def main():
         # session creation
         session = mix.sessions.create(title="Streaming Demo")
         stream_message(mix, session.id, user_msg)
-        mix.sessions.delete(id=session.id)
+        # mix.sessions.delete(id=session.id)
 
 
 if __name__ == "__main__":

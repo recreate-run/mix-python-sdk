@@ -41,6 +41,18 @@ value: models.SSEHeartbeatEvent = /* values here */
 value: models.SSEPermissionEvent = /* values here */
 ```
 
+### `models.SSESessionCreatedEvent`
+
+```python
+value: models.SSESessionCreatedEvent = /* values here */
+```
+
+### `models.SSESessionDeletedEvent`
+
+```python
+value: models.SSESessionDeletedEvent = /* values here */
+```
+
 ### `models.SSESummarizeEvent`
 
 ```python
