@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: da36946902c7d1b9ced92cbe43005eb4
+  docChecksum: 66ee59cadad984ce1cdf807ae97abd5d
   docVersion: 1.0.0
-  speakeasyVersion: 1.631.5
-  generationVersion: 2.716.16
-  releaseVersion: 0.5.7
-  configChecksum: 208356f9390a8c7a9f0eed15d71c2c50
+  speakeasyVersion: 1.634.2
+  generationVersion: 2.721.3
+  releaseVersion: 0.6.0
+  configChecksum: 7b1d8929237b7e3bb9e31eaef066dfde
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.22.0
+    core: 5.22.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     downloadStreams: 1.0.1
@@ -31,7 +31,7 @@ features:
     retries: 3.0.2
     sdkHooks: 1.1.0
     serverEvents: 1.0.10
-    unions: 3.0.5
+    unions: 3.1.0
     uploadStreams: 1.0.0
 generatedFiles:
   - .devcontainer/README.md
@@ -74,7 +74,6 @@ generatedFiles:
   - docs/models/getsessionfilerequest.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
-  - docs/models/getsysteminforesponse.md
   - docs/models/gettoolsstatusresponse.md
   - docs/models/gettoolsstatustool.md
   - docs/models/grantpermissionrequest.md
@@ -97,8 +96,6 @@ generatedFiles:
   - docs/models/rewindsessionrequestbody.md
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
-  - docs/models/sendstreamingmessagerequest.md
-  - docs/models/sendstreamingmessagerequestbody.md
   - docs/models/sessiondata.md
   - docs/models/ssecompleteevent.md
   - docs/models/ssecompleteeventdata.md
@@ -142,12 +139,10 @@ generatedFiles:
   - docs/models/ssetoolexecutionstarteventevent.md
   - docs/models/startoauthflowrequest.md
   - docs/models/startoauthflowresponse.md
-  - docs/models/status.md
   - docs/models/storeapikeyrequest.md
   - docs/models/storeapikeyresponse.md
   - docs/models/streameventsrequest.md
   - docs/models/streameventsresponse.md
-  - docs/models/streammessageresponse.md
   - docs/models/toolcalldata.md
   - docs/models/toolname.md
   - docs/models/type.md
@@ -211,7 +206,6 @@ generatedFiles:
   - src/mix_python_sdk/models/getsessionfileop.py
   - src/mix_python_sdk/models/getsessionmessagesop.py
   - src/mix_python_sdk/models/getsessionop.py
-  - src/mix_python_sdk/models/getsysteminfoop.py
   - src/mix_python_sdk/models/gettoolsstatusop.py
   - src/mix_python_sdk/models/grantpermissionop.py
   - src/mix_python_sdk/models/handleoauthcallbackop.py
@@ -223,13 +217,11 @@ generatedFiles:
   - src/mix_python_sdk/models/resterror.py
   - src/mix_python_sdk/models/rewindsessionop.py
   - src/mix_python_sdk/models/sendmessageop.py
-  - src/mix_python_sdk/models/sendstreamingmessageop.py
   - src/mix_python_sdk/models/sessiondata.py
   - src/mix_python_sdk/models/sseeventstream.py
   - src/mix_python_sdk/models/startoauthflowop.py
   - src/mix_python_sdk/models/storeapikeyop.py
   - src/mix_python_sdk/models/streameventsop.py
-  - src/mix_python_sdk/models/streammessageresponse.py
   - src/mix_python_sdk/models/toolcalldata.py
   - src/mix_python_sdk/models/toolname.py
   - src/mix_python_sdk/models/updatepreferencesop.py

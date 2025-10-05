@@ -92,7 +92,6 @@ if TYPE_CHECKING:
         GetSessionMessagesRequestTypedDict,
     )
     from .getsessionop import GetSessionRequest, GetSessionRequestTypedDict
-    from .getsysteminfoop import GetSystemInfoResponse, GetSystemInfoResponseTypedDict
     from .gettoolsstatusop import (
         Categories,
         CategoriesTypedDict,
@@ -141,12 +140,6 @@ if TYPE_CHECKING:
         SendMessageRequestBody,
         SendMessageRequestBodyTypedDict,
         SendMessageRequestTypedDict,
-    )
-    from .sendstreamingmessageop import (
-        SendStreamingMessageRequest,
-        SendStreamingMessageRequestBody,
-        SendStreamingMessageRequestBodyTypedDict,
-        SendStreamingMessageRequestTypedDict,
     )
     from .sessiondata import SessionData, SessionDataTypedDict
     from .sseeventstream import (
@@ -239,11 +232,6 @@ if TYPE_CHECKING:
         StreamEventsResponse,
         StreamEventsResponseTypedDict,
     )
-    from .streammessageresponse import (
-        Status,
-        StreamMessageResponse,
-        StreamMessageResponseTypedDict,
-    )
     from .toolcalldata import ToolCallData, ToolCallDataTypedDict
     from .toolname import ToolName, ToolNameTypedDict
     from .updatepreferencesop import (
@@ -331,8 +319,6 @@ __all__ = [
     "GetSessionMessagesRequestTypedDict",
     "GetSessionRequest",
     "GetSessionRequestTypedDict",
-    "GetSystemInfoResponse",
-    "GetSystemInfoResponseTypedDict",
     "GetToolsStatusResponse",
     "GetToolsStatusResponseTypedDict",
     "GetToolsStatusTool",
@@ -442,17 +428,12 @@ __all__ = [
     "SendMessageRequestBody",
     "SendMessageRequestBodyTypedDict",
     "SendMessageRequestTypedDict",
-    "SendStreamingMessageRequest",
-    "SendStreamingMessageRequestBody",
-    "SendStreamingMessageRequestBodyTypedDict",
-    "SendStreamingMessageRequestTypedDict",
     "SessionData",
     "SessionDataTypedDict",
     "StartOAuthFlowRequest",
     "StartOAuthFlowRequestTypedDict",
     "StartOAuthFlowResponse",
     "StartOAuthFlowResponseTypedDict",
-    "Status",
     "StoreAPIKeyRequest",
     "StoreAPIKeyRequestTypedDict",
     "StoreAPIKeyResponse",
@@ -461,8 +442,6 @@ __all__ = [
     "StreamEventsRequestTypedDict",
     "StreamEventsResponse",
     "StreamEventsResponseTypedDict",
-    "StreamMessageResponse",
-    "StreamMessageResponseTypedDict",
     "ToolCallData",
     "ToolCallDataTypedDict",
     "ToolName",
@@ -547,8 +526,6 @@ _dynamic_imports: dict[str, str] = {
     "GetSessionMessagesRequestTypedDict": ".getsessionmessagesop",
     "GetSessionRequest": ".getsessionop",
     "GetSessionRequestTypedDict": ".getsessionop",
-    "GetSystemInfoResponse": ".getsysteminfoop",
-    "GetSystemInfoResponseTypedDict": ".getsysteminfoop",
     "Categories": ".gettoolsstatusop",
     "CategoriesTypedDict": ".gettoolsstatusop",
     "GetToolsStatusResponse": ".gettoolsstatusop",
@@ -586,10 +563,6 @@ _dynamic_imports: dict[str, str] = {
     "SendMessageRequestBody": ".sendmessageop",
     "SendMessageRequestBodyTypedDict": ".sendmessageop",
     "SendMessageRequestTypedDict": ".sendmessageop",
-    "SendStreamingMessageRequest": ".sendstreamingmessageop",
-    "SendStreamingMessageRequestBody": ".sendstreamingmessageop",
-    "SendStreamingMessageRequestBodyTypedDict": ".sendstreamingmessageop",
-    "SendStreamingMessageRequestTypedDict": ".sendstreamingmessageop",
     "SessionData": ".sessiondata",
     "SessionDataTypedDict": ".sessiondata",
     "Params": ".sseeventstream",
@@ -674,9 +647,6 @@ _dynamic_imports: dict[str, str] = {
     "StreamEventsRequestTypedDict": ".streameventsop",
     "StreamEventsResponse": ".streameventsop",
     "StreamEventsResponseTypedDict": ".streameventsop",
-    "Status": ".streammessageresponse",
-    "StreamMessageResponse": ".streammessageresponse",
-    "StreamMessageResponseTypedDict": ".streammessageresponse",
     "ToolCallData": ".toolcalldata",
     "ToolCallDataTypedDict": ".toolcalldata",
     "ToolName": ".toolname",
