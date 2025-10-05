@@ -8,6 +8,7 @@
 * [list_commands](#list_commands) - List available commands
 * [get_command](#get_command) - Get specific command
 * [list_mcp_servers](#list_mcp_servers) - List MCP servers
+* [get_system_info](#get_system_info) - Get system information
 * [get_health](#get_health) - Health check
 
 ## list_commands
@@ -121,6 +122,43 @@ with Mix() as mix:
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorResponse   | 401                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
+
+## get_system_info
+
+Retrieve system information including storage configuration
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getSystemInfo" method="get" path="/api/system/info" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.system.get_system_info()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.GetSystemInfoResponse](../../models/getsysteminforesponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorResponse   | 500                    | application/json       |
 | errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 

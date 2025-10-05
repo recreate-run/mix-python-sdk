@@ -92,6 +92,7 @@ if TYPE_CHECKING:
         GetSessionMessagesRequestTypedDict,
     )
     from .getsessionop import GetSessionRequest, GetSessionRequestTypedDict
+    from .getsysteminfoop import GetSystemInfoResponse, GetSystemInfoResponseTypedDict
     from .gettoolsstatusop import (
         Categories,
         CategoriesTypedDict,
@@ -319,6 +320,8 @@ __all__ = [
     "GetSessionMessagesRequestTypedDict",
     "GetSessionRequest",
     "GetSessionRequestTypedDict",
+    "GetSystemInfoResponse",
+    "GetSystemInfoResponseTypedDict",
     "GetToolsStatusResponse",
     "GetToolsStatusResponseTypedDict",
     "GetToolsStatusTool",
@@ -526,6 +529,8 @@ _dynamic_imports: dict[str, str] = {
     "GetSessionMessagesRequestTypedDict": ".getsessionmessagesop",
     "GetSessionRequest": ".getsessionop",
     "GetSessionRequestTypedDict": ".getsessionop",
+    "GetSystemInfoResponse": ".getsysteminfoop",
+    "GetSystemInfoResponseTypedDict": ".getsysteminfoop",
     "Categories": ".gettoolsstatusop",
     "CategoriesTypedDict": ".gettoolsstatusop",
     "GetToolsStatusResponse": ".gettoolsstatusop",

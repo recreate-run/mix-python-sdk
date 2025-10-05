@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 66ee59cadad984ce1cdf807ae97abd5d
+  docChecksum: 180a7c543da80f87d8701847a23df8d3
   docVersion: 1.0.0
   speakeasyVersion: 1.634.2
   generationVersion: 2.721.3
-  releaseVersion: 0.6.0
-  configChecksum: 7b1d8929237b7e3bb9e31eaef066dfde
+  releaseVersion: 0.6.1
+  configChecksum: 00b86bb8ed8f17bc803a78e03914c219
   published: true
 features:
   python:
@@ -74,6 +74,7 @@ generatedFiles:
   - docs/models/getsessionfilerequest.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
+  - docs/models/getsysteminforesponse.md
   - docs/models/gettoolsstatusresponse.md
   - docs/models/gettoolsstatustool.md
   - docs/models/grantpermissionrequest.md
@@ -206,6 +207,7 @@ generatedFiles:
   - src/mix_python_sdk/models/getsessionfileop.py
   - src/mix_python_sdk/models/getsessionmessagesop.py
   - src/mix_python_sdk/models/getsessionop.py
+  - src/mix_python_sdk/models/getsysteminfoop.py
   - src/mix_python_sdk/models/gettoolsstatusop.py
   - src/mix_python_sdk/models/grantpermissionop.py
   - src/mix_python_sdk/models/handleoauthcallbackop.py
