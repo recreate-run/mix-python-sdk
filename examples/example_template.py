@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-"""Minimal streaming example demonstrating SSE connection, message sending, and event processing."""
+"""Minimal streaming example using high-level helper functions."""
 
 import asyncio
 import os
 from dotenv import load_dotenv
 from mix_python_sdk import Mix
-from mix_python_sdk.models import (
-    SSEThinkingEvent,
-    SSEContentEvent,
-    SSEToolEvent,
-    SSEErrorEvent,
-    SSECompleteEvent,
-)
+from mix_python_sdk.helpers import stream_and_send
 
 
 async def main():
@@ -23,26 +17,16 @@ async def main():
         )
 
         session = mix.sessions.create(title="Streaming Demo")
-        stream_response = await mix.streaming.stream_events_async(session_id=session.id)
 
-        async with stream_response.result as event_stream:
-            await mix.messages.send_async(
-                id=session.id,
-                text="write a detailed 50 word essay about the history of cats",
-            )
-
-            async for event in event_stream:
-                if isinstance(event, SSEThinkingEvent):
-                    print(event.data.content, end="", flush=True)
-                elif isinstance(event, SSEContentEvent):
-                    print(event.data.content, end="", flush=True)
-                elif isinstance(event, SSEToolEvent):
-                    print(f"\n🔧 {event.data.name}: {event.data.status}")
-                elif isinstance(event, SSEErrorEvent):
-                    print(f"\n❌ {event.data.error}")
-                    break
-                elif isinstance(event, SSECompleteEvent):
-                    break
+        await stream_and_send(
+            mix,
+            session_id=session.id,
+            message="write a detailed 50 word essay about the history of cats",
+            on_thinking=lambda text: print(text, end="", flush=True),
+            on_content=lambda text: print(text, end="", flush=True),
+            on_tool=lambda tool: print(f"\n🔧 {tool.name}: {tool.status}"),
+            on_error=lambda error: print(f"\n❌ {error}"),
+        )
 
 
 if __name__ == "__main__":
