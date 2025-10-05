@@ -24,25 +24,31 @@ async def main():
 
         session = mix.sessions.create(title="Streaming Demo")
         stream_response = await mix.streaming.stream_events_async(session_id=session.id)
+        await asyncio.sleep(0.5)
 
         async with stream_response.result as event_stream:
-            await mix.messages.send_async(
-                id=session.id,
-                text="write a detailed 50 word essay about the history of cats",
-            )
 
-            async for event in event_stream:
-                if isinstance(event, SSEThinkingEvent):
-                    print(event.data.content, end="", flush=True)
-                elif isinstance(event, SSEContentEvent):
-                    print(event.data.content, end="", flush=True)
-                elif isinstance(event, SSEToolEvent):
-                    print(f"\n🔧 {event.data.name}: {event.data.status}")
-                elif isinstance(event, SSEErrorEvent):
-                    print(f"\n❌ {event.data.error}")
-                    break
-                elif isinstance(event, SSECompleteEvent):
-                    break
+            async def process_events():
+                async for event in event_stream:
+                    if isinstance(event, SSEThinkingEvent):
+                        print(event.data.content, end="", flush=True)
+                    elif isinstance(event, SSEContentEvent):
+                        print(event.data.content, end="", flush=True)
+                    elif isinstance(event, SSEToolEvent):
+                        print(f"\n🔧 {event.data.name}: {event.data.status}")
+                    elif isinstance(event, SSEErrorEvent):
+                        print(f"\n❌ {event.data.error}")
+                        break
+                    elif isinstance(event, SSECompleteEvent):
+                        break
+
+            await asyncio.gather(
+                mix.messages.send_async(
+                    id=session.id,
+                    text="write a detailed 50 word essay about the history of cats",
+                ),
+                process_events(),
+            )
 
 
 if __name__ == "__main__":
