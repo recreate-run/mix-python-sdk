@@ -4,18 +4,18 @@ The Mix Python SDK provides high-level helper functions that make streaming inte
 
 ## Quick Start (Recommended)
 
-For most use cases, use the **callback-based** `stream_and_send()` function:
+For most use cases, use the **callback-based** `send_with_callbacks()` function:
 
 ```python
 import asyncio
 from mix_python_sdk import Mix
-from mix_python_sdk.helpers import stream_and_send
+from mix_python_sdk.helpers import send_with_callbacks
 
 async def main():
     async with Mix(server_url="http://localhost:8088") as mix:
         session = mix.sessions.create(title="Demo")
 
-        await stream_and_send(
+        await send_with_callbacks(
             mix,
             session_id=session.id,
             message="What's the weather like?",
@@ -28,12 +28,12 @@ asyncio.run(main())
 
 ## The Three Patterns
 
-### 1. `stream_and_send()` - Callback-based ⭐ RECOMMENDED
+### 1. `send_with_callbacks()` - Callback-based ⭐ RECOMMENDED
 
 **Use this 90% of the time** - simplest and most ergonomic.
 
 ```python
-await stream_and_send(
+await send_with_callbacks(
     mix,
     session_id=session.id,
     message="Tell me a joke",
@@ -46,6 +46,7 @@ await stream_and_send(
 ```
 
 **Available callbacks:**
+
 - `on_thinking` - Called when AI is thinking (receives text)
 - `on_content` - Called for response content (receives text)
 - `on_tool` - Called when a tool is used (receives tool data)
@@ -56,11 +57,13 @@ await stream_and_send(
 - `on_complete` - Called when streaming completes
 
 **Pros:**
+
 - ✅ Simplest API
 - ✅ All complexity hidden
 - ✅ Just provide callbacks for events you care about
 
 **Cons:**
+
 - ❌ Can't control event flow (can't skip/stop conditionally)
 
 ---
@@ -87,6 +90,7 @@ async for event in query(mix, session.id, "Hello!"):
 ```
 
 **Event types:**
+
 - `"thinking"` - AI thinking
 - `"content"` - Response content
 - `"tool"` - Tool usage
@@ -97,6 +101,7 @@ async for event in query(mix, session.id, "Hello!"):
 - `"complete"` - Stream completed
 
 **Event properties:**
+
 - `event.type` - Event type string
 - `event.data` - Raw event data
 - `event.content` - Content text (if type is "content")
@@ -104,11 +109,13 @@ async for event in query(mix, session.id, "Hello!"):
 - `event.tool_name` - Tool name (if type is "tool")
 
 **Pros:**
+
 - ✅ Can control loop flow (break, continue)
 - ✅ Can inspect events before processing
 - ✅ Familiar Python pattern
 
 **Cons:**
+
 - ❌ More verbose than callbacks
 - ❌ Must manually check event types
 
@@ -147,11 +154,13 @@ async with Mix(server_url="http://localhost:8088") as mix:
 ```
 
 **Pros:**
+
 - ✅ Automatic session creation/cleanup
 - ✅ Multiple messages to same session
 - ✅ Clean resource management
 
 **Cons:**
+
 - ❌ More overhead for single messages
 
 ---
@@ -163,7 +172,7 @@ Here's a comprehensive example showing all available callbacks:
 ```python
 import asyncio
 from mix_python_sdk import Mix
-from mix_python_sdk.helpers import stream_and_send
+from mix_python_sdk.helpers import send_with_callbacks
 
 async def main():
     async with Mix(server_url="http://localhost:8088") as mix:
@@ -198,7 +207,7 @@ async def main():
         def handle_complete():
             print("\n✅ Complete!")
 
-        await stream_and_send(
+        await send_with_callbacks(
             mix,
             session_id=session.id,
             message="What's your working directory?",
@@ -218,8 +227,8 @@ asyncio.run(main())
 
 | Use Case | Recommended Pattern |
 |----------|-------------------|
-| Simple chat bot | `stream_and_send()` |
-| Display streaming responses | `stream_and_send()` |
+| Simple chat bot | `send_with_callbacks()` |
+| Display streaming responses | `send_with_callbacks()` |
 | Need to stop on condition | `query()` |
 | Need event inspection | `query()` |
 | Multi-turn conversation | `StreamingSession` |
@@ -241,6 +250,7 @@ See the `examples/` directory for complete working examples:
 If you were using the low-level API before, you can simplify your code:
 
 **Before (v0.5.0):**
+
 ```python
 stream_response = await mix.streaming.stream_events_async(session_id=session_id)
 await asyncio.sleep(0.5)
@@ -259,8 +269,9 @@ async with stream_response.result as event_stream:
 ```
 
 **After (v0.6.0+):**
+
 ```python
-await stream_and_send(
+await send_with_callbacks(
     mix,
     session_id=session.id,
     message=message,

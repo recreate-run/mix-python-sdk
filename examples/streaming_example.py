@@ -2,14 +2,14 @@
 """Comprehensive streaming example using high-level helper functions.
 
 This example shows all available streaming event types and how to handle them
-using the callback-based stream_and_send helper function.
+using the callback-based send_with_callbacks helper function.
 """
 
 import asyncio
 import os
 from dotenv import load_dotenv
 from mix_python_sdk import Mix
-from mix_python_sdk.helpers import stream_and_send
+from mix_python_sdk.helpers import send_with_callbacks
 
 
 async def stream_message(mix, session_id: str, message: str) -> None:
@@ -58,7 +58,7 @@ async def stream_message(mix, session_id: str, message: str) -> None:
             print("\n")
         print("✅ Complete!")
 
-    await stream_and_send(
+    await send_with_callbacks(
         mix,
         session_id=session_id,
         message=message,
@@ -81,7 +81,9 @@ async def main():
 
     user_msg = "what's your working dir?"
 
-    async with Mix(server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")) as mix:
+    async with Mix(
+        server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")
+    ) as mix:
         mix.system.get_health()
         mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
         session = mix.sessions.create(title="Streaming Demo")

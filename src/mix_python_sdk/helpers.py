@@ -84,7 +84,9 @@ async def query(
     await asyncio.sleep(0.5)  # Allow stream connection to establish
 
     # Start sending the message
-    send_task = asyncio.create_task(mix.messages.send_async(id=session_id, text=message))
+    send_task = asyncio.create_task(
+        mix.messages.send_async(id=session_id, text=message)
+    )
 
     async with stream_response.result as event_stream:
         async for event in event_stream:
@@ -110,7 +112,7 @@ async def query(
     await send_task
 
 
-async def stream_and_send(
+async def send_with_callbacks(
     mix,
     session_id: str,
     message: str,
@@ -145,7 +147,7 @@ async def stream_and_send(
 
     Example:
         ```python
-        await stream_and_send(
+        await send_with_callbacks(
             mix,
             session_id=session.id,
             message="What's the weather?",
@@ -169,9 +171,15 @@ async def stream_and_send(
                     on_content(event.data.content)
                 elif isinstance(event, SSEToolEvent) and on_tool:
                     on_tool(event.data)
-                elif isinstance(event, SSEToolExecutionStartEvent) and on_tool_execution_start:
+                elif (
+                    isinstance(event, SSEToolExecutionStartEvent)
+                    and on_tool_execution_start
+                ):
                     on_tool_execution_start(event.data)
-                elif isinstance(event, SSEToolExecutionCompleteEvent) and on_tool_execution_complete:
+                elif (
+                    isinstance(event, SSEToolExecutionCompleteEvent)
+                    and on_tool_execution_complete
+                ):
                     on_tool_execution_complete(event.data)
                 elif isinstance(event, SSEErrorEvent):
                     if on_error:
@@ -293,7 +301,7 @@ class StreamingSession:
             on_permission: Callback for permission events
             on_complete: Callback when stream completes
         """
-        await stream_and_send(
+        await send_with_callbacks(
             self.mix,
             self.id,
             message,

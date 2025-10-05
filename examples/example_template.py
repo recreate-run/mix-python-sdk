@@ -5,7 +5,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from mix_python_sdk import Mix
-from mix_python_sdk.helpers import stream_and_send
+from mix_python_sdk.helpers import send_with_callbacks
 
 
 async def main():
@@ -18,7 +18,7 @@ async def main():
 
         session = mix.sessions.create(title="Streaming Demo")
 
-        await stream_and_send(
+        await send_with_callbacks(
             mix,
             session_id=session.id,
             message="write a detailed 50 word essay about the history of cats",
