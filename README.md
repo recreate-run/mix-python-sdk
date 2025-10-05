@@ -217,6 +217,7 @@ asyncio.run(main())
 * [list_commands](docs/sdks/system/README.md#list_commands) - List available commands
 * [get_command](docs/sdks/system/README.md#get_command) - Get specific command
 * [list_mcp_servers](docs/sdks/system/README.md#list_mcp_servers) - List MCP servers
+* [get_system_info](docs/sdks/system/README.md#get_system_info) - Get system information
 * [get_health](docs/sdks/system/README.md#get_health) - Health check
 
 ### [tools](docs/sdks/tools/README.md)

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 7384494f232a985b639f7095a2061269
+  docChecksum: da36946902c7d1b9ced92cbe43005eb4
   docVersion: 1.0.0
   speakeasyVersion: 1.631.5
   generationVersion: 2.716.16
-  releaseVersion: 0.5.6
-  configChecksum: c8b80734e2e0660fd051022af6c9817e
+  releaseVersion: 0.5.7
+  configChecksum: 208356f9390a8c7a9f0eed15d71c2c50
   published: true
 features:
   python:
@@ -74,6 +74,7 @@ generatedFiles:
   - docs/models/getsessionfilerequest.md
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
+  - docs/models/getsysteminforesponse.md
   - docs/models/gettoolsstatusresponse.md
   - docs/models/gettoolsstatustool.md
   - docs/models/grantpermissionrequest.md
@@ -210,6 +211,7 @@ generatedFiles:
   - src/mix_python_sdk/models/getsessionfileop.py
   - src/mix_python_sdk/models/getsessionmessagesop.py
   - src/mix_python_sdk/models/getsessionop.py
+  - src/mix_python_sdk/models/getsysteminfoop.py
   - src/mix_python_sdk/models/gettoolsstatusop.py
   - src/mix_python_sdk/models/grantpermissionop.py
   - src/mix_python_sdk/models/handleoauthcallbackop.py
@@ -675,4 +677,11 @@ examples:
           application/json: {"error": {"code": 657092, "message": "<value>", "type": "validation_error"}}
         "500":
           application/json: {"error": {"code": 657092, "message": "<value>", "type": "validation_error"}}
+  getSystemInfo:
+    speakeasy-default-get-system-info:
+      responses:
+        "200":
+          application/json: {"storageBasePath": "<value>"}
+        "500":
+          application/json: {"error": {"code": 39436, "message": "<value>", "type": "internal_error"}}
 examplesVersion: 1.0.2
