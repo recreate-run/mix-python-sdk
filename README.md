@@ -23,6 +23,7 @@ Mix REST API: REST API for the Mix application - session management, messaging, 
 * [mix-python-sdk](#mix-python-sdk)
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
+  * [Quick Start](#quick-start)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Server-sent event streaming](#server-sent-event-streaming)
@@ -114,6 +115,67 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 - [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
 <!-- End IDE Support [idesupport] -->
+
+## Quick Start
+
+The Mix SDK provides high-level helper functions for common patterns like streaming interactions. Here are three simple ways to get started:
+
+### 1. Callback-based Streaming (Recommended for Beginners)
+
+```python
+import asyncio
+import os
+from mix_python_sdk import Mix
+from mix_python_sdk.helpers import stream_and_send
+
+async def main():
+    async with Mix(server_url="http://localhost:8088") as mix:
+        mix.authentication.store_api_key(
+            api_key=os.getenv("OPENROUTER_API_KEY"),
+            provider="openrouter"
+        )
+        session = mix.sessions.create(title="Demo")
+
+        await stream_and_send(
+            mix,
+            session_id=session.id,
+            message="What's the weather?",
+            on_content=lambda text: print(text, end="", flush=True),
+            on_complete=lambda: print("\nDone!")
+        )
+
+asyncio.run(main())
+```
+
+### 2. Async Iterator Pattern
+
+```python
+from mix_python_sdk import Mix
+from mix_python_sdk.helpers import query
+
+async with Mix(server_url="http://localhost:8088") as mix:
+    session = mix.sessions.create(title="Demo")
+
+    async for event in query(mix, session.id, "Hello!"):
+        if event.type == "content":
+            print(event.content, end="", flush=True)
+```
+
+### 3. Session Context Manager
+
+```python
+from mix_python_sdk import Mix
+from mix_python_sdk.helpers import StreamingSession
+
+async with Mix(server_url="http://localhost:8088") as mix:
+    async with StreamingSession(mix, title="Demo") as session:
+        await session.send(
+            "What's 2+2?",
+            on_content=lambda text: print(text, end="", flush=True)
+        )
+```
+
+See the [examples/](examples/) directory for complete working examples.
 
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
@@ -216,6 +278,7 @@ asyncio.run(main())
 * [list_commands](docs/sdks/system/README.md#list_commands) - List available commands
 * [get_command](docs/sdks/system/README.md#get_command) - Get specific command
 * [list_mcp_servers](docs/sdks/system/README.md#list_mcp_servers) - List MCP servers
+* [get_system_info](docs/sdks/system/README.md#get_system_info) - Get system information
 * [get_health](docs/sdks/system/README.md#get_health) - Health check
 
 ### [tools](docs/sdks/tools/README.md)

@@ -1,75 +1,76 @@
 #!/usr/bin/env python3
-"""Minimal streaming example demonstrating SSE connection, message sending, and event processing."""
+"""Comprehensive streaming example using high-level helper functions.
+
+This example shows all available streaming event types and how to handle them
+using the callback-based stream_and_send helper function.
+"""
 
 import asyncio
 import os
 from dotenv import load_dotenv
 from mix_python_sdk import Mix
-from mix_python_sdk.models import (
-    SSEThinkingEvent,
-    SSEContentEvent,
-    SSEToolEvent,
-    SSEToolExecutionStartEvent,
-    SSEToolExecutionCompleteEvent,
-    SSECompleteEvent,
-    SSEErrorEvent,
-    SSEPermissionEvent,
-)
+from mix_python_sdk.helpers import stream_and_send
 
 
 async def stream_message(mix, session_id: str, message: str) -> None:
-    """Send message via streaming and process events"""
-    stream_response = await mix.streaming.stream_events_async(session_id=session_id)
-    await asyncio.sleep(0.5)
-
+    """Send message via streaming and process events with callbacks."""
     thinking_started = content_started = False
 
-    async with stream_response.result as event_stream:
+    def handle_thinking(text: str):
+        nonlocal thinking_started
+        if not thinking_started:
+            print("🤔 Thinking: ", end="", flush=True)
+            thinking_started = True
+        print(text, end="", flush=True)
 
-        async def process_events():
-            nonlocal thinking_started, content_started
-            async for event in event_stream:
-                if isinstance(event, SSEThinkingEvent):
-                    if not thinking_started:
-                        print("🤔 Thinking: ", end="", flush=True)
-                        thinking_started = True
-                    print(event.data.content, end="", flush=True)
-                elif isinstance(event, SSEContentEvent):
-                    if thinking_started and not content_started:
-                        print("\n📝 Response: ", end="", flush=True)
-                        content_started = True
-                    elif not content_started:
-                        print("📝 Response: ", end="", flush=True)
-                        content_started = True
-                    print(event.data.content, end="", flush=True)
-                elif isinstance(event, SSEToolEvent):
-                    print(f"\n🔧 Tool: {event.data.name} - {event.data.status}")
-                    if event.data.input:
-                        print(f"   Parameters: {event.data.input}")
-                elif isinstance(event, SSEToolExecutionStartEvent):
-                    if hasattr(event.data, "progress") and event.data.progress:
-                        print(f"   Progress: {event.data.progress}")
-                elif isinstance(event, SSEToolExecutionCompleteEvent):
-                    # Display the actual tool content
-                    if hasattr(event.data, "progress") and event.data.progress:
-                        if event.data.success:
-                            print(f"📄 Result:\n{event.data.progress}")
-                        else:
-                            print(f"❌ Error:\n{event.data.progress}")
-                elif isinstance(event, SSEErrorEvent):
-                    print(f"\n❌ Error: {event.data.error}")
-                elif isinstance(event, SSEPermissionEvent):
-                    print(f"\n🔐 Permission: {event.data.tool_name}")
-                elif isinstance(event, SSECompleteEvent):
-                    if content_started:
-                        print("\n")
-                    print("✅ Complete!")
-                    break
+    def handle_content(text: str):
+        nonlocal content_started, thinking_started
+        if not content_started:
+            if thinking_started:
+                print("\n📝 Response: ", end="", flush=True)
+            else:
+                print("📝 Response: ", end="", flush=True)
+            content_started = True
+        print(text, end="", flush=True)
 
-        await asyncio.gather(
-            mix.messages.send_async(id=session_id, text=message),
-            process_events(),
-        )
+    def handle_tool(tool):
+        print(f"\n🔧 Tool: {tool.name} - {tool.status}")
+        if hasattr(tool, "input") and tool.input:
+            print(f"   Parameters: {tool.input}")
+
+    def handle_tool_execution_start(data):
+        if hasattr(data, "progress") and data.progress:
+            print(f"   Progress: {data.progress}")
+
+    def handle_tool_execution_complete(data):
+        if hasattr(data, "progress") and data.progress:
+            if hasattr(data, "success") and data.success:
+                print(f"📄 Result:\n{data.progress}")
+            else:
+                print(f"❌ Error:\n{data.progress}")
+
+    def handle_permission(data):
+        print(f"\n🔐 Permission: {data.tool_name}")
+
+    def handle_complete():
+        nonlocal content_started
+        if content_started:
+            print("\n")
+        print("✅ Complete!")
+
+    await stream_and_send(
+        mix,
+        session_id=session_id,
+        message=message,
+        on_thinking=handle_thinking,
+        on_content=handle_content,
+        on_tool=handle_tool,
+        on_tool_execution_start=handle_tool_execution_start,
+        on_tool_execution_complete=handle_tool_execution_complete,
+        on_error=lambda error: print(f"\n❌ Error: {error}"),
+        on_permission=handle_permission,
+        on_complete=handle_complete,
+    )
 
 
 async def main():
