@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Minimal streaming example demonstrating SSE connection, message sending, and event processing."""
 
+import asyncio
+import os
+from dotenv import load_dotenv
 from mix_python_sdk import Mix
 from mix_python_sdk.models import (
-    SendMessageRequestBody,
     SSEThinkingEvent,
     SSEContentEvent,
     SSEToolEvent,
@@ -12,29 +14,19 @@ from mix_python_sdk.models import (
     SSECompleteEvent,
     SSEErrorEvent,
     SSEPermissionEvent,
-    SSEEventStream,
 )
-import os
-from dotenv import load_dotenv
-import json
-import time
 
 
-def stream_message(mix, session_id: str, message: str) -> None:
+async def stream_message(mix, session_id: str, message: str) -> None:
     """Send message via streaming and process events"""
-    stream_response = mix.streaming.stream_events(session_id=session_id)
-    time.sleep(2)
-
-    mix.streaming.send_streaming_message(
-        id=session_id,
-        content=json.dumps(SendMessageRequestBody(text=message).model_dump()),
-    )
+    stream_response = await mix.streaming.stream_events_async(session_id=session_id)
 
     thinking_started = content_started = False
 
-    with stream_response.result as event_stream:
-        event: SSEEventStream
-        for event in event_stream:
+    async with stream_response.result as event_stream:
+        await mix.messages.send_async(id=session_id, text=message)
+
+        async for event in event_stream:
             if isinstance(event, SSEThinkingEvent):
                 if not thinking_started:
                     print("🤔 Thinking: ", end="", flush=True)
@@ -73,7 +65,7 @@ def stream_message(mix, session_id: str, message: str) -> None:
                 break
 
 
-def main():
+async def main():
     load_dotenv()
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
@@ -81,13 +73,13 @@ def main():
 
     user_msg = "what's your working dir?"
 
-    with Mix(server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")) as mix:
+    async with Mix(server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")) as mix:
         mix.system.get_health()
         mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
         session = mix.sessions.create(title="Streaming Demo")
-        stream_message(mix, session.id, user_msg)
+        await stream_message(mix, session.id, user_msg)
         mix.sessions.delete(id=session.id)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

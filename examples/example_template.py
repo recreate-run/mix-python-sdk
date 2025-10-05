@@ -1,29 +1,49 @@
 #!/usr/bin/env python3
 """Minimal streaming example demonstrating SSE connection, message sending, and event processing."""
 
-from mix_python_sdk import Mix
+import asyncio
 import os
 from dotenv import load_dotenv
-from utils import stream_message
+from mix_python_sdk import Mix
+from mix_python_sdk.models import (
+    SSEThinkingEvent,
+    SSEContentEvent,
+    SSEToolEvent,
+    SSEErrorEvent,
+    SSECompleteEvent,
+)
 
 
-def main():
+async def main():
     load_dotenv()
-    api_key = os.getenv("OPENROUTER_API_KEY")
-    if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment variables")
 
-    user_msg = "Say hi"
+    async with Mix(server_url=os.getenv("MIX_SERVER_URL")) as mix:
+        mix.authentication.store_api_key(
+            api_key=os.getenv("OPENROUTER_API_KEY"), provider="openrouter"
+        )
 
-    with Mix(server_url=os.getenv("MIX_SERVER_URL")) as mix:
-        mix.system.get_health()
-        mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
-
-        # session creation
         session = mix.sessions.create(title="Streaming Demo")
-        stream_message(mix, session.id, user_msg)
-        # mix.sessions.delete(id=session.id)
+        stream_response = await mix.streaming.stream_events_async(session_id=session.id)
+
+        async with stream_response.result as event_stream:
+            await mix.messages.send_async(
+                id=session.id,
+                text="write a detailed 50 word essay about the history of cats",
+            )
+
+            async for event in event_stream:
+                if isinstance(event, SSEThinkingEvent):
+                    print(event.data.content, end="", flush=True)
+                elif isinstance(event, SSEContentEvent):
+                    print(event.data.content, end="", flush=True)
+                elif isinstance(event, SSEToolEvent):
+                    print(f"\n🔧 {event.data.name}: {event.data.status}")
+                elif isinstance(event, SSEErrorEvent):
+                    print(f"\n❌ {event.data.error}")
+                    break
+                elif isinstance(event, SSECompleteEvent):
+                    break
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
