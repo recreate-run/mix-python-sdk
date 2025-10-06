@@ -19,6 +19,25 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 
+# ===== Core Tool Names =====
+
+class CoreToolName(str, Enum):
+    """Core built-in tool names."""
+    BASH = "bash"
+    READ_TEXT = "ReadText"
+    GLOB = "glob"
+    READ_MEDIA = "ReadMedia"
+    GREP = "grep"
+    WRITE = "write"
+    EDIT = "edit"
+    PYTHON_EXECUTION = "python_execution"
+    SEARCH = "search"
+    TODO_WRITE = "todo_write"
+    EXIT_PLAN_MODE = "exit_plan_mode"
+    SHOW_MEDIA = "show_media"
+    TASK = "task"
+
+
 # ===== show_media Tool =====
 
 class MediaType(str, Enum):
