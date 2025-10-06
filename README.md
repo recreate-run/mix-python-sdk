@@ -113,7 +113,7 @@ Once that is saved to a file, you can run it with `uv run script.py` where
 
 Generally, the SDK will work well with most IDEs out of the box. However, when using PyCharm, you can enjoy much better integration with Pydantic by installing an additional plugin.
 
-* [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
+- [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
 <!-- End IDE Support [idesupport] -->
 
 ## Quick Start
@@ -245,6 +245,7 @@ asyncio.run(main())
 * [list_session](docs/sdks/messages/README.md#list_session) - List session messages
 * [send](docs/sdks/messages/README.md#send) - Send a message to session
 
+
 ### [permissions](docs/sdks/permissions/README.md)
 
 * [deny](docs/sdks/permissions/README.md#deny) - Deny permission
@@ -352,7 +353,6 @@ with Mix() as mix:
 Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
-
 ```python
 from mix_python_sdk import Mix
 from mix_python_sdk.utils import BackoffStrategy, RetryConfig
@@ -369,7 +369,6 @@ with Mix() as mix:
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
-
 ```python
 from mix_python_sdk import Mix
 from mix_python_sdk.utils import BackoffStrategy, RetryConfig
@@ -402,7 +401,6 @@ with Mix(
 | `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
-
 ```python
 from mix_python_sdk import Mix, errors
 
@@ -431,9 +429,7 @@ with Mix() as mix:
 ```
 
 ### Error Classes
-
 **Primary errors:**
-
 * [`MixError`](./src/mix_python_sdk/errors/mixerror.py): The base class for HTTP error responses.
   * [`ErrorResponse`](./src/mix_python_sdk/errors/errorresponse.py): Generic error.
 
@@ -442,13 +438,12 @@ with Mix() as mix:
 <br />
 
 **Network errors:**
-
 * [`httpx.RequestError`](https://www.python-httpx.org/exceptions/#httpx.RequestError): Base class for request errors.
-  * [`httpx.ConnectError`](https://www.python-httpx.org/exceptions/#httpx.ConnectError): HTTP client was unable to make a request to a server.
-  * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
+    * [`httpx.ConnectError`](https://www.python-httpx.org/exceptions/#httpx.ConnectError): HTTP client was unable to make a request to a server.
+    * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
+
 
 **Inherit from [`MixError`](./src/mix_python_sdk/errors/mixerror.py)**:
-
 * [`ResponseValidationError`](./src/mix_python_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -460,7 +455,6 @@ with Mix() as mix:
 ### Override Server URL Per-Client
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-
 ```python
 from mix_python_sdk import Mix
 
@@ -485,7 +479,6 @@ Depending on whether you are using the sync or async version of the SDK, you can
 This allows you to wrap the client with your own custom logic, such as adding custom headers, logging, or error handling, or you can just pass an instance of `httpx.Client` or `httpx.AsyncClient` directly.
 
 For example, you could specify a header for every request that this sdk makes as follows:
-
 ```python
 from mix_python_sdk import Mix
 import httpx
@@ -495,7 +488,6 @@ s = Mix(client=http_client)
 ```
 
 or you could wrap the client with your own custom logic:
-
 ```python
 from mix_python_sdk import Mix
 from mix_python_sdk.httpclient import AsyncHttpClient
@@ -565,6 +557,7 @@ s = Mix(async_client=CustomClient(httpx.AsyncClient()))
 
 The `Mix` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
 
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
 from mix_python_sdk import Mix
@@ -588,7 +581,6 @@ async def amain():
 You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
-
 ```python
 from mix_python_sdk import Mix
 import logging
