@@ -243,8 +243,7 @@ asyncio.run(main())
 
 * [get_history](docs/sdks/messages/README.md#get_history) - Get global message history
 * [list_session](docs/sdks/messages/README.md#list_session) - List session messages
-* [send](docs/sdks/messages/README.md#send) - Send a message to session
-
+* [send](docs/sdks/messages/README.md#send) - Send a message to session (async)
 
 ### [permissions](docs/sdks/permissions/README.md)
 

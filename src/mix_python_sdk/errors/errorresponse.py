@@ -13,7 +13,7 @@ class ErrorResponseData(BaseModel):
     error: models_resterror.RESTError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ErrorResponse(MixError):
     data: ErrorResponseData = field(hash=False)
 

@@ -1187,7 +1187,7 @@ paths:
         - "Messages"
       x-speakeasy-name-override: "listSession"
     post:
-      description: "Send a user message to a specific session for AI processing"
+      description: "Send a user message to a specific session for AI processing. Returns immediately with 202 Accepted. All results stream via Server-Sent Events (SSE) connection."
       operationId: "sendMessage"
       parameters:
         - description: "Session ID"
@@ -1213,11 +1213,23 @@ paths:
               type: "object"
         required: true
       responses:
-        "200":
+        "202":
           content:
             "application/json":
-              schema: {"$ref": "#/components/schemas/BackendMessage"}
-          description: "Message sent and processed"
+              schema:
+                properties:
+                  "sessionId":
+                    description: "Session ID for the processing task"
+                    type: "string"
+                  "status":
+                    description: "Processing status"
+                    example: "processing"
+                    type: "string"
+                required:
+                  - "status"
+                  - "sessionId"
+                type: "object"
+          description: "Message accepted for processing. Agent runs asynchronously and streams results via SSE."
         "400":
           content:
             "application/json":
@@ -1228,7 +1240,7 @@ paths:
             "application/json":
               schema: {"$ref": "#/components/schemas/ErrorResponse"}
           description: "Session not found"
-      summary: "Send a message to session"
+      summary: "Send a message to session (async)"
       tags:
         - "Messages"
       x-speakeasy-name-override: "send"

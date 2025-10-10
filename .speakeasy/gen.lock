@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 180a7c543da80f87d8701847a23df8d3
+  docChecksum: d89278ed9b47d0fd5053c8eed69be90b
   docVersion: 1.0.0
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 0.6.4
-  configChecksum: 5a9b382dc5b0cbdfadd081b3460028c0
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 0.6.5
+  configChecksum: aedb8d866eb8323ca358ba38d94650fb
   published: true
 features:
   python:
@@ -22,7 +22,7 @@ features:
     flattening: 3.1.1
     globalSecurityCallbacks: 1.0.0
     globalServerURLs: 3.1.1
-    groups: 3.0.0
+    groups: 3.0.1
     methodArguments: 1.0.2
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
@@ -30,7 +30,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    serverEvents: 1.0.10
+    serverEvents: 1.0.11
     unions: 3.1.0
     uploadStreams: 1.0.0
 generatedFiles:
@@ -97,6 +97,7 @@ generatedFiles:
   - docs/models/rewindsessionrequestbody.md
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
+  - docs/models/sendmessageresponse.md
   - docs/models/sessiondata.md
   - docs/models/ssecompleteevent.md
   - docs/models/ssecompleteeventdata.md
@@ -157,7 +158,6 @@ generatedFiles:
   - docs/sdks/authentication/README.md
   - docs/sdks/files/README.md
   - docs/sdks/messages/README.md
-  - docs/sdks/mix/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/preferencessdk/README.md
   - docs/sdks/sessions/README.md
@@ -358,6 +358,8 @@ examples:
           application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "toolCalls": [{"finished": true, "id": "<id>", "input": "<value>", "name": "brave_search", "type": "<value>"}], "userInput": "<value>"}
         "400":
           application/json: {"error": {"code": 600162, "message": "<value>", "type": "validation_error"}}
+        "202":
+          application/json: {"sessionId": "<id>", "status": "processing"}
   denyPermission:
     speakeasy-default-deny-permission:
       parameters:

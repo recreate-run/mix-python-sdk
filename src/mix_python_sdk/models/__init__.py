@@ -141,6 +141,8 @@ if TYPE_CHECKING:
         SendMessageRequestBody,
         SendMessageRequestBodyTypedDict,
         SendMessageRequestTypedDict,
+        SendMessageResponse,
+        SendMessageResponseTypedDict,
     )
     from .sessiondata import SessionData, SessionDataTypedDict
     from .sseeventstream import (
@@ -431,6 +433,8 @@ __all__ = [
     "SendMessageRequestBody",
     "SendMessageRequestBodyTypedDict",
     "SendMessageRequestTypedDict",
+    "SendMessageResponse",
+    "SendMessageResponseTypedDict",
     "SessionData",
     "SessionDataTypedDict",
     "StartOAuthFlowRequest",
@@ -568,6 +572,8 @@ _dynamic_imports: dict[str, str] = {
     "SendMessageRequestBody": ".sendmessageop",
     "SendMessageRequestBodyTypedDict": ".sendmessageop",
     "SendMessageRequestTypedDict": ".sendmessageop",
+    "SendMessageResponse": ".sendmessageop",
+    "SendMessageResponseTypedDict": ".sendmessageop",
     "SessionData": ".sessiondata",
     "SessionDataTypedDict": ".sessiondata",
     "Params": ".sseeventstream",

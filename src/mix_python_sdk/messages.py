@@ -77,7 +77,7 @@ class Messages(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMessageHistory",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -171,7 +171,7 @@ class Messages(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMessageHistory",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -262,7 +262,7 @@ class Messages(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getSessionMessages",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -350,7 +350,7 @@ class Messages(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getSessionMessages",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -383,10 +383,10 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.BackendMessage:
-        r"""Send a message to session
+    ) -> models.SendMessageResponse:
+        r"""Send a message to session (async)
 
-        Send a user message to a specific session for AI processing
+        Send a user message to a specific session for AI processing. Returns immediately with 202 Accepted. All results stream via Server-Sent Events (SSE) connection.
 
         :param id: Session ID
         :param text: The text content of the message
@@ -453,7 +453,7 @@ class Messages(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="sendMessage",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -462,8 +462,8 @@ class Messages(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.BackendMessage, http_res)
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(models.SendMessageResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
@@ -486,10 +486,10 @@ class Messages(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.BackendMessage:
-        r"""Send a message to session
+    ) -> models.SendMessageResponse:
+        r"""Send a message to session (async)
 
-        Send a user message to a specific session for AI processing
+        Send a user message to a specific session for AI processing. Returns immediately with 202 Accepted. All results stream via Server-Sent Events (SSE) connection.
 
         :param id: Session ID
         :param text: The text content of the message
@@ -556,7 +556,7 @@ class Messages(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="sendMessage",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -565,8 +565,8 @@ class Messages(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.BackendMessage, http_res)
+        if utils.match_response(http_res, "202", "application/json"):
+            return unmarshal_json_response(models.SendMessageResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)

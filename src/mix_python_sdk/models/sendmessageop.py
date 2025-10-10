@@ -3,6 +3,7 @@
 from __future__ import annotations
 from mix_python_sdk.types import BaseModel
 from mix_python_sdk.utils import FieldMetadata, PathParamMetadata, RequestMetadata
+import pydantic
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -38,3 +39,22 @@ class SendMessageRequest(BaseModel):
         SendMessageRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+
+class SendMessageResponseTypedDict(TypedDict):
+    r"""Message accepted for processing. Agent runs asynchronously and streams results via SSE."""
+
+    session_id: str
+    r"""Session ID for the processing task"""
+    status: str
+    r"""Processing status"""
+
+
+class SendMessageResponse(BaseModel):
+    r"""Message accepted for processing. Agent runs asynchronously and streams results via SSE."""
+
+    session_id: Annotated[str, pydantic.Field(alias="sessionId")]
+    r"""Session ID for the processing task"""
+
+    status: str
+    r"""Processing status"""

@@ -7,7 +7,7 @@
 
 * [get_history](#get_history) - Get global message history
 * [list_session](#list_session) - List session messages
-* [send](#send) - Send a message to session
+* [send](#send) - Send a message to session (async)
 
 ## get_history
 
@@ -89,7 +89,7 @@ with Mix() as mix:
 
 ## send
 
-Send a user message to a specific session for AI processing
+Send a user message to a specific session for AI processing. Returns immediately with 202 Accepted. All results stream via Server-Sent Events (SSE) connection.
 
 ### Example Usage
 
@@ -118,7 +118,7 @@ with Mix() as mix:
 
 ### Response
 
-**[models.BackendMessage](../../models/backendmessage.md)**
+**[models.SendMessageResponse](../../models/sendmessageresponse.md)**
 
 ### Errors
 
