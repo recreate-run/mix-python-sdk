@@ -83,3 +83,9 @@ value: models.SSEToolExecutionCompleteEvent = /* values here */
 value: models.SSEToolExecutionStartEvent = /* values here */
 ```
 
+### `models.SSEToolParameterDeltaEvent`
+
+```python
+value: models.SSEToolParameterDeltaEvent = /* values here */
+```
+

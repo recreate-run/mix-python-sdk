@@ -18,6 +18,7 @@ SSESessionDeletedEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -78,6 +79,7 @@ SSESessionCreatedEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -148,6 +150,7 @@ SSESummarizeEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -213,6 +216,7 @@ SSEPermissionEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -311,6 +315,7 @@ SSEToolExecutionCompleteEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -386,6 +391,7 @@ SSEToolExecutionStartEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -448,6 +454,72 @@ class SSEToolExecutionStartEvent(BaseModel):
     r"""Client retry interval in milliseconds"""
 
 
+SSEToolParameterDeltaEventEvent = Literal[
+    "connected",
+    "heartbeat",
+    "error",
+    "complete",
+    "thinking",
+    "content",
+    "tool",
+    "tool_parameter_delta",
+    "tool_execution_start",
+    "tool_execution_complete",
+    "permission",
+    "summarize",
+    "session_created",
+    "session_deleted",
+]
+r"""Event type identifier"""
+
+
+class SSEToolParameterDeltaEventDataTypedDict(TypedDict):
+    input: str
+    r"""Partial JSON parameter delta - may not be parseable until complete"""
+    tool_call_id: str
+    r"""Tool call identifier for correlation"""
+    type: str
+    r"""Tool parameter delta event type"""
+
+
+class SSEToolParameterDeltaEventData(BaseModel):
+    input: str
+    r"""Partial JSON parameter delta - may not be parseable until complete"""
+
+    tool_call_id: Annotated[str, pydantic.Field(alias="toolCallId")]
+    r"""Tool call identifier for correlation"""
+
+    type: str
+    r"""Tool parameter delta event type"""
+
+
+class SSEToolParameterDeltaEventTypedDict(TypedDict):
+    r"""Base SSE event with standard fields"""
+
+    event: SSEToolParameterDeltaEventEvent
+    r"""Event type identifier"""
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+    data: SSEToolParameterDeltaEventDataTypedDict
+    retry: NotRequired[int]
+    r"""Client retry interval in milliseconds"""
+
+
+class SSEToolParameterDeltaEvent(BaseModel):
+    r"""Base SSE event with standard fields"""
+
+    event: SSEToolParameterDeltaEventEvent
+    r"""Event type identifier"""
+
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+
+    data: SSEToolParameterDeltaEventData
+
+    retry: Optional[int] = None
+    r"""Client retry interval in milliseconds"""
+
+
 SSEToolEventEvent = Literal[
     "connected",
     "heartbeat",
@@ -456,6 +528,7 @@ SSEToolEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -531,6 +604,7 @@ SSEContentEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -591,6 +665,7 @@ SSEThinkingEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -651,6 +726,7 @@ SSECompleteEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -733,6 +809,7 @@ SSEErrorEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -808,6 +885,7 @@ SSEHeartbeatEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -863,6 +941,7 @@ SSEConnectedEventEvent = Literal[
     "thinking",
     "content",
     "tool",
+    "tool_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
@@ -920,6 +999,7 @@ SSEEventStreamTypedDict = TypeAliasType(
         SSEThinkingEventTypedDict,
         SSEContentEventTypedDict,
         SSEToolEventTypedDict,
+        SSEToolParameterDeltaEventTypedDict,
         SSEToolExecutionStartEventTypedDict,
         SSEToolExecutionCompleteEventTypedDict,
         SSEPermissionEventTypedDict,
@@ -946,6 +1026,7 @@ SSEEventStream = Annotated[
         Annotated[SSEToolEvent, Tag("tool")],
         Annotated[SSEToolExecutionCompleteEvent, Tag("tool_execution_complete")],
         Annotated[SSEToolExecutionStartEvent, Tag("tool_execution_start")],
+        Annotated[SSEToolParameterDeltaEvent, Tag("tool_parameter_delta")],
     ],
     Discriminator(lambda m: get_discriminator(m, "event", "event")),
 ]

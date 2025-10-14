@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: d89278ed9b47d0fd5053c8eed69be90b
+  docChecksum: 12df33fd763dc3acdf795f491310571f
   docVersion: 1.0.0
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 0.6.5
-  configChecksum: aedb8d866eb8323ca358ba38d94650fb
+  releaseVersion: 0.6.6
+  configChecksum: 1e0789cbc0f83b2c7e8645c3b00e960b
   published: true
 features:
   python:
@@ -64,11 +64,14 @@ generatedFiles:
   - docs/models/forksessionrequest.md
   - docs/models/forksessionrequestbody.md
   - docs/models/getauthstatusauthmethod.md
+  - docs/models/getauthstatusproviders.md
   - docs/models/getauthstatusresponse.md
   - docs/models/getavailableprovidersresponse.md
   - docs/models/getcommandrequest.md
   - docs/models/getcommandresponse.md
   - docs/models/getmessagehistoryrequest.md
+  - docs/models/getoauthhealthproviders.md
+  - docs/models/getoauthhealthresponse.md
   - docs/models/getpreferencespreferences.md
   - docs/models/getpreferencesresponse.md
   - docs/models/getsessionfilerequest.md
@@ -90,7 +93,8 @@ generatedFiles:
   - docs/models/params.md
   - docs/models/promptmode.md
   - docs/models/provider.md
-  - docs/models/providers.md
+  - docs/models/providersstatus.md
+  - docs/models/refreshoauthtokensresponse.md
   - docs/models/resetpreferencesresponse.md
   - docs/models/resterror.md
   - docs/models/rewindsessionrequest.md
@@ -139,8 +143,12 @@ generatedFiles:
   - docs/models/ssetoolexecutionstartevent.md
   - docs/models/ssetoolexecutionstarteventdata.md
   - docs/models/ssetoolexecutionstarteventevent.md
+  - docs/models/ssetoolparameterdeltaevent.md
+  - docs/models/ssetoolparameterdeltaeventdata.md
+  - docs/models/ssetoolparameterdeltaeventevent.md
   - docs/models/startoauthflowrequest.md
   - docs/models/startoauthflowresponse.md
+  - docs/models/status.md
   - docs/models/storeapikeyrequest.md
   - docs/models/storeapikeyresponse.md
   - docs/models/streameventsrequest.md
@@ -157,6 +165,8 @@ generatedFiles:
   - docs/models/validatepreferredproviderresponse.md
   - docs/sdks/authentication/README.md
   - docs/sdks/files/README.md
+  - docs/sdks/health/README.md
+  - docs/sdks/internal/README.md
   - docs/sdks/messages/README.md
   - docs/sdks/permissions/README.md
   - docs/sdks/preferencessdk/README.md
@@ -182,7 +192,9 @@ generatedFiles:
   - src/mix_python_sdk/errors/no_response_error.py
   - src/mix_python_sdk/errors/responsevalidationerror.py
   - src/mix_python_sdk/files.py
+  - src/mix_python_sdk/health.py
   - src/mix_python_sdk/httpclient.py
+  - src/mix_python_sdk/internal.py
   - src/mix_python_sdk/messages.py
   - src/mix_python_sdk/models/__init__.py
   - src/mix_python_sdk/models/backendmessage.py
@@ -203,6 +215,7 @@ generatedFiles:
   - src/mix_python_sdk/models/getavailableprovidersop.py
   - src/mix_python_sdk/models/getcommandop.py
   - src/mix_python_sdk/models/getmessagehistoryop.py
+  - src/mix_python_sdk/models/getoauthhealthop.py
   - src/mix_python_sdk/models/getpreferencesop.py
   - src/mix_python_sdk/models/getsessionfileop.py
   - src/mix_python_sdk/models/getsessionmessagesop.py
@@ -215,6 +228,7 @@ generatedFiles:
   - src/mix_python_sdk/models/listcommandsop.py
   - src/mix_python_sdk/models/listmcpserversop.py
   - src/mix_python_sdk/models/listsessionfilesop.py
+  - src/mix_python_sdk/models/refreshoauthtokensop.py
   - src/mix_python_sdk/models/resetpreferencesop.py
   - src/mix_python_sdk/models/resterror.py
   - src/mix_python_sdk/models/rewindsessionop.py
@@ -680,4 +694,18 @@ examples:
           application/json: {"storageBasePath": "<value>"}
         "500":
           application/json: {"error": {"code": 39436, "message": "<value>", "type": "internal_error"}}
+  getOAuthHealth:
+    speakeasy-default-get-O-auth-health:
+      responses:
+        "200":
+          application/json: {"providers": {"key": {"expires_in": "2h30m15s", "provider": "<value>", "status": "expired"}}, "status": "healthy", "timestamp": "2024-10-11T14:02:57.011Z"}
+        "500":
+          application/json: {"error": {"code": 52281, "message": "<value>", "type": "internal_error"}}
+  refreshOAuthTokens:
+    speakeasy-default-refresh-O-auth-tokens:
+      responses:
+        "200":
+          application/json: {"message": "Token refresh triggered successfully", "status": "success"}
+        "500":
+          application/json: {"error": {"code": 726372, "message": "<value>", "type": "bad_request"}}
 examplesVersion: 1.0.2

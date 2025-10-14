@@ -17,6 +17,8 @@ import weakref
 if TYPE_CHECKING:
     from mix_python_sdk.authentication import Authentication
     from mix_python_sdk.files import Files
+    from mix_python_sdk.health import Health
+    from mix_python_sdk.internal import Internal
     from mix_python_sdk.messages import Messages
     from mix_python_sdk.permissions import Permissions
     from mix_python_sdk.preferences_sdk import PreferencesSDK
@@ -37,6 +39,8 @@ class Mix(BaseSDK):
     sessions: "Sessions"
     files: "Files"
     tools: "Tools"
+    health: "Health"
+    internal: "Internal"
     streaming: "Streaming"
     _sub_sdk_map = {
         "authentication": ("mix_python_sdk.authentication", "Authentication"),
@@ -47,6 +51,8 @@ class Mix(BaseSDK):
         "sessions": ("mix_python_sdk.sessions", "Sessions"),
         "files": ("mix_python_sdk.files", "Files"),
         "tools": ("mix_python_sdk.tools", "Tools"),
+        "health": ("mix_python_sdk.health", "Health"),
+        "internal": ("mix_python_sdk.internal", "Internal"),
         "streaming": ("mix_python_sdk.streaming", "Streaming"),
     }
 

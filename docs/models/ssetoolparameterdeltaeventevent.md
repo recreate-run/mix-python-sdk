@@ -1,4 +1,4 @@
-# SSEErrorEventEvent
+# SSEToolParameterDeltaEventEvent
 
 Event type identifier
 

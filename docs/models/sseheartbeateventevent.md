@@ -14,6 +14,7 @@ Event type identifier
 | `THINKING`                | thinking                  |
 | `CONTENT`                 | content                   |
 | `TOOL`                    | tool                      |
+| `TOOL_PARAMETER_DELTA`    | tool_parameter_delta      |
 | `TOOL_EXECUTION_START`    | tool_execution_start      |
 | `TOOL_EXECUTION_COMPLETE` | tool_execution_complete   |
 | `PERMISSION`              | permission                |

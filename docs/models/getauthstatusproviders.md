@@ -1,4 +1,4 @@
-# Providers
+# GetAuthStatusProviders
 
 
 ## Fields

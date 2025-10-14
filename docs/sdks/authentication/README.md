@@ -11,6 +11,8 @@
 * [get_auth_status](#get_auth_status) - Get authentication status
 * [validate_preferred_provider](#validate_preferred_provider) - Validate preferred provider
 * [delete_credentials](#delete_credentials) - Delete provider credentials
+* [get_o_auth_health](#get_o_auth_health) - Get OAuth authentication health
+* [refresh_o_auth_tokens](#refresh_o_auth_tokens) - Manually refresh OAuth tokens
 
 ## store_api_key
 
@@ -242,5 +244,79 @@ with Mix() as mix:
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorResponse   | 400                    | application/json       |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
+
+## get_o_auth_health
+
+Get health status of all OAuth credentials including expiry information. Health statuses: 'healthy' (all tokens valid), 'degraded' (some tokens expired but refreshable), 'unhealthy' (tokens expired without refresh capability)
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getOAuthHealth" method="get" path="/health/auth" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.authentication.get_o_auth_health()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.GetOAuthHealthResponse](../../models/getoauthhealthresponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 500                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
+
+## refresh_o_auth_tokens
+
+Manually trigger OAuth token refresh for all expired tokens. Normally tokens are refreshed automatically by the background service every 30 minutes.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="refreshOAuthTokens" method="post" path="/internal/auth/refresh-tokens" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.authentication.refresh_o_auth_tokens()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.RefreshOAuthTokensResponse](../../models/refreshoauthtokensresponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorResponse   | 500                    | application/json       |
 | errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |

@@ -231,6 +231,8 @@ asyncio.run(main())
 * [get_auth_status](docs/sdks/authentication/README.md#get_auth_status) - Get authentication status
 * [validate_preferred_provider](docs/sdks/authentication/README.md#validate_preferred_provider) - Validate preferred provider
 * [delete_credentials](docs/sdks/authentication/README.md#delete_credentials) - Delete provider credentials
+* [get_o_auth_health](docs/sdks/authentication/README.md#get_o_auth_health) - Get OAuth authentication health
+* [refresh_o_auth_tokens](docs/sdks/authentication/README.md#refresh_o_auth_tokens) - Manually refresh OAuth tokens
 
 ### [files](docs/sdks/files/README.md)
 
@@ -238,6 +240,14 @@ asyncio.run(main())
 * [upload_session_file](docs/sdks/files/README.md#upload_session_file) - Upload file to session
 * [delete_session_file](docs/sdks/files/README.md#delete_session_file) - Delete session file
 * [get_session_file](docs/sdks/files/README.md#get_session_file) - Get session file
+
+### [health](docs/sdks/health/README.md)
+
+* [get_o_auth_health](docs/sdks/health/README.md#get_o_auth_health) - Get OAuth authentication health
+
+### [internal](docs/sdks/internal/README.md)
+
+* [refresh_o_auth_tokens](docs/sdks/internal/README.md#refresh_o_auth_tokens) - Manually refresh OAuth tokens
 
 ### [messages](docs/sdks/messages/README.md)
 
@@ -430,7 +440,7 @@ with Mix() as mix:
 ### Error Classes
 **Primary errors:**
 * [`MixError`](./src/mix_python_sdk/errors/mixerror.py): The base class for HTTP error responses.
-  * [`ErrorResponse`](./src/mix_python_sdk/errors/errorresponse.py): Generic error.
+  * [`ErrorResponse`](./src/mix_python_sdk/errors/errorresponse.py): *
 
 <details><summary>Less common errors (5)</summary>
 
@@ -446,6 +456,8 @@ with Mix() as mix:
 * [`ResponseValidationError`](./src/mix_python_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

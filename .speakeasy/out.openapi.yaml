@@ -1395,6 +1395,108 @@ paths:
       tags:
         - "System"
       x-speakeasy-name-override: "getHealth"
+  "/health/auth":
+    get:
+      description: "Get health status of all OAuth credentials including expiry information. Health statuses: 'healthy' (all tokens valid), 'degraded' (some tokens expired but refreshable), 'unhealthy' (tokens expired without refresh capability)"
+      operationId: "getOAuthHealth"
+      responses:
+        "200":
+          content:
+            "application/json":
+              schema:
+                properties:
+                  "providers":
+                    additionalProperties:
+                      properties:
+                        "error":
+                          description: "Error message if status is 'error'"
+                          type: "string"
+                        "expires_at":
+                          description: "Token expiration time"
+                          format: "date-time"
+                          type: "string"
+                        "expires_in":
+                          description: "Human-readable time until expiration"
+                          example: "2h30m15s"
+                          type: "string"
+                        "last_refresh":
+                          description: "Last time token was refreshed"
+                          format: "date-time"
+                          type: "string"
+                        "provider":
+                          description: "Provider name"
+                          type: "string"
+                        "status":
+                          description: "Token status"
+                          enum:
+                            - "active"
+                            - "expired"
+                            - "expired_no_refresh"
+                            - "error"
+                            - "not_found"
+                          type: "string"
+                      required:
+                        - "provider"
+                        - "status"
+                      type: "object"
+                    description: "Map of provider OAuth health status"
+                    type: "object"
+                  "status":
+                    description: "Overall health status"
+                    enum:
+                      - "healthy"
+                      - "degraded"
+                      - "unhealthy"
+                    example: "healthy"
+                    type: "string"
+                  "timestamp":
+                    description: "Health check timestamp"
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "status"
+                  - "providers"
+                  - "timestamp"
+                type: "object"
+          description: "OAuth health status"
+        "500":
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
+          description: "Health check service not available or internal error"
+      summary: "Get OAuth authentication health"
+      tags:
+        - "Health"
+        - "Authentication"
+  "/internal/auth/refresh-tokens":
+    post:
+      description: "Manually trigger OAuth token refresh for all expired tokens. Normally tokens are refreshed automatically by the background service every 30 minutes."
+      operationId: "refreshOAuthTokens"
+      responses:
+        "200":
+          content:
+            "application/json":
+              schema:
+                properties:
+                  "message":
+                    description: "Status message"
+                    example: "Token refresh triggered successfully"
+                    type: "string"
+                  "status":
+                    description: "Operation status"
+                    example: "success"
+                    type: "string"
+                type: "object"
+          description: "Token refresh triggered"
+        "500":
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ErrorResponse"}
+          description: "Token refresh service not available or internal error"
+      summary: "Manually refresh OAuth tokens"
+      tags:
+        - "Authentication"
+        - "Internal"
   "/stream":
     get:
       description: "Establishes a persistent SSE connection for receiving real-time updates during message processing. Connection remains open for multiple messages and includes proper reconnection support with Last-Event-ID header."
@@ -1715,6 +1817,7 @@ components:
             - "thinking"
             - "content"
             - "tool"
+            - "tool_parameter_delta"
             - "tool_execution_start"
             - "tool_execution_complete"
             - "permission"
@@ -1843,6 +1946,7 @@ components:
           "tool": "#/components/schemas/SSEToolEvent"
           "tool_execution_complete": "#/components/schemas/SSEToolExecutionCompleteEvent"
           "tool_execution_start": "#/components/schemas/SSEToolExecutionStartEvent"
+          "tool_parameter_delta": "#/components/schemas/SSEToolParameterDeltaEvent"
         propertyName: "event"
       oneOf:
         - {"$ref": "#/components/schemas/SSEConnectedEvent"}
@@ -1852,6 +1956,7 @@ components:
         - {"$ref": "#/components/schemas/SSEThinkingEvent"}
         - {"$ref": "#/components/schemas/SSEContentEvent"}
         - {"$ref": "#/components/schemas/SSEToolEvent"}
+        - {"$ref": "#/components/schemas/SSEToolParameterDeltaEvent"}
         - {"$ref": "#/components/schemas/SSEToolExecutionStartEvent"}
         - {"$ref": "#/components/schemas/SSEToolExecutionCompleteEvent"}
         - {"$ref": "#/components/schemas/SSEPermissionEvent"}
@@ -2084,6 +2189,29 @@ components:
                 - "toolName"
                 - "progress"
                 - "toolCallId"
+              type: "object"
+          required:
+            - "data"
+          type: "object"
+    "SSEToolParameterDeltaEvent":
+      allOf:
+        - {"$ref": "#/components/schemas/SSEBaseEvent"}
+        - properties:
+            "data":
+              properties:
+                "input":
+                  description: "Partial JSON parameter delta - may not be parseable until complete"
+                  type: "string"
+                "toolCallId":
+                  description: "Tool call identifier for correlation"
+                  type: "string"
+                "type":
+                  description: "Tool parameter delta event type"
+                  type: "string"
+              required:
+                - "type"
+                - "toolCallId"
+                - "input"
               type: "object"
           required:
             - "data"

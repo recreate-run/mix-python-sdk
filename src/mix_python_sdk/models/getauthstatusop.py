@@ -14,7 +14,7 @@ GetAuthStatusAuthMethod = Literal[
 r"""Authentication method (oauth, api_key, none)"""
 
 
-class ProvidersTypedDict(TypedDict):
+class GetAuthStatusProvidersTypedDict(TypedDict):
     auth_method: NotRequired[GetAuthStatusAuthMethod]
     r"""Authentication method (oauth, api_key, none)"""
     authenticated: NotRequired[bool]
@@ -23,7 +23,7 @@ class ProvidersTypedDict(TypedDict):
     r"""User-friendly provider name"""
 
 
-class Providers(BaseModel):
+class GetAuthStatusProviders(BaseModel):
     auth_method: Optional[GetAuthStatusAuthMethod] = None
     r"""Authentication method (oauth, api_key, none)"""
 
@@ -37,12 +37,12 @@ class Providers(BaseModel):
 class GetAuthStatusResponseTypedDict(TypedDict):
     r"""Authentication status for all providers"""
 
-    providers: NotRequired[Dict[str, ProvidersTypedDict]]
+    providers: NotRequired[Dict[str, GetAuthStatusProvidersTypedDict]]
     r"""Map of provider authentication status"""
 
 
 class GetAuthStatusResponse(BaseModel):
     r"""Authentication status for all providers"""
 
-    providers: Optional[Dict[str, Providers]] = None
+    providers: Optional[Dict[str, GetAuthStatusProviders]] = None
     r"""Map of provider authentication status"""
