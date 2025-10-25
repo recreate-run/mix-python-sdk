@@ -36,7 +36,7 @@ class CoreToolName(str, Enum):
     SEARCH = "search"
     TODO_WRITE = "todo_write"
     EXIT_PLAN_MODE = "exit_plan_mode"
-    SHOW_MEDIA = "show_media"
+    SHOW_MEDIA = "ShowMedia"
     TASK = "task"
 
 
