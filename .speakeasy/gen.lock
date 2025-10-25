@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: 12df33fd763dc3acdf795f491310571f
+  docChecksum: d2d44c2cb631e27e3dab8da35bde3e79
   docVersion: 1.0.0
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 0.6.6
-  configChecksum: 1e0789cbc0f83b2c7e8645c3b00e960b
+  speakeasyVersion: 1.639.3
+  generationVersion: 2.730.5
+  releaseVersion: 0.7.0
+  configChecksum: 73ba36dc87bd7ec557f259f7b5192294
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.22.1
+    core: 5.23.0
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     downloadStreams: 1.0.1
@@ -43,11 +43,15 @@ generatedFiles:
   - docs/errors/errorresponse.md
   - docs/models/availableproviders.md
   - docs/models/backendmessage.md
+  - docs/models/callback.md
+  - docs/models/callbackresultdata.md
+  - docs/models/callbackresultdatacallbacktype.md
+  - docs/models/callbacktype.md
   - docs/models/cancelsessionprocessingrequest.md
   - docs/models/cancelsessionprocessingresponse.md
-  - docs/models/categories.md
   - docs/models/coretoolname.md
   - docs/models/createsessionrequest.md
+  - docs/models/createsessionsessiontype.md
   - docs/models/deletecredentialsrequest.md
   - docs/models/deletecredentialsresponse.md
   - docs/models/deletesessionfilerequest.md
@@ -78,6 +82,10 @@ generatedFiles:
   - docs/models/getsessionmessagesrequest.md
   - docs/models/getsessionrequest.md
   - docs/models/getsysteminforesponse.md
+  - docs/models/gettoolcredentialsstatuscategories.md
+  - docs/models/gettoolcredentialsstatusresponse.md
+  - docs/models/gettoolcredentialsstatustool.md
+  - docs/models/gettoolsstatuscategories.md
   - docs/models/gettoolsstatusresponse.md
   - docs/models/gettoolsstatustool.md
   - docs/models/grantpermissionrequest.md
@@ -87,9 +95,13 @@ generatedFiles:
   - docs/models/healthcheckresponse.md
   - docs/models/inputjson.md
   - docs/models/listcommandsresponse.md
+  - docs/models/listllmtoolsresponse.md
+  - docs/models/listllmtoolstool.md
   - docs/models/listmcpserversresponse.md
   - docs/models/listmcpserverstool.md
   - docs/models/listsessionfilesrequest.md
+  - docs/models/listsessionsrequest.md
+  - docs/models/parameters.md
   - docs/models/params.md
   - docs/models/promptmode.md
   - docs/models/provider.md
@@ -97,12 +109,14 @@ generatedFiles:
   - docs/models/refreshoauthtokensresponse.md
   - docs/models/resetpreferencesresponse.md
   - docs/models/resterror.md
+  - docs/models/resterrortype.md
   - docs/models/rewindsessionrequest.md
   - docs/models/rewindsessionrequestbody.md
   - docs/models/sendmessagerequest.md
   - docs/models/sendmessagerequestbody.md
   - docs/models/sendmessageresponse.md
   - docs/models/sessiondata.md
+  - docs/models/sessiontype.md
   - docs/models/ssecompleteevent.md
   - docs/models/ssecompleteeventdata.md
   - docs/models/ssecompleteeventevent.md
@@ -128,9 +142,6 @@ generatedFiles:
   - docs/models/ssesessiondeletedevent.md
   - docs/models/ssesessiondeletedeventdata.md
   - docs/models/ssesessiondeletedeventevent.md
-  - docs/models/ssesummarizeevent.md
-  - docs/models/ssesummarizeeventdata.md
-  - docs/models/ssesummarizeeventevent.md
   - docs/models/ssethinkingevent.md
   - docs/models/ssethinkingeventdata.md
   - docs/models/ssethinkingeventevent.md
@@ -146,6 +157,9 @@ generatedFiles:
   - docs/models/ssetoolparameterdeltaevent.md
   - docs/models/ssetoolparameterdeltaeventdata.md
   - docs/models/ssetoolparameterdeltaeventevent.md
+  - docs/models/sseusermessagecreatedevent.md
+  - docs/models/sseusermessagecreatedeventdata.md
+  - docs/models/sseusermessagecreatedeventevent.md
   - docs/models/startoauthflowrequest.md
   - docs/models/startoauthflowresponse.md
   - docs/models/status.md
@@ -153,11 +167,13 @@ generatedFiles:
   - docs/models/storeapikeyresponse.md
   - docs/models/streameventsrequest.md
   - docs/models/streameventsresponse.md
+  - docs/models/subagenttype.md
   - docs/models/toolcalldata.md
   - docs/models/toolname.md
-  - docs/models/type.md
   - docs/models/updatepreferencesrequest.md
   - docs/models/updatepreferencesresponse.md
+  - docs/models/updatesessioncallbacksrequest.md
+  - docs/models/updatesessioncallbacksrequestbody.md
   - docs/models/uploadsessionfilerequest.md
   - docs/models/uploadsessionfilerequestbody.md
   - docs/models/utils/retryconfig.md
@@ -198,6 +214,8 @@ generatedFiles:
   - src/mix_python_sdk/messages.py
   - src/mix_python_sdk/models/__init__.py
   - src/mix_python_sdk/models/backendmessage.py
+  - src/mix_python_sdk/models/callback.py
+  - src/mix_python_sdk/models/callbackresultdata.py
   - src/mix_python_sdk/models/cancelsessionprocessingop.py
   - src/mix_python_sdk/models/coretoolname.py
   - src/mix_python_sdk/models/createsessionop.py
@@ -221,13 +239,16 @@ generatedFiles:
   - src/mix_python_sdk/models/getsessionmessagesop.py
   - src/mix_python_sdk/models/getsessionop.py
   - src/mix_python_sdk/models/getsysteminfoop.py
+  - src/mix_python_sdk/models/gettoolcredentialsstatusop.py
   - src/mix_python_sdk/models/gettoolsstatusop.py
   - src/mix_python_sdk/models/grantpermissionop.py
   - src/mix_python_sdk/models/handleoauthcallbackop.py
   - src/mix_python_sdk/models/healthcheckop.py
   - src/mix_python_sdk/models/listcommandsop.py
+  - src/mix_python_sdk/models/listllmtoolsop.py
   - src/mix_python_sdk/models/listmcpserversop.py
   - src/mix_python_sdk/models/listsessionfilesop.py
+  - src/mix_python_sdk/models/listsessionsop.py
   - src/mix_python_sdk/models/refreshoauthtokensop.py
   - src/mix_python_sdk/models/resetpreferencesop.py
   - src/mix_python_sdk/models/resterror.py
@@ -241,6 +262,7 @@ generatedFiles:
   - src/mix_python_sdk/models/toolcalldata.py
   - src/mix_python_sdk/models/toolname.py
   - src/mix_python_sdk/models/updatepreferencesop.py
+  - src/mix_python_sdk/models/updatesessioncallbacksop.py
   - src/mix_python_sdk/models/uploadsessionfileop.py
   - src/mix_python_sdk/models/validatepreferredproviderop.py
   - src/mix_python_sdk/permissions.py
@@ -400,9 +422,12 @@ examples:
           application/json: {"error": {"code": 96400, "message": "<value>", "type": "internal_error"}}
   listSessions:
     speakeasy-default-list-sessions:
+      parameters:
+        query:
+          includeSubagents: false
       responses:
         "200":
-          application/json: [{"assistantMessageCount": 103950, "completionTokens": 539404, "cost": 7346.82, "createdAt": "2025-02-04T14:58:04.231Z", "id": "<id>", "promptTokens": 244425, "title": "<value>", "toolCallCount": 717181, "userMessageCount": 270800}]
+          application/json: [{"assistantMessageCount": 103950, "completionTokens": 539404, "cost": 7346.82, "createdAt": "2025-02-04T14:58:04.231Z", "id": "<id>", "promptTokens": 244425, "sessionType": "main", "title": "<value>", "toolCallCount": 717181, "userMessageCount": 270800}]
         "401":
           application/json: {"error": {"code": 306652, "message": "<value>", "type": "bad_request"}}
         "500":
@@ -418,28 +443,40 @@ examples:
           application/json: {"error": {"code": 481369, "message": "<value>", "type": "validation_error"}}
     invalid_prompt_mode:
       requestBody:
-        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "promptMode must be 'default', 'append', or 'replace'", "type": "validation_error"}}
     missing_title:
       requestBody:
-        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "title is required", "type": "validation_error"}}
     prompt_size_exceeded_append:
       requestBody:
-        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "Custom prompt size (75KB) exceeds append mode limit of 50KB", "type": "validation_error"}}
     prompt_size_exceeded_replace:
       requestBody:
-        application/json: {"customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "title": "<value>"}
+        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "Custom prompt size (150KB) exceeds replace mode limit of 100KB", "type": "validation_error"}}
+    invalid_session_type:
+      requestBody:
+        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "API can only create main sessions. Use /fork endpoint for forked sessions. Subagent sessions are created automatically.", "type": "validation_error"}}
+    subagent_type_not_allowed:
+      requestBody:
+        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "subagentType cannot be set for API-created sessions. Subagent sessions are created programmatically by the task delegation system.", "type": "validation_error"}}
   deleteSession:
     speakeasy-default-delete-session:
       parameters:
@@ -455,7 +492,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"assistantMessageCount": 387834, "completionTokens": 407862, "cost": 588.53, "createdAt": "2025-01-09T12:44:06.736Z", "id": "<id>", "promptTokens": 306630, "title": "<value>", "toolCallCount": 945765, "userMessageCount": 844040}
+          application/json: {"assistantMessageCount": 387834, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "sub_agent"}], "completionTokens": 407862, "cost": 588.53, "createdAt": "2025-01-09T12:44:06.736Z", "id": "<id>", "promptTokens": 306630, "sessionType": "forked", "title": "<value>", "toolCallCount": 945765, "userMessageCount": 844040}
         "404":
           application/json: {"error": {"code": 125836, "message": "<value>", "type": "validation_error"}}
   forkSession:
@@ -467,7 +504,7 @@ examples:
         application/json: {"messageIndex": 385832}
       responses:
         "201":
-          application/json: {"assistantMessageCount": 385832, "completionTokens": 551389, "cost": 5945.98, "createdAt": "2025-08-26T03:33:17.824Z", "id": "<id>", "promptTokens": 770117, "title": "<value>", "toolCallCount": 905266, "userMessageCount": 239157}
+          application/json: {"assistantMessageCount": 385832, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "sub_agent"}], "completionTokens": 551389, "cost": 5945.98, "createdAt": "2025-08-26T03:33:17.824Z", "id": "<id>", "promptTokens": 770117, "sessionType": "forked", "title": "<value>", "toolCallCount": 905266, "userMessageCount": 239157}
         "400":
           application/json: {"error": {"code": 654763, "message": "<value>", "type": "validation_error"}}
   storeApiKey:
@@ -672,7 +709,7 @@ examples:
         application/json: {"cleanupMedia": true, "messageId": "<id>"}
       responses:
         "200":
-          application/json: {"assistantMessageCount": 676019, "completionTokens": 18242, "cost": 1903.72, "createdAt": "2024-09-02T07:59:03.378Z", "id": "<id>", "promptTokens": 505203, "title": "<value>", "toolCallCount": 938253, "userMessageCount": 629623}
+          application/json: {"assistantMessageCount": 676019, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "completionTokens": 18242, "cost": 1903.72, "createdAt": "2024-09-02T07:59:03.378Z", "id": "<id>", "promptTokens": 505203, "sessionType": "main", "title": "<value>", "toolCallCount": 938253, "userMessageCount": 629623}
         "400":
           application/json: {"error": {"code": 877894, "message": "<value>", "type": "bad_request"}}
   exportSession:
@@ -708,4 +745,30 @@ examples:
           application/json: {"message": "Token refresh triggered successfully", "status": "success"}
         "500":
           application/json: {"error": {"code": 726372, "message": "<value>", "type": "bad_request"}}
+  updateSessionCallbacks:
+    speakeasy-default-update-session-callbacks:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"callbacks": []}
+      responses:
+        "200":
+          application/json: {"assistantMessageCount": 331297, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "bash_script"}], "completionTokens": 732683, "cost": 8068.84, "createdAt": "2023-06-04T19:02:08.923Z", "id": "<id>", "promptTokens": 460281, "sessionType": "main", "title": "<value>", "toolCallCount": 805406, "userMessageCount": 971135}
+        "400":
+          application/json: {"error": {"code": 585695, "message": "<value>", "type": "bad_request"}}
+  listLLMTools:
+    speakeasy-default-list-LLM-tools:
+      responses:
+        "200":
+          application/json: {"tools": [{"description": "Execute bash commands in a persistent shell session", "name": "Bash"}]}
+        "500":
+          application/json: {"error": {"code": 57152, "message": "<value>", "type": "unauthorized"}}
+  getToolCredentialsStatus:
+    speakeasy-default-get-tool-credentials-status:
+      responses:
+        "200":
+          application/json: {"categories": {"key": {"description": "Search the web for real-time information", "display_name": "Web Search", "icon": "\U0001F50D", "tools": [{"api_key_format": "BSA...", "api_key_required": true, "authenticated": true, "description": "Privacy-focused web search with real-time results", "display_name": "Brave Search", "provider": "brave"}]}}}
+        "500":
+          application/json: {"error": {"code": 725163, "message": "<value>", "type": "validation_error"}}
 examplesVersion: 1.0.2

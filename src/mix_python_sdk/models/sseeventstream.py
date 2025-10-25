@@ -22,7 +22,7 @@ SSESessionDeletedEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -83,7 +83,7 @@ SSESessionCreatedEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -142,7 +142,7 @@ class SSESessionCreatedEvent(BaseModel):
     r"""Client retry interval in milliseconds"""
 
 
-SSESummarizeEventEvent = Literal[
+SSEUserMessageCreatedEventEvent = Literal[
     "connected",
     "heartbeat",
     "error",
@@ -154,55 +154,62 @@ SSESummarizeEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
 r"""Event type identifier"""
 
 
-class SSESummarizeEventDataTypedDict(TypedDict):
-    done: bool
-    r"""Indicates if summarization is complete"""
-    progress: str
-    r"""Summarization progress description"""
+class SSEUserMessageCreatedEventDataTypedDict(TypedDict):
+    content: str
+    r"""Content of the user message"""
+    message_id: str
+    r"""ID of the created user message"""
     type: str
-    r"""Summarization event type"""
+    r"""User message created event type"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
-class SSESummarizeEventData(BaseModel):
-    done: bool
-    r"""Indicates if summarization is complete"""
+class SSEUserMessageCreatedEventData(BaseModel):
+    content: str
+    r"""Content of the user message"""
 
-    progress: str
-    r"""Summarization progress description"""
+    message_id: Annotated[str, pydantic.Field(alias="messageId")]
+    r"""ID of the created user message"""
 
     type: str
-    r"""Summarization event type"""
+    r"""User message created event type"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
-class SSESummarizeEventTypedDict(TypedDict):
+class SSEUserMessageCreatedEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
 
-    event: SSESummarizeEventEvent
+    event: SSEUserMessageCreatedEventEvent
     r"""Event type identifier"""
     id: str
     r"""Unique sequential event identifier for ordering and reconnection"""
-    data: SSESummarizeEventDataTypedDict
+    data: SSEUserMessageCreatedEventDataTypedDict
     retry: NotRequired[int]
     r"""Client retry interval in milliseconds"""
 
 
-class SSESummarizeEvent(BaseModel):
+class SSEUserMessageCreatedEvent(BaseModel):
     r"""Base SSE event with standard fields"""
 
-    event: SSESummarizeEventEvent
+    event: SSEUserMessageCreatedEventEvent
     r"""Event type identifier"""
 
     id: str
     r"""Unique sequential event identifier for ordering and reconnection"""
 
-    data: SSESummarizeEventData
+    data: SSEUserMessageCreatedEventData
 
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
@@ -220,7 +227,7 @@ SSEPermissionEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -250,6 +257,8 @@ class SSEPermissionEventDataTypedDict(TypedDict):
     r"""Permission event type"""
     params: NotRequired[ParamsTypedDict]
     r"""Additional parameters for the permission request"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
     path: NotRequired[str]
     r"""File path for permission request"""
 
@@ -275,6 +284,11 @@ class SSEPermissionEventData(BaseModel):
 
     params: Optional[Params] = None
     r"""Additional parameters for the permission request"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
     path: Optional[str] = None
     r"""File path for permission request"""
@@ -319,7 +333,7 @@ SSEToolExecutionCompleteEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -337,6 +351,8 @@ class SSEToolExecutionCompleteEventDataTypedDict(TypedDict):
     r"""Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"""
     type: str
     r"""Tool execution complete event type"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolExecutionCompleteEventData(BaseModel):
@@ -354,6 +370,11 @@ class SSEToolExecutionCompleteEventData(BaseModel):
 
     type: str
     r"""Tool execution complete event type"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolExecutionCompleteEventTypedDict(TypedDict):
@@ -395,7 +416,7 @@ SSEToolExecutionStartEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -411,6 +432,8 @@ class SSEToolExecutionStartEventDataTypedDict(TypedDict):
     r"""Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"""
     type: str
     r"""Tool execution start event type"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolExecutionStartEventData(BaseModel):
@@ -425,6 +448,11 @@ class SSEToolExecutionStartEventData(BaseModel):
 
     type: str
     r"""Tool execution start event type"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolExecutionStartEventTypedDict(TypedDict):
@@ -466,7 +494,7 @@ SSEToolParameterDeltaEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -480,6 +508,10 @@ class SSEToolParameterDeltaEventDataTypedDict(TypedDict):
     r"""Tool call identifier for correlation"""
     type: str
     r"""Tool parameter delta event type"""
+    assistant_message_id: NotRequired[str]
+    r"""ID of the assistant message this tool parameter delta belongs to"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolParameterDeltaEventData(BaseModel):
@@ -491,6 +523,16 @@ class SSEToolParameterDeltaEventData(BaseModel):
 
     type: str
     r"""Tool parameter delta event type"""
+
+    assistant_message_id: Annotated[
+        Optional[str], pydantic.Field(alias="assistantMessageId")
+    ] = None
+    r"""ID of the assistant message this tool parameter delta belongs to"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolParameterDeltaEventTypedDict(TypedDict):
@@ -532,7 +574,7 @@ SSEToolEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -550,6 +592,10 @@ class SSEToolEventDataTypedDict(TypedDict):
     r"""Tool execution status"""
     type: str
     r"""Tool event type"""
+    assistant_message_id: NotRequired[str]
+    r"""ID of the assistant message this tool belongs to"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolEventData(BaseModel):
@@ -567,6 +613,16 @@ class SSEToolEventData(BaseModel):
 
     type: str
     r"""Tool event type"""
+
+    assistant_message_id: Annotated[
+        Optional[str], pydantic.Field(alias="assistantMessageId")
+    ] = None
+    r"""ID of the assistant message this tool belongs to"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEToolEventTypedDict(TypedDict):
@@ -608,7 +664,7 @@ SSEContentEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -620,6 +676,10 @@ class SSEContentEventDataTypedDict(TypedDict):
     r"""Streaming content delta"""
     type: str
     r"""Content event type"""
+    assistant_message_id: NotRequired[str]
+    r"""ID of the assistant message this content belongs to"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEContentEventData(BaseModel):
@@ -628,6 +688,16 @@ class SSEContentEventData(BaseModel):
 
     type: str
     r"""Content event type"""
+
+    assistant_message_id: Annotated[
+        Optional[str], pydantic.Field(alias="assistantMessageId")
+    ] = None
+    r"""ID of the assistant message this content belongs to"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEContentEventTypedDict(TypedDict):
@@ -669,7 +739,7 @@ SSEThinkingEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -681,6 +751,10 @@ class SSEThinkingEventDataTypedDict(TypedDict):
     r"""Thinking or reasoning content"""
     type: str
     r"""Thinking event type"""
+    assistant_message_id: NotRequired[str]
+    r"""ID of the assistant message this thinking belongs to"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEThinkingEventData(BaseModel):
@@ -689,6 +763,16 @@ class SSEThinkingEventData(BaseModel):
 
     type: str
     r"""Thinking event type"""
+
+    assistant_message_id: Annotated[
+        Optional[str], pydantic.Field(alias="assistantMessageId")
+    ] = None
+    r"""ID of the assistant message this thinking belongs to"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
 class SSEThinkingEventTypedDict(TypedDict):
@@ -730,7 +814,7 @@ SSECompleteEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -746,6 +830,8 @@ class SSECompleteEventDataTypedDict(TypedDict):
     r"""Final response content"""
     message_id: NotRequired[str]
     r"""Completed message identifier"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
     reasoning: NotRequired[str]
     r"""Optional reasoning content"""
     reasoning_duration: NotRequired[int]
@@ -764,6 +850,11 @@ class SSECompleteEventData(BaseModel):
 
     message_id: Annotated[Optional[str], pydantic.Field(alias="messageId")] = None
     r"""Completed message identifier"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
     reasoning: Optional[str] = None
     r"""Optional reasoning content"""
@@ -813,7 +904,7 @@ SSEErrorEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -827,6 +918,8 @@ class SSEErrorEventDataTypedDict(TypedDict):
     r"""Current retry attempt number"""
     max_attempts: NotRequired[int]
     r"""Maximum number of retry attempts"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
     retry_after: NotRequired[int]
     r"""Milliseconds to wait before retry"""
     type: NotRequired[str]
@@ -842,6 +935,11 @@ class SSEErrorEventData(BaseModel):
 
     max_attempts: Annotated[Optional[int], pydantic.Field(alias="maxAttempts")] = None
     r"""Maximum number of retry attempts"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
     retry_after: Annotated[Optional[int], pydantic.Field(alias="retryAfter")] = None
     r"""Milliseconds to wait before retry"""
@@ -889,7 +987,7 @@ SSEHeartbeatEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -945,7 +1043,7 @@ SSEConnectedEventEvent = Literal[
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
-    "summarize",
+    "user_message_created",
     "session_created",
     "session_deleted",
 ]
@@ -1003,7 +1101,7 @@ SSEEventStreamTypedDict = TypeAliasType(
         SSEToolExecutionStartEventTypedDict,
         SSEToolExecutionCompleteEventTypedDict,
         SSEPermissionEventTypedDict,
-        SSESummarizeEventTypedDict,
+        SSEUserMessageCreatedEventTypedDict,
         SSESessionCreatedEventTypedDict,
         SSESessionDeletedEventTypedDict,
     ],
@@ -1021,12 +1119,12 @@ SSEEventStream = Annotated[
         Annotated[SSEPermissionEvent, Tag("permission")],
         Annotated[SSESessionCreatedEvent, Tag("session_created")],
         Annotated[SSESessionDeletedEvent, Tag("session_deleted")],
-        Annotated[SSESummarizeEvent, Tag("summarize")],
         Annotated[SSEThinkingEvent, Tag("thinking")],
         Annotated[SSEToolEvent, Tag("tool")],
         Annotated[SSEToolExecutionCompleteEvent, Tag("tool_execution_complete")],
         Annotated[SSEToolExecutionStartEvent, Tag("tool_execution_start")],
         Annotated[SSEToolParameterDeltaEvent, Tag("tool_parameter_delta")],
+        Annotated[SSEUserMessageCreatedEvent, Tag("user_message_created")],
     ],
     Discriminator(lambda m: get_discriminator(m, "event", "event")),
 ]

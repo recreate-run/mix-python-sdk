@@ -22,12 +22,14 @@ generation:
     hoistGlobalSecurity: true
   inferSSEOverload: true
   sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.6.6
+  version: 0.7.0
   additionalDependencies:
     dev:
       ruff: ^0.13.2

@@ -7,16 +7,16 @@ Core built-in tool names
 
 | Name               | Value              |
 | ------------------ | ------------------ |
-| `BASH`             | bash               |
+| `BASH`             | Bash               |
 | `READ_TEXT`        | ReadText           |
-| `GLOB`             | glob               |
+| `GLOB`             | Glob               |
 | `READ_MEDIA`       | ReadMedia          |
-| `GREP`             | grep               |
-| `WRITE`            | write              |
-| `EDIT`             | edit               |
+| `GREP`             | Grep               |
+| `WRITE`            | Write              |
+| `EDIT`             | Edit               |
 | `PYTHON_EXECUTION` | python_execution   |
-| `SEARCH`           | search             |
-| `TODO_WRITE`       | todo_write         |
-| `EXIT_PLAN_MODE`   | exit_plan_mode     |
-| `SHOW_MEDIA`       | show_media         |
-| `TASK`             | task               |
+| `SEARCH`           | Search             |
+| `TODO_WRITE`       | TodoWrite          |
+| `EXIT_PLAN_MODE`   | ExitPlanMode       |
+| `SHOW_MEDIA`       | ShowMedia          |
+| `TASK`             | Task               |

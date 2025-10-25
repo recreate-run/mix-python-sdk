@@ -1,4 +1,4 @@
-# Type
+# RESTErrorType
 
 Error type
 

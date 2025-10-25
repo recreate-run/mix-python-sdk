@@ -19,7 +19,7 @@ class Health(BaseSDK):
     ) -> models.GetOAuthHealthResponse:
         r"""Get OAuth authentication health
 
-        Get health status of all OAuth credentials including expiry information. Health statuses: 'healthy' (all tokens valid), 'degraded' (some tokens expired but refreshable), 'unhealthy' (tokens expired without refresh capability)
+        Get health status of all OAuth credentials. Background service refreshes tokens 35 minutes before expiry. API calls mark tokens expired 5 minutes before expiry. Health statuses: 'healthy' (tokens valid, >5min remaining), 'degraded' (some tokens within 5min of expiry but refreshable), 'unhealthy' (tokens expired without refresh capability)
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -100,7 +100,7 @@ class Health(BaseSDK):
     ) -> models.GetOAuthHealthResponse:
         r"""Get OAuth authentication health
 
-        Get health status of all OAuth credentials including expiry information. Health statuses: 'healthy' (all tokens valid), 'degraded' (some tokens expired but refreshable), 'unhealthy' (tokens expired without refresh capability)
+        Get health status of all OAuth credentials. Background service refreshes tokens 35 minutes before expiry. API calls mark tokens expired 5 minutes before expiry. Health statuses: 'healthy' (tokens valid, >5min remaining), 'degraded' (some tokens within 5min of expiry but refreshable), 'unhealthy' (tokens expired without refresh capability)
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

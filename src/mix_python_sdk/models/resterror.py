@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-Type = Literal[
+RESTErrorType = Literal[
     "bad_request",
     "not_found",
     "internal_error",
@@ -21,7 +21,7 @@ class RESTErrorTypedDict(TypedDict):
     r"""HTTP status code"""
     message: str
     r"""Error message"""
-    type: Type
+    type: RESTErrorType
     r"""Error type"""
 
 
@@ -32,5 +32,5 @@ class RESTError(BaseModel):
     message: str
     r"""Error message"""
 
-    type: Type
+    type: RESTErrorType
     r"""Error type"""

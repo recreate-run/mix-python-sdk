@@ -273,6 +273,7 @@ asyncio.run(main())
 * [create](docs/sdks/sessions/README.md#create) - Create a new session
 * [delete](docs/sdks/sessions/README.md#delete) - Delete a session
 * [get](docs/sdks/sessions/README.md#get) - Get a specific session
+* [update_session_callbacks](docs/sdks/sessions/README.md#update_session_callbacks) - Update session callbacks
 * [export_session](docs/sdks/sessions/README.md#export_session) - Export session transcript
 * [fork](docs/sdks/sessions/README.md#fork) - Fork a session
 * [rewind_session](docs/sdks/sessions/README.md#rewind_session) - Rewind a session
@@ -292,6 +293,8 @@ asyncio.run(main())
 
 ### [tools](docs/sdks/tools/README.md)
 
+* [list_llm_tools](docs/sdks/tools/README.md#list_llm_tools) - List LLM tools
+* [get_tool_credentials_status](docs/sdks/tools/README.md#get_tool_credentials_status) - Get tool credentials status
 * [get_tools_status](docs/sdks/tools/README.md#get_tools_status) - Get tools status
 
 </details>

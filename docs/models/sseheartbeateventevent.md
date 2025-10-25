@@ -18,6 +18,6 @@ Event type identifier
 | `TOOL_EXECUTION_START`    | tool_execution_start      |
 | `TOOL_EXECUTION_COMPLETE` | tool_execution_complete   |
 | `PERMISSION`              | permission                |
-| `SUMMARIZE`               | summarize                 |
+| `USER_MESSAGE_CREATED`    | user_message_created      |
 | `SESSION_CREATED`         | session_created           |
 | `SESSION_DELETED`         | session_deleted           |

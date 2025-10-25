@@ -1,0 +1,11 @@
+# SSEUserMessageCreatedEventData
+
+
+## Fields
+
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `content`                                                                 | *str*                                                                     | :heavy_check_mark:                                                        | Content of the user message                                               |                                                                           |
+| `message_id`                                                              | *str*                                                                     | :heavy_check_mark:                                                        | ID of the created user message                                            |                                                                           |
+| `parent_tool_call_id`                                                     | *Optional[str]*                                                           | :heavy_minus_sign:                                                        | ID of the parent tool call that spawned this subagent (for nested events) |                                                                           |
+| `type`                                                                    | *str*                                                                     | :heavy_check_mark:                                                        | User message created event type                                           | user_message_created                                                      |

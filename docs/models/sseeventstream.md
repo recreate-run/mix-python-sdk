@@ -53,12 +53,6 @@ value: models.SSESessionCreatedEvent = /* values here */
 value: models.SSESessionDeletedEvent = /* values here */
 ```
 
-### `models.SSESummarizeEvent`
-
-```python
-value: models.SSESummarizeEvent = /* values here */
-```
-
 ### `models.SSEThinkingEvent`
 
 ```python
@@ -87,5 +81,11 @@ value: models.SSEToolExecutionStartEvent = /* values here */
 
 ```python
 value: models.SSEToolParameterDeltaEvent = /* values here */
+```
+
+### `models.SSEUserMessageCreatedEvent`
+
+```python
+value: models.SSEUserMessageCreatedEvent = /* values here */
 ```
 

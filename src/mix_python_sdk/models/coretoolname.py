@@ -5,18 +5,18 @@ from typing import Literal
 
 
 CoreToolName = Literal[
-    "bash",
+    "Bash",
     "ReadText",
-    "glob",
+    "Glob",
     "ReadMedia",
-    "grep",
-    "write",
-    "edit",
+    "Grep",
+    "Write",
+    "Edit",
     "python_execution",
-    "search",
-    "todo_write",
-    "exit_plan_mode",
-    "show_media",
-    "task",
+    "Search",
+    "TodoWrite",
+    "ExitPlanMode",
+    "ShowMedia",
+    "Task",
 ]
 r"""Core built-in tool names"""

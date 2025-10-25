@@ -36,14 +36,14 @@ class GetToolsStatusTool(BaseModel):
     r"""Tool provider name"""
 
 
-class CategoriesTypedDict(TypedDict):
+class GetToolsStatusCategoriesTypedDict(TypedDict):
     display_name: NotRequired[str]
     r"""User-friendly category name"""
     tools: NotRequired[List[GetToolsStatusToolTypedDict]]
     r"""Available tools in this category"""
 
 
-class Categories(BaseModel):
+class GetToolsStatusCategories(BaseModel):
     display_name: Optional[str] = None
     r"""User-friendly category name"""
 
@@ -54,12 +54,12 @@ class Categories(BaseModel):
 class GetToolsStatusResponseTypedDict(TypedDict):
     r"""Tools status and authentication information"""
 
-    categories: NotRequired[Dict[str, CategoriesTypedDict]]
+    categories: NotRequired[Dict[str, GetToolsStatusCategoriesTypedDict]]
     r"""Map of tool categories and their tools"""
 
 
 class GetToolsStatusResponse(BaseModel):
     r"""Tools status and authentication information"""
 
-    categories: Optional[Dict[str, Categories]] = None
+    categories: Optional[Dict[str, GetToolsStatusCategories]] = None
     r"""Map of tool categories and their tools"""

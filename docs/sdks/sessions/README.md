@@ -9,6 +9,7 @@
 * [create](#create) - Create a new session
 * [delete](#delete) - Delete a session
 * [get](#get) - Get a specific session
+* [update_session_callbacks](#update_session_callbacks) - Update session callbacks
 * [export_session](#export_session) - Export session transcript
 * [fork](#fork) - Fork a session
 * [rewind_session](#rewind_session) - Rewind a session
@@ -27,7 +28,7 @@ from mix_python_sdk import Mix
 
 with Mix() as mix:
 
-    res = mix.sessions.list()
+    res = mix.sessions.list(include_subagents=False)
 
     # Handle response
     print(res)
@@ -36,9 +37,10 @@ with Mix() as mix:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `include_subagents`                                                                  | *Optional[bool]*                                                                     | :heavy_minus_sign:                                                                   | Include subagent sessions in response (default: false, subagent sessions are hidden) |
+| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
 
 ### Response
 
@@ -54,7 +56,7 @@ with Mix() as mix:
 
 ## create
 
-Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory.
+Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory. Supports session-level callbacks for automated actions after tool execution.
 
 ### Example Usage
 
@@ -65,7 +67,14 @@ from mix_python_sdk import Mix
 
 with Mix() as mix:
 
-    res = mix.sessions.create(title="<value>", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append")
+    res = mix.sessions.create(title="<value>", callbacks=[
+        {
+            "message_content": "Please review the changes and run tests",
+            "name": "Log Output",
+            "tool_name": "*",
+            "type": "send_message",
+        },
+    ], custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
 
     # Handle response
     print(res)
@@ -77,8 +86,11 @@ with Mix() as mix:
 | Parameter                                                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                                                  | Description                                                                                                                                                                                                                                               | Example                                                                                                                                                                                                                                                   |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `title`                                                                                                                                                                                                                                                   | *str*                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                        | Title for the session                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                           |
+| `callbacks`                                                                                                                                                                                                                                               | List[[models.Callback](../../models/callback.md)]                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                        | Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID                                                                              |                                                                                                                                                                                                                                                           |
 | `custom_system_prompt`                                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                        | Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.            | You are a helpful assistant specialized in $<domain>. Always be concise and accurate.                                                                                                                                                                     |
 | `prompt_mode`                                                                                                                                                                                                                                             | [Optional[models.PromptMode]](../../models/promptmode.md)                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                        | Custom prompt handling mode:<br/>- 'default': Use base system prompt only (customSystemPrompt ignored)<br/>- 'append': Append customSystemPrompt to base system prompt (50KB limit)<br/>- 'replace': Replace base system prompt with customSystemPrompt (100KB limit) | append                                                                                                                                                                                                                                                    |
+| `session_type`                                                                                                                                                                                                                                            | [Optional[models.CreateSessionSessionType]](../../models/createsessionsessiontype.md)                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                        | Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system.                                                                             | main                                                                                                                                                                                                                                                      |
+| `subagent_type`                                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                        | Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation.                                                                                                                                      |                                                                                                                                                                                                                                                           |
 | `retries`                                                                                                                                                                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                        | Configuration to override the default retry behavior of the client.                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
 
 ### Response
@@ -161,6 +173,45 @@ with Mix() as mix:
 | Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
 | errors.ErrorResponse   | 404                    | application/json       |
+| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
+
+## update_session_callbacks
+
+Update the callback configurations for a session. Callbacks execute automatically after tool completion. Pass an empty array to clear all callbacks.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="updateSessionCallbacks" method="patch" path="/api/sessions/{id}/callbacks" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix() as mix:
+
+    res = mix.sessions.update_session_callbacks(id="<id>", callbacks=[])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                    | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                         | *str*                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                           | Session ID to update                                                                                                                                                         |
+| `callbacks`                                                                                                                                                                  | List[[models.Callback](../../models/callback.md)]                                                                                                                            | :heavy_check_mark:                                                                                                                                                           | Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID |
+| `retries`                                                                                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                           | Configuration to override the default retry behavior of the client.                                                                                                          |
+
+### Response
+
+**[models.SessionData](../../models/sessiondata.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| errors.ErrorResponse   | 400, 404               | application/json       |
 | errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
 ## export_session
