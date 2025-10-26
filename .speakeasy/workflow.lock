@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:e9c5dced27ed62e282d3228360989adf14c16d0fd5bee74572cac4af5905a282
         sourceBlobDigest: sha256:f407eff09dbc26954dd26dded12d662d640584e573cc64017adefe8d933d8299
         codeSamplesNamespace: mix-rest-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:1cb4691e75bda557ea287ce602067af8955d2222ff99c726c6b8fe5787011911
+        codeSamplesRevisionDigest: sha256:8da202e2dfe6f59b4465d3d72c68308d6ade4f06d2cd055480354449e7975f03
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
