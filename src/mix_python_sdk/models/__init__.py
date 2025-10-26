@@ -179,6 +179,7 @@ if TYPE_CHECKING:
         SendMessageRequestTypedDict,
         SendMessageResponse,
         SendMessageResponseTypedDict,
+        ThinkingLevel,
     )
     from .sessiondata import (
         SessionData,
@@ -538,6 +539,7 @@ __all__ = [
     "StreamEventsResponse",
     "StreamEventsResponseTypedDict",
     "SubagentType",
+    "ThinkingLevel",
     "ToolCallData",
     "ToolCallDataTypedDict",
     "ToolName",
@@ -695,6 +697,7 @@ _dynamic_imports: dict[str, str] = {
     "SendMessageRequestTypedDict": ".sendmessageop",
     "SendMessageResponse": ".sendmessageop",
     "SendMessageResponseTypedDict": ".sendmessageop",
+    "ThinkingLevel": ".sendmessageop",
     "SessionData": ".sessiondata",
     "SessionDataTypedDict": ".sessiondata",
     "SessionType": ".sessiondata",

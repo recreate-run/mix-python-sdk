@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: d2d44c2cb631e27e3dab8da35bde3e79
+  docChecksum: c858aade3430312bcfa92104349c7561
   docVersion: 1.0.0
   speakeasyVersion: 1.639.3
   generationVersion: 2.730.5
-  releaseVersion: 0.7.1
-  configChecksum: b0df2c5df5ef5950a57d0af00a06d11d
+  releaseVersion: 0.7.2
+  configChecksum: 224f5b40322af61e6b5979c15530ed29
   published: true
 features:
   python:
@@ -168,6 +168,7 @@ generatedFiles:
   - docs/models/streameventsrequest.md
   - docs/models/streameventsresponse.md
   - docs/models/subagenttype.md
+  - docs/models/thinkinglevel.md
   - docs/models/toolcalldata.md
   - docs/models/toolname.md
   - docs/models/updatepreferencesrequest.md
@@ -388,7 +389,7 @@ examples:
         path:
           id: "<id>"
       requestBody:
-        application/json: {"plan_mode": false, "text": "<value>"}
+        application/json: {"plan_mode": false, "text": "<value>", "thinking_level": "medium"}
       responses:
         "200":
           application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "toolCalls": [{"finished": true, "id": "<id>", "input": "<value>", "name": "brave_search", "type": "<value>"}], "userInput": "<value>"}

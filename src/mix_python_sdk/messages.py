@@ -379,6 +379,7 @@ class Messages(BaseSDK):
         id: str,
         text: str,
         plan_mode: Optional[bool] = False,
+        thinking_level: OptionalNullable[models.ThinkingLevel] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -391,6 +392,7 @@ class Messages(BaseSDK):
         :param id: Session ID
         :param text: The text content of the message
         :param plan_mode: Whether the message is in planning mode
+        :param thinking_level: Thinking level: off (disabled), basic (4k tokens), medium (10k tokens), maximum (32k tokens). If not provided, determined by keywords in message.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -411,6 +413,7 @@ class Messages(BaseSDK):
             request_body=models.SendMessageRequestBody(
                 plan_mode=plan_mode,
                 text=text,
+                thinking_level=thinking_level,
             ),
         )
 
@@ -482,6 +485,7 @@ class Messages(BaseSDK):
         id: str,
         text: str,
         plan_mode: Optional[bool] = False,
+        thinking_level: OptionalNullable[models.ThinkingLevel] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -494,6 +498,7 @@ class Messages(BaseSDK):
         :param id: Session ID
         :param text: The text content of the message
         :param plan_mode: Whether the message is in planning mode
+        :param thinking_level: Thinking level: off (disabled), basic (4k tokens), medium (10k tokens), maximum (32k tokens). If not provided, determined by keywords in message.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -514,6 +519,7 @@ class Messages(BaseSDK):
             request_body=models.SendMessageRequestBody(
                 plan_mode=plan_mode,
                 text=text,
+                thinking_level=thinking_level,
             ),
         )
 
