@@ -1,5 +1,4 @@
 # Streaming
-(*streaming*)
 
 ## Overview
 
@@ -18,7 +17,9 @@ Establishes a persistent SSE connection for receiving real-time updates during m
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.streaming.stream_events(session_id="<id>")
 

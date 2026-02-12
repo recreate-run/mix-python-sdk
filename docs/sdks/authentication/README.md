@@ -1,5 +1,4 @@
 # Authentication
-(*authentication*)
 
 ## Overview
 
@@ -25,7 +24,9 @@ Store API key for direct authentication with a specific provider
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
@@ -65,7 +66,9 @@ Process OAuth callback and exchange code for access token
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.handle_o_auth_callback(code="<value>", provider="<value>", state="Arizona")
 
@@ -106,7 +109,9 @@ Initiate OAuth authentication flow for a specific provider
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.start_o_auth_flow(provider="<value>")
 
@@ -145,7 +150,9 @@ Get authentication status for all supported providers
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.get_auth_status()
 
@@ -182,7 +189,9 @@ Check if the user's preferred provider is authenticated
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.validate_preferred_provider()
 
@@ -219,7 +228,9 @@ Delete stored API key and/or OAuth credentials for a provider
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.delete_credentials(provider="<value>")
 
@@ -258,7 +269,9 @@ Get health status of all OAuth credentials. Background service refreshes tokens 
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.get_o_auth_health()
 
@@ -295,7 +308,9 @@ Manually trigger OAuth token refresh for all expired tokens. Normally tokens are
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.refresh_o_auth_tokens()
 

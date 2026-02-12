@@ -27,6 +27,22 @@ class AvailableProviders(BaseModel):
     models: Optional[List[str]] = None
     r"""Available models from this provider"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["display_name", "models"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class GetPreferencesPreferencesTypedDict(TypedDict):
     r"""User preferences (null if no preferences exist)"""
@@ -81,6 +97,34 @@ class GetPreferencesPreferences(BaseModel):
     updated_at: Optional[int] = None
     r"""Unix timestamp of last update"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "created_at",
+                "main_agent_max_tokens",
+                "main_agent_model",
+                "main_agent_reasoning_effort",
+                "preferred_provider",
+                "sub_agent_max_tokens",
+                "sub_agent_model",
+                "sub_agent_reasoning_effort",
+                "updated_at",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class GetPreferencesResponseTypedDict(TypedDict):
     r"""User preferences and available providers"""
@@ -102,30 +146,25 @@ class GetPreferencesResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["preferences"]
-        nullable_fields = ["preferences"]
-        null_default_fields = []
-
+        optional_fields = set(["preferences"])
+        nullable_fields = set(["preferences"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

@@ -21,7 +21,10 @@ def main():
             print(f"Sessions: {len(sessions) if sessions else 0}")
 
             # Create new session
-            session = mix.sessions.create(title="Test Session")
+            session = mix.sessions.create(
+                title="Test Session",
+                browser_mode="local-browser-service"
+            )
             print(f"Created session: {session.id if session else 'No session data'}")
 
             # Send hello message

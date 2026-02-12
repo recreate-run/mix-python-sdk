@@ -1,5 +1,4 @@
 # Permissions
-(*permissions*)
 
 ## Overview
 
@@ -19,7 +18,9 @@ Deny a specific permission
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.permissions.deny(id="<id>")
 
@@ -58,7 +59,9 @@ Grant a specific permission
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.permissions.grant(id="<id>")
 

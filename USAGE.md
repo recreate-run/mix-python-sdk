@@ -4,7 +4,9 @@
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
@@ -23,7 +25,9 @@ from mix_python_sdk import Mix
 
 async def main():
 
-    async with Mix() as mix:
+    async with Mix(
+        server_url="https://api.example.com",
+    ) as mix:
 
         res = await mix.authentication.store_api_key_async(api_key="<value>", provider="openrouter")
 

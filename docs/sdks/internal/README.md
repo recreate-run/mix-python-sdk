@@ -1,5 +1,4 @@
 # Internal
-(*internal*)
 
 ## Overview
 
@@ -18,7 +17,9 @@ Manually trigger OAuth token refresh for all expired tokens. Normally tokens are
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.internal.refresh_o_auth_tokens()
 

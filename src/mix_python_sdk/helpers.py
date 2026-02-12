@@ -10,7 +10,6 @@ from typing import AsyncIterator, Callable, Optional, Any
 from mix_python_sdk.models import (
     SSEThinkingEvent,
     SSEContentEvent,
-    SSEToolEvent,
     SSEToolExecutionStartEvent,
     SSEToolExecutionCompleteEvent,
     SSECompleteEvent,
@@ -94,8 +93,6 @@ async def query(
                 yield StreamEvent("thinking", event.data)
             elif isinstance(event, SSEContentEvent):
                 yield StreamEvent("content", event.data)
-            elif isinstance(event, SSEToolEvent):
-                yield StreamEvent("tool", event.data)
             elif isinstance(event, SSEToolExecutionStartEvent):
                 yield StreamEvent("tool_execution_start", event.data)
             elif isinstance(event, SSEToolExecutionCompleteEvent):
@@ -119,7 +116,6 @@ async def send_with_callbacks(
     *,
     on_thinking: Optional[Callable[[str], None]] = None,
     on_content: Optional[Callable[[str], None]] = None,
-    on_tool: Optional[Callable[[Any], None]] = None,
     on_tool_execution_start: Optional[Callable[[Any], None]] = None,
     on_tool_execution_complete: Optional[Callable[[Any], None]] = None,
     on_error: Optional[Callable[[str], None]] = None,
@@ -138,7 +134,6 @@ async def send_with_callbacks(
         message: Message text to send
         on_thinking: Callback for thinking events (receives thinking text)
         on_content: Callback for content events (receives content text)
-        on_tool: Callback for tool events (receives tool data)
         on_tool_execution_start: Callback for tool execution start events
         on_tool_execution_complete: Callback for tool execution complete events
         on_error: Callback for error events (receives error message)
@@ -153,7 +148,6 @@ async def send_with_callbacks(
             message="What's the weather?",
             on_thinking=lambda text: print(f"🤔 {text}", end="", flush=True),
             on_content=lambda text: print(f"💬 {text}", end="", flush=True),
-            on_tool=lambda tool: print(f"\\n🔧 Using {tool.name}"),
             on_complete=lambda: print("\\n✅ Done!")
         )
         ```
@@ -169,8 +163,6 @@ async def send_with_callbacks(
                     on_thinking(event.data.content)
                 elif isinstance(event, SSEContentEvent) and on_content:
                     on_content(event.data.content)
-                elif isinstance(event, SSEToolEvent) and on_tool:
-                    on_tool(event.data)
                 elif (
                     isinstance(event, SSEToolExecutionStartEvent)
                     and on_tool_execution_start
@@ -281,7 +273,6 @@ class StreamingSession:
         *,
         on_thinking: Optional[Callable[[str], None]] = None,
         on_content: Optional[Callable[[str], None]] = None,
-        on_tool: Optional[Callable[[Any], None]] = None,
         on_tool_execution_start: Optional[Callable[[Any], None]] = None,
         on_tool_execution_complete: Optional[Callable[[Any], None]] = None,
         on_error: Optional[Callable[[str], None]] = None,
@@ -294,7 +285,6 @@ class StreamingSession:
             message: Message text to send
             on_thinking: Callback for thinking events
             on_content: Callback for content events
-            on_tool: Callback for tool events
             on_tool_execution_start: Callback for tool execution start events
             on_tool_execution_complete: Callback for tool execution complete events
             on_error: Callback for error events
@@ -307,7 +297,6 @@ class StreamingSession:
             message,
             on_thinking=on_thinking,
             on_content=on_content,
-            on_tool=on_tool,
             on_tool_execution_start=on_tool_execution_start,
             on_tool_execution_complete=on_tool_execution_complete,
             on_error=on_error,

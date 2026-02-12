@@ -1,5 +1,4 @@
-# PreferencesSDK
-(*preferences*)
+# Preferences
 
 ## Overview
 
@@ -21,7 +20,9 @@ Retrieve current user preferences including model and provider settings
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.preferences.get_preferences()
 
@@ -58,7 +59,9 @@ Update user preferences including model and provider settings
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.preferences.update_preferences()
 
@@ -103,7 +106,9 @@ Retrieve list of available AI providers and their supported models
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.preferences.get_available_providers()
 
@@ -140,7 +145,9 @@ Reset user preferences to default values
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.preferences.reset_preferences()
 

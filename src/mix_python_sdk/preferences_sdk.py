@@ -47,6 +47,7 @@ class PreferencesSDK(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -128,6 +129,7 @@ class PreferencesSDK(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -237,6 +239,7 @@ class PreferencesSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.UpdatePreferencesRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -349,6 +352,7 @@ class PreferencesSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.UpdatePreferencesRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -433,6 +437,7 @@ class PreferencesSDK(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -516,6 +521,7 @@ class PreferencesSDK(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -599,6 +605,7 @@ class PreferencesSDK(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -680,6 +687,7 @@ class PreferencesSDK(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

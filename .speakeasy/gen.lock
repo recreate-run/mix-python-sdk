@@ -1,18 +1,22 @@
 lockVersion: 2.0.0
 id: 11cd54ee-52e4-4594-9b22-87f0ed15f49c
 management:
-  docChecksum: d2d44c2cb631e27e3dab8da35bde3e79
+  docChecksum: e434090141f2e2bb1a8f1dba3cfa82d7
   docVersion: 1.0.0
-  speakeasyVersion: 1.639.0
-  generationVersion: 2.730.0
-  releaseVersion: 0.7.0
-  configChecksum: 73ba36dc87bd7ec557f259f7b5192294
+  speakeasyVersion: 1.711.0
+  generationVersion: 2.818.4
+  releaseVersion: 0.8.0
+  configChecksum: cd200d89e96405bdeca9f9127c3bdb89
   published: true
+persistentEdits:
+  generation_id: b06e0e8b-6a3b-448e-90d6-0d55184829e9
+  pristine_commit_hash: 3c83c6e69e279736b670480146d10151aad9fd35
+  pristine_tree_hash: 0edb844d06465439e41e79ce0306b63b0f63deac
 features:
   python:
     additionalDependencies: 1.0.0
-    constsAndDefaults: 1.0.5
-    core: 5.23.0
+    constsAndDefaults: 1.0.6
+    core: 6.0.4
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     downloadStreams: 1.0.1
@@ -21,278 +25,1111 @@ features:
     flatRequests: 1.0.1
     flattening: 3.1.1
     globalSecurityCallbacks: 1.0.0
-    globalServerURLs: 3.1.1
+    globalServerURLs: 3.2.0
     groups: 3.0.1
     methodArguments: 1.0.2
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
-    nullables: 1.0.1
-    responseFormat: 1.0.1
-    retries: 3.0.2
-    sdkHooks: 1.1.0
-    serverEvents: 1.0.11
-    unions: 3.1.0
+    nullables: 1.0.2
+    responseFormat: 1.1.0
+    retries: 3.0.3
+    sdkHooks: 1.2.1
+    serverEvents: 1.0.13
+    unions: 3.1.2
     uploadStreams: 1.0.0
-generatedFiles:
-  - .devcontainer/README.md
-  - .devcontainer/devcontainer.json
-  - .devcontainer/setup.sh
-  - .gitattributes
-  - .vscode/settings.json
-  - USAGE.md
-  - docs/errors/errorresponse.md
-  - docs/models/availableproviders.md
-  - docs/models/backendmessage.md
-  - docs/models/callback.md
-  - docs/models/callbackresultdata.md
-  - docs/models/callbackresultdatacallbacktype.md
-  - docs/models/callbacktype.md
-  - docs/models/cancelsessionprocessingrequest.md
-  - docs/models/cancelsessionprocessingresponse.md
-  - docs/models/coretoolname.md
-  - docs/models/createsessionrequest.md
-  - docs/models/createsessionsessiontype.md
-  - docs/models/deletecredentialsrequest.md
-  - docs/models/deletecredentialsresponse.md
-  - docs/models/deletesessionfilerequest.md
-  - docs/models/deletesessionrequest.md
-  - docs/models/denypermissionrequest.md
-  - docs/models/denypermissionresponse.md
-  - docs/models/exportmessage.md
-  - docs/models/exportsession.md
-  - docs/models/exportsessionrequest.md
-  - docs/models/exportsessionresponse.md
-  - docs/models/exporttoolcall.md
-  - docs/models/file.md
-  - docs/models/fileinfo.md
-  - docs/models/forksessionrequest.md
-  - docs/models/forksessionrequestbody.md
-  - docs/models/getauthstatusauthmethod.md
-  - docs/models/getauthstatusproviders.md
-  - docs/models/getauthstatusresponse.md
-  - docs/models/getavailableprovidersresponse.md
-  - docs/models/getcommandrequest.md
-  - docs/models/getcommandresponse.md
-  - docs/models/getmessagehistoryrequest.md
-  - docs/models/getoauthhealthproviders.md
-  - docs/models/getoauthhealthresponse.md
-  - docs/models/getpreferencespreferences.md
-  - docs/models/getpreferencesresponse.md
-  - docs/models/getsessionfilerequest.md
-  - docs/models/getsessionmessagesrequest.md
-  - docs/models/getsessionrequest.md
-  - docs/models/getsysteminforesponse.md
-  - docs/models/gettoolcredentialsstatuscategories.md
-  - docs/models/gettoolcredentialsstatusresponse.md
-  - docs/models/gettoolcredentialsstatustool.md
-  - docs/models/gettoolsstatuscategories.md
-  - docs/models/gettoolsstatusresponse.md
-  - docs/models/gettoolsstatustool.md
-  - docs/models/grantpermissionrequest.md
-  - docs/models/grantpermissionresponse.md
-  - docs/models/handleoauthcallbackrequest.md
-  - docs/models/handleoauthcallbackresponse.md
-  - docs/models/healthcheckresponse.md
-  - docs/models/inputjson.md
-  - docs/models/listcommandsresponse.md
-  - docs/models/listllmtoolsresponse.md
-  - docs/models/listllmtoolstool.md
-  - docs/models/listmcpserversresponse.md
-  - docs/models/listmcpserverstool.md
-  - docs/models/listsessionfilesrequest.md
-  - docs/models/listsessionsrequest.md
-  - docs/models/parameters.md
-  - docs/models/params.md
-  - docs/models/promptmode.md
-  - docs/models/provider.md
-  - docs/models/providersstatus.md
-  - docs/models/refreshoauthtokensresponse.md
-  - docs/models/resetpreferencesresponse.md
-  - docs/models/resterror.md
-  - docs/models/resterrortype.md
-  - docs/models/rewindsessionrequest.md
-  - docs/models/rewindsessionrequestbody.md
-  - docs/models/sendmessagerequest.md
-  - docs/models/sendmessagerequestbody.md
-  - docs/models/sendmessageresponse.md
-  - docs/models/sessiondata.md
-  - docs/models/sessiontype.md
-  - docs/models/ssecompleteevent.md
-  - docs/models/ssecompleteeventdata.md
-  - docs/models/ssecompleteeventevent.md
-  - docs/models/sseconnectedevent.md
-  - docs/models/sseconnectedeventdata.md
-  - docs/models/sseconnectedeventevent.md
-  - docs/models/ssecontentevent.md
-  - docs/models/ssecontenteventdata.md
-  - docs/models/ssecontenteventevent.md
-  - docs/models/sseerrorevent.md
-  - docs/models/sseerroreventdata.md
-  - docs/models/sseerroreventevent.md
-  - docs/models/sseeventstream.md
-  - docs/models/sseheartbeatevent.md
-  - docs/models/sseheartbeateventdata.md
-  - docs/models/sseheartbeateventevent.md
-  - docs/models/ssepermissionevent.md
-  - docs/models/ssepermissioneventdata.md
-  - docs/models/ssepermissioneventevent.md
-  - docs/models/ssesessioncreatedevent.md
-  - docs/models/ssesessioncreatedeventdata.md
-  - docs/models/ssesessioncreatedeventevent.md
-  - docs/models/ssesessiondeletedevent.md
-  - docs/models/ssesessiondeletedeventdata.md
-  - docs/models/ssesessiondeletedeventevent.md
-  - docs/models/ssethinkingevent.md
-  - docs/models/ssethinkingeventdata.md
-  - docs/models/ssethinkingeventevent.md
-  - docs/models/ssetoolevent.md
-  - docs/models/ssetooleventdata.md
-  - docs/models/ssetooleventevent.md
-  - docs/models/ssetoolexecutioncompleteevent.md
-  - docs/models/ssetoolexecutioncompleteeventdata.md
-  - docs/models/ssetoolexecutioncompleteeventevent.md
-  - docs/models/ssetoolexecutionstartevent.md
-  - docs/models/ssetoolexecutionstarteventdata.md
-  - docs/models/ssetoolexecutionstarteventevent.md
-  - docs/models/ssetoolparameterdeltaevent.md
-  - docs/models/ssetoolparameterdeltaeventdata.md
-  - docs/models/ssetoolparameterdeltaeventevent.md
-  - docs/models/sseusermessagecreatedevent.md
-  - docs/models/sseusermessagecreatedeventdata.md
-  - docs/models/sseusermessagecreatedeventevent.md
-  - docs/models/startoauthflowrequest.md
-  - docs/models/startoauthflowresponse.md
-  - docs/models/status.md
-  - docs/models/storeapikeyrequest.md
-  - docs/models/storeapikeyresponse.md
-  - docs/models/streameventsrequest.md
-  - docs/models/streameventsresponse.md
-  - docs/models/subagenttype.md
-  - docs/models/toolcalldata.md
-  - docs/models/toolname.md
-  - docs/models/updatepreferencesrequest.md
-  - docs/models/updatepreferencesresponse.md
-  - docs/models/updatesessioncallbacksrequest.md
-  - docs/models/updatesessioncallbacksrequestbody.md
-  - docs/models/uploadsessionfilerequest.md
-  - docs/models/uploadsessionfilerequestbody.md
-  - docs/models/utils/retryconfig.md
-  - docs/models/validatepreferredproviderauthmethod.md
-  - docs/models/validatepreferredproviderresponse.md
-  - docs/sdks/authentication/README.md
-  - docs/sdks/files/README.md
-  - docs/sdks/health/README.md
-  - docs/sdks/internal/README.md
-  - docs/sdks/messages/README.md
-  - docs/sdks/permissions/README.md
-  - docs/sdks/preferencessdk/README.md
-  - docs/sdks/sessions/README.md
-  - docs/sdks/streaming/README.md
-  - docs/sdks/system/README.md
-  - docs/sdks/tools/README.md
-  - py.typed
-  - pylintrc
-  - pyproject.toml
-  - scripts/publish.sh
-  - src/mix_python_sdk/__init__.py
-  - src/mix_python_sdk/_hooks/__init__.py
-  - src/mix_python_sdk/_hooks/sdkhooks.py
-  - src/mix_python_sdk/_hooks/types.py
-  - src/mix_python_sdk/_version.py
-  - src/mix_python_sdk/authentication.py
-  - src/mix_python_sdk/basesdk.py
-  - src/mix_python_sdk/errors/__init__.py
-  - src/mix_python_sdk/errors/errorresponse.py
-  - src/mix_python_sdk/errors/mixdefaulterror.py
-  - src/mix_python_sdk/errors/mixerror.py
-  - src/mix_python_sdk/errors/no_response_error.py
-  - src/mix_python_sdk/errors/responsevalidationerror.py
-  - src/mix_python_sdk/files.py
-  - src/mix_python_sdk/health.py
-  - src/mix_python_sdk/httpclient.py
-  - src/mix_python_sdk/internal.py
-  - src/mix_python_sdk/messages.py
-  - src/mix_python_sdk/models/__init__.py
-  - src/mix_python_sdk/models/backendmessage.py
-  - src/mix_python_sdk/models/callback.py
-  - src/mix_python_sdk/models/callbackresultdata.py
-  - src/mix_python_sdk/models/cancelsessionprocessingop.py
-  - src/mix_python_sdk/models/coretoolname.py
-  - src/mix_python_sdk/models/createsessionop.py
-  - src/mix_python_sdk/models/deletecredentialsop.py
-  - src/mix_python_sdk/models/deletesessionfileop.py
-  - src/mix_python_sdk/models/deletesessionop.py
-  - src/mix_python_sdk/models/denypermissionop.py
-  - src/mix_python_sdk/models/exportmessage.py
-  - src/mix_python_sdk/models/exportsession.py
-  - src/mix_python_sdk/models/exportsessionop.py
-  - src/mix_python_sdk/models/exporttoolcall.py
-  - src/mix_python_sdk/models/fileinfo.py
-  - src/mix_python_sdk/models/forksessionop.py
-  - src/mix_python_sdk/models/getauthstatusop.py
-  - src/mix_python_sdk/models/getavailableprovidersop.py
-  - src/mix_python_sdk/models/getcommandop.py
-  - src/mix_python_sdk/models/getmessagehistoryop.py
-  - src/mix_python_sdk/models/getoauthhealthop.py
-  - src/mix_python_sdk/models/getpreferencesop.py
-  - src/mix_python_sdk/models/getsessionfileop.py
-  - src/mix_python_sdk/models/getsessionmessagesop.py
-  - src/mix_python_sdk/models/getsessionop.py
-  - src/mix_python_sdk/models/getsysteminfoop.py
-  - src/mix_python_sdk/models/gettoolcredentialsstatusop.py
-  - src/mix_python_sdk/models/gettoolsstatusop.py
-  - src/mix_python_sdk/models/grantpermissionop.py
-  - src/mix_python_sdk/models/handleoauthcallbackop.py
-  - src/mix_python_sdk/models/healthcheckop.py
-  - src/mix_python_sdk/models/listcommandsop.py
-  - src/mix_python_sdk/models/listllmtoolsop.py
-  - src/mix_python_sdk/models/listmcpserversop.py
-  - src/mix_python_sdk/models/listsessionfilesop.py
-  - src/mix_python_sdk/models/listsessionsop.py
-  - src/mix_python_sdk/models/refreshoauthtokensop.py
-  - src/mix_python_sdk/models/resetpreferencesop.py
-  - src/mix_python_sdk/models/resterror.py
-  - src/mix_python_sdk/models/rewindsessionop.py
-  - src/mix_python_sdk/models/sendmessageop.py
-  - src/mix_python_sdk/models/sessiondata.py
-  - src/mix_python_sdk/models/sseeventstream.py
-  - src/mix_python_sdk/models/startoauthflowop.py
-  - src/mix_python_sdk/models/storeapikeyop.py
-  - src/mix_python_sdk/models/streameventsop.py
-  - src/mix_python_sdk/models/toolcalldata.py
-  - src/mix_python_sdk/models/toolname.py
-  - src/mix_python_sdk/models/updatepreferencesop.py
-  - src/mix_python_sdk/models/updatesessioncallbacksop.py
-  - src/mix_python_sdk/models/uploadsessionfileop.py
-  - src/mix_python_sdk/models/validatepreferredproviderop.py
-  - src/mix_python_sdk/permissions.py
-  - src/mix_python_sdk/preferences_sdk.py
-  - src/mix_python_sdk/py.typed
-  - src/mix_python_sdk/sdk.py
-  - src/mix_python_sdk/sdkconfiguration.py
-  - src/mix_python_sdk/sessions.py
-  - src/mix_python_sdk/streaming.py
-  - src/mix_python_sdk/system.py
-  - src/mix_python_sdk/tools.py
-  - src/mix_python_sdk/types/__init__.py
-  - src/mix_python_sdk/types/basemodel.py
-  - src/mix_python_sdk/utils/__init__.py
-  - src/mix_python_sdk/utils/annotations.py
-  - src/mix_python_sdk/utils/datetimes.py
-  - src/mix_python_sdk/utils/enums.py
-  - src/mix_python_sdk/utils/eventstreaming.py
-  - src/mix_python_sdk/utils/forms.py
-  - src/mix_python_sdk/utils/headers.py
-  - src/mix_python_sdk/utils/logger.py
-  - src/mix_python_sdk/utils/metadata.py
-  - src/mix_python_sdk/utils/queryparams.py
-  - src/mix_python_sdk/utils/requestbodies.py
-  - src/mix_python_sdk/utils/retries.py
-  - src/mix_python_sdk/utils/security.py
-  - src/mix_python_sdk/utils/serializers.py
-  - src/mix_python_sdk/utils/unmarshal_json_response.py
-  - src/mix_python_sdk/utils/url.py
-  - src/mix_python_sdk/utils/values.py
+trackedFiles:
+  .devcontainer/README.md:
+    id: b170c0f184ac
+    last_write_checksum: sha1:3c63dfd4dcea8df0d4add09e975a6887e6da4aab
+    pristine_git_object: 396929ab2e57cf09dd25ec83bd4496f733b95701
+  .devcontainer/devcontainer.json:
+    id: b34062a34eb1
+    last_write_checksum: sha1:94309e8c8eab5ab063986bf625f513a59825e947
+    pristine_git_object: 75edff51e68d2934c825764459ba3071044ce2ab
+  .devcontainer/setup.sh:
+    id: 5f1dfbfeb8eb
+    last_write_checksum: sha1:234faaf21a8a7028346590d1eb3fac0429f4991c
+    pristine_git_object: b39c28c38cf46135982ab5576b4723ea777bf510
+  .gitattributes:
+    id: 24139dae6567
+    last_write_checksum: sha1:53134de3ada576f37c22276901e1b5b6d85cd2da
+    pristine_git_object: 4d75d59008e4d8609876d263419a9dc56c8d6f3a
+  .vscode/settings.json:
+    id: 89aa447020cd
+    last_write_checksum: sha1:f84632c81029fcdda8c3b0c768d02b836fc80526
+    pristine_git_object: 8d79f0abb72526f1fb34a4c03e5bba612c6ba2ae
+  USAGE.md:
+    id: 3aed33ce6e6f
+    last_write_checksum: sha1:f1c404e2dc00bb6ad749a2b417e797ef9e994407
+    pristine_git_object: 4e3fd61352a2949cfb31350024ec718fc802e587
+  docs/errors/errorresponse.md:
+    id: 910ef333346b
+    last_write_checksum: sha1:c7b916c1d8e7b6fd25be26f657b632927841ba88
+    pristine_git_object: 591a8268107a490dcdc5220fa5a42745bf667978
+  docs/models/availableproviders.md:
+    id: b1e40b3918bc
+    last_write_checksum: sha1:5442813f35f6dc78be7c748730e1cf6eb622eca1
+    pristine_git_object: a0aec4ddcf73b927d9bf3c1ff62306f01d1bc86e
+  docs/models/backendmessage.md:
+    id: 000c8003a1dd
+    last_write_checksum: sha1:06764766f2129966201f70da08b7d1872ff5124d
+    pristine_git_object: 673b339c3b0494804f08950a77c75aa06f072a92
+  docs/models/browsermode.md:
+    id: c214556ca512
+    last_write_checksum: sha1:400c453cb6a5eea66d61c2c643f97fb1edf2b076
+    pristine_git_object: 5b8646d146ab1bae26aac2dda60e70599778eb76
+  docs/models/callback.md:
+    id: ddbeb3fa1d60
+    last_write_checksum: sha1:bb31b52c9779813d93d87dabe148e1f0c3739fd0
+    pristine_git_object: 84cb5f3c789190403c78d78ccb3ef9c53d9bd677
+  docs/models/callbackresultdata.md:
+    id: 30d6b859ae36
+    last_write_checksum: sha1:b84a3a7c03f9a9d65b4fd5059112fcee26f8fa7d
+    pristine_git_object: d31b53f003ad7daea748befe31897121b426eacb
+  docs/models/callbackresultdatacallbacktype.md:
+    id: c7e347cf27e3
+    last_write_checksum: sha1:44f9c8c688c46873b12552a8acf0b9e3f88db6c1
+    pristine_git_object: 9b597f6c678e2aa41b48552254898019f4e21225
+  docs/models/callbacktype.md:
+    id: 605862ea3589
+    last_write_checksum: sha1:31c0a4482f20ce30f7ea741f1dff0b4753903ff4
+    pristine_git_object: 12566211ac0d40b3928bfac20e59f4cc74fd22c4
+  docs/models/cancelsessionprocessingrequest.md:
+    id: 072fa1e3ab27
+    last_write_checksum: sha1:f46d8c06b23a09eae7796b6549d15e72a2d70d97
+    pristine_git_object: df9fe98a9ece964f12c5080dcb1253163af8b6cd
+  docs/models/cancelsessionprocessingresponse.md:
+    id: e10b7aaa1ee5
+    last_write_checksum: sha1:5a96def950d415b89412fb7e57cdba31d747baf7
+    pristine_git_object: cf9052efdf3356483d4b125360a797d9a157e079
+  docs/models/coretoolname.md:
+    id: c6bb5b507391
+    last_write_checksum: sha1:564d46fc153b429478bf5d03a484e41eebeac9d3
+    pristine_git_object: 84e9a99746fd41c47e4d4b7169585db3738423d1
+  docs/models/createsessionbrowsermode.md:
+    id: 7565ef32db52
+    last_write_checksum: sha1:05d3d8424ba0895d4f532cb2a2a714aff4031fb0
+    pristine_git_object: 8be9646758fa223ac7977af33ae665c3284206fc
+  docs/models/createsessionrequest.md:
+    id: ed95d5ed0ccc
+    last_write_checksum: sha1:f44bba14d7dd6eeef39ed6b420b679178b518084
+    pristine_git_object: 597beb49dfd5eb31c6eee5fc13e0473ec23bcaf4
+  docs/models/createsessionsessiontype.md:
+    id: 5d339a3c6d77
+    last_write_checksum: sha1:a194ce5e378f3dcbe221061c561437c14db2b876
+    pristine_git_object: d71003bf3cfd9754d9e0d9ba342484fdd1ad3f3b
+  docs/models/deletecredentialsrequest.md:
+    id: 12617098fecb
+    last_write_checksum: sha1:daa9ad057e85428be3a683427b8df4980f09655a
+    pristine_git_object: 4be0b83934596ead8cc4be1f79cab864cf080fc4
+  docs/models/deletecredentialsresponse.md:
+    id: 01a9ea03a9bd
+    last_write_checksum: sha1:2a81c94fd6255f88c3b4ce871cec9f2502f64b38
+    pristine_git_object: e4d8634d0358ced5d7e86953ff807ab0f913db7d
+  docs/models/deletesessionfilerequest.md:
+    id: eac65d882e68
+    last_write_checksum: sha1:81558728d6e658fc8f622854a8d0406b0b0d28af
+    pristine_git_object: 84c1eaa7e487dbc1f9b9f03577e14b088c78288d
+  docs/models/deletesessionrequest.md:
+    id: e7877488850c
+    last_write_checksum: sha1:05a5d7668ac5f8572677e2b641097f6c973287b9
+    pristine_git_object: dd33f4248cc539081020d9013f30d1e271d64847
+  docs/models/denypermissionrequest.md:
+    id: c0bbbde53ed0
+    last_write_checksum: sha1:36aea0a3ed2125488ed41d5d3afadda52d11838b
+    pristine_git_object: 27d1c6ceb4566c27d77d0049e9f7e9d777371886
+  docs/models/denypermissionresponse.md:
+    id: dfae959b42aa
+    last_write_checksum: sha1:03b9ed34c6c28385dbf3a0653281ccf1966bd793
+    pristine_git_object: cc27c84b0c4005dc8cde1e1064bc2ecc63a4cf41
+  docs/models/exportmessage.md:
+    id: aeec72600cf9
+    last_write_checksum: sha1:ff0d9b25ae8c47cd43b62c62716bcc7b5cc541ad
+    pristine_git_object: a631298c3a8090cd98ba37713dd585361be2b089
+  docs/models/exportsession.md:
+    id: 6705a4383abe
+    last_write_checksum: sha1:9d8a6fa5efcadbb5cc550a0d21946b0ebf8aa6a1
+    pristine_git_object: d1f37adb76a3e3687c3a5948278eecc44b23af04
+  docs/models/exportsessionrequest.md:
+    id: 48aca9d5bc71
+    last_write_checksum: sha1:a5d3cb7e015a8fbdb427fb05d605d8fd65f6e13e
+    pristine_git_object: c1010daab73671289b3008fa7f92ab340b32a014
+  docs/models/exportsessionresponse.md:
+    id: c221fc48e79b
+    last_write_checksum: sha1:3046c69ade38f3b3e708211d79694b680650f776
+    pristine_git_object: dd0e18559f1c63c20a1ac3cad7182d08fb52f391
+  docs/models/exporttoolcall.md:
+    id: 7f0a10f51fa6
+    last_write_checksum: sha1:76f0f6bd49e761dece0c027e5cd277ecebb5f93f
+    pristine_git_object: 1c959c1b74114603a3ae811d250efce4b949eb35
+  docs/models/file.md:
+    id: 4ad31355bd1c
+    last_write_checksum: sha1:ade4d3c908c664a07a3c333cc24bc1bfb43ab88b
+    pristine_git_object: 37cc418f9e5189c18f312c42060fd702e2963765
+  docs/models/fileinfo.md:
+    id: b2e80d38b8da
+    last_write_checksum: sha1:83dab90fadc540537ffaa4776773b7fbad65d21a
+    pristine_git_object: 2e5a16c9f81dd95d92bea101107d89e915ec4e0d
+  docs/models/getauthstatusauthmethod.md:
+    id: 8e8da9a4ec3d
+    last_write_checksum: sha1:996c28700e33dc806a100b6ee87589311a62833f
+    pristine_git_object: cef056eef058de8b5725b56ffe95bdaf7eccb8d3
+  docs/models/getauthstatusproviders.md:
+    id: 3cf18d2d11b0
+    last_write_checksum: sha1:7610f148d9e6a5054da9542f61eb5caf8b8dd97c
+    pristine_git_object: e2f06885a9faf94c2a847bf6c7caa8091994731a
+  docs/models/getauthstatusresponse.md:
+    id: df8897f4f422
+    last_write_checksum: sha1:1b8d1ba3ccad7ca35495068d279347588df775cf
+    pristine_git_object: c5b706e96115abbdc31a266a47c3e7d8aa97200b
+  docs/models/getavailableprovidersresponse.md:
+    id: 3256cbe4767a
+    last_write_checksum: sha1:cd6a71bce8e685791d52d63b1f2af361da8ae737
+    pristine_git_object: fcbc1c11d53780e97a15ebd64de77144907aa0cf
+  docs/models/getcommandrequest.md:
+    id: 2981b4b3b3bf
+    last_write_checksum: sha1:1640c624ce51bfb5b7d3f51f0727be751c720948
+    pristine_git_object: e132630df9a198960da52c107ee578a3bcf06b6e
+  docs/models/getcommandresponse.md:
+    id: 56b5254c4a15
+    last_write_checksum: sha1:b594e62a2a156930e6aed83c196768dd79b7decd
+    pristine_git_object: 886a93c7f7570be6c60b28f5fbfb6eb04cfe49ef
+  docs/models/getmessagehistoryrequest.md:
+    id: 2e9c5ca22551
+    last_write_checksum: sha1:a7963fc5b6ef61741d51531e5935542f6093681e
+    pristine_git_object: 357f184256130c786ec0baa46f90e72be723e39f
+  docs/models/getoauthhealthproviders.md:
+    id: d944fbdcc0b5
+    last_write_checksum: sha1:3790fd1a72908bd0449389655f94f92187e61b28
+    pristine_git_object: 2b4e370e6bf6ce74256389e3cdcff2518d9fbc8f
+  docs/models/getoauthhealthresponse.md:
+    id: 0a9036294a0b
+    last_write_checksum: sha1:78117eec67be17bf6ae4117955c385ebded634f5
+    pristine_git_object: 75f684a399c622209827eb04b197013b8ec1f75d
+  docs/models/getpreferencespreferences.md:
+    id: 965f4da687b2
+    last_write_checksum: sha1:9629556e6f813b1251cafb4ff7aeb1ec9839c7d3
+    pristine_git_object: 251541d02d4aa7bb7ca96c39053b9c5852164585
+  docs/models/getpreferencesresponse.md:
+    id: 572c049a5d20
+    last_write_checksum: sha1:851ac2a2d563e852806062f2b33c903736135004
+    pristine_git_object: 4c60348f981cf43a9c7525887e7e1789925ec365
+  docs/models/getsessionfilerequest.md:
+    id: 3a793eaccb9b
+    last_write_checksum: sha1:256f2f51112966660a8001b7545dceccb17b93fd
+    pristine_git_object: 2a9129d59fc5adfb95a5aed01320d7e6d681cee4
+  docs/models/getsessionmessagesrequest.md:
+    id: 2afc5b2827c5
+    last_write_checksum: sha1:afcc22fbc7cae4b0dd0a5bba752d02e8184334d5
+    pristine_git_object: cdc991138e71ff6a11a3b5e1b28e08cfc77530b3
+  docs/models/getsessionrequest.md:
+    id: 1533087690ea
+    last_write_checksum: sha1:f5e7684a9d8033aae56e3977aa06c232e47610ca
+    pristine_git_object: 7e2ed645d59cad2b4af89f5ddd6a5e87b6f94e28
+  docs/models/getsysteminforesponse.md:
+    id: aec2d79a9c23
+    last_write_checksum: sha1:cfee40ba4969bf5411c740626e784bad21e62e9c
+    pristine_git_object: 9cd0ddf2b0ee3c29f17365e9ee210bc17a839803
+  docs/models/gettoolcredentialsstatuscategories.md:
+    id: 8a5d4c1541f9
+    last_write_checksum: sha1:55dde1e55cc9ad6b35d83287d082229d4c7139ee
+    pristine_git_object: 85884503e9b2102e653439bd2e3f2da10a6f7311
+  docs/models/gettoolcredentialsstatusresponse.md:
+    id: 955f142fcd17
+    last_write_checksum: sha1:f4ea87d4d292f1df81f857086a93c1b226172523
+    pristine_git_object: 3a987eead627cf17eff0a7115cefdb04898be70c
+  docs/models/gettoolcredentialsstatustool.md:
+    id: 51ade90b1464
+    last_write_checksum: sha1:069a51a0bfad0b707135f4dc3aa8920c9980cdfb
+    pristine_git_object: 601f4c6e9523a97b9d07d2ddb189d447b2b7d7f6
+  docs/models/gettoolsstatuscategories.md:
+    id: fcd4419f4eb8
+    last_write_checksum: sha1:a3890e0af95d30931027c8f3cf45adf82800a5ba
+    pristine_git_object: 787320a9710b3df5dd886bf828f36dcb85ed3d5f
+  docs/models/gettoolsstatusresponse.md:
+    id: b42858540152
+    last_write_checksum: sha1:05bb6e29c65aeaadf7cef9a2ed39d77a403e84aa
+    pristine_git_object: 27e89adfe5023c9eb31cee6a2634afa24c90d329
+  docs/models/gettoolsstatustool.md:
+    id: e51a65b4982d
+    last_write_checksum: sha1:37885e245a214e0b21eafe997177668fb889f1a7
+    pristine_git_object: 72651a645da227ee92060e4e8d4ce048193fa82e
+  docs/models/grantpermissionrequest.md:
+    id: 67b7e1289a6c
+    last_write_checksum: sha1:1e04f76e4357c6b5a111353fb4c73c79c5fae5de
+    pristine_git_object: 982fa75f58a4aed11d3981b561f5477808a6c4bb
+  docs/models/grantpermissionresponse.md:
+    id: 50e4caf42222
+    last_write_checksum: sha1:6deb8b8b0bde7e991dac11da3486981daaa380d9
+    pristine_git_object: 548f4595722c72704809e8d616047208fefdc149
+  docs/models/handleoauthcallbackrequest.md:
+    id: 6706edb7cde6
+    last_write_checksum: sha1:5d7a9136bb86049cc1155f27929ea3c0cc90ec21
+    pristine_git_object: fc2248473572e0dc58aaf01c797fba90f5df550b
+  docs/models/handleoauthcallbackresponse.md:
+    id: 6ada4ab35413
+    last_write_checksum: sha1:ef3e414070e70ef54f6a6292a5139706bee7c222
+    pristine_git_object: b7af0a5841155aed0a00c3337d42dd1ff9906ac5
+  docs/models/healthcheckresponse.md:
+    id: dbb2cc68ef9a
+    last_write_checksum: sha1:77395a9b6afe7a8044eaf3b3812c41b64f9213e0
+    pristine_git_object: 82144144da8d6085a1bfd34c9f5c06772d131768
+  docs/models/inputjson.md:
+    id: 4c5ecf6db4f5
+    last_write_checksum: sha1:94a0fe0810782e3b91e61de7b16efaecfb4bf439
+    pristine_git_object: 8c8d389369f911e52105509d4b24f382f62d2910
+  docs/models/listcommandsresponse.md:
+    id: 5c98f369af5b
+    last_write_checksum: sha1:043eb27cb16203bcf40764607b657e886deb17ca
+    pristine_git_object: 66ad8abefc1eb0b4aadb1e8b017aafa58cf11b8e
+  docs/models/listllmtoolsresponse.md:
+    id: 70e282ced0bc
+    last_write_checksum: sha1:6811261330f7b3e14d7c00bc8c4fccfceef6ca4e
+    pristine_git_object: 286399a2aaedc2d33c1f0187e867173d2c0b3dcb
+  docs/models/listllmtoolstool.md:
+    id: 84427f7bdee0
+    last_write_checksum: sha1:ab47c504ca088e3a6e02f7ba28d45435c2c0d0fb
+    pristine_git_object: 469975c6abb6eaf6aa185ed15c57c449006bdb50
+  docs/models/listmcpserversresponse.md:
+    id: 11bdcba72a48
+    last_write_checksum: sha1:9cb6c9f9579bd23ff9a2fcd243c8f44bee49996a
+    pristine_git_object: 211c2f0eb7403d53b383329d205606b3f5785326
+  docs/models/listmcpserverstool.md:
+    id: 261be48b8d06
+    last_write_checksum: sha1:e820c578ed5f517ca8e07716b88980efaa40e535
+    pristine_git_object: 414370f0404ac3ee40ca875db1e2053f5191b971
+  docs/models/listsessionfilesrequest.md:
+    id: 216f44b7d117
+    last_write_checksum: sha1:33b26814d93a3de0919f0771179e55149bed38b2
+    pristine_git_object: 97f7f880dae5384518f442f41d2e04e9aa603cb0
+  docs/models/listsessionsrequest.md:
+    id: 38efa9d48377
+    last_write_checksum: sha1:4c46a0bff5f1a9508cffc21290496e5b5d6dd575
+    pristine_git_object: a03ea1f0ba6fd8c0e6c0bf826c7559bc35b963e5
+  docs/models/notificationtype.md:
+    id: 656e4b2a3c7c
+    last_write_checksum: sha1:37fcde5e5ea382bb827ff443ac91814bc5918ec6
+    pristine_git_object: 6530df679613af4d54ea8837b858a99ec857d71f
+  docs/models/parameters.md:
+    id: e4a3969226fc
+    last_write_checksum: sha1:663289c02a7bd3c189bf5e29855c2d0e853a92f4
+    pristine_git_object: be272de8c73d99102f289c64fd3f72ada830bf38
+  docs/models/params.md:
+    id: 9c85a55b7b80
+    last_write_checksum: sha1:5032fc3f5e95e576693a7a97faae3d1f47de128c
+    pristine_git_object: 3e0daa8595099aad95bcd57a9d5f64d3a8e67384
+  docs/models/promptmode.md:
+    id: deef775fcd75
+    last_write_checksum: sha1:f42eadc4f8a328f6430ba78aa6a0edf89511105d
+    pristine_git_object: d1668c60fbf44ae95633fdffdcecbe6baa752da6
+  docs/models/provider.md:
+    id: cedb2a98f8e3
+    last_write_checksum: sha1:2af25060386bf14bc7dd52ea4ee26167ceb32996
+    pristine_git_object: d18ff90203d30e3141693c63839d4c2f8b90ba44
+  docs/models/providersstatus.md:
+    id: 9f51266ad7fe
+    last_write_checksum: sha1:0a1cf0cf5f56a135f355a5c9d6647fdd4bc0f16f
+    pristine_git_object: 413e9988d9f5ec6e0cda86e273b0e4891c132c88
+  docs/models/refreshoauthtokensresponse.md:
+    id: a29d4e69627b
+    last_write_checksum: sha1:4be51936d1488ffa2f441f89cbf63a14d3f53fce
+    pristine_git_object: a19165ebf7f9974da1ace159440a4c84c740e6c1
+  docs/models/resetpreferencesresponse.md:
+    id: 838b5482bed7
+    last_write_checksum: sha1:b7570c09533720be704cabe6ad8c5c5eb162ea1e
+    pristine_git_object: 0ea232b7c0f588f920aa49002cbc6c4d277427c8
+  docs/models/respondtonotificationrequest.md:
+    id: 50d164bd210e
+    last_write_checksum: sha1:23be9acfba7f7c7167ab05211500c143056eb5f2
+    pristine_git_object: 37a9549543aa944d2c7f4a3d9a144d0a7f7ea27d
+  docs/models/respondtonotificationrequestbody.md:
+    id: 8647eb8dfdea
+    last_write_checksum: sha1:ddc78679a7adfdab067e52722da3b01ff1fa9f70
+    pristine_git_object: 70c95c64b86659562737af39c247e2828320227a
+  docs/models/respondtonotificationtype.md:
+    id: 54dbfa3842f0
+    last_write_checksum: sha1:e23df1838f3f8a55aeb85797d80d219fcd724ff3
+    pristine_git_object: b5f84b36acf8be99ca456c43d2cfba05b2900670
+  docs/models/responsetype.md:
+    id: 4be34cb8f272
+    last_write_checksum: sha1:54f067e227672e92db99addbbba8be13e988d274
+    pristine_git_object: 1c15480c7af0d846ac8f4bac9cb11891bb62ec3d
+  docs/models/resterror.md:
+    id: ed07982f509d
+    last_write_checksum: sha1:eefb51b79ff93ba3fa9f0894256fb6f90fea5f74
+    pristine_git_object: 3b3939bb1f23c534418fc0e88a1f18b0c95f25b4
+  docs/models/resterrortype.md:
+    id: a041bdd7e0ba
+    last_write_checksum: sha1:f6129a63b8625d0f9f7a87809b82d6dbc61a59c7
+    pristine_git_object: 5d61e23b3ece979c6c5785174c6e247a0a6739e3
+  docs/models/rewindsessionrequest.md:
+    id: 33a671905552
+    last_write_checksum: sha1:5a2a5d7bf739b94dcb84a287c5f4d3e2284495d9
+    pristine_git_object: a78806510b8a3b5bec8ffdfc2f2f610b004da0c0
+  docs/models/rewindsessionrequestbody.md:
+    id: dd86d959e122
+    last_write_checksum: sha1:14d19a9c6c0afabdf15bdc4bbfc9b7c955e4231b
+    pristine_git_object: 2523440b892bbf52ad08e5fc520b1cf913ad3dc6
+  docs/models/sendmessagerequest.md:
+    id: eaa5c4d22a19
+    last_write_checksum: sha1:4522c7a9ff110e5cceb828449115b2bff3228438
+    pristine_git_object: 9f268f8d9017cbdd81a3ed0d41b8a2fefb58f16a
+  docs/models/sendmessagerequestbody.md:
+    id: 12097de64afb
+    last_write_checksum: sha1:a2659ddf77ec44c5d2874b4bd46a201c918dc381
+    pristine_git_object: 9f71fc6f7c80c8241adc936fca15c2ce3e0ec553
+  docs/models/sendmessageresponse.md:
+    id: d50c434e7db0
+    last_write_checksum: sha1:ed4db064396c8814512fd2c79495c76ee4edbd7b
+    pristine_git_object: fd3da970937b4826a5b0615f29a15793537c051e
+  docs/models/sessiondata.md:
+    id: fa87d6b649be
+    last_write_checksum: sha1:522bceea0c2067fc7592bbaf6e725781c7ee0246
+    pristine_git_object: 64d8f87baa6755b46e899fda2e17321b63b94e8e
+  docs/models/sessiontype.md:
+    id: 3570155d5779
+    last_write_checksum: sha1:84368aa10fe8645f6718ababf17990bfa633f6f6
+    pristine_git_object: 8de1502b4906f5778fe26154f70ec216e49b1c2b
+  docs/models/ssecompleteevent.md:
+    id: d6809fad131e
+    last_write_checksum: sha1:47c2c0aa65b3aff9e142ce7b3d4c52f44a50fa7e
+    pristine_git_object: ab08d958dc7787058253c08dd37e8264c2a9aed6
+  docs/models/ssecompleteeventdata.md:
+    id: 484e29664618
+    last_write_checksum: sha1:4d42a760fed5ca581bcb6cf8e0b9a15ed10e124f
+    pristine_git_object: 9f7fa4aae3a2ddfd054f2d00dea17590a3ee07d2
+  docs/models/ssecompleteeventevent.md:
+    id: fe9ff685ec36
+    last_write_checksum: sha1:dc5338a66dbcfce4f0cd354e8da6016183b61b00
+    pristine_git_object: d3230a44c43422818cd9c93e196af80542847469
+  docs/models/sseconnectedevent.md:
+    id: ed9140d5fb16
+    last_write_checksum: sha1:9ab9ceca146acc5ddda4b05caec08ff430cdb67e
+    pristine_git_object: 73cceee1e0cf95f115d40eb5e7f153050caaa54c
+  docs/models/sseconnectedeventdata.md:
+    id: f085df9c8871
+    last_write_checksum: sha1:a4bf2fac49ef41d60598d8356445faf9a0a170c8
+    pristine_git_object: 216d32b9957221a7fa2ef46acd3c37463b8ece97
+  docs/models/sseconnectedeventevent.md:
+    id: 6a9ddd9e1dfa
+    last_write_checksum: sha1:3cbcd6bbc24166b669b6d5e9693b45a0ad02f052
+    pristine_git_object: 45c997178cc7dfe33f09ad2d2fb58e3f18663c34
+  docs/models/ssecontentevent.md:
+    id: 76d6dd9f5ede
+    last_write_checksum: sha1:97351ab9a131a86431987443b57735813d46b661
+    pristine_git_object: 1903627eba0f0727184ba045187e65f32c98e9b3
+  docs/models/ssecontenteventdata.md:
+    id: 8f636343ae52
+    last_write_checksum: sha1:cfbdf764a731999839908f9ff8c69548f1a2a308
+    pristine_git_object: 30bd0a0a2fb7e8a406397fb2f3b148238c779d1f
+  docs/models/ssecontenteventevent.md:
+    id: 5f69d93675a7
+    last_write_checksum: sha1:90fc09d1108560d5448b92c1d6416fe2e053502a
+    pristine_git_object: 7f57f7965df860c9a0562da2ddf1161df5750e1d
+  docs/models/sseerrorevent.md:
+    id: 0416029a8a33
+    last_write_checksum: sha1:94e62d30e4858ffb8a7fc98703452b7d3925fabb
+    pristine_git_object: f295c5ccbde38abd31830456b7cdfef0e7594998
+  docs/models/sseerroreventdata.md:
+    id: b8374dba8744
+    last_write_checksum: sha1:f2b76f2d3513505931e15cb463b08cd0a4827035
+    pristine_git_object: ed39b6194a166f1f2bae2feac7696d223cb00762
+  docs/models/sseerroreventevent.md:
+    id: 4f7ee6f59b7d
+    last_write_checksum: sha1:2b235a400353dc9933ffd4a38690213ab73d9834
+    pristine_git_object: 22a4e39a72e9196035cbc5880ea87452820d6d81
+  docs/models/sseeventstream.md:
+    id: baa26ad9a060
+    last_write_checksum: sha1:dfad848362afd5a0d6b7856cb662c64e4ae7ac0d
+    pristine_git_object: 60cd07f4285d7b0d42053fd4bc7086f775c776ed
+  docs/models/sseheartbeatevent.md:
+    id: ddf2a1133845
+    last_write_checksum: sha1:ddee5377bd6f2b2f95e0d9e4f8396d0fe5d1c90d
+    pristine_git_object: c1fd659cf8ce85f8824ef85fd54397bf82049813
+  docs/models/sseheartbeateventdata.md:
+    id: 76a52443ff86
+    last_write_checksum: sha1:487a3d0ac1462492719b4be4096805003d5487fb
+    pristine_git_object: 9cb70061ed3d10f6cd504585da308aaafcecb239
+  docs/models/sseheartbeateventevent.md:
+    id: a95feda09f61
+    last_write_checksum: sha1:63cdddb6d1be67c1f86dc695cbe7f211ab27c833
+    pristine_git_object: ade8d0a68cd2a91ee3a6abb34db1b899830d228d
+  docs/models/ssenotificationevent.md:
+    id: 4f20dd24a503
+    last_write_checksum: sha1:566631bf73fbbadae41aaaacb113211eddbf92fa
+    pristine_git_object: 1403ce55ab290eeb1f5f04bb4f1e4b013205bf75
+  docs/models/ssenotificationeventdata.md:
+    id: 637dcf8166c1
+    last_write_checksum: sha1:767ca4c3e2fcc5284dc590a848920b08620cf9bb
+    pristine_git_object: 1c3ef08daa063133712d856c95a58a00561e075a
+  docs/models/ssenotificationeventevent.md:
+    id: 5cb4f6eb3f12
+    last_write_checksum: sha1:5e22388e5356fdfdcae553e2ab065e7edd8118c6
+    pristine_git_object: 01a8c81b65ac91fc7a3319d4ca501d2d28da8f35
+  docs/models/ssepermissionevent.md:
+    id: 3b350c3433cf
+    last_write_checksum: sha1:265f0298f4e29d03af3983edb4edb5767f015ca9
+    pristine_git_object: 2576414a308e1a9c1daa253665590b6214224fd5
+  docs/models/ssepermissioneventdata.md:
+    id: c3b1b3ca15e7
+    last_write_checksum: sha1:1d8f5c6be07035168696bc64ebc207a304682baa
+    pristine_git_object: 63f2b8cffdd6ddd92e1100d9818d53442cd588df
+  docs/models/ssepermissioneventevent.md:
+    id: dbb5bbd9a9fe
+    last_write_checksum: sha1:313f48332ca00856539fd4c09aa17f15f9dac0ac
+    pristine_git_object: 006bcc2d042908e541f670d53d8053f035423e8f
+  docs/models/ssesessioncreatedevent.md:
+    id: 07c739caee63
+    last_write_checksum: sha1:b9900b26ca08add36f002413f55c9eb82eff4781
+    pristine_git_object: fb4f3c3d9ecdb1662fe4a0184591aba021542e44
+  docs/models/ssesessioncreatedeventdata.md:
+    id: f5a57675b729
+    last_write_checksum: sha1:7a6324cd788f5d1bf219f0309915c1d665c67c04
+    pristine_git_object: 038f0f06acf32765f33cedc582c3406cd3675644
+  docs/models/ssesessioncreatedeventevent.md:
+    id: abc8f5cbe373
+    last_write_checksum: sha1:9e6a9297ddd5359e6ddb45e3957c8d211f8ed760
+    pristine_git_object: 05781bdc79350cebf7d81e1cf182a4e7471c6ba2
+  docs/models/ssesessiondeletedevent.md:
+    id: 4df438634961
+    last_write_checksum: sha1:2ab84acc2601702ff3f91972c0ab7ce7c6b582f3
+    pristine_git_object: 9cb2b98b7a07da9adbe58317dc24f5a07d7683e4
+  docs/models/ssesessiondeletedeventdata.md:
+    id: dafb1ebe2ad9
+    last_write_checksum: sha1:ef159037ea67b6b280bec7bedb6f5f535d38c35c
+    pristine_git_object: c881987cf739253e2c65ba57fcd7c8d6ebeb7b7c
+  docs/models/ssesessiondeletedeventevent.md:
+    id: 5be9d0124faf
+    last_write_checksum: sha1:e4c80ca1a59fed34433f67fc6dec716d9f5e9bf3
+    pristine_git_object: 85ba15c5718147b7b1c2cdf6f141f0812422b80c
+  docs/models/ssethinkingevent.md:
+    id: f099f9f77711
+    last_write_checksum: sha1:b2024c590bdfb80a372b90cc4d0e8008d5d9e117
+    pristine_git_object: cf774b3a839a7056e0494d2230e61c068b686c3d
+  docs/models/ssethinkingeventdata.md:
+    id: 9eea0c8b71c9
+    last_write_checksum: sha1:705e4ff711009d13554e35547e6520abd12eb80d
+    pristine_git_object: 4f09b7001e9f7e1e5d7fba3486563d5522948387
+  docs/models/ssethinkingeventevent.md:
+    id: e590f64a9d67
+    last_write_checksum: sha1:e3cb5cdf4826023995fe6856a36e60d2270b66a5
+    pristine_git_object: d7401ba3713915666102b9818159754039ce67b4
+  docs/models/ssetoolexecutioncompleteevent.md:
+    id: 709b56c804ad
+    last_write_checksum: sha1:57d7aa0f96f9c126252cc37c57fced24596d870f
+    pristine_git_object: 9ab228325d12633ca3d11ecaa05d1b2422e53aa0
+  docs/models/ssetoolexecutioncompleteeventdata.md:
+    id: 5c010bf632eb
+    last_write_checksum: sha1:0008df2f4e59cde18315c422a04d4afdc3f9b238
+    pristine_git_object: db90ca1fe0e926a4511c51a1523ddbfc04fd635d
+  docs/models/ssetoolexecutioncompleteeventevent.md:
+    id: ec1c6643bd11
+    last_write_checksum: sha1:7f85ea52943fb34707e41f98dd99020774172f1f
+    pristine_git_object: c99f2332c6f6d1085d69898133f2761d85939677
+  docs/models/ssetoolexecutionstartevent.md:
+    id: a863e90cfcc7
+    last_write_checksum: sha1:dd12f2af13d0b4910807487da3db2f5b8a67f744
+    pristine_git_object: 7928ad599ddeb419b37a543f6edc34c72c89eec9
+  docs/models/ssetoolexecutionstarteventdata.md:
+    id: b293587fb728
+    last_write_checksum: sha1:73b82cbde069771c6861030784dd18883c7c747a
+    pristine_git_object: 1c1b377090963d923142a96df490d660ab4d9873
+  docs/models/ssetoolexecutionstarteventevent.md:
+    id: c0da9f53effd
+    last_write_checksum: sha1:b07fa282b0c3f81e29574b6f7f6b2e9409314c55
+    pristine_git_object: 7f496db360785ead9ab23668590290b5e531221c
+  docs/models/ssetooluseparameterdeltaevent.md:
+    id: 86f73ca80c7a
+    last_write_checksum: sha1:7cdc71ec8cf48f410ba2d297ff995bb1e275b1c8
+    pristine_git_object: ad60aefa95650c32163f918ffd93dea0f82fa7e2
+  docs/models/ssetooluseparameterdeltaeventdata.md:
+    id: 6e8723d8935e
+    last_write_checksum: sha1:7ba8fe6d5f82665c282ee582bff5433e3d4978f6
+    pristine_git_object: 2c4089075df4f872d930813a55608dc670da2246
+  docs/models/ssetooluseparameterdeltaeventevent.md:
+    id: 28b9f3a6ce7a
+    last_write_checksum: sha1:18c2320f007bddfa2820d2ea69654b27b23d117b
+    pristine_git_object: 63b0b3a44cb000605be59ab9bff9652603f61d51
+  docs/models/ssetooluseparameterstreamingcompleteevent.md:
+    id: afa6ec9ca847
+    last_write_checksum: sha1:11ae7cf375fdd467514a0d30c229c58e96a48752
+    pristine_git_object: 803d85bce590761b8ba50f47a333ef0ed79b652e
+  docs/models/ssetooluseparameterstreamingcompleteeventdata.md:
+    id: 77e2d1442859
+    last_write_checksum: sha1:59084dd2ce2c23d0901c0dca06d6d36538419438
+    pristine_git_object: 28e02a993eb0128078d9ffc3e760078cd9bbe5aa
+  docs/models/ssetooluseparameterstreamingcompleteeventevent.md:
+    id: 923079a19728
+    last_write_checksum: sha1:b3b6bb543447f7e5fd04f4a042bf190fbc4d43cc
+    pristine_git_object: 38a89e74724652ac381d11ddc9b9a7465bb188b4
+  docs/models/ssetoolusestartevent.md:
+    id: 205e3dcf6e4e
+    last_write_checksum: sha1:4231f735126d0afc468141913d9ea7aed7af9536
+    pristine_git_object: f7015823cdf34bcf22b87f6504db5af6aed2a2e3
+  docs/models/ssetoolusestarteventdata.md:
+    id: c76a0c009699
+    last_write_checksum: sha1:16db8123e460348af88927f292f50655962d1919
+    pristine_git_object: 14c9f95bc331db59d5f60062fc517f8f9579d385
+  docs/models/ssetoolusestarteventevent.md:
+    id: 70349d7e6795
+    last_write_checksum: sha1:179392e20cc04084f68d222df360fc1b8ed99930
+    pristine_git_object: babc227c9f54228d17a6ed520ecc16be89c96a1c
+  docs/models/sseusermessagecreatedevent.md:
+    id: 91b251a3b3c4
+    last_write_checksum: sha1:4a1d51e66ba8620facbee3299aae8554ab7cb132
+    pristine_git_object: be7f825422a71637cc73eb66b54f3d9dbf6f03de
+  docs/models/sseusermessagecreatedeventdata.md:
+    id: 579e9b48df70
+    last_write_checksum: sha1:9dc8fff64715c73dd3ec280d12404e9e4df57303
+    pristine_git_object: 16bc4f90fe9a8ef48182d602c6dac085139e035a
+  docs/models/sseusermessagecreatedeventevent.md:
+    id: 579ec1173d7f
+    last_write_checksum: sha1:f3024622e54af4678e031f4cd46ee0ebebf2cfb0
+    pristine_git_object: 320c690ae4291ef333e0672ce587405ce51702be
+  docs/models/startoauthflowrequest.md:
+    id: dc0f2a67230b
+    last_write_checksum: sha1:19149c6757d871c38e359fdd1a53984cd35acea6
+    pristine_git_object: 289ff778223fdf216e1468d7f432b2c98c49e8f7
+  docs/models/startoauthflowresponse.md:
+    id: 8d1983eeb5a2
+    last_write_checksum: sha1:f8a4b82921cb10dd1e89af1b3c4a8e637447d6ce
+    pristine_git_object: 5fdeed13a5a6803c4f9ed50f57232d215c1c8c67
+  docs/models/status.md:
+    id: 959cd204aadf
+    last_write_checksum: sha1:f217a0ef925eaa605ecc4513f7ad7fa8688b9846
+    pristine_git_object: 2b1b850bd831997ec51926c1840784010a145425
+  docs/models/storeapikeyrequest.md:
+    id: 31113cdfd3c4
+    last_write_checksum: sha1:a7577e9e0d536f962c5292031cce496122999242
+    pristine_git_object: 73f6699e6ab41a71bdedb9c0cd92bf6d9f1350fe
+  docs/models/storeapikeyresponse.md:
+    id: bc75b90d7d14
+    last_write_checksum: sha1:e71db4e62d87095a22a2f508d61a07687c6606cc
+    pristine_git_object: ae4c02e8528dc100f9c4ee3bd584ba0d67dedbc3
+  docs/models/streameventsrequest.md:
+    id: 6ccd3fc81136
+    last_write_checksum: sha1:483f8460494942102c35d1eb247edbd29f6387e2
+    pristine_git_object: bd61ab00abbb89c6d569ba00a88f0747ea4d5be8
+  docs/models/streameventsresponse.md:
+    id: 4c8e489b76b1
+    last_write_checksum: sha1:b236d227c3a2122f41312c3fd0ae74dca3e661eb
+    pristine_git_object: f86f7a5e40c947e9f1e48d670ca6036805ff5a7f
+  docs/models/subagenttype.md:
+    id: 99df57971257
+    last_write_checksum: sha1:d2ad05ac0fcdcf1dc78bc9854d75bae955cffcfa
+    pristine_git_object: 7c07217635b0228953ec6169dc967903ff9b66dc
+  docs/models/thinkinglevel.md:
+    id: 9738d7d12665
+    last_write_checksum: sha1:09179fd05815fcec8b9556cbf775da2496e725ae
+    pristine_git_object: 37ff10d3a9ed273c22519f1c6e3dafc94d2af569
+  docs/models/toolcalldata.md:
+    id: ee9c861df731
+    last_write_checksum: sha1:a643f7fbac7406d582d17dba2ab6f6dfc8f5e20b
+    pristine_git_object: f2b9952b203ba5e9e7f9b45cfc4b4200e75470b6
+  docs/models/toolname.md:
+    id: d68e023395d9
+    last_write_checksum: sha1:8895f62e41f8b07797764e05aafc2f944509e273
+    pristine_git_object: 1639797278a9b9f8b755dc89765e34ab874a5281
+  docs/models/updatepreferencesrequest.md:
+    id: 8846a1440be0
+    last_write_checksum: sha1:304bd94e0c9424d07d884f8b7671df035af6978a
+    pristine_git_object: 6fdb7783f04d8aad11d44ef57eac1d10d87f4a0c
+  docs/models/updatepreferencesresponse.md:
+    id: b4663dd0301f
+    last_write_checksum: sha1:e93d42c0acb7e97cb407c1660776a2135545d26a
+    pristine_git_object: 3e2b98213bc99349ff581b07fc79bead2a1da231
+  docs/models/updatesessioncallbacksrequest.md:
+    id: 471e60ea0195
+    last_write_checksum: sha1:b1397053e89a70f9d566b4ab158ec0b0ec58eb2a
+    pristine_git_object: f85689bd78a11195a71fe1ba4c859abc16cff826
+  docs/models/updatesessioncallbacksrequestbody.md:
+    id: 2d08cb8c7839
+    last_write_checksum: sha1:bf6ab084c838c92c8e3d44772385dd318e1bd08e
+    pristine_git_object: ff2bef5e5250e9cd1635f22a7809b67669facf6c
+  docs/models/uploadsessionfilerequest.md:
+    id: 9eff5c0d862c
+    last_write_checksum: sha1:d3aec984584e326948f07a31b2cdcab88d0f112f
+    pristine_git_object: 3af3cc730decea3d0d720b89afddd6cd74db633f
+  docs/models/uploadsessionfilerequestbody.md:
+    id: 2d8e94fe39f2
+    last_write_checksum: sha1:a9d7a98a0ef44df389d54302492f1de5dc00b8f5
+    pristine_git_object: 3e64f6a722986042d10cfcfd814ed6948c31faed
+  docs/models/utils/retryconfig.md:
+    id: 4343ac43161c
+    last_write_checksum: sha1:562c0f21e308ad10c27f85f75704c15592c6929d
+    pristine_git_object: 69dd549ec7f5f885101d08dd502e25748183aebf
+  docs/models/validatepreferredproviderauthmethod.md:
+    id: 67a90a672738
+    last_write_checksum: sha1:693c6027049c8bea6c13ba4f3e7592d5a01f6588
+    pristine_git_object: 12df4925bbbef7aed3596bbc7ca31b2df33d6237
+  docs/models/validatepreferredproviderresponse.md:
+    id: 9e172fd60754
+    last_write_checksum: sha1:bc7d3bc713385d07f2d3bcdd9e3eb553e1fd7325
+    pristine_git_object: 5cd694e8d33235c8bbb19ff1d5a15a459d1c51dd
+  docs/sdks/authentication/README.md:
+    id: 45be241adfc3
+    last_write_checksum: sha1:1d968286e24ec83fc93c21486df15a97d074a0fa
+    pristine_git_object: 8240c63913f513be406febf94b9df231809a446c
+  docs/sdks/files/README.md:
+    id: e576d7a117f0
+    last_write_checksum: sha1:793aa8f02a3398867595f6365397c0db9b3cfd91
+    pristine_git_object: 6c92f4f6429e2c12bb02aa09b5c1cf642e93ace5
+  docs/sdks/health/README.md:
+    id: 5082c50d5e82
+    last_write_checksum: sha1:f30d1d43c38c308190f6f5183187094fbc0a6dc0
+    pristine_git_object: 5c6233ce2d53aa30d1ae9e6cb047c5a3099e3fee
+  docs/sdks/internal/README.md:
+    id: 11cb26f5abcb
+    last_write_checksum: sha1:17f6b698f328d6801e4f672da455c7267f2ec24a
+    pristine_git_object: 013d75f197a8acb19ed21e5c42a8045d3f900ca5
+  docs/sdks/messages/README.md:
+    id: 3f1f6d38fc33
+    last_write_checksum: sha1:43c5ef5e12d4dc6a24071d18eb93092d8ca1262d
+    pristine_git_object: f0c10e426e6e2c1f325745fa318f3a4f9311be47
+  docs/sdks/notifications/README.md:
+    id: 271bac956045
+    last_write_checksum: sha1:3c39ebd2246d2f11c4b4ddd2b57b36cc9ff3a813
+    pristine_git_object: ad98b348d9b49eff61e148d2e5cb272d8b4b31df
+  docs/sdks/permissions/README.md:
+    id: 2e4061ce50d4
+    last_write_checksum: sha1:2bd8173507ac1526d5210fcaccf26a04ecc42023
+    pristine_git_object: 549725acb064e836e61105ef7a7e42b830e0830b
+  docs/sdks/preferencessdk/README.md:
+    id: c05fc42f2695
+    last_write_checksum: sha1:94f6a329054a5d74864a5e46dd3d13964c7b2188
+    pristine_git_object: 88034ddb930ec92b40b9e3ff11d3ee75ec8af252
+  docs/sdks/sessions/README.md:
+    id: 57ad62844f79
+    last_write_checksum: sha1:4ed4e6456425c151ed2664f475264d511f2b80ff
+    pristine_git_object: 4c6c7f6071ff5d55af172c69b854272ed7cd8a0e
+  docs/sdks/streaming/README.md:
+    id: de52a04909eb
+    last_write_checksum: sha1:66e4b571335a74331b52b642e09244cda46c04ff
+    pristine_git_object: c8e551c7b2bf506757e791a7ac1d2ae44fd53f07
+  docs/sdks/system/README.md:
+    id: 91103586b308
+    last_write_checksum: sha1:8c780c7e17c7a8ea9bc2ffa224bc179736b7e74d
+    pristine_git_object: 6ebe7543ec3012848983a63bc6dd16ddd18cc24e
+  docs/sdks/tools/README.md:
+    id: 044286549bac
+    last_write_checksum: sha1:c4698589f852ca6052267452c1584d0fd9cffa06
+    pristine_git_object: 126c5d836cdf97767d55b9bf1550a3416747b8e0
+  py.typed:
+    id: 258c3ed47ae4
+    last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
+    pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
+  pylintrc:
+    id: 7ce8b9f946e6
+    last_write_checksum: sha1:e5a329bfb307f0d3345bd9b607e7d15cd5fbead1
+    pristine_git_object: 24e7c7e3823711ee8105b0c215275acc7bab7f0a
+  pyproject.toml:
+    id: 5d07e7d72637
+    last_write_checksum: sha1:9c6a989e516fb194df68c7d1ce73910e748f9829
+    pristine_git_object: cf0ba22f1d854258aa633a522fe19e19f10cfc83
+  scripts/publish.sh:
+    id: fe273b08f514
+    last_write_checksum: sha1:adc9b741c12ad1591ab4870eabe20f0d0a86cd1a
+    pristine_git_object: ef28dc10c60d7d6a4bac0c6a1e9caba36b471861
+  src/mix_python_sdk/__init__.py:
+    id: b7804d24c293
+    last_write_checksum: sha1:da077c0bdfcef64a4a5aea91a17292f72fa2b088
+    pristine_git_object: 833c68cd526fe34aab2b7e7c45f974f7f4b9e120
+  src/mix_python_sdk/_hooks/__init__.py:
+    id: 72f547b61c4c
+    last_write_checksum: sha1:e3111289afd28ad557c21d9e2f918caabfb7037d
+    pristine_git_object: 2ee66cdd592fe41731c24ddd407c8ca31c50aec1
+  src/mix_python_sdk/_hooks/sdkhooks.py:
+    id: 1b0f0644a0c7
+    last_write_checksum: sha1:86fb17db2d15d59881239864c733c5bd3bc3725a
+    pristine_git_object: 5a844d62ad8b8bd3128171eadc0d35ae2612d6c9
+  src/mix_python_sdk/_hooks/types.py:
+    id: 649af67f7ee7
+    last_write_checksum: sha1:90052acc3b465c100b7a41f38d6575fd516dc11f
+    pristine_git_object: 8fa936102301fdbcafc58ac4f98fc6ebeff4e6dc
+  src/mix_python_sdk/_version.py:
+    id: 779a0b26b1e9
+    last_write_checksum: sha1:b1d79ca45e36efb3fb061e542f1aaf4972985ffe
+    pristine_git_object: 40186e113ed27bbc09ff9f7574746b62b7ba684b
+  src/mix_python_sdk/authentication.py:
+    id: 02d7e01efb73
+    last_write_checksum: sha1:f5028d50e2b07090e3679918e352527bf57bcf2d
+    pristine_git_object: 6e8f5717ee62dca30bfba2b2dbfc74e51e2565dc
+  src/mix_python_sdk/basesdk.py:
+    id: 8a871091d028
+    last_write_checksum: sha1:f2af7e6dfa999852f1b3a3a40c27b80e022bb701
+    pristine_git_object: 295bf15ddfce9741ad9f3c26285159246919d775
+  src/mix_python_sdk/errors/__init__.py:
+    id: 8d1e653a51ad
+    last_write_checksum: sha1:0e0eae720590e5873e11d47b12fbba68f88cdc45
+    pristine_git_object: cacacc1f590c446386c9344e7e70d586ab31e050
+  src/mix_python_sdk/errors/errorresponse.py:
+    id: bac35db5dc60
+    last_write_checksum: sha1:324d1599608c6e92a08eaa2d5a3255b700b5c0f3
+    pristine_git_object: 1093801d74e59828a38e3f8eebffe204e5628502
+  src/mix_python_sdk/errors/mixdefaulterror.py:
+    id: 0d7dd49bbcbe
+    last_write_checksum: sha1:2edebd79822e08ac236a769c10f62d1306a8698d
+    pristine_git_object: ef551b195cb58f5ab8839f368d8b3d4ad320b4f6
+  src/mix_python_sdk/errors/mixerror.py:
+    id: 15df7c4c9a4b
+    last_write_checksum: sha1:76f49bff4ce8488901b8965aaa3747fcdb0bbb2f
+    pristine_git_object: 9d5f7eaf48d944bc96789f3b0b7f65e04215826d
+  src/mix_python_sdk/errors/no_response_error.py:
+    id: 4ee8f17b00cd
+    last_write_checksum: sha1:7f326424a7d5ae1bcd5c89a0d6b3dbda9138942f
+    pristine_git_object: 1deab64bc43e1e65bf3c412d326a4032ce342366
+  src/mix_python_sdk/errors/responsevalidationerror.py:
+    id: 5de76dfb079a
+    last_write_checksum: sha1:55c2c077298de94e0519e9ebd6998c7aacfc4f53
+    pristine_git_object: 74cd3045161e1301c9246cf26a7acec4b1e143b4
+  src/mix_python_sdk/files.py:
+    id: b1523a659b7d
+    last_write_checksum: sha1:039ef8c776575e45a1c792ab66b00a7f12c4056d
+    pristine_git_object: 679f1ff2cb98fbb3dca1d1979bd572ff7adb955d
+  src/mix_python_sdk/health.py:
+    id: 643d414e70ae
+    last_write_checksum: sha1:4b653307eeb57ae316ac94c6092aa72ef4983832
+    pristine_git_object: 86dcdab37470272fa0e207ddd4fb7365ecfec2ed
+  src/mix_python_sdk/httpclient.py:
+    id: f6d267909eb1
+    last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
+    pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
+  src/mix_python_sdk/internal.py:
+    id: 63909d07294a
+    last_write_checksum: sha1:7f08d4a9f92a24c9593069c088064333f2d94bde
+    pristine_git_object: 07166c4a2b6ac93e7d491ef08f2e002a35ee68af
+  src/mix_python_sdk/messages.py:
+    id: c5f956180cff
+    last_write_checksum: sha1:d5990baea0685f5ff1e48d6a6e574e57a5f2057c
+    pristine_git_object: f23864db4463068e3b94211f960f465579f07a45
+  src/mix_python_sdk/models/__init__.py:
+    id: cee0da28ba6e
+    last_write_checksum: sha1:f06da3e2033af2819b98c5f1588f1f66fd0d2878
+    pristine_git_object: 901845ef232f0bc1af646686ecee8d895960d2db
+  src/mix_python_sdk/models/backendmessage.py:
+    id: b90d95314bca
+    last_write_checksum: sha1:48082a651f947e7ae083e5082dea550ff5c90cf3
+    pristine_git_object: 18cd5b83efb56b2ba8d1016305cf38618ba5636c
+  src/mix_python_sdk/models/callback.py:
+    id: 50afa028bbb6
+    last_write_checksum: sha1:97a43b93e9a9fef6cc187553064e5fa5dc87b673
+    pristine_git_object: 2bb2fefdb3fad575458687b59149d7af72fd5d4e
+  src/mix_python_sdk/models/callbackresultdata.py:
+    id: a10d9ee9c5d0
+    last_write_checksum: sha1:f581850938a3e46d98c2ab8ca70ad04cc1bd73cd
+    pristine_git_object: 88821778b70fe8c75fae4496e7bddbd9db4c8cc1
+  src/mix_python_sdk/models/cancelsessionprocessingop.py:
+    id: 9b8c042dd992
+    last_write_checksum: sha1:1caf44f9af02db4df4b320db5ff534d68520138f
+    pristine_git_object: 35aea5c1c04244cbc60784221ced73ed67879636
+  src/mix_python_sdk/models/coretoolname.py:
+    id: 32b85480ae09
+    last_write_checksum: sha1:98def496943305fe10e6663d1c87a87833d99d9e
+    pristine_git_object: 8529c6f3d66dfbc941b2fd094b4bdb3297a3fb6d
+  src/mix_python_sdk/models/createsessionop.py:
+    id: f931b7e1481f
+    last_write_checksum: sha1:86c3eca415fe5aefe688df5c240dee355d292b41
+    pristine_git_object: cf75cc1a3a5925e9b02bd3422ebe33217ed2914b
+  src/mix_python_sdk/models/deletecredentialsop.py:
+    id: da4adeba5926
+    last_write_checksum: sha1:0e7bef8f4d04b0041b54caf001c8599eb1f2ddda
+    pristine_git_object: 4daf43e95986bab7112d638d0b7471f2066d67d9
+  src/mix_python_sdk/models/deletesessionfileop.py:
+    id: 2fd717641cd0
+    last_write_checksum: sha1:7d3abc4467fc312eac5078366ae3fe2b36e8458e
+    pristine_git_object: 4e09916ba2ba3c0943ff2f501c231a14027698fd
+  src/mix_python_sdk/models/deletesessionop.py:
+    id: a185bfd5c733
+    last_write_checksum: sha1:f29d7d6798accf14a9202dec60bfb2c466a321ca
+    pristine_git_object: 6abee7cc8c4e8c39b678a887fda6edeea81d5387
+  src/mix_python_sdk/models/denypermissionop.py:
+    id: "7395074021e0"
+    last_write_checksum: sha1:5db16d59e3a772c5b1334cb67d569eeb00ff3308
+    pristine_git_object: 11bd4b0b71845d30020a8e99ffefda76e507da67
+  src/mix_python_sdk/models/exportmessage.py:
+    id: 6305e4aba7ed
+    last_write_checksum: sha1:0db01efcf1547ac15e0940c20c3f2cf68239b04c
+    pristine_git_object: 75e34de53b7852f0fc8ca03226966365b504721f
+  src/mix_python_sdk/models/exportsession.py:
+    id: dac1004084a9
+    last_write_checksum: sha1:11450e1da849adf01999380f13b44650eaa75c3c
+    pristine_git_object: bca69b983cbcd374bf0cb66b10a6089aa726e26a
+  src/mix_python_sdk/models/exportsessionop.py:
+    id: e28804b2970b
+    last_write_checksum: sha1:35edb191998975dde6316ddc904a1d2684baea71
+    pristine_git_object: 771b090dd6f145b6dcfe12963125f6eafd5c27d9
+  src/mix_python_sdk/models/exporttoolcall.py:
+    id: b2267c3858a3
+    last_write_checksum: sha1:1f7ec67a70557c352bbf851e8187bc42ca02af1e
+    pristine_git_object: 7e8dff305b83b79a3b99240cba35283b472840aa
+  src/mix_python_sdk/models/fileinfo.py:
+    id: 04a90841590f
+    last_write_checksum: sha1:5acb0b195d80ad3653113c0d9e713f8678f05207
+    pristine_git_object: ce85179be827b68b3695afc303e35f5792002c72
+  src/mix_python_sdk/models/getauthstatusop.py:
+    id: 8a017e07ad9d
+    last_write_checksum: sha1:3017c66cf871629ed94da71ee0bb9bd87b690dcf
+    pristine_git_object: 5a3794227497d5dbf8440c2e3e3c8b140afe13fe
+  src/mix_python_sdk/models/getavailableprovidersop.py:
+    id: 64d5adac8769
+    last_write_checksum: sha1:0551f5ccb831d9aababcc6c57433de86cce9b142
+    pristine_git_object: cdb673d2708cf041a97bf0502abeab8f8e528026
+  src/mix_python_sdk/models/getcommandop.py:
+    id: 04d10e267c68
+    last_write_checksum: sha1:4a85b95632ab2b03103a4b585fed4065121faf17
+    pristine_git_object: 1decc1a5402c9a3b1063f0c0fddd2232999b4c2f
+  src/mix_python_sdk/models/getmessagehistoryop.py:
+    id: 9c2c54aa5aae
+    last_write_checksum: sha1:d87e240205d929a13685b78aee6ebfc9fdb51436
+    pristine_git_object: 44373cefd1f7a8408ae18efa53df09bd31b0f74c
+  src/mix_python_sdk/models/getoauthhealthop.py:
+    id: e32cd647efba
+    last_write_checksum: sha1:d10e79b0f9923eb3638c3feb1d557ede85e6dde8
+    pristine_git_object: f705338a5cab6ab18931dd0bf854cc35bfd5dfb4
+  src/mix_python_sdk/models/getpreferencesop.py:
+    id: 492dcdd20c7b
+    last_write_checksum: sha1:35b1825cc0cf399b8823ce94b71469a982f6294d
+    pristine_git_object: 6703fac82a79d38ebea1920b2f9ee137a3151cbe
+  src/mix_python_sdk/models/getsessionfileop.py:
+    id: 5d778469d540
+    last_write_checksum: sha1:9b978599e9de39745c10324d7a14a557c4b44f23
+    pristine_git_object: 741c9ec670b00df989b25c637563841065f7dc80
+  src/mix_python_sdk/models/getsessionmessagesop.py:
+    id: d02883bcb49b
+    last_write_checksum: sha1:56d706cb759e0ad7ea6ad12dbd6d881947eedee4
+    pristine_git_object: d009d1fce4aa644e6d4c0ed4f70aa9dd367e9656
+  src/mix_python_sdk/models/getsessionop.py:
+    id: 21a0144840bb
+    last_write_checksum: sha1:4571b54ed37cdd385ddac138112f36e272b60bc5
+    pristine_git_object: dbb8f345a6024ada13b2c39a4c2af1d5fb3c8ab8
+  src/mix_python_sdk/models/getsysteminfoop.py:
+    id: be94b024271c
+    last_write_checksum: sha1:e6238ba40d5a83202e47af9aa043388fe9f331e0
+    pristine_git_object: 28a64a8d51c121c98db600f1ce92a2a58554614d
+  src/mix_python_sdk/models/gettoolcredentialsstatusop.py:
+    id: 266613cf2abf
+    last_write_checksum: sha1:4d9a265f1e241a303a2da144c05d150727eb8479
+    pristine_git_object: 2979af6cd2b048a1d38a86bc904f9f0a6c64f14b
+  src/mix_python_sdk/models/gettoolsstatusop.py:
+    id: 539da9cd0727
+    last_write_checksum: sha1:7395a64b17508889bed25644d390107259141b6b
+    pristine_git_object: 3e3adac6a1633b6b79e3266e6c9da6ee09f52309
+  src/mix_python_sdk/models/grantpermissionop.py:
+    id: e46ed6d64e70
+    last_write_checksum: sha1:6ef74316e67c644d2bf56e82c9c3ecabb32b38c9
+    pristine_git_object: 8d0f9d4d9568359e35343837e68d6696060b7c7d
+  src/mix_python_sdk/models/handleoauthcallbackop.py:
+    id: 1dcef73bd58a
+    last_write_checksum: sha1:79e106041726c5369f6e159cc00289d101be10a6
+    pristine_git_object: 09f1f6d82114c8f278997879e19620fa272894fe
+  src/mix_python_sdk/models/healthcheckop.py:
+    id: bd275cd3b928
+    last_write_checksum: sha1:6505446da55a7cd2fad7dce3f7a8280996ee6522
+    pristine_git_object: 1bfd68bf1e898f726de80b8f94a3480218a31210
+  src/mix_python_sdk/models/listcommandsop.py:
+    id: 51fa57e8a48e
+    last_write_checksum: sha1:f112d0f900f423f44449be15f01fab906d048dba
+    pristine_git_object: 5fc953eabe6d15858c0ddb8c3bd97e59a81e4bbc
+  src/mix_python_sdk/models/listllmtoolsop.py:
+    id: b506b7698824
+    last_write_checksum: sha1:ad8f2d3bf2ebe26d70d48039ef1d0582dbd182ad
+    pristine_git_object: b855110f16360d5939352fbea43a5a7920b57ae9
+  src/mix_python_sdk/models/listmcpserversop.py:
+    id: 7d2c477c8990
+    last_write_checksum: sha1:1c6bf881b2e829359fe3480e905aae60f2a7de0f
+    pristine_git_object: 7d4351215df02aec32b0eb2dc368ec59851179a6
+  src/mix_python_sdk/models/listsessionfilesop.py:
+    id: 4eea529347be
+    last_write_checksum: sha1:2dca152c054a99385a5afc55453e8e77f74311af
+    pristine_git_object: ce060a8d3fa76162cea009352ded1c05a3443222
+  src/mix_python_sdk/models/listsessionsop.py:
+    id: 6de0491e0aca
+    last_write_checksum: sha1:c0b2e503fe23397b618039bf4aa92289a2e732c5
+    pristine_git_object: 76d35a7cd5d7b6e3af07d32b90f55cc9a71c0dc6
+  src/mix_python_sdk/models/refreshoauthtokensop.py:
+    id: 060523b15c25
+    last_write_checksum: sha1:2a2989ccaede713571bca8b0a675f0ac1ac30481
+    pristine_git_object: f3d6dec426964f652c9e7fc473af774c3bd545ba
+  src/mix_python_sdk/models/resetpreferencesop.py:
+    id: f74fdecb08ed
+    last_write_checksum: sha1:1589240ad8470072bef0975add278b69f079d4b5
+    pristine_git_object: 0b4db74d8ae31d4e557e14b34dfbdd9899df22b4
+  src/mix_python_sdk/models/respondtonotificationop.py:
+    id: ecf1d0224245
+    last_write_checksum: sha1:5a21ff320c9f32dd9253d7c044a0f96c60f74605
+    pristine_git_object: 7c769c2c46227994ae306002105b2dff25c12a82
+  src/mix_python_sdk/models/resterror.py:
+    id: 9298fa4d8dd2
+    last_write_checksum: sha1:1014d180313f6964f0054e2069ebffc482bb0bca
+    pristine_git_object: 5b489821f275fe8c6b73fb6e7c2a0ba8d494f3a6
+  src/mix_python_sdk/models/rewindsessionop.py:
+    id: fed5ab0a514d
+    last_write_checksum: sha1:9b48c1090b75c6dee63c3210c2e35790171a6231
+    pristine_git_object: 8a59fba3ab3a5948d638efd4ecd2464311b1c71e
+  src/mix_python_sdk/models/sendmessageop.py:
+    id: 83d5717da808
+    last_write_checksum: sha1:62dd930af2961f1e1d02c294784ea0621b85b708
+    pristine_git_object: 585e3bece09d57c4e7c55882dce072886c2bdba5
+  src/mix_python_sdk/models/sessiondata.py:
+    id: 7efd3dc897bf
+    last_write_checksum: sha1:4323cbca0eed26794793441935506f63972ade3d
+    pristine_git_object: b4f6fd7e862d7e32622c060ff19e5861db382a51
+  src/mix_python_sdk/models/sseeventstream.py:
+    id: 20fa9ad78abc
+    last_write_checksum: sha1:b091fef18e8cdaefdd1aae55a8de7bf1fb635303
+    pristine_git_object: 0bf4f40cae0b64f521dd89134a335477c592e960
+  src/mix_python_sdk/models/startoauthflowop.py:
+    id: 56ddffe3281c
+    last_write_checksum: sha1:93526fe3b7ae21edf8a9aab9c0b67a7610ffc09f
+    pristine_git_object: e4b76b6b3ef2e3236ac4eac9141bb8604546b472
+  src/mix_python_sdk/models/storeapikeyop.py:
+    id: 85fa545fbd7d
+    last_write_checksum: sha1:f06838274ea7041834a7b4e5e3e11a3e04abbe56
+    pristine_git_object: 109ef41e47d41c21b4b4fa804d5b6a1be0df1617
+  src/mix_python_sdk/models/streameventsop.py:
+    id: 14f2283f4409
+    last_write_checksum: sha1:d5ca0465ba1a344f004fa123462a63c01582d506
+    pristine_git_object: 5aeeebf04ba0a8e2bbbbb9b28a468ad74038f26e
+  src/mix_python_sdk/models/toolcalldata.py:
+    id: eb0b84f21090
+    last_write_checksum: sha1:93bcd92c1b1a2633ece6c3523edaedb7a407b2c0
+    pristine_git_object: 720570b0cbe87fd200d2a3f1ca65b75997692af9
+  src/mix_python_sdk/models/toolname.py:
+    id: 83217ad70507
+    last_write_checksum: sha1:c9866c33a5d0cc174e4e2b98790a6d7120124c3e
+    pristine_git_object: b58d3787739909abe44ffa503a07b5c890d39c15
+  src/mix_python_sdk/models/updatepreferencesop.py:
+    id: b9c0e30e748a
+    last_write_checksum: sha1:7424f57935dfa82be51aeb83bf7b783b93d92bc2
+    pristine_git_object: 2b0f0506c06ce3221358a61143a12b294710fac7
+  src/mix_python_sdk/models/updatesessioncallbacksop.py:
+    id: 2370565e29ca
+    last_write_checksum: sha1:c834817db2c81ec0ac66605b3ba75f0e6cdbf4bb
+    pristine_git_object: dbd9d685ec5be0f1761950facfd6af3dea63baf3
+  src/mix_python_sdk/models/uploadsessionfileop.py:
+    id: d656b24ea6dc
+    last_write_checksum: sha1:ed4f6d304e59b95e4fe26cf5d73c37bd7facb796
+    pristine_git_object: 94ea5643b75b3f13bb0971c2857d9277b7b16a9f
+  src/mix_python_sdk/models/validatepreferredproviderop.py:
+    id: cd9a17fe70f2
+    last_write_checksum: sha1:a363dcda569301f532c870cfc73ce7b9ade2aa82
+    pristine_git_object: 484b75a3f4f7f83926c0d0aa3504434d5ec9ee79
+  src/mix_python_sdk/notifications.py:
+    id: 4be3355241e4
+    last_write_checksum: sha1:3d42e17452439394445d86ce79f2e80716c442c4
+    pristine_git_object: b262d4590eabc67b9f250ed0ea118986c91848c2
+  src/mix_python_sdk/permissions.py:
+    id: eab46e0044d6
+    last_write_checksum: sha1:bc07243763b3f10533b3517a977b09e6bbbbf736
+    pristine_git_object: 4a955897c60019d0b27989f23bedeeef5ec32c5c
+  src/mix_python_sdk/preferences_sdk.py:
+    id: bec46f98309f
+    last_write_checksum: sha1:3db4a7ae072dbfe80c3c55d299ea97a2bf7de41f
+    pristine_git_object: b77799398d8c439185f95cd40e4ec2351155e203
+  src/mix_python_sdk/py.typed:
+    id: 4d6901540f30
+    last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
+    pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
+  src/mix_python_sdk/sdk.py:
+    id: 47d717acdec8
+    last_write_checksum: sha1:05eb22557ba571b49fbe7839ef279f772cb0635b
+    pristine_git_object: c002fb5f056c9271f7a7db282f1d004813f24e04
+  src/mix_python_sdk/sdkconfiguration.py:
+    id: ebe2c7ff177c
+    last_write_checksum: sha1:6ce64e27bed32584d9a016d4af0ca7aa45998868
+    pristine_git_object: 2b37e55d0e7ccd9884f5032908f50692f9b58c71
+  src/mix_python_sdk/sessions.py:
+    id: 50a0c7a53cec
+    last_write_checksum: sha1:a6c63a41c102f4add4f8de7e3df6a2322b0472f6
+    pristine_git_object: de7519d8f83f082dc7471283cd9fc31ef1156a4e
+  src/mix_python_sdk/streaming.py:
+    id: 5a98f258380a
+    last_write_checksum: sha1:eb8421f239f9665d4c959ed21371535937e4d92c
+    pristine_git_object: b1a8319d67b43bb77b9f465bd986a6a912fe8b02
+  src/mix_python_sdk/system.py:
+    id: efcf61ef9164
+    last_write_checksum: sha1:135f444206818f4dc85e889af741d40b35b1f6fe
+    pristine_git_object: 89ac283fce599be8ab166f745d5b1179333ef9a0
+  src/mix_python_sdk/tools.py:
+    id: 7eb5b117d850
+    last_write_checksum: sha1:1bdcf274b3b758220b249f9544cc7716d52785d0
+    pristine_git_object: 8b9fd654a1562d6a0647eeea9db62b03fa4a6173
+  src/mix_python_sdk/types/__init__.py:
+    id: 578bc332e562
+    last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
+    pristine_git_object: fc76fe0c5505e29859b5d2bb707d48fd27661b8c
+  src/mix_python_sdk/types/basemodel.py:
+    id: 72f1d0b0b456
+    last_write_checksum: sha1:10d84aedeb9d35edfdadf2c3020caa1d24d8b584
+    pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
+  src/mix_python_sdk/utils/__init__.py:
+    id: 642d32915ac2
+    last_write_checksum: sha1:a1f6ae620fb6a3ccc30e99b427e49a0c8be463af
+    pristine_git_object: 15394a08a7e30033d319e44dd5734664ddb587e5
+  src/mix_python_sdk/utils/annotations.py:
+    id: 8469016eef6e
+    last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
+    pristine_git_object: 12e0aa4f1151bb52474cc02e88397329b90703f6
+  src/mix_python_sdk/utils/datetimes.py:
+    id: 27e876f8ecf9
+    last_write_checksum: sha1:c721e4123000e7dc61ec52b28a739439d9e17341
+    pristine_git_object: a6c52cd61bbe2d459046c940ce5e8c469f2f0664
+  src/mix_python_sdk/utils/enums.py:
+    id: bbac40b49b29
+    last_write_checksum: sha1:bc8c3c1285ae09ba8a094ee5c3d9c7f41fa1284d
+    pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
+  src/mix_python_sdk/utils/eventstreaming.py:
+    id: e25c1f14e755
+    last_write_checksum: sha1:ffa870a25a7e4e2015bfd7a467ccd3aa1de97f0e
+    pristine_git_object: f2052fc22d9fd6c663ba3dce019fe234ca37108b
+  src/mix_python_sdk/utils/forms.py:
+    id: 5d3a8930519d
+    last_write_checksum: sha1:15fa7e9ab1611e062a9984cf06cb20969713d295
+    pristine_git_object: f961e76beaf0a8b1fe0dda44754a74eebd3608e7
+  src/mix_python_sdk/utils/headers.py:
+    id: d24f7da34560
+    last_write_checksum: sha1:7c6df233ee006332b566a8afa9ce9a245941d935
+    pristine_git_object: 37864cbbbc40d1a47112bbfdd3ba79568fc8818a
+  src/mix_python_sdk/utils/logger.py:
+    id: 385b662e4fbb
+    last_write_checksum: sha1:f6ed88131ece1401144941c3193046ad1523eace
+    pristine_git_object: c6a31568768f19e840d6ed5565a742b3ad312f94
+  src/mix_python_sdk/utils/metadata.py:
+    id: 320e75c5c22e
+    last_write_checksum: sha1:c6a560bd0c63ab158582f34dadb69433ea73b3d4
+    pristine_git_object: 173b3e5ce658675c2f504222a56b3daaaa68107d
+  src/mix_python_sdk/utils/queryparams.py:
+    id: 95798737cf7f
+    last_write_checksum: sha1:b94c3f314fd3da0d1d215afc2731f48748e2aa59
+    pristine_git_object: c04e0db82b68eca041f2cb2614d748fbac80fd41
+  src/mix_python_sdk/utils/requestbodies.py:
+    id: 0081216c25c4
+    last_write_checksum: sha1:41e2d2d2d3ecc394c8122ca4d4b85e1c3e03f054
+    pristine_git_object: 1de32b6d26f46590232f398fdba6ce0072f1659c
+  src/mix_python_sdk/utils/retries.py:
+    id: b4d4999be043
+    last_write_checksum: sha1:5b97ac4f59357d70c2529975d50364c88bcad607
+    pristine_git_object: 88a91b10cd2076b4a2c6cff2ac6bfaa5e3c5ad13
+  src/mix_python_sdk/utils/security.py:
+    id: 8c8ee30dc61a
+    last_write_checksum: sha1:435dd8b180cefcd733e635b9fa45512da091d9c0
+    pristine_git_object: 17996bd54b8624009802fbbdf30bcb4225b8dfed
+  src/mix_python_sdk/utils/serializers.py:
+    id: 9566080f67a6
+    last_write_checksum: sha1:ce1d8d7f500a9ccba0aeca5057cee9c271f4dfd7
+    pristine_git_object: 14321eb479de81d0d9580ec8291e0ff91bf29e57
+  src/mix_python_sdk/utils/unmarshal_json_response.py:
+    id: 795ec8bffb1f
+    last_write_checksum: sha1:7faf4fb078b70001b08d602bb4c011252fa106cc
+    pristine_git_object: 30bbe6a73793c61e11771e7dccce2a488a44248d
+  src/mix_python_sdk/utils/url.py:
+    id: cd308bdcc073
+    last_write_checksum: sha1:6479961baa90432ca25626f8e40a7bbc32e73b41
+    pristine_git_object: c78ccbae426ce6d385709d97ce0b1c2813ea2418
+  src/mix_python_sdk/utils/values.py:
+    id: 382af17f7f74
+    last_write_checksum: sha1:acaa178a7c41ddd000f58cc691e4632d925b2553
+    pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
 examples:
   setApiKey:
     speakeasy-default-set-api-key:
@@ -388,7 +1225,7 @@ examples:
         path:
           id: "<id>"
       requestBody:
-        application/json: {"plan_mode": false, "text": "<value>"}
+        application/json: {"plan_mode": false, "text": "<value>", "thinking_level": "medium"}
       responses:
         "200":
           application/json: {"id": "<id>", "role": "<value>", "sessionId": "<id>", "toolCalls": [{"finished": true, "id": "<id>", "input": "<value>", "name": "brave_search", "type": "<value>"}], "userInput": "<value>"}
@@ -427,7 +1264,7 @@ examples:
           includeSubagents: false
       responses:
         "200":
-          application/json: [{"assistantMessageCount": 103950, "completionTokens": 539404, "cost": 7346.82, "createdAt": "2025-02-04T14:58:04.231Z", "id": "<id>", "promptTokens": 244425, "sessionType": "main", "title": "<value>", "toolCallCount": 717181, "userMessageCount": 270800}]
+          application/json: [{"assistantMessageCount": 103950, "browserMode": "electron-embedded-browser", "completionTokens": 539404, "cost": 7346.82, "createdAt": "2025-02-04T14:58:04.231Z", "id": "<id>", "promptTokens": 244425, "sessionType": "main", "title": "<value>", "toolCallCount": 717181, "userMessageCount": 270800}]
         "401":
           application/json: {"error": {"code": 306652, "message": "<value>", "type": "bad_request"}}
         "500":
@@ -435,45 +1272,45 @@ examples:
   createSession:
     speakeasy-default-create-session:
       requestBody:
-        application/json: {"title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "201":
-          application/json: {"assistantMessageCount": 880027, "completionTokens": 524380, "cost": 8710.41, "createdAt": "2024-03-18T16:52:26.875Z", "id": "<id>", "promptTokens": 469380, "title": "<value>", "toolCallCount": 70138, "userMessageCount": 844160}
+          application/json: {"assistantMessageCount": 880027, "browserMode": "remote-cdp-websocket", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "sub_agent"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "completionTokens": 524380, "cost": 8710.41, "createdAt": "2024-03-18T16:52:26.875Z", "id": "<id>", "promptTokens": 469380, "sessionType": "subagent", "title": "<value>", "toolCallCount": 70138, "userMessageCount": 844160}
         "400":
           application/json: {"error": {"code": 481369, "message": "<value>", "type": "validation_error"}}
     invalid_prompt_mode:
       requestBody:
-        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "promptMode must be 'default', 'append', or 'replace'", "type": "validation_error"}}
     missing_title:
       requestBody:
-        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "title is required", "type": "validation_error"}}
     prompt_size_exceeded_append:
       requestBody:
-        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "Custom prompt size (75KB) exceeds append mode limit of 50KB", "type": "validation_error"}}
     prompt_size_exceeded_replace:
       requestBody:
-        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "Custom prompt size (150KB) exceeds replace mode limit of 100KB", "type": "validation_error"}}
     invalid_session_type:
       requestBody:
-        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
-          application/json: {"error": {"code": 400, "message": "API can only create main sessions. Use /fork endpoint for forked sessions. Subagent sessions are created automatically.", "type": "validation_error"}}
+          application/json: {"error": {"code": 400, "message": "API can only create main sessions. Subagent sessions are created automatically.", "type": "validation_error"}}
     subagent_type_not_allowed:
       requestBody:
-        application/json: {"callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
+        application/json: {"browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "customSystemPrompt": "You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", "promptMode": "append", "sessionType": "main", "subagentType": "", "title": "<value>"}
       responses:
         "400":
           application/json: {"error": {"code": 400, "message": "subagentType cannot be set for API-created sessions. Subagent sessions are created programmatically by the task delegation system.", "type": "validation_error"}}
@@ -492,7 +1329,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"assistantMessageCount": 387834, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "sub_agent"}], "completionTokens": 407862, "cost": 588.53, "createdAt": "2025-01-09T12:44:06.736Z", "id": "<id>", "promptTokens": 306630, "sessionType": "forked", "title": "<value>", "toolCallCount": 945765, "userMessageCount": 844040}
+          application/json: {"assistantMessageCount": 387834, "browserMode": "local-browser-service", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "sub_agent"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "completionTokens": 407862, "cost": 588.53, "createdAt": "2025-01-09T12:44:06.736Z", "id": "<id>", "promptTokens": 306630, "sessionType": "main", "title": "<value>", "toolCallCount": 945765, "userMessageCount": 844040}
         "404":
           application/json: {"error": {"code": 125836, "message": "<value>", "type": "validation_error"}}
   forkSession:
@@ -709,7 +1546,7 @@ examples:
         application/json: {"cleanupMedia": true, "messageId": "<id>"}
       responses:
         "200":
-          application/json: {"assistantMessageCount": 676019, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "completionTokens": 18242, "cost": 1903.72, "createdAt": "2024-09-02T07:59:03.378Z", "id": "<id>", "promptTokens": 505203, "sessionType": "main", "title": "<value>", "toolCallCount": 938253, "userMessageCount": 629623}
+          application/json: {"assistantMessageCount": 676019, "browserMode": "remote-cdp-websocket", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "send_message"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "completionTokens": 18242, "cost": 1903.72, "createdAt": "2024-09-02T07:59:03.378Z", "id": "<id>", "promptTokens": 505203, "sessionType": "main", "title": "<value>", "toolCallCount": 938253, "userMessageCount": 629623}
         "400":
           application/json: {"error": {"code": 877894, "message": "<value>", "type": "bad_request"}}
   exportSession:
@@ -754,7 +1591,7 @@ examples:
         application/json: {"callbacks": []}
       responses:
         "200":
-          application/json: {"assistantMessageCount": 331297, "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "bash_script"}], "completionTokens": 732683, "cost": 8068.84, "createdAt": "2023-06-04T19:02:08.923Z", "id": "<id>", "promptTokens": 460281, "sessionType": "main", "title": "<value>", "toolCallCount": 805406, "userMessageCount": 971135}
+          application/json: {"assistantMessageCount": 331297, "browserMode": "electron-embedded-browser", "callbacks": [{"bashTimeout": 120000, "excludeFromContext": false, "includeFullHistory": false, "messageContent": "Please review the changes and run tests", "name": "Log Output", "subAgentType": "general-purpose", "toolName": "*", "type": "bash_script"}], "cdpUrl": "wss://connect.browserbase.com/v1/sessions/abc123", "completionTokens": 732683, "cost": 8068.84, "createdAt": "2023-06-04T19:02:08.923Z", "id": "<id>", "promptTokens": 460281, "sessionType": "main", "title": "<value>", "toolCallCount": 805406, "userMessageCount": 971135}
         "400":
           application/json: {"error": {"code": 585695, "message": "<value>", "type": "bad_request"}}
   listLLMTools:
@@ -771,4 +1608,290 @@ examples:
           application/json: {"categories": {"key": {"description": "Search the web for real-time information", "display_name": "Web Search", "icon": "\U0001F50D", "tools": [{"api_key_format": "BSA...", "api_key_required": true, "authenticated": true, "description": "Privacy-focused web search with real-time results", "display_name": "Brave Search", "provider": "brave"}]}}}
         "500":
           application/json: {"error": {"code": 725163, "message": "<value>", "type": "validation_error"}}
+  respondToNotification:
+    speakeasy-default-respond-to-notification:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"type": "acknowledge"}
+      responses:
+        "401":
+          application/json: {"error": {"code": 852178, "message": "<value>", "type": "validation_error"}}
+        "500":
+          application/json: {"error": {"code": 852178, "message": "<value>", "type": "validation_error"}}
 examplesVersion: 1.0.2
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/errors/errorresponse.md
+  - docs/models/availableproviders.md
+  - docs/models/backendmessage.md
+  - docs/models/browsermode.md
+  - docs/models/callback.md
+  - docs/models/callbackresultdata.md
+  - docs/models/callbackresultdatacallbacktype.md
+  - docs/models/callbacktype.md
+  - docs/models/cancelsessionprocessingrequest.md
+  - docs/models/cancelsessionprocessingresponse.md
+  - docs/models/coretoolname.md
+  - docs/models/createsessionbrowsermode.md
+  - docs/models/createsessionrequest.md
+  - docs/models/createsessionsessiontype.md
+  - docs/models/deletecredentialsrequest.md
+  - docs/models/deletecredentialsresponse.md
+  - docs/models/deletesessionfilerequest.md
+  - docs/models/deletesessionrequest.md
+  - docs/models/denypermissionrequest.md
+  - docs/models/denypermissionresponse.md
+  - docs/models/exportmessage.md
+  - docs/models/exportsession.md
+  - docs/models/exportsessionrequest.md
+  - docs/models/exportsessionresponse.md
+  - docs/models/exporttoolcall.md
+  - docs/models/file.md
+  - docs/models/fileinfo.md
+  - docs/models/getauthstatusauthmethod.md
+  - docs/models/getauthstatusproviders.md
+  - docs/models/getauthstatusresponse.md
+  - docs/models/getavailableprovidersresponse.md
+  - docs/models/getcommandrequest.md
+  - docs/models/getcommandresponse.md
+  - docs/models/getmessagehistoryrequest.md
+  - docs/models/getoauthhealthproviders.md
+  - docs/models/getoauthhealthresponse.md
+  - docs/models/getpreferencespreferences.md
+  - docs/models/getpreferencesresponse.md
+  - docs/models/getsessionfilerequest.md
+  - docs/models/getsessionmessagesrequest.md
+  - docs/models/getsessionrequest.md
+  - docs/models/getsysteminforesponse.md
+  - docs/models/gettoolcredentialsstatuscategories.md
+  - docs/models/gettoolcredentialsstatusresponse.md
+  - docs/models/gettoolcredentialsstatustool.md
+  - docs/models/gettoolsstatuscategories.md
+  - docs/models/gettoolsstatusresponse.md
+  - docs/models/gettoolsstatustool.md
+  - docs/models/grantpermissionrequest.md
+  - docs/models/grantpermissionresponse.md
+  - docs/models/handleoauthcallbackrequest.md
+  - docs/models/handleoauthcallbackresponse.md
+  - docs/models/healthcheckresponse.md
+  - docs/models/inputjson.md
+  - docs/models/listcommandsresponse.md
+  - docs/models/listllmtoolsresponse.md
+  - docs/models/listllmtoolstool.md
+  - docs/models/listmcpserversresponse.md
+  - docs/models/listmcpserverstool.md
+  - docs/models/listsessionfilesrequest.md
+  - docs/models/listsessionsrequest.md
+  - docs/models/notificationtype.md
+  - docs/models/parameters.md
+  - docs/models/params.md
+  - docs/models/promptmode.md
+  - docs/models/provider.md
+  - docs/models/providersstatus.md
+  - docs/models/refreshoauthtokensresponse.md
+  - docs/models/resetpreferencesresponse.md
+  - docs/models/respondtonotificationrequest.md
+  - docs/models/respondtonotificationrequestbody.md
+  - docs/models/respondtonotificationtype.md
+  - docs/models/responsetype.md
+  - docs/models/resterror.md
+  - docs/models/resterrortype.md
+  - docs/models/rewindsessionrequest.md
+  - docs/models/rewindsessionrequestbody.md
+  - docs/models/sendmessagerequest.md
+  - docs/models/sendmessagerequestbody.md
+  - docs/models/sendmessageresponse.md
+  - docs/models/sessiondata.md
+  - docs/models/sessiontype.md
+  - docs/models/ssecompleteevent.md
+  - docs/models/ssecompleteeventdata.md
+  - docs/models/ssecompleteeventevent.md
+  - docs/models/sseconnectedevent.md
+  - docs/models/sseconnectedeventdata.md
+  - docs/models/sseconnectedeventevent.md
+  - docs/models/ssecontentevent.md
+  - docs/models/ssecontenteventdata.md
+  - docs/models/ssecontenteventevent.md
+  - docs/models/sseerrorevent.md
+  - docs/models/sseerroreventdata.md
+  - docs/models/sseerroreventevent.md
+  - docs/models/sseeventstream.md
+  - docs/models/sseheartbeatevent.md
+  - docs/models/sseheartbeateventdata.md
+  - docs/models/sseheartbeateventevent.md
+  - docs/models/ssenotificationevent.md
+  - docs/models/ssenotificationeventdata.md
+  - docs/models/ssenotificationeventevent.md
+  - docs/models/ssepermissionevent.md
+  - docs/models/ssepermissioneventdata.md
+  - docs/models/ssepermissioneventevent.md
+  - docs/models/ssesessioncreatedevent.md
+  - docs/models/ssesessioncreatedeventdata.md
+  - docs/models/ssesessioncreatedeventevent.md
+  - docs/models/ssesessiondeletedevent.md
+  - docs/models/ssesessiondeletedeventdata.md
+  - docs/models/ssesessiondeletedeventevent.md
+  - docs/models/ssethinkingevent.md
+  - docs/models/ssethinkingeventdata.md
+  - docs/models/ssethinkingeventevent.md
+  - docs/models/ssetoolexecutioncompleteevent.md
+  - docs/models/ssetoolexecutioncompleteeventdata.md
+  - docs/models/ssetoolexecutioncompleteeventevent.md
+  - docs/models/ssetoolexecutionstartevent.md
+  - docs/models/ssetoolexecutionstarteventdata.md
+  - docs/models/ssetoolexecutionstarteventevent.md
+  - docs/models/ssetooluseparameterdeltaevent.md
+  - docs/models/ssetooluseparameterdeltaeventdata.md
+  - docs/models/ssetooluseparameterdeltaeventevent.md
+  - docs/models/ssetooluseparameterstreamingcompleteevent.md
+  - docs/models/ssetooluseparameterstreamingcompleteeventdata.md
+  - docs/models/ssetooluseparameterstreamingcompleteeventevent.md
+  - docs/models/ssetoolusestartevent.md
+  - docs/models/ssetoolusestarteventdata.md
+  - docs/models/ssetoolusestarteventevent.md
+  - docs/models/sseusermessagecreatedevent.md
+  - docs/models/sseusermessagecreatedeventdata.md
+  - docs/models/sseusermessagecreatedeventevent.md
+  - docs/models/startoauthflowrequest.md
+  - docs/models/startoauthflowresponse.md
+  - docs/models/status.md
+  - docs/models/storeapikeyrequest.md
+  - docs/models/storeapikeyresponse.md
+  - docs/models/streameventsrequest.md
+  - docs/models/streameventsresponse.md
+  - docs/models/subagenttype.md
+  - docs/models/thinkinglevel.md
+  - docs/models/toolcalldata.md
+  - docs/models/toolname.md
+  - docs/models/updatepreferencesrequest.md
+  - docs/models/updatepreferencesresponse.md
+  - docs/models/updatesessioncallbacksrequest.md
+  - docs/models/updatesessioncallbacksrequestbody.md
+  - docs/models/uploadsessionfilerequest.md
+  - docs/models/uploadsessionfilerequestbody.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/validatepreferredproviderauthmethod.md
+  - docs/models/validatepreferredproviderresponse.md
+  - docs/sdks/authentication/README.md
+  - docs/sdks/files/README.md
+  - docs/sdks/health/README.md
+  - docs/sdks/internal/README.md
+  - docs/sdks/messages/README.md
+  - docs/sdks/notifications/README.md
+  - docs/sdks/permissions/README.md
+  - docs/sdks/preferencessdk/README.md
+  - docs/sdks/sessions/README.md
+  - docs/sdks/streaming/README.md
+  - docs/sdks/system/README.md
+  - docs/sdks/tools/README.md
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/publish.sh
+  - src/mix_python_sdk/__init__.py
+  - src/mix_python_sdk/_hooks/__init__.py
+  - src/mix_python_sdk/_hooks/sdkhooks.py
+  - src/mix_python_sdk/_hooks/types.py
+  - src/mix_python_sdk/_version.py
+  - src/mix_python_sdk/authentication.py
+  - src/mix_python_sdk/basesdk.py
+  - src/mix_python_sdk/errors/__init__.py
+  - src/mix_python_sdk/errors/errorresponse.py
+  - src/mix_python_sdk/errors/mixdefaulterror.py
+  - src/mix_python_sdk/errors/mixerror.py
+  - src/mix_python_sdk/errors/no_response_error.py
+  - src/mix_python_sdk/errors/responsevalidationerror.py
+  - src/mix_python_sdk/files.py
+  - src/mix_python_sdk/health.py
+  - src/mix_python_sdk/httpclient.py
+  - src/mix_python_sdk/internal.py
+  - src/mix_python_sdk/messages.py
+  - src/mix_python_sdk/models/__init__.py
+  - src/mix_python_sdk/models/backendmessage.py
+  - src/mix_python_sdk/models/callback.py
+  - src/mix_python_sdk/models/callbackresultdata.py
+  - src/mix_python_sdk/models/cancelsessionprocessingop.py
+  - src/mix_python_sdk/models/coretoolname.py
+  - src/mix_python_sdk/models/createsessionop.py
+  - src/mix_python_sdk/models/deletecredentialsop.py
+  - src/mix_python_sdk/models/deletesessionfileop.py
+  - src/mix_python_sdk/models/deletesessionop.py
+  - src/mix_python_sdk/models/denypermissionop.py
+  - src/mix_python_sdk/models/exportmessage.py
+  - src/mix_python_sdk/models/exportsession.py
+  - src/mix_python_sdk/models/exportsessionop.py
+  - src/mix_python_sdk/models/exporttoolcall.py
+  - src/mix_python_sdk/models/fileinfo.py
+  - src/mix_python_sdk/models/getauthstatusop.py
+  - src/mix_python_sdk/models/getavailableprovidersop.py
+  - src/mix_python_sdk/models/getcommandop.py
+  - src/mix_python_sdk/models/getmessagehistoryop.py
+  - src/mix_python_sdk/models/getoauthhealthop.py
+  - src/mix_python_sdk/models/getpreferencesop.py
+  - src/mix_python_sdk/models/getsessionfileop.py
+  - src/mix_python_sdk/models/getsessionmessagesop.py
+  - src/mix_python_sdk/models/getsessionop.py
+  - src/mix_python_sdk/models/getsysteminfoop.py
+  - src/mix_python_sdk/models/gettoolcredentialsstatusop.py
+  - src/mix_python_sdk/models/gettoolsstatusop.py
+  - src/mix_python_sdk/models/grantpermissionop.py
+  - src/mix_python_sdk/models/handleoauthcallbackop.py
+  - src/mix_python_sdk/models/healthcheckop.py
+  - src/mix_python_sdk/models/listcommandsop.py
+  - src/mix_python_sdk/models/listllmtoolsop.py
+  - src/mix_python_sdk/models/listmcpserversop.py
+  - src/mix_python_sdk/models/listsessionfilesop.py
+  - src/mix_python_sdk/models/listsessionsop.py
+  - src/mix_python_sdk/models/refreshoauthtokensop.py
+  - src/mix_python_sdk/models/resetpreferencesop.py
+  - src/mix_python_sdk/models/respondtonotificationop.py
+  - src/mix_python_sdk/models/resterror.py
+  - src/mix_python_sdk/models/rewindsessionop.py
+  - src/mix_python_sdk/models/sendmessageop.py
+  - src/mix_python_sdk/models/sessiondata.py
+  - src/mix_python_sdk/models/sseeventstream.py
+  - src/mix_python_sdk/models/startoauthflowop.py
+  - src/mix_python_sdk/models/storeapikeyop.py
+  - src/mix_python_sdk/models/streameventsop.py
+  - src/mix_python_sdk/models/toolcalldata.py
+  - src/mix_python_sdk/models/toolname.py
+  - src/mix_python_sdk/models/updatepreferencesop.py
+  - src/mix_python_sdk/models/updatesessioncallbacksop.py
+  - src/mix_python_sdk/models/uploadsessionfileop.py
+  - src/mix_python_sdk/models/validatepreferredproviderop.py
+  - src/mix_python_sdk/notifications.py
+  - src/mix_python_sdk/permissions.py
+  - src/mix_python_sdk/preferences_sdk.py
+  - src/mix_python_sdk/py.typed
+  - src/mix_python_sdk/sdk.py
+  - src/mix_python_sdk/sdkconfiguration.py
+  - src/mix_python_sdk/sessions.py
+  - src/mix_python_sdk/streaming.py
+  - src/mix_python_sdk/system.py
+  - src/mix_python_sdk/tools.py
+  - src/mix_python_sdk/types/__init__.py
+  - src/mix_python_sdk/types/basemodel.py
+  - src/mix_python_sdk/utils/__init__.py
+  - src/mix_python_sdk/utils/annotations.py
+  - src/mix_python_sdk/utils/datetimes.py
+  - src/mix_python_sdk/utils/enums.py
+  - src/mix_python_sdk/utils/eventstreaming.py
+  - src/mix_python_sdk/utils/forms.py
+  - src/mix_python_sdk/utils/headers.py
+  - src/mix_python_sdk/utils/logger.py
+  - src/mix_python_sdk/utils/metadata.py
+  - src/mix_python_sdk/utils/queryparams.py
+  - src/mix_python_sdk/utils/requestbodies.py
+  - src/mix_python_sdk/utils/retries.py
+  - src/mix_python_sdk/utils/security.py
+  - src/mix_python_sdk/utils/serializers.py
+  - src/mix_python_sdk/utils/unmarshal_json_response.py
+  - src/mix_python_sdk/utils/url.py
+  - src/mix_python_sdk/utils/values.py

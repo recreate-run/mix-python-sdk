@@ -35,6 +35,12 @@ value: models.SSEErrorEvent = /* values here */
 value: models.SSEHeartbeatEvent = /* values here */
 ```
 
+### `models.SSENotificationEvent`
+
+```python
+value: models.SSENotificationEvent = /* values here */
+```
+
 ### `models.SSEPermissionEvent`
 
 ```python
@@ -59,12 +65,6 @@ value: models.SSESessionDeletedEvent = /* values here */
 value: models.SSEThinkingEvent = /* values here */
 ```
 
-### `models.SSEToolEvent`
-
-```python
-value: models.SSEToolEvent = /* values here */
-```
-
 ### `models.SSEToolExecutionCompleteEvent`
 
 ```python
@@ -77,10 +77,22 @@ value: models.SSEToolExecutionCompleteEvent = /* values here */
 value: models.SSEToolExecutionStartEvent = /* values here */
 ```
 
-### `models.SSEToolParameterDeltaEvent`
+### `models.SSEToolUseParameterDeltaEvent`
 
 ```python
-value: models.SSEToolParameterDeltaEvent = /* values here */
+value: models.SSEToolUseParameterDeltaEvent = /* values here */
+```
+
+### `models.SSEToolUseParameterStreamingCompleteEvent`
+
+```python
+value: models.SSEToolUseParameterStreamingCompleteEvent = /* values here */
+```
+
+### `models.SSEToolUseStartEvent`
+
+```python
+value: models.SSEToolUseStartEvent = /* values here */
 ```
 
 ### `models.SSEUserMessageCreatedEvent`

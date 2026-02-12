@@ -7,11 +7,10 @@ from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 import httpx
 import importlib
-from mix_python_sdk import utils
 from mix_python_sdk._hooks import SDKHooks
 from mix_python_sdk.types import OptionalNullable, UNSET
 import sys
-from typing import Dict, Optional, TYPE_CHECKING, cast
+from typing import Optional, TYPE_CHECKING, cast
 import weakref
 
 if TYPE_CHECKING:
@@ -20,6 +19,7 @@ if TYPE_CHECKING:
     from mix_python_sdk.health import Health
     from mix_python_sdk.internal import Internal
     from mix_python_sdk.messages import Messages
+    from mix_python_sdk.notifications import Notifications
     from mix_python_sdk.permissions import Permissions
     from mix_python_sdk.preferences_sdk import PreferencesSDK
     from mix_python_sdk.sessions import Sessions
@@ -34,6 +34,7 @@ class Mix(BaseSDK):
     authentication: "Authentication"
     system: "System"
     messages: "Messages"
+    notifications: "Notifications"
     permissions: "Permissions"
     preferences: "PreferencesSDK"
     sessions: "Sessions"
@@ -46,6 +47,7 @@ class Mix(BaseSDK):
         "authentication": ("mix_python_sdk.authentication", "Authentication"),
         "system": ("mix_python_sdk.system", "System"),
         "messages": ("mix_python_sdk.messages", "Messages"),
+        "notifications": ("mix_python_sdk.notifications", "Notifications"),
         "permissions": ("mix_python_sdk.permissions", "Permissions"),
         "preferences": ("mix_python_sdk.preferences_sdk", "PreferencesSDK"),
         "sessions": ("mix_python_sdk.sessions", "Sessions"),
@@ -58,9 +60,7 @@ class Mix(BaseSDK):
 
     def __init__(
         self,
-        server_idx: Optional[int] = None,
-        server_url: Optional[str] = None,
-        url_params: Optional[Dict[str, str]] = None,
+        server_url: str,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
@@ -98,10 +98,6 @@ class Mix(BaseSDK):
             type(async_client), AsyncHttpClient
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
-        if server_url is not None:
-            if url_params is not None:
-                server_url = utils.template_url(server_url, url_params)
-
         BaseSDK.__init__(
             self,
             SDKConfiguration(
@@ -110,7 +106,6 @@ class Mix(BaseSDK):
                 async_client=async_client,
                 async_client_supplied=async_client_supplied,
                 server_url=server_url,
-                server_idx=server_idx,
                 retry_config=retry_config,
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,

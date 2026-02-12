@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 from .toolname import ToolName, ToolNameTypedDict
-from mix_python_sdk.types import BaseModel
+from mix_python_sdk.types import BaseModel, UNSET_SENTINEL
 from mix_python_sdk.utils import get_discriminator
 import pydantic
-from pydantic import Discriminator, Tag
-from typing import Literal, Optional, Union
+from pydantic import Discriminator, Tag, model_serializer
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -17,11 +17,13 @@ SSESessionDeletedEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -70,6 +72,22 @@ class SSESessionDeletedEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSESessionCreatedEventEvent = Literal[
     "connected",
@@ -78,11 +96,13 @@ SSESessionCreatedEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -141,6 +161,22 @@ class SSESessionCreatedEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEUserMessageCreatedEventEvent = Literal[
     "connected",
@@ -149,11 +185,13 @@ SSEUserMessageCreatedEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -187,6 +225,22 @@ class SSEUserMessageCreatedEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEUserMessageCreatedEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -214,6 +268,183 @@ class SSEUserMessageCreatedEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+SSENotificationEventEvent = Literal[
+    "connected",
+    "heartbeat",
+    "error",
+    "complete",
+    "thinking",
+    "content",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
+    "tool_execution_start",
+    "tool_execution_complete",
+    "permission",
+    "notification",
+    "user_message_created",
+    "session_created",
+    "session_deleted",
+]
+r"""Event type identifier"""
+
+
+NotificationType = Literal[
+    "info",
+    "warning",
+    "error",
+    "question",
+]
+r"""Type of notification"""
+
+
+ResponseType = Literal[
+    "acknowledge",
+    "text",
+    "choice",
+]
+r"""Expected response type from user"""
+
+
+class SSENotificationEventDataTypedDict(TypedDict):
+    created_at: int
+    r"""Unix timestamp when notification was created"""
+    id: str
+    r"""Notification identifier"""
+    message: str
+    r"""Notification message content"""
+    notification_type: NotificationType
+    r"""Type of notification"""
+    response_type: ResponseType
+    r"""Expected response type from user"""
+    session_id: str
+    r"""Session identifier for the notification"""
+    timeout: int
+    r"""Timeout in seconds for user response"""
+    title: str
+    r"""Notification title"""
+    type: str
+    r"""Notification event type"""
+    choices: NotRequired[List[str]]
+    r"""Available choices (required when responseType is 'choice')"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
+
+
+class SSENotificationEventData(BaseModel):
+    created_at: Annotated[int, pydantic.Field(alias="createdAt")]
+    r"""Unix timestamp when notification was created"""
+
+    id: str
+    r"""Notification identifier"""
+
+    message: str
+    r"""Notification message content"""
+
+    notification_type: Annotated[
+        NotificationType, pydantic.Field(alias="notificationType")
+    ]
+    r"""Type of notification"""
+
+    response_type: Annotated[ResponseType, pydantic.Field(alias="responseType")]
+    r"""Expected response type from user"""
+
+    session_id: Annotated[str, pydantic.Field(alias="sessionId")]
+    r"""Session identifier for the notification"""
+
+    timeout: int
+    r"""Timeout in seconds for user response"""
+
+    title: str
+    r"""Notification title"""
+
+    type: str
+    r"""Notification event type"""
+
+    choices: Optional[List[str]] = None
+    r"""Available choices (required when responseType is 'choice')"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["choices", "parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class SSENotificationEventTypedDict(TypedDict):
+    r"""Base SSE event with standard fields"""
+
+    event: SSENotificationEventEvent
+    r"""Event type identifier"""
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+    data: SSENotificationEventDataTypedDict
+    retry: NotRequired[int]
+    r"""Client retry interval in milliseconds"""
+
+
+class SSENotificationEvent(BaseModel):
+    r"""Base SSE event with standard fields"""
+
+    event: SSENotificationEventEvent
+    r"""Event type identifier"""
+
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+
+    data: SSENotificationEventData
+
+    retry: Optional[int] = None
+    r"""Client retry interval in milliseconds"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEPermissionEventEvent = Literal[
     "connected",
@@ -222,11 +453,13 @@ SSEPermissionEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -293,6 +526,22 @@ class SSEPermissionEventData(BaseModel):
     path: Optional[str] = None
     r"""File path for permission request"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["params", "parentToolCallId", "path"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEPermissionEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -320,6 +569,22 @@ class SSEPermissionEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEToolExecutionCompleteEventEvent = Literal[
     "connected",
@@ -328,11 +593,13 @@ SSEToolExecutionCompleteEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -376,6 +643,22 @@ class SSEToolExecutionCompleteEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEToolExecutionCompleteEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -403,6 +686,22 @@ class SSEToolExecutionCompleteEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEToolExecutionStartEventEvent = Literal[
     "connected",
@@ -411,11 +710,13 @@ SSEToolExecutionStartEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -454,6 +755,22 @@ class SSEToolExecutionStartEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEToolExecutionStartEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -481,19 +798,37 @@ class SSEToolExecutionStartEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
 
-SSEToolParameterDeltaEventEvent = Literal[
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+SSEToolUseParameterDeltaEventEvent = Literal[
     "connected",
     "heartbeat",
     "error",
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -501,20 +836,20 @@ SSEToolParameterDeltaEventEvent = Literal[
 r"""Event type identifier"""
 
 
-class SSEToolParameterDeltaEventDataTypedDict(TypedDict):
+class SSEToolUseParameterDeltaEventDataTypedDict(TypedDict):
     input: str
     r"""Partial JSON parameter delta - may not be parseable until complete"""
     tool_call_id: str
     r"""Tool call identifier for correlation"""
     type: str
-    r"""Tool parameter delta event type"""
+    r"""Tool use parameter delta event type"""
     assistant_message_id: NotRequired[str]
     r"""ID of the assistant message this tool parameter delta belongs to"""
     parent_tool_call_id: NotRequired[str]
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
-class SSEToolParameterDeltaEventData(BaseModel):
+class SSEToolUseParameterDeltaEventData(BaseModel):
     input: str
     r"""Partial JSON parameter delta - may not be parseable until complete"""
 
@@ -522,7 +857,7 @@ class SSEToolParameterDeltaEventData(BaseModel):
     r"""Tool call identifier for correlation"""
 
     type: str
-    r"""Tool parameter delta event type"""
+    r"""Tool use parameter delta event type"""
 
     assistant_message_id: Annotated[
         Optional[str], pydantic.Field(alias="assistantMessageId")
@@ -534,46 +869,80 @@ class SSEToolParameterDeltaEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["assistantMessageId", "parentToolCallId"])
+        serialized = handler(self)
+        m = {}
 
-class SSEToolParameterDeltaEventTypedDict(TypedDict):
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class SSEToolUseParameterDeltaEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
 
-    event: SSEToolParameterDeltaEventEvent
+    event: SSEToolUseParameterDeltaEventEvent
     r"""Event type identifier"""
     id: str
     r"""Unique sequential event identifier for ordering and reconnection"""
-    data: SSEToolParameterDeltaEventDataTypedDict
+    data: SSEToolUseParameterDeltaEventDataTypedDict
     retry: NotRequired[int]
     r"""Client retry interval in milliseconds"""
 
 
-class SSEToolParameterDeltaEvent(BaseModel):
+class SSEToolUseParameterDeltaEvent(BaseModel):
     r"""Base SSE event with standard fields"""
 
-    event: SSEToolParameterDeltaEventEvent
+    event: SSEToolUseParameterDeltaEventEvent
     r"""Event type identifier"""
 
     id: str
     r"""Unique sequential event identifier for ordering and reconnection"""
 
-    data: SSEToolParameterDeltaEventData
+    data: SSEToolUseParameterDeltaEventData
 
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
 
-SSEToolEventEvent = Literal[
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+SSEToolUseParameterStreamingCompleteEventEvent = Literal[
     "connected",
     "heartbeat",
     "error",
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -581,38 +950,33 @@ SSEToolEventEvent = Literal[
 r"""Event type identifier"""
 
 
-class SSEToolEventDataTypedDict(TypedDict):
+class SSEToolUseParameterStreamingCompleteEventDataTypedDict(TypedDict):
     id: str
-    r"""Tool execution identifier"""
+    r"""Tool call identifier"""
     input: str
-    r"""Tool input parameters"""
+    r"""Complete JSON-encoded tool input parameters"""
     name: ToolNameTypedDict
     r"""Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"""
-    status: str
-    r"""Tool execution status"""
     type: str
-    r"""Tool event type"""
+    r"""Tool use parameter streaming complete event type"""
     assistant_message_id: NotRequired[str]
     r"""ID of the assistant message this tool belongs to"""
     parent_tool_call_id: NotRequired[str]
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
 
-class SSEToolEventData(BaseModel):
+class SSEToolUseParameterStreamingCompleteEventData(BaseModel):
     id: str
-    r"""Tool execution identifier"""
+    r"""Tool call identifier"""
 
     input: str
-    r"""Tool input parameters"""
+    r"""Complete JSON-encoded tool input parameters"""
 
     name: ToolName
     r"""Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"""
 
-    status: str
-    r"""Tool execution status"""
-
     type: str
-    r"""Tool event type"""
+    r"""Tool use parameter streaming complete event type"""
 
     assistant_message_id: Annotated[
         Optional[str], pydantic.Field(alias="assistantMessageId")
@@ -624,32 +988,178 @@ class SSEToolEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["assistantMessageId", "parentToolCallId"])
+        serialized = handler(self)
+        m = {}
 
-class SSEToolEventTypedDict(TypedDict):
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class SSEToolUseParameterStreamingCompleteEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
 
-    event: SSEToolEventEvent
+    event: SSEToolUseParameterStreamingCompleteEventEvent
     r"""Event type identifier"""
     id: str
     r"""Unique sequential event identifier for ordering and reconnection"""
-    data: SSEToolEventDataTypedDict
+    data: SSEToolUseParameterStreamingCompleteEventDataTypedDict
     retry: NotRequired[int]
     r"""Client retry interval in milliseconds"""
 
 
-class SSEToolEvent(BaseModel):
+class SSEToolUseParameterStreamingCompleteEvent(BaseModel):
     r"""Base SSE event with standard fields"""
 
-    event: SSEToolEventEvent
+    event: SSEToolUseParameterStreamingCompleteEventEvent
     r"""Event type identifier"""
 
     id: str
     r"""Unique sequential event identifier for ordering and reconnection"""
 
-    data: SSEToolEventData
+    data: SSEToolUseParameterStreamingCompleteEventData
 
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+SSEToolUseStartEventEvent = Literal[
+    "connected",
+    "heartbeat",
+    "error",
+    "complete",
+    "thinking",
+    "content",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
+    "tool_execution_start",
+    "tool_execution_complete",
+    "permission",
+    "notification",
+    "user_message_created",
+    "session_created",
+    "session_deleted",
+]
+r"""Event type identifier"""
+
+
+class SSEToolUseStartEventDataTypedDict(TypedDict):
+    id: str
+    r"""Tool call identifier"""
+    name: ToolNameTypedDict
+    r"""Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"""
+    type: str
+    r"""Tool use start event type"""
+    assistant_message_id: NotRequired[str]
+    r"""ID of the assistant message this tool belongs to"""
+    parent_tool_call_id: NotRequired[str]
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
+
+
+class SSEToolUseStartEventData(BaseModel):
+    id: str
+    r"""Tool call identifier"""
+
+    name: ToolName
+    r"""Tool name - either a core tool or MCP tool following {serverName}_{toolName} pattern"""
+
+    type: str
+    r"""Tool use start event type"""
+
+    assistant_message_id: Annotated[
+        Optional[str], pydantic.Field(alias="assistantMessageId")
+    ] = None
+    r"""ID of the assistant message this tool belongs to"""
+
+    parent_tool_call_id: Annotated[
+        Optional[str], pydantic.Field(alias="parentToolCallId")
+    ] = None
+    r"""ID of the parent tool call that spawned this subagent (for nested events)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["assistantMessageId", "parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class SSEToolUseStartEventTypedDict(TypedDict):
+    r"""Base SSE event with standard fields"""
+
+    event: SSEToolUseStartEventEvent
+    r"""Event type identifier"""
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+    data: SSEToolUseStartEventDataTypedDict
+    retry: NotRequired[int]
+    r"""Client retry interval in milliseconds"""
+
+
+class SSEToolUseStartEvent(BaseModel):
+    r"""Base SSE event with standard fields"""
+
+    event: SSEToolUseStartEventEvent
+    r"""Event type identifier"""
+
+    id: str
+    r"""Unique sequential event identifier for ordering and reconnection"""
+
+    data: SSEToolUseStartEventData
+
+    retry: Optional[int] = None
+    r"""Client retry interval in milliseconds"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 SSEContentEventEvent = Literal[
@@ -659,11 +1169,13 @@ SSEContentEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -699,6 +1211,22 @@ class SSEContentEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["assistantMessageId", "parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEContentEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -726,6 +1254,22 @@ class SSEContentEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEThinkingEventEvent = Literal[
     "connected",
@@ -734,11 +1278,13 @@ SSEThinkingEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -774,6 +1320,22 @@ class SSEThinkingEventData(BaseModel):
     ] = None
     r"""ID of the parent tool call that spawned this subagent (for nested events)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["assistantMessageId", "parentToolCallId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEThinkingEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -801,6 +1363,22 @@ class SSEThinkingEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSECompleteEventEvent = Literal[
     "connected",
@@ -809,11 +1387,13 @@ SSECompleteEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -864,6 +1444,30 @@ class SSECompleteEventData(BaseModel):
     ] = None
     r"""Duration of reasoning process in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "content",
+                "messageId",
+                "parentToolCallId",
+                "reasoning",
+                "reasoningDuration",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSECompleteEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -891,6 +1495,22 @@ class SSECompleteEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEErrorEventEvent = Literal[
     "connected",
@@ -899,11 +1519,13 @@ SSEErrorEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -947,6 +1569,24 @@ class SSEErrorEventData(BaseModel):
     type: Optional[str] = None
     r"""Error type classification"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["attempt", "maxAttempts", "parentToolCallId", "retryAfter", "type"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class SSEErrorEventTypedDict(TypedDict):
     r"""Base SSE event with standard fields"""
@@ -974,6 +1614,22 @@ class SSEErrorEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEHeartbeatEventEvent = Literal[
     "connected",
@@ -982,11 +1638,13 @@ SSEHeartbeatEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -1030,6 +1688,22 @@ class SSEHeartbeatEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEConnectedEventEvent = Literal[
     "connected",
@@ -1038,11 +1712,13 @@ SSEConnectedEventEvent = Literal[
     "complete",
     "thinking",
     "content",
-    "tool",
-    "tool_parameter_delta",
+    "tool_use_start",
+    "tool_use_parameter_streaming_complete",
+    "tool_use_parameter_delta",
     "tool_execution_start",
     "tool_execution_complete",
     "permission",
+    "notification",
     "user_message_created",
     "session_created",
     "session_deleted",
@@ -1086,6 +1762,22 @@ class SSEConnectedEvent(BaseModel):
     retry: Optional[int] = None
     r"""Client retry interval in milliseconds"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["retry"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 SSEEventStreamTypedDict = TypeAliasType(
     "SSEEventStreamTypedDict",
@@ -1096,11 +1788,13 @@ SSEEventStreamTypedDict = TypeAliasType(
         SSECompleteEventTypedDict,
         SSEThinkingEventTypedDict,
         SSEContentEventTypedDict,
-        SSEToolEventTypedDict,
-        SSEToolParameterDeltaEventTypedDict,
+        SSEToolUseStartEventTypedDict,
+        SSEToolUseParameterStreamingCompleteEventTypedDict,
+        SSEToolUseParameterDeltaEventTypedDict,
         SSEToolExecutionStartEventTypedDict,
         SSEToolExecutionCompleteEventTypedDict,
         SSEPermissionEventTypedDict,
+        SSENotificationEventTypedDict,
         SSEUserMessageCreatedEventTypedDict,
         SSESessionCreatedEventTypedDict,
         SSESessionDeletedEventTypedDict,
@@ -1116,14 +1810,19 @@ SSEEventStream = Annotated[
         Annotated[SSEContentEvent, Tag("content")],
         Annotated[SSEErrorEvent, Tag("error")],
         Annotated[SSEHeartbeatEvent, Tag("heartbeat")],
+        Annotated[SSENotificationEvent, Tag("notification")],
         Annotated[SSEPermissionEvent, Tag("permission")],
         Annotated[SSESessionCreatedEvent, Tag("session_created")],
         Annotated[SSESessionDeletedEvent, Tag("session_deleted")],
         Annotated[SSEThinkingEvent, Tag("thinking")],
-        Annotated[SSEToolEvent, Tag("tool")],
         Annotated[SSEToolExecutionCompleteEvent, Tag("tool_execution_complete")],
         Annotated[SSEToolExecutionStartEvent, Tag("tool_execution_start")],
-        Annotated[SSEToolParameterDeltaEvent, Tag("tool_parameter_delta")],
+        Annotated[SSEToolUseParameterDeltaEvent, Tag("tool_use_parameter_delta")],
+        Annotated[
+            SSEToolUseParameterStreamingCompleteEvent,
+            Tag("tool_use_parameter_streaming_complete"),
+        ],
+        Annotated[SSEToolUseStartEvent, Tag("tool_use_start")],
         Annotated[SSEUserMessageCreatedEvent, Tag("user_message_created")],
     ],
     Discriminator(lambda m: get_discriminator(m, "event", "event")),

@@ -1,5 +1,4 @@
 # Files
-(*files*)
 
 ## Overview
 
@@ -21,7 +20,9 @@ List all files in session storage directory
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.files.list_session_files(id="<id>")
 
@@ -59,7 +60,9 @@ Upload a file to session-specific storage directory
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.files.upload_session_file(id="<id>", file={
         "file_name": "example.file",
@@ -101,7 +104,9 @@ Delete a specific file from session storage. Only files are supported - director
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     mix.files.delete_session_file(id="<id>", filename="example.file")
 
@@ -135,7 +140,9 @@ Download or serve a specific file from session storage. Supports thumbnail gener
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.files.get_session_file(id="<id>", filename="example.file")
 

@@ -12,11 +12,10 @@ CoreToolName = Literal[
     "Grep",
     "Write",
     "Edit",
-    "python_execution",
     "Search",
     "TodoWrite",
     "ExitPlanMode",
-    "ShowMedia",
+    "Show",
     "Task",
 ]
 r"""Core built-in tool names"""

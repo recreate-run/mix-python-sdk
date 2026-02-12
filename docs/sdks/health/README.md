@@ -1,5 +1,4 @@
 # Health
-(*health*)
 
 ## Overview
 
@@ -18,7 +17,9 @@ Get health status of all OAuth credentials. Background service refreshes tokens 
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.health.get_o_auth_health()
 

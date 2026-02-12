@@ -3,20 +3,31 @@
 from __future__ import annotations
 from .callback import Callback, CallbackTypedDict
 from datetime import datetime
-from mix_python_sdk.types import BaseModel
+from mix_python_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+BrowserMode = Literal[
+    "electron-embedded-browser",
+    "local-browser-service",
+    "remote-cdp-websocket",
+]
+r"""Browser automation mode:
+- 'electron-embedded-browser': Electron app with embedded Chromium browser
+- 'local-browser-service': Local browser-service (GoRod-based)
+- 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
+"""
+
+
 SessionType = Literal[
     "main",
-    "forked",
     "subagent",
 ]
 r"""Session type:
 - 'main': Root-level user interactions
-- 'forked': User-created conversation branches
 - 'subagent': Delegated task workers
 """
 
@@ -28,6 +39,12 @@ r"""Subagent specialization type (only present for subagent sessions)"""
 class SessionDataTypedDict(TypedDict):
     assistant_message_count: int
     r"""Number of assistant messages in session"""
+    browser_mode: BrowserMode
+    r"""Browser automation mode:
+    - 'electron-embedded-browser': Electron app with embedded Chromium browser
+    - 'local-browser-service': Local browser-service (GoRod-based)
+    - 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
+    """
     completion_tokens: int
     r"""Total completion tokens used"""
     cost: float
@@ -41,7 +58,6 @@ class SessionDataTypedDict(TypedDict):
     session_type: SessionType
     r"""Session type:
     - 'main': Root-level user interactions
-    - 'forked': User-created conversation branches
     - 'subagent': Delegated task workers
     """
     title: str
@@ -52,10 +68,12 @@ class SessionDataTypedDict(TypedDict):
     r"""Number of user messages in session"""
     callbacks: NotRequired[List[CallbackTypedDict]]
     r"""Session-level callback configurations (optional)"""
+    cdp_url: NotRequired[str]
+    r"""CDP WebSocket URL for remote browser connections (only present when browserMode is 'remote-cdp-websocket')"""
     first_user_message: NotRequired[str]
     r"""First user message (optional)"""
     parent_session_id: NotRequired[str]
-    r"""Parent session ID for forked and subagent sessions (null for main sessions)"""
+    r"""Parent session ID for subagent sessions (null for main sessions)"""
     parent_tool_call_id: NotRequired[str]
     r"""ID of the tool call that spawned this subagent session (null for non-subagent sessions)"""
     subagent_type: NotRequired[SubagentType]
@@ -67,6 +85,13 @@ class SessionData(BaseModel):
         int, pydantic.Field(alias="assistantMessageCount")
     ]
     r"""Number of assistant messages in session"""
+
+    browser_mode: Annotated[BrowserMode, pydantic.Field(alias="browserMode")]
+    r"""Browser automation mode:
+    - 'electron-embedded-browser': Electron app with embedded Chromium browser
+    - 'local-browser-service': Local browser-service (GoRod-based)
+    - 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
+    """
 
     completion_tokens: Annotated[int, pydantic.Field(alias="completionTokens")]
     r"""Total completion tokens used"""
@@ -86,7 +111,6 @@ class SessionData(BaseModel):
     session_type: Annotated[SessionType, pydantic.Field(alias="sessionType")]
     r"""Session type:
     - 'main': Root-level user interactions
-    - 'forked': User-created conversation branches
     - 'subagent': Delegated task workers
     """
 
@@ -102,6 +126,9 @@ class SessionData(BaseModel):
     callbacks: Optional[List[Callback]] = None
     r"""Session-level callback configurations (optional)"""
 
+    cdp_url: Annotated[Optional[str], pydantic.Field(alias="cdpUrl")] = None
+    r"""CDP WebSocket URL for remote browser connections (only present when browserMode is 'remote-cdp-websocket')"""
+
     first_user_message: Annotated[
         Optional[str], pydantic.Field(alias="firstUserMessage")
     ] = None
@@ -110,7 +137,7 @@ class SessionData(BaseModel):
     parent_session_id: Annotated[
         Optional[str], pydantic.Field(alias="parentSessionId")
     ] = None
-    r"""Parent session ID for forked and subagent sessions (null for main sessions)"""
+    r"""Parent session ID for subagent sessions (null for main sessions)"""
 
     parent_tool_call_id: Annotated[
         Optional[str], pydantic.Field(alias="parentToolCallId")
@@ -121,3 +148,28 @@ class SessionData(BaseModel):
         Optional[SubagentType], pydantic.Field(alias="subagentType")
     ] = None
     r"""Subagent specialization type (only present for subagent sessions)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "callbacks",
+                "cdpUrl",
+                "firstUserMessage",
+                "parentSessionId",
+                "parentToolCallId",
+                "subagentType",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

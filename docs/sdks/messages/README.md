@@ -1,5 +1,4 @@
 # Messages
-(*messages*)
 
 ## Overview
 
@@ -20,7 +19,9 @@ Retrieve message history across all sessions with optional pagination
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.messages.get_history(limit=50, offset=0)
 
@@ -60,7 +61,9 @@ Retrieve all messages from a specific session
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.messages.list_session(id="<id>")
 
@@ -98,7 +101,9 @@ Send a user message to a specific session for AI processing. Returns immediately
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.messages.send(id="<id>", text="<value>", plan_mode=False, thinking_level="medium")
 

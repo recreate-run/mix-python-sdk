@@ -22,7 +22,10 @@ async def main():
         server_url=os.getenv("MIX_SERVER_URL", "http://localhost:8088")
     ) as mix:
         mix.authentication.store_api_key(api_key=api_key, provider="openrouter")
-        session = mix.sessions.create(title="Simple Streaming Demo")
+        session = mix.sessions.create(
+            title="Simple Streaming Demo",
+            browser_mode="local-browser-service"
+        )
 
         # Simple callback-based streaming - just 10 lines instead of 50!
         await send_with_callbacks(
@@ -31,7 +34,7 @@ async def main():
             message="What's your working directory?",
             on_thinking=lambda text: print(f"🤔 {text}", end="", flush=True),
             on_content=lambda text: print(f"\n💬 {text}", end="", flush=True),
-            on_tool=lambda tool: print(f"\n🔧 Tool: {tool.name} - {tool.status}"),
+            on_tool_execution_start=lambda tool: print(f"\n🔧 Tool execution started: {tool}"),
             on_complete=lambda: print("\n✅ Complete!"),
         )
 

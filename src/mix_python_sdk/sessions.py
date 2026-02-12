@@ -54,6 +54,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -145,6 +146,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -194,10 +196,12 @@ class Sessions(BaseSDK):
     def create(
         self,
         *,
+        browser_mode: models.CreateSessionBrowserMode,
         title: str,
         callbacks: Optional[
             Union[List[models.Callback], List[models.CallbackTypedDict]]
         ] = None,
+        cdp_url: Optional[str] = None,
         custom_system_prompt: Optional[str] = None,
         prompt_mode: Optional[models.PromptMode] = "default",
         session_type: Optional[models.CreateSessionSessionType] = "main",
@@ -211,11 +215,19 @@ class Sessions(BaseSDK):
 
         Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory. Supports session-level callbacks for automated actions after tool execution.
 
+        :param browser_mode: Browser automation mode (required):
+            - 'electron-embedded-browser': Electron app with embedded Chromium browser
+            - 'local-browser-service': Local browser-service (GoRod-based)
+            - 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
         :param title: Title for the session
         :param callbacks: Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID
+        :param cdp_url: CDP WebSocket URL for remote browser connections. Required when browserMode is 'remote-cdp-websocket'. Must start with 'ws://' or 'wss://'.
         :param custom_system_prompt: Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.
-        :param prompt_mode: Custom prompt handling mode: - 'default': Use base system prompt only (customSystemPrompt ignored) - 'append': Append customSystemPrompt to base system prompt (50KB limit) - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
-        :param session_type: Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system.
+        :param prompt_mode: Custom prompt handling mode:
+            - 'default': Use base system prompt only (customSystemPrompt ignored)
+            - 'append': Append customSystemPrompt to base system prompt (50KB limit)
+            - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
+        :param session_type: Session type. API can only create 'main' sessions. Subagent sessions are created automatically by the task delegation system.
         :param subagent_type: Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -233,9 +245,11 @@ class Sessions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateSessionRequest(
+            browser_mode=browser_mode,
             callbacks=utils.get_pydantic_model(
                 callbacks, Optional[List[models.Callback]]
             ),
+            cdp_url=cdp_url,
             custom_system_prompt=custom_system_prompt,
             prompt_mode=prompt_mode,
             session_type=session_type,
@@ -258,6 +272,7 @@ class Sessions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateSessionRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -304,10 +319,12 @@ class Sessions(BaseSDK):
     async def create_async(
         self,
         *,
+        browser_mode: models.CreateSessionBrowserMode,
         title: str,
         callbacks: Optional[
             Union[List[models.Callback], List[models.CallbackTypedDict]]
         ] = None,
+        cdp_url: Optional[str] = None,
         custom_system_prompt: Optional[str] = None,
         prompt_mode: Optional[models.PromptMode] = "default",
         session_type: Optional[models.CreateSessionSessionType] = "main",
@@ -321,11 +338,19 @@ class Sessions(BaseSDK):
 
         Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory. Supports session-level callbacks for automated actions after tool execution.
 
+        :param browser_mode: Browser automation mode (required):
+            - 'electron-embedded-browser': Electron app with embedded Chromium browser
+            - 'local-browser-service': Local browser-service (GoRod-based)
+            - 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
         :param title: Title for the session
         :param callbacks: Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID
+        :param cdp_url: CDP WebSocket URL for remote browser connections. Required when browserMode is 'remote-cdp-websocket'. Must start with 'ws://' or 'wss://'.
         :param custom_system_prompt: Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.
-        :param prompt_mode: Custom prompt handling mode: - 'default': Use base system prompt only (customSystemPrompt ignored) - 'append': Append customSystemPrompt to base system prompt (50KB limit) - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
-        :param session_type: Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system.
+        :param prompt_mode: Custom prompt handling mode:
+            - 'default': Use base system prompt only (customSystemPrompt ignored)
+            - 'append': Append customSystemPrompt to base system prompt (50KB limit)
+            - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
+        :param session_type: Session type. API can only create 'main' sessions. Subagent sessions are created automatically by the task delegation system.
         :param subagent_type: Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -343,9 +368,11 @@ class Sessions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateSessionRequest(
+            browser_mode=browser_mode,
             callbacks=utils.get_pydantic_model(
                 callbacks, Optional[List[models.Callback]]
             ),
+            cdp_url=cdp_url,
             custom_system_prompt=custom_system_prompt,
             prompt_mode=prompt_mode,
             session_type=session_type,
@@ -368,6 +395,7 @@ class Sessions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateSessionRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -456,6 +484,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -544,6 +573,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -632,6 +662,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -720,6 +751,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -820,6 +852,7 @@ class Sessions(BaseSDK):
                 "json",
                 models.UpdateSessionCallbacksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -920,6 +953,7 @@ class Sessions(BaseSDK):
                 "json",
                 models.UpdateSessionCallbacksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1008,6 +1042,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1102,6 +1137,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1140,212 +1176,6 @@ class Sessions(BaseSDK):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    def fork(
-        self,
-        *,
-        id: str,
-        message_index: int,
-        title: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Fork a session
-
-        Create a new session based on an existing session, copying messages up to a specified index
-
-        :param id: Source session ID to fork from
-        :param message_index: Index of the last message to include in the fork (0-based)
-        :param title: Optional title for the forked session (defaults to 'Forked Session')
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.ForkSessionRequest(
-            id=id,
-            request_body=models.ForkSessionRequestBody(
-                message_index=message_index,
-                title=title,
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/api/sessions/{id}/fork",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                False,
-                "json",
-                models.ForkSessionRequestBody,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="forkSession",
-                oauth2_scopes=None,
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["400", "404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, ["400", "404"], "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.MixDefaultError("API error occurred", http_res, http_res_text)
-
-        raise errors.MixDefaultError("Unexpected response received", http_res)
-
-    async def fork_async(
-        self,
-        *,
-        id: str,
-        message_index: int,
-        title: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SessionData:
-        r"""Fork a session
-
-        Create a new session based on an existing session, copying messages up to a specified index
-
-        :param id: Source session ID to fork from
-        :param message_index: Index of the last message to include in the fork (0-based)
-        :param title: Optional title for the forked session (defaults to 'Forked Session')
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.ForkSessionRequest(
-            id=id,
-            request_body=models.ForkSessionRequestBody(
-                message_index=message_index,
-                title=title,
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/api/sessions/{id}/fork",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                False,
-                "json",
-                models.ForkSessionRequestBody,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-            else:
-                retries = utils.RetryConfig(
-                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 600000), True
-                )
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["5XX", "408", "429"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="forkSession",
-                oauth2_scopes=None,
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["400", "404", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(models.SessionData, http_res)
-        if utils.match_response(http_res, ["400", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
             raise errors.ErrorResponse(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1417,6 +1247,7 @@ class Sessions(BaseSDK):
                 "json",
                 models.RewindSessionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1520,6 +1351,7 @@ class Sessions(BaseSDK):
                 "json",
                 models.RewindSessionRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1608,6 +1440,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1698,6 +1531,7 @@ class Sessions(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

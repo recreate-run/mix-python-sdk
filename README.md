@@ -30,7 +30,6 @@ Mix REST API: REST API for the Mix application - session management, messaging, 
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Resource Management](#resource-management)
   * [Debugging](#debugging)
@@ -87,7 +86,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "mix-python-sdk",
 # ]
@@ -187,7 +186,9 @@ See the [examples/](examples/) directory for complete working examples.
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
 
@@ -206,7 +207,9 @@ from mix_python_sdk import Mix
 
 async def main():
 
-    async with Mix() as mix:
+    async with Mix(
+        server_url="https://api.example.com",
+    ) as mix:
 
         res = await mix.authentication.store_api_key_async(api_key="<value>", provider="openrouter")
 
@@ -223,7 +226,7 @@ asyncio.run(main())
 <details open>
 <summary>Available methods</summary>
 
-### [authentication](docs/sdks/authentication/README.md)
+### [Authentication](docs/sdks/authentication/README.md)
 
 * [store_api_key](docs/sdks/authentication/README.md#store_api_key) - Store API key
 * [handle_o_auth_callback](docs/sdks/authentication/README.md#handle_o_auth_callback) - Handle OAuth callback
@@ -234,40 +237,44 @@ asyncio.run(main())
 * [get_o_auth_health](docs/sdks/authentication/README.md#get_o_auth_health) - Get OAuth authentication health
 * [refresh_o_auth_tokens](docs/sdks/authentication/README.md#refresh_o_auth_tokens) - Manually refresh OAuth tokens
 
-### [files](docs/sdks/files/README.md)
+### [Files](docs/sdks/files/README.md)
 
 * [list_session_files](docs/sdks/files/README.md#list_session_files) - List session files
 * [upload_session_file](docs/sdks/files/README.md#upload_session_file) - Upload file to session
 * [delete_session_file](docs/sdks/files/README.md#delete_session_file) - Delete session file
 * [get_session_file](docs/sdks/files/README.md#get_session_file) - Get session file
 
-### [health](docs/sdks/health/README.md)
+### [Health](docs/sdks/health/README.md)
 
 * [get_o_auth_health](docs/sdks/health/README.md#get_o_auth_health) - Get OAuth authentication health
 
-### [internal](docs/sdks/internal/README.md)
+### [Internal](docs/sdks/internal/README.md)
 
 * [refresh_o_auth_tokens](docs/sdks/internal/README.md#refresh_o_auth_tokens) - Manually refresh OAuth tokens
 
-### [messages](docs/sdks/messages/README.md)
+### [Messages](docs/sdks/messages/README.md)
 
 * [get_history](docs/sdks/messages/README.md#get_history) - Get global message history
 * [list_session](docs/sdks/messages/README.md#list_session) - List session messages
 * [send](docs/sdks/messages/README.md#send) - Send a message to session (async)
 
-### [permissions](docs/sdks/permissions/README.md)
+### [Notifications](docs/sdks/notifications/README.md)
+
+* [respond_to_notification](docs/sdks/notifications/README.md#respond_to_notification) - Respond to notification
+
+### [Permissions](docs/sdks/permissions/README.md)
 
 * [deny](docs/sdks/permissions/README.md#deny) - Deny permission
 * [grant](docs/sdks/permissions/README.md#grant) - Grant permission
 
-### [preferences](docs/sdks/preferencessdk/README.md)
+### [Preferences](docs/sdks/preferencessdk/README.md)
 
 * [get_preferences](docs/sdks/preferencessdk/README.md#get_preferences) - Get user preferences
 * [update_preferences](docs/sdks/preferencessdk/README.md#update_preferences) - Update user preferences
 * [get_available_providers](docs/sdks/preferencessdk/README.md#get_available_providers) - Get available providers
 * [reset_preferences](docs/sdks/preferencessdk/README.md#reset_preferences) - Reset preferences
 
-### [sessions](docs/sdks/sessions/README.md)
+### [Sessions](docs/sdks/sessions/README.md)
 
 * [list](docs/sdks/sessions/README.md#list) - List all sessions
 * [create](docs/sdks/sessions/README.md#create) - Create a new session
@@ -275,15 +282,14 @@ asyncio.run(main())
 * [get](docs/sdks/sessions/README.md#get) - Get a specific session
 * [update_session_callbacks](docs/sdks/sessions/README.md#update_session_callbacks) - Update session callbacks
 * [export_session](docs/sdks/sessions/README.md#export_session) - Export session transcript
-* [fork](docs/sdks/sessions/README.md#fork) - Fork a session
 * [rewind_session](docs/sdks/sessions/README.md#rewind_session) - Rewind a session
 * [cancel_processing](docs/sdks/sessions/README.md#cancel_processing) - Cancel agent processing
 
-### [streaming](docs/sdks/streaming/README.md)
+### [Streaming](docs/sdks/streaming/README.md)
 
 * [stream_events](docs/sdks/streaming/README.md#stream_events) - Server-Sent Events stream for real-time updates
 
-### [system](docs/sdks/system/README.md)
+### [System](docs/sdks/system/README.md)
 
 * [list_commands](docs/sdks/system/README.md#list_commands) - List available commands
 * [get_command](docs/sdks/system/README.md#get_command) - Get specific command
@@ -291,7 +297,7 @@ asyncio.run(main())
 * [get_system_info](docs/sdks/system/README.md#get_system_info) - Get system information
 * [get_health](docs/sdks/system/README.md#get_health) - Health check
 
-### [tools](docs/sdks/tools/README.md)
+### [Tools](docs/sdks/tools/README.md)
 
 * [list_llm_tools](docs/sdks/tools/README.md#list_llm_tools) - List LLM tools
 * [get_tool_credentials_status](docs/sdks/tools/README.md#get_tool_credentials_status) - Get tool credentials status
@@ -316,7 +322,9 @@ underlying connection when the context is exited.
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.streaming.stream_events(session_id="<id>")
 
@@ -346,7 +354,9 @@ Certain SDK methods accept file objects as part of a request body or multi-part 
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.files.upload_session_file(id="<id>", file={
         "file_name": "example.file",
@@ -370,7 +380,9 @@ from mix_python_sdk import Mix
 from mix_python_sdk.utils import BackoffStrategy, RetryConfig
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
@@ -387,6 +399,7 @@ from mix_python_sdk.utils import BackoffStrategy, RetryConfig
 
 
 with Mix(
+    server_url="https://api.example.com",
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
 ) as mix:
 
@@ -417,7 +430,9 @@ with Mix(
 from mix_python_sdk import Mix, errors
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
     res = None
     try:
 
@@ -462,28 +477,6 @@ with Mix() as mix:
 
 \* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
-
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Override Server URL Per-Client
-
-The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-```python
-from mix_python_sdk import Mix
-
-
-with Mix(
-    server_url="http://localhost:8088",
-) as mix:
-
-    res = mix.authentication.store_api_key(api_key="<value>", provider="openrouter")
-
-    # Handle response
-    print(res)
-
-```
-<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
@@ -577,14 +570,18 @@ The `Mix` class implements the context manager protocol and registers a finalize
 from mix_python_sdk import Mix
 def main():
 
-    with Mix() as mix:
+    with Mix(
+        server_url="https://api.example.com",
+    ) as mix:
         # Rest of application here...
 
 
 # Or when using async:
 async def amain():
 
-    async with Mix() as mix:
+    async with Mix(
+        server_url="https://api.example.com",
+    ) as mix:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->
@@ -600,7 +597,7 @@ from mix_python_sdk import Mix
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Mix(debug_logger=logging.getLogger("mix_python_sdk"))
+s = Mix(server_url="https://example.com", debug_logger=logging.getLogger("mix_python_sdk"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `MIX_DEBUG` to true.

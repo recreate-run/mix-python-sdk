@@ -58,6 +58,7 @@ class Streaming(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="text/event-stream",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -169,6 +170,7 @@ class Streaming(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="text/event-stream",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

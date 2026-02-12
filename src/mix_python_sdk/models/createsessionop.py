@@ -2,10 +2,23 @@
 
 from __future__ import annotations
 from .callback import Callback, CallbackTypedDict
-from mix_python_sdk.types import BaseModel
+from mix_python_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+CreateSessionBrowserMode = Literal[
+    "electron-embedded-browser",
+    "local-browser-service",
+    "remote-cdp-websocket",
+]
+r"""Browser automation mode (required):
+- 'electron-embedded-browser': Electron app with embedded Chromium browser
+- 'local-browser-service': Local browser-service (GoRod-based)
+- 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
+"""
 
 
 PromptMode = Literal[
@@ -21,14 +34,22 @@ r"""Custom prompt handling mode:
 
 
 CreateSessionSessionType = Literal["main",]
-r"""Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system."""
+r"""Session type. API can only create 'main' sessions. Subagent sessions are created automatically by the task delegation system."""
 
 
 class CreateSessionRequestTypedDict(TypedDict):
+    browser_mode: CreateSessionBrowserMode
+    r"""Browser automation mode (required):
+    - 'electron-embedded-browser': Electron app with embedded Chromium browser
+    - 'local-browser-service': Local browser-service (GoRod-based)
+    - 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
+    """
     title: str
     r"""Title for the session"""
     callbacks: NotRequired[List[CallbackTypedDict]]
     r"""Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID"""
+    cdp_url: NotRequired[str]
+    r"""CDP WebSocket URL for remote browser connections. Required when browserMode is 'remote-cdp-websocket'. Must start with 'ws://' or 'wss://'."""
     custom_system_prompt: NotRequired[str]
     r"""Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax."""
     prompt_mode: NotRequired[PromptMode]
@@ -38,17 +59,29 @@ class CreateSessionRequestTypedDict(TypedDict):
     - 'replace': Replace base system prompt with customSystemPrompt (100KB limit)
     """
     session_type: NotRequired[CreateSessionSessionType]
-    r"""Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system."""
+    r"""Session type. API can only create 'main' sessions. Subagent sessions are created automatically by the task delegation system."""
     subagent_type: NotRequired[str]
     r"""Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation."""
 
 
 class CreateSessionRequest(BaseModel):
+    browser_mode: Annotated[
+        CreateSessionBrowserMode, pydantic.Field(alias="browserMode")
+    ]
+    r"""Browser automation mode (required):
+    - 'electron-embedded-browser': Electron app with embedded Chromium browser
+    - 'local-browser-service': Local browser-service (GoRod-based)
+    - 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers)
+    """
+
     title: str
     r"""Title for the session"""
 
     callbacks: Optional[List[Callback]] = None
     r"""Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID"""
+
+    cdp_url: Annotated[Optional[str], pydantic.Field(alias="cdpUrl")] = None
+    r"""CDP WebSocket URL for remote browser connections. Required when browserMode is 'remote-cdp-websocket'. Must start with 'ws://' or 'wss://'."""
 
     custom_system_prompt: Annotated[
         Optional[str], pydantic.Field(alias="customSystemPrompt")
@@ -67,7 +100,32 @@ class CreateSessionRequest(BaseModel):
     session_type: Annotated[
         Optional[CreateSessionSessionType], pydantic.Field(alias="sessionType")
     ] = "main"
-    r"""Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system."""
+    r"""Session type. API can only create 'main' sessions. Subagent sessions are created automatically by the task delegation system."""
 
     subagent_type: Annotated[Optional[str], pydantic.Field(alias="subagentType")] = None
     r"""Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "callbacks",
+                "cdpUrl",
+                "customSystemPrompt",
+                "promptMode",
+                "sessionType",
+                "subagentType",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

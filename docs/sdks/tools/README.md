@@ -1,5 +1,4 @@
 # Tools
-(*tools*)
 
 ## Overview
 
@@ -20,7 +19,9 @@ Returns the list of all LLM tools that Claude can invoke. The list is dynamicall
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.tools.list_llm_tools()
 
@@ -57,7 +58,9 @@ Returns authentication/credential status for external tool integrations (Brave S
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.tools.get_tool_credentials_status()
 
@@ -94,7 +97,9 @@ Get status and authentication information for all available tools and categories
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.tools.get_tools_status()
 

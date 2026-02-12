@@ -1,5 +1,4 @@
 # Sessions
-(*sessions*)
 
 ## Overview
 
@@ -11,7 +10,6 @@
 * [get](#get) - Get a specific session
 * [update_session_callbacks](#update_session_callbacks) - Update session callbacks
 * [export_session](#export_session) - Export session transcript
-* [fork](#fork) - Fork a session
 * [rewind_session](#rewind_session) - Rewind a session
 * [cancel_processing](#cancel_processing) - Cancel agent processing
 
@@ -26,7 +24,9 @@ Retrieve a list of all available sessions with their metadata
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.sessions.list(include_subagents=False)
 
@@ -58,23 +58,145 @@ with Mix() as mix:
 
 Create a new session with required title and optional custom system prompt. Session automatically gets isolated storage directory. Supports session-level callbacks for automated actions after tool execution.
 
-### Example Usage
+### Example Usage: invalid_prompt_mode
 
-<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" -->
+<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" example="invalid_prompt_mode" -->
 ```python
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
-    res = mix.sessions.create(title="<value>", callbacks=[
+    res = mix.sessions.create(browser_mode="local-browser-service", title="<value>", callbacks=[
         {
             "message_content": "Please review the changes and run tests",
             "name": "Log Output",
             "tool_name": "*",
             "type": "send_message",
         },
-    ], custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
+    ], cdp_url="wss://connect.browserbase.com/v1/sessions/abc123", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: invalid_session_type
+
+<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" example="invalid_session_type" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
+
+    res = mix.sessions.create(browser_mode="local-browser-service", title="<value>", callbacks=[
+        {
+            "message_content": "Please review the changes and run tests",
+            "name": "Log Output",
+            "tool_name": "*",
+            "type": "send_message",
+        },
+    ], cdp_url="wss://connect.browserbase.com/v1/sessions/abc123", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: missing_title
+
+<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" example="missing_title" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
+
+    res = mix.sessions.create(browser_mode="local-browser-service", title="<value>", callbacks=[
+        {
+            "message_content": "Please review the changes and run tests",
+            "name": "Log Output",
+            "tool_name": "*",
+            "type": "send_message",
+        },
+    ], cdp_url="wss://connect.browserbase.com/v1/sessions/abc123", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: prompt_size_exceeded_append
+
+<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" example="prompt_size_exceeded_append" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
+
+    res = mix.sessions.create(browser_mode="local-browser-service", title="<value>", callbacks=[
+        {
+            "message_content": "Please review the changes and run tests",
+            "name": "Log Output",
+            "tool_name": "*",
+            "type": "send_message",
+        },
+    ], cdp_url="wss://connect.browserbase.com/v1/sessions/abc123", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: prompt_size_exceeded_replace
+
+<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" example="prompt_size_exceeded_replace" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
+
+    res = mix.sessions.create(browser_mode="local-browser-service", title="<value>", callbacks=[
+        {
+            "message_content": "Please review the changes and run tests",
+            "name": "Log Output",
+            "tool_name": "*",
+            "type": "send_message",
+        },
+    ], cdp_url="wss://connect.browserbase.com/v1/sessions/abc123", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: subagent_type_not_allowed
+
+<!-- UsageSnippet language="python" operationID="createSession" method="post" path="/api/sessions" example="subagent_type_not_allowed" -->
+```python
+from mix_python_sdk import Mix
+
+
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
+
+    res = mix.sessions.create(browser_mode="local-browser-service", title="<value>", callbacks=[
+        {
+            "message_content": "Please review the changes and run tests",
+            "name": "Log Output",
+            "tool_name": "*",
+            "type": "send_message",
+        },
+    ], cdp_url="wss://connect.browserbase.com/v1/sessions/abc123", custom_system_prompt="You are a helpful assistant specialized in $<domain>. Always be concise and accurate.", prompt_mode="append", session_type="main", subagent_type="")
 
     # Handle response
     print(res)
@@ -83,15 +205,17 @@ with Mix() as mix:
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                                                  | Description                                                                                                                                                                                                                                               | Example                                                                                                                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`                                                                                                                                                                                                                                                   | *str*                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                        | Title for the session                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                           |
-| `callbacks`                                                                                                                                                                                                                                               | List[[models.Callback](../../models/callback.md)]                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                        | Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID                                                                              |                                                                                                                                                                                                                                                           |
-| `custom_system_prompt`                                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                        | Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.            | You are a helpful assistant specialized in $<domain>. Always be concise and accurate.                                                                                                                                                                     |
-| `prompt_mode`                                                                                                                                                                                                                                             | [Optional[models.PromptMode]](../../models/promptmode.md)                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                        | Custom prompt handling mode:<br/>- 'default': Use base system prompt only (customSystemPrompt ignored)<br/>- 'append': Append customSystemPrompt to base system prompt (50KB limit)<br/>- 'replace': Replace base system prompt with customSystemPrompt (100KB limit) | append                                                                                                                                                                                                                                                    |
-| `session_type`                                                                                                                                                                                                                                            | [Optional[models.CreateSessionSessionType]](../../models/createsessionsessiontype.md)                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                        | Session type. API can only create 'main' sessions. Forked sessions are created via /fork endpoint. Subagent sessions are created automatically by the task delegation system.                                                                             | main                                                                                                                                                                                                                                                      |
-| `subagent_type`                                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                        | Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation.                                                                                                                                      |                                                                                                                                                                                                                                                           |
-| `retries`                                                                                                                                                                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                        | Configuration to override the default retry behavior of the client.                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
+| Parameter                                                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                                | Example                                                                                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `browser_mode`                                                                                                                                                                                                                                             | [models.CreateSessionBrowserMode](../../models/createsessionbrowsermode.md)                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                         | Browser automation mode (required):<br/>- 'electron-embedded-browser': Electron app with embedded Chromium browser<br/>- 'local-browser-service': Local browser-service (GoRod-based)<br/>- 'remote-cdp-websocket': Remote CDP WebSocket URL (cloud browser providers) | local-browser-service                                                                                                                                                                                                                                      |
+| `title`                                                                                                                                                                                                                                                    | *str*                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                         | Title for the session                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                            |
+| `callbacks`                                                                                                                                                                                                                                                | List[[models.Callback](../../models/callback.md)]                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                         | Session-level callbacks that execute after tool completion. Environment variables available: CALLBACK_TOOL_RESULT, CALLBACK_TOOL_NAME, CALLBACK_TOOL_ID, CALLBACK_SESSION_ID                                                                               |                                                                                                                                                                                                                                                            |
+| `cdp_url`                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                         | CDP WebSocket URL for remote browser connections. Required when browserMode is 'remote-cdp-websocket'. Must start with 'ws://' or 'wss://'.                                                                                                                | wss://connect.browserbase.com/v1/sessions/abc123                                                                                                                                                                                                           |
+| `custom_system_prompt`                                                                                                                                                                                                                                     | *Optional[str]*                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                         | Custom system prompt content. Size limits apply based on promptMode: 100KB (102,400 bytes) for replace mode, 50KB (51,200 bytes) for append mode. Ignored in default mode. Supports environment variable substitution with $<variable> syntax.             | You are a helpful assistant specialized in $<domain>. Always be concise and accurate.                                                                                                                                                                      |
+| `prompt_mode`                                                                                                                                                                                                                                              | [Optional[models.PromptMode]](../../models/promptmode.md)                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                         | Custom prompt handling mode:<br/>- 'default': Use base system prompt only (customSystemPrompt ignored)<br/>- 'append': Append customSystemPrompt to base system prompt (50KB limit)<br/>- 'replace': Replace base system prompt with customSystemPrompt (100KB limit) | append                                                                                                                                                                                                                                                     |
+| `session_type`                                                                                                                                                                                                                                             | [Optional[models.CreateSessionSessionType]](../../models/createsessionsessiontype.md)                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                         | Session type. API can only create 'main' sessions. Subagent sessions are created automatically by the task delegation system.                                                                                                                              | main                                                                                                                                                                                                                                                       |
+| `subagent_type`                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                         | Subagent type - must not be set for API-created sessions. This field is reserved for programmatic subagent creation.                                                                                                                                       |                                                                                                                                                                                                                                                            |
+| `retries`                                                                                                                                                                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                         | Configuration to override the default retry behavior of the client.                                                                                                                                                                                        |                                                                                                                                                                                                                                                            |
 
 ### Response
 
@@ -115,7 +239,9 @@ Permanently delete a session and all its data
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     mix.sessions.delete(id="<id>")
 
@@ -148,7 +274,9 @@ Retrieve detailed information about a specific session
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.sessions.get(id="<id>")
 
@@ -186,7 +314,9 @@ Update the callback configurations for a session. Callbacks execute automaticall
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.sessions.update_session_callbacks(id="<id>", callbacks=[])
 
@@ -225,7 +355,9 @@ Export complete session transcript with all messages, tool calls, reasoning, and
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.sessions.export_session(id="<id>")
 
@@ -253,46 +385,6 @@ with Mix() as mix:
 | errors.ErrorResponse   | 500                    | application/json       |
 | errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
 
-## fork
-
-Create a new session based on an existing session, copying messages up to a specified index
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="forkSession" method="post" path="/api/sessions/{id}/fork" -->
-```python
-from mix_python_sdk import Mix
-
-
-with Mix() as mix:
-
-    res = mix.sessions.fork(id="<id>", message_index=385832)
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `id`                                                                 | *str*                                                                | :heavy_check_mark:                                                   | Source session ID to fork from                                       |
-| `message_index`                                                      | *int*                                                                | :heavy_check_mark:                                                   | Index of the last message to include in the fork (0-based)           |
-| `title`                                                              | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Optional title for the forked session (defaults to 'Forked Session') |
-| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
-
-### Response
-
-**[models.SessionData](../../models/sessiondata.md)**
-
-### Errors
-
-| Error Type             | Status Code            | Content Type           |
-| ---------------------- | ---------------------- | ---------------------- |
-| errors.ErrorResponse   | 400, 404               | application/json       |
-| errors.MixDefaultError | 4XX, 5XX               | \*/\*                  |
-
 ## rewind_session
 
 Delete messages after a specified message in the current session, optionally cleaning up media files created after that point
@@ -304,7 +396,9 @@ Delete messages after a specified message in the current session, optionally cle
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.sessions.rewind_session(id="<id>", message_id="<id>", cleanup_media=True)
 
@@ -344,7 +438,9 @@ Cancel any ongoing agent processing in the specified session
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.sessions.cancel_processing(id="<id>")
 

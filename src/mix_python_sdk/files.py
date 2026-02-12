@@ -55,6 +55,7 @@ class Files(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -143,6 +144,7 @@ class Files(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -243,6 +245,7 @@ class Files(BaseSDK):
                 "multipart",
                 models.UploadSessionFileRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -343,6 +346,7 @@ class Files(BaseSDK):
                 "multipart",
                 models.UploadSessionFileRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -434,6 +438,7 @@ class Files(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -525,6 +530,7 @@ class Files(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -622,6 +628,7 @@ class Files(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="*/*",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -726,6 +733,7 @@ class Files(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="*/*",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

@@ -1,5 +1,4 @@
 # System
-(*system*)
 
 ## Overview
 
@@ -22,7 +21,9 @@ Retrieve list of all available commands
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.system.list_commands()
 
@@ -60,7 +61,9 @@ Retrieve details about a specific command
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.system.get_command(name="<value>")
 
@@ -98,7 +101,9 @@ Retrieve list of available Model Context Protocol (MCP) servers
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.system.list_mcp_servers()
 
@@ -136,7 +141,9 @@ Retrieve system information including storage configuration
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.system.get_system_info()
 
@@ -173,7 +180,9 @@ Check server health and status
 from mix_python_sdk import Mix
 
 
-with Mix() as mix:
+with Mix(
+    server_url="https://api.example.com",
+) as mix:
 
     res = mix.system.get_health()
 
