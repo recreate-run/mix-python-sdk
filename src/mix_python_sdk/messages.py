@@ -382,6 +382,7 @@ class Messages(BaseSDK):
         *,
         id: str,
         text: str,
+        max_steps: Optional[int] = None,
         plan_mode: Optional[bool] = False,
         thinking_level: OptionalNullable[models.ThinkingLevel] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -395,6 +396,7 @@ class Messages(BaseSDK):
 
         :param id: Session ID
         :param text: The text content of the message
+        :param max_steps: Maximum tool call iterations for this message. If not provided, unlimited iterations allowed.
         :param plan_mode: Whether the message is in planning mode
         :param thinking_level: Thinking level: off (disabled), basic (4k tokens), medium (10k tokens), maximum (32k tokens). If not provided, determined by keywords in message.
         :param retries: Override the default retry configuration for this method
@@ -415,6 +417,7 @@ class Messages(BaseSDK):
         request = models.SendMessageRequest(
             id=id,
             request_body=models.SendMessageRequestBody(
+                max_steps=max_steps,
                 plan_mode=plan_mode,
                 text=text,
                 thinking_level=thinking_level,
@@ -489,6 +492,7 @@ class Messages(BaseSDK):
         *,
         id: str,
         text: str,
+        max_steps: Optional[int] = None,
         plan_mode: Optional[bool] = False,
         thinking_level: OptionalNullable[models.ThinkingLevel] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -502,6 +506,7 @@ class Messages(BaseSDK):
 
         :param id: Session ID
         :param text: The text content of the message
+        :param max_steps: Maximum tool call iterations for this message. If not provided, unlimited iterations allowed.
         :param plan_mode: Whether the message is in planning mode
         :param thinking_level: Thinking level: off (disabled), basic (4k tokens), medium (10k tokens), maximum (32k tokens). If not provided, determined by keywords in message.
         :param retries: Override the default retry configuration for this method
@@ -522,6 +527,7 @@ class Messages(BaseSDK):
         request = models.SendMessageRequest(
             id=id,
             request_body=models.SendMessageRequestBody(
+                max_steps=max_steps,
                 plan_mode=plan_mode,
                 text=text,
                 thinking_level=thinking_level,

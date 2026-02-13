@@ -5,7 +5,7 @@ from .toolname import ToolName, ToolNameTypedDict
 from mix_python_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -24,6 +24,8 @@ class ToolCallDataTypedDict(TypedDict):
     r"""Whether tool call resulted in error (optional)"""
     result: NotRequired[str]
     r"""Tool execution result (optional)"""
+    screenshot_urls: NotRequired[List[str]]
+    r"""Screenshot URLs captured during tool execution (optional)"""
 
 
 class ToolCallData(BaseModel):
@@ -48,9 +50,14 @@ class ToolCallData(BaseModel):
     result: Optional[str] = None
     r"""Tool execution result (optional)"""
 
+    screenshot_urls: Annotated[
+        Optional[List[str]], pydantic.Field(alias="screenshotUrls")
+    ] = None
+    r"""Screenshot URLs captured during tool execution (optional)"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["isError", "result"])
+        optional_fields = set(["isError", "result", "screenshotUrls"])
         serialized = handler(self)
         m = {}
 

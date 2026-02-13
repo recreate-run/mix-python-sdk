@@ -4,7 +4,7 @@ from __future__ import annotations
 from mix_python_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -31,12 +31,10 @@ class ExportToolCallTypedDict(TypedDict):
     r"""Tool type"""
     input_json: NotRequired[InputJSONTypedDict]
     r"""Parsed tool input (optional)"""
-    is_error: NotRequired[bool]
-    r"""Whether execution resulted in error (optional)"""
-    metadata: NotRequired[str]
-    r"""Additional tool metadata (optional)"""
     result: NotRequired[str]
     r"""Tool execution result (optional)"""
+    screenshot_urls: NotRequired[List[str]]
+    r"""Screenshot URLs captured during tool execution (optional)"""
 
 
 class ExportToolCall(BaseModel):
@@ -60,18 +58,17 @@ class ExportToolCall(BaseModel):
     input_json: Annotated[Optional[InputJSON], pydantic.Field(alias="inputJson")] = None
     r"""Parsed tool input (optional)"""
 
-    is_error: Annotated[Optional[bool], pydantic.Field(alias="isError")] = None
-    r"""Whether execution resulted in error (optional)"""
-
-    metadata: Optional[str] = None
-    r"""Additional tool metadata (optional)"""
-
     result: Optional[str] = None
     r"""Tool execution result (optional)"""
 
+    screenshot_urls: Annotated[
+        Optional[List[str]], pydantic.Field(alias="screenshotUrls")
+    ] = None
+    r"""Screenshot URLs captured during tool execution (optional)"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["inputJson", "isError", "metadata", "result"])
+        optional_fields = set(["inputJson", "result", "screenshotUrls"])
         serialized = handler(self)
         m = {}
 

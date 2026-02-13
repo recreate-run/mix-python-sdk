@@ -23,8 +23,20 @@ class BackendMessageTypedDict(TypedDict):
     r"""User's input message"""
     assistant_response: NotRequired[str]
     r"""Assistant's response message (optional)"""
+    cache_creation_tokens: NotRequired[int]
+    r"""Tokens used for prompt cache creation (optional)"""
+    cache_read_tokens: NotRequired[int]
+    r"""Tokens read from prompt cache (optional)"""
     callback_results: NotRequired[List[CallbackResultDataTypedDict]]
     r"""Callback execution results (optional)"""
+    cost: NotRequired[float]
+    r"""Cost for this specific message in USD"""
+    input_tokens: NotRequired[int]
+    r"""Input tokens used for this message (includes cache creation)"""
+    model: NotRequired[str]
+    r"""Model used for this message (e.g., 'claude-sonnet-4')"""
+    output_tokens: NotRequired[int]
+    r"""Output tokens generated for this message (includes cache reads)"""
     reasoning: NotRequired[str]
     r"""Reasoning process (optional)"""
     reasoning_duration: NotRequired[int]
@@ -53,10 +65,32 @@ class BackendMessage(BaseModel):
     ] = None
     r"""Assistant's response message (optional)"""
 
+    cache_creation_tokens: Annotated[
+        Optional[int], pydantic.Field(alias="cacheCreationTokens")
+    ] = None
+    r"""Tokens used for prompt cache creation (optional)"""
+
+    cache_read_tokens: Annotated[
+        Optional[int], pydantic.Field(alias="cacheReadTokens")
+    ] = None
+    r"""Tokens read from prompt cache (optional)"""
+
     callback_results: Annotated[
         Optional[List[CallbackResultData]], pydantic.Field(alias="callbackResults")
     ] = None
     r"""Callback execution results (optional)"""
+
+    cost: Optional[float] = None
+    r"""Cost for this specific message in USD"""
+
+    input_tokens: Annotated[Optional[int], pydantic.Field(alias="inputTokens")] = None
+    r"""Input tokens used for this message (includes cache creation)"""
+
+    model: Optional[str] = None
+    r"""Model used for this message (e.g., 'claude-sonnet-4')"""
+
+    output_tokens: Annotated[Optional[int], pydantic.Field(alias="outputTokens")] = None
+    r"""Output tokens generated for this message (includes cache reads)"""
 
     reasoning: Optional[str] = None
     r"""Reasoning process (optional)"""
@@ -76,7 +110,13 @@ class BackendMessage(BaseModel):
         optional_fields = set(
             [
                 "assistantResponse",
+                "cacheCreationTokens",
+                "cacheReadTokens",
                 "callbackResults",
+                "cost",
+                "inputTokens",
+                "model",
+                "outputTokens",
                 "reasoning",
                 "reasoningDuration",
                 "toolCalls",

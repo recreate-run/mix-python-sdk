@@ -267,12 +267,12 @@ asyncio.run(main())
 * [deny](docs/sdks/permissions/README.md#deny) - Deny permission
 * [grant](docs/sdks/permissions/README.md#grant) - Grant permission
 
-### [Preferences](docs/sdks/preferencessdk/README.md)
+### [Preferences](docs/sdks/preferences/README.md)
 
-* [get_preferences](docs/sdks/preferencessdk/README.md#get_preferences) - Get user preferences
-* [update_preferences](docs/sdks/preferencessdk/README.md#update_preferences) - Update user preferences
-* [get_available_providers](docs/sdks/preferencessdk/README.md#get_available_providers) - Get available providers
-* [reset_preferences](docs/sdks/preferencessdk/README.md#reset_preferences) - Reset preferences
+* [get_preferences](docs/sdks/preferences/README.md#get_preferences) - Get user preferences
+* [update_preferences](docs/sdks/preferences/README.md#update_preferences) - Update user preferences
+* [get_available_providers](docs/sdks/preferences/README.md#get_available_providers) - Get available providers
+* [reset_preferences](docs/sdks/preferences/README.md#reset_preferences) - Reset preferences
 
 ### [Sessions](docs/sdks/sessions/README.md)
 

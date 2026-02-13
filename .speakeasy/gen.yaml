@@ -33,7 +33,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.8.0
+  version: 0.8.1
   additionalDependencies:
     dev:
       ruff: ^0.13.2
@@ -60,6 +60,7 @@ python:
   flattenRequests: true
   flatteningOrder: parameters-first
   forwardCompatibleEnumsByDefault: false
+  forwardCompatibleUnionsByDefault: "false"
   githubURL: https://github.com/recreate-run/mix-python-sdk
   imports:
     option: openapi

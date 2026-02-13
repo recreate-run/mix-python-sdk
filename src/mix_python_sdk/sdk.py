@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from mix_python_sdk.messages import Messages
     from mix_python_sdk.notifications import Notifications
     from mix_python_sdk.permissions import Permissions
-    from mix_python_sdk.preferences_sdk import PreferencesSDK
+    from mix_python_sdk.preferences import Preferences
     from mix_python_sdk.sessions import Sessions
     from mix_python_sdk.streaming import Streaming
     from mix_python_sdk.system import System
@@ -36,7 +36,7 @@ class Mix(BaseSDK):
     messages: "Messages"
     notifications: "Notifications"
     permissions: "Permissions"
-    preferences: "PreferencesSDK"
+    preferences: "Preferences"
     sessions: "Sessions"
     files: "Files"
     tools: "Tools"
@@ -49,7 +49,7 @@ class Mix(BaseSDK):
         "messages": ("mix_python_sdk.messages", "Messages"),
         "notifications": ("mix_python_sdk.notifications", "Notifications"),
         "permissions": ("mix_python_sdk.permissions", "Permissions"),
-        "preferences": ("mix_python_sdk.preferences_sdk", "PreferencesSDK"),
+        "preferences": ("mix_python_sdk.preferences", "Preferences"),
         "sessions": ("mix_python_sdk.sessions", "Sessions"),
         "files": ("mix_python_sdk.files", "Files"),
         "tools": ("mix_python_sdk.tools", "Tools"),

@@ -27,6 +27,8 @@ r"""Thinking level: off (disabled), basic (4k tokens), medium (10k tokens), maxi
 class SendMessageRequestBodyTypedDict(TypedDict):
     text: str
     r"""The text content of the message"""
+    max_steps: NotRequired[int]
+    r"""Maximum tool call iterations for this message. If not provided, unlimited iterations allowed."""
     plan_mode: NotRequired[bool]
     r"""Whether the message is in planning mode"""
     thinking_level: NotRequired[Nullable[ThinkingLevel]]
@@ -37,6 +39,9 @@ class SendMessageRequestBody(BaseModel):
     text: str
     r"""The text content of the message"""
 
+    max_steps: Optional[int] = None
+    r"""Maximum tool call iterations for this message. If not provided, unlimited iterations allowed."""
+
     plan_mode: Optional[bool] = False
     r"""Whether the message is in planning mode"""
 
@@ -45,7 +50,7 @@ class SendMessageRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["plan_mode", "thinking_level"])
+        optional_fields = set(["max_steps", "plan_mode", "thinking_level"])
         nullable_fields = set(["thinking_level"])
         serialized = handler(self)
         m = {}

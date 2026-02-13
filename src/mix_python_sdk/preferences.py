@@ -8,7 +8,7 @@ from mix_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Dict, Mapping, Optional
 
 
-class PreferencesSDK(BaseSDK):
+class Preferences(BaseSDK):
     def get_preferences(
         self,
         *,

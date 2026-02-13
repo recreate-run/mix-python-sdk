@@ -91,8 +91,6 @@ if TYPE_CHECKING:
     from .getpreferencesop import (
         AvailableProviders,
         AvailableProvidersTypedDict,
-        GetPreferencesPreferences,
-        GetPreferencesPreferencesTypedDict,
         GetPreferencesResponse,
         GetPreferencesResponseTypedDict,
     )
@@ -319,6 +317,10 @@ if TYPE_CHECKING:
         UploadSessionFileRequestBodyTypedDict,
         UploadSessionFileRequestTypedDict,
     )
+    from .userpreferencesresponse import (
+        UserPreferencesResponse,
+        UserPreferencesResponseTypedDict,
+    )
     from .validatepreferredproviderop import (
         ValidatePreferredProviderAuthMethod,
         ValidatePreferredProviderResponse,
@@ -389,8 +391,6 @@ __all__ = [
     "GetOAuthHealthProvidersTypedDict",
     "GetOAuthHealthResponse",
     "GetOAuthHealthResponseTypedDict",
-    "GetPreferencesPreferences",
-    "GetPreferencesPreferencesTypedDict",
     "GetPreferencesResponse",
     "GetPreferencesResponseTypedDict",
     "GetSessionFileRequest",
@@ -586,6 +586,8 @@ __all__ = [
     "UploadSessionFileRequestBody",
     "UploadSessionFileRequestBodyTypedDict",
     "UploadSessionFileRequestTypedDict",
+    "UserPreferencesResponse",
+    "UserPreferencesResponseTypedDict",
     "ValidatePreferredProviderAuthMethod",
     "ValidatePreferredProviderResponse",
     "ValidatePreferredProviderResponseTypedDict",
@@ -657,8 +659,6 @@ _dynamic_imports: dict[str, str] = {
     "Status": ".getoauthhealthop",
     "AvailableProviders": ".getpreferencesop",
     "AvailableProvidersTypedDict": ".getpreferencesop",
-    "GetPreferencesPreferences": ".getpreferencesop",
-    "GetPreferencesPreferencesTypedDict": ".getpreferencesop",
     "GetPreferencesResponse": ".getpreferencesop",
     "GetPreferencesResponseTypedDict": ".getpreferencesop",
     "GetSessionFileRequest": ".getsessionfileop",
@@ -852,6 +852,8 @@ _dynamic_imports: dict[str, str] = {
     "UploadSessionFileRequestBody": ".uploadsessionfileop",
     "UploadSessionFileRequestBodyTypedDict": ".uploadsessionfileop",
     "UploadSessionFileRequestTypedDict": ".uploadsessionfileop",
+    "UserPreferencesResponse": ".userpreferencesresponse",
+    "UserPreferencesResponseTypedDict": ".userpreferencesresponse",
     "ValidatePreferredProviderAuthMethod": ".validatepreferredproviderop",
     "ValidatePreferredProviderResponse": ".validatepreferredproviderop",
     "ValidatePreferredProviderResponseTypedDict": ".validatepreferredproviderop",

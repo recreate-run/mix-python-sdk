@@ -1,6 +1,6 @@
-# GetPreferencesPreferences
+# UserPreferencesResponse
 
-User preferences (null if no preferences exist)
+User preferences configuration
 
 
 ## Fields
